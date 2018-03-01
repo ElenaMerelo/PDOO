@@ -17,4 +17,40 @@ public class perro{
   ...
 }
 ~~~
-> Consecuentemente, un atributo de clase es una característica de cada objeto que creemos de un tipo determinado, cambia de un objeto a otro, no es estático, mientras que un atributo de clase es igual en todos los objetos que se creen de un mismo tipo, es estático. 
+> Consecuentemente, un atributo de clase es una característica de cada objeto que creemos de un tipo determinado, cambia de un objeto a otro, no es estático, mientras que un atributo de clase es igual en todos los objetos que se creen de un mismo tipo, es estático.
+
+# Constructores de copia
+~~~Java
+/**
+  * Copy constructor.
+  */
+  public Galaxy(Galaxy g) {
+    this(g.getMass(), g.getName());
+    //no defensive copies are created here, since
+    //there are no mutable object fields (String is immutable)
+  }
+
+  /**
+  * Alternative style for a copy constructor, using a static newInstance
+  * method.
+  */
+  public static Galaxy newInstance(Galaxy g) {
+    return new Galaxy(g.getMass(), g.getName());
+  }
+
+  //Another option:
+  public Galaxy(Galaxy g){
+    this.mass= g.mass;
+    this.name= g.name;
+  }
+
+  public Person(Person original) {
+    this.id = original.id;
+
+    this.name = new String(original.name);
+
+    this.city = new City(original.city);
+  }
+  ~~~
+
+  >Cuando nos dicen de crear una clase, enumerado,... con visibilidad de paquete quiere decir que no tendremos que poner ni public ni private a la hora de declararlo, la opción por defecto, default, es crearlo con este tipo de visibilidad.
