@@ -17,7 +17,7 @@ class ShieldBooster {
     }
     
     ShieldBooster(ShieldBooster sb){
-        this(sb.name, sb.getBoost(), sb.getUses());     
+        this(sb.name, sb.boost, sb.uses);     
     }
     
     //Consultores

@@ -18,10 +18,14 @@ class Weapon {
     }
     
     Weapon(Weapon w){
-        this(w.name, w.getType(), w.getUses());
+        this(w.name, w.type, w.uses);
     }
     
-    //Consultores 
+    //Consultores
+    public String getName(){
+        return name;
+    }
+    
     public WeaponType getType(){
         return type;
     }
@@ -48,5 +52,9 @@ class Weapon {
             return this.power();
         }
         return 1.0f;
+    }
+    
+    public String toString(){
+        return name + " " + type + " " + uses;
     }
 }
