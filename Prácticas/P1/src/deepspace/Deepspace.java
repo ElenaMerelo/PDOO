@@ -1,7 +1,7 @@
 /**
  * @author Elena Merelo
  */
-package deepspace;
+/*package deepspace;
 
 public class Deepspace {   
 
@@ -9,4 +9,4 @@ public class Deepspace {
         // TODO code application logic here
     }
     
-}
+}*/

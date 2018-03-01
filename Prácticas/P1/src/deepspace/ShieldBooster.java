@@ -1,10 +1,9 @@
-
-import deepspace.ShieldBooster;
-
 /**
  * @author elena
  * @brief representa a los potenciadores de escudo que pueden tener las estaciones espaciales.
  */
+package deepspace;
+
 class ShieldBooster {
     private String name;
     private float boost;
@@ -12,13 +11,13 @@ class ShieldBooster {
     
     //Constructores
     ShieldBooster(String n, float b, int u){
-        name= n;
-        boost= b;
-        uses= u;
+        this.name= n;
+        this.boost= b;
+        this.uses= u;
     }
     
-    ShieldBooster(ShieldBooster b){
-        this(b.name, b.getBoost(), b.getUses());     
+    ShieldBooster(ShieldBooster sb){
+        this(sb.name, sb.getBoost(), sb.getUses());     
     }
     
     //Consultores

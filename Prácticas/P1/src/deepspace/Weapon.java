@@ -1,12 +1,10 @@
-
-import deepspace.WeaponType;
-import deepspace.Weapon;
-
 /**
  * @author elena
  * @brief Esta clase representa a las armas de las que puede disponer una estación 
  * espacial para potenciar su energía al disparar.
  */
+package deepspace;
+
 class Weapon {
     private String name;
     private WeaponType type;
@@ -47,7 +45,7 @@ class Weapon {
     public float useIt(){
         if( uses > 0){
             uses--;
-            return power();
+            return this.power();
         }
         return 1.0f;
     }
