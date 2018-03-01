@@ -21,6 +21,9 @@ class ShieldBooster {
     }
     
     //Consultores
+    public String getName(){
+        return name;
+    }
     public float getBoost(){
         return boost;
     }
@@ -39,6 +42,10 @@ class ShieldBooster {
             return boost;
         }
         return 1.0f;
+    }
+    
+    public String toString(){
+        return name + ": " + boost + " boost, " + uses + " uses.";
     }
     
 }
