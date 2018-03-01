@@ -9,11 +9,11 @@ class Loot {
     private int nSupplies, nWeapons, nShields, nHangars, nMedals;
         
     Loot(int supplies, int weapons, int shields, int hangars, int medals){
-        nSupplies= supplies;
-        nWeapons= weapons;
-        nShields= shields;
-        nHangars= hangars;
-        nMedals= medals;
+        this.nSupplies= supplies;
+        this.nWeapons= weapons;
+        this.nShields= shields;
+        this.nHangars= hangars;
+        this.nMedals= medals;
     }
 
     //Consultores 

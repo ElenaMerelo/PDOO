@@ -54,3 +54,13 @@ public class perro{
   ~~~
 
   >Cuando nos dicen de crear una clase, enumerado,... con visibilidad de paquete quiere decir que no tendremos que poner ni public ni private a la hora de declararlo, la opción por defecto, default, es crearlo con este tipo de visibilidad.
+
+  # Enumerados
+  Para crear un enumerado en Netbeans pulsamos botón derecho en source packages y seleccionamos Java Enum. Los valores que tienen dentro se consideran constantes, se pueden añadir además métodos, pero Java requiere que las constantes vayan primero y para hacer referencia a ellos hemos de escribir `nombre_del_enum.lo_que_queremos_acceder`. Así por ejemplo:
+  ~~~Java
+  //Puede ser también private o public, como lo hemos declarado le estamos dando visibilidad de paquete.
+  enum Comidas{ MACARRONES, CHOCOLATE, MANTECADOS, LENTEJAS, FRUTA }
+
+  //Si ahora queremos acceder a éste desde otra clase, dentro del mismo paquete:
+  Comidas ricas= Comidas.FRUTA;
+  ~~~

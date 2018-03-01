@@ -6,16 +6,18 @@
 class SuppliesPackage{
     private float ammoPower, fuelUnits, shieldPower;
 
+    //Constructores
     SuppliesPackage(float ammo, float fuel, float power){
-        ammoPower= ammo;
-        fuelUnits= fuel;
-        shieldPower= power;
+        this.ammoPower= ammo;
+        this.fuelUnits= fuel;
+        this.shieldPower= power;
     }
     
     SuppliesPackage(SuppliesPackage s){
         this(s.getAmmoPower(), s.getFuelUnits(), s.getShieldPower());
     }
     
+    //Consultores
     public float getAmmoPower(){
         return ammoPower;
     }

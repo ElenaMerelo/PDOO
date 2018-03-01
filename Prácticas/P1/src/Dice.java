@@ -1,4 +1,3 @@
-
 import java.util.Random;
 
 /**
@@ -14,11 +13,11 @@ class Dice {
     
     //Constructores
     Dice(){
-        generator= new Random();
-        NHANGARSPROB=0.25f;
-        NSHIELDSPROB=0.25f;
-        NWEAPONSPROB=0.33f;
-        FIRSTSHOTPROB=0.5f;
+        this.generator= new Random();
+        this.NHANGARSPROB=0.25f;
+        this.NSHIELDSPROB=0.25f;
+        this.NWEAPONSPROB=0.33f;
+        this.FIRSTSHOTPROB=0.5f;
     }
     
     /*
@@ -38,9 +37,9 @@ class Dice {
     */
     int initWithWeapons(){
         float n= 1 - 2*NWEAPONSPROB;
-        if ( generator.nextFloat() < NWEAPONSPROB )
+        if ( generator.nextFloat() <= NWEAPONSPROB )
             return 1;
-        if (generator.nextFloat() >= NWEAPONSPROB && generator.nextFloat() < n )
+        if (generator.nextFloat() > NWEAPONSPROB && generator.nextFloat() <= n )
             return 2;
         return 3; 
     }
@@ -59,7 +58,29 @@ class Dice {
      * el jugador (su índice) que iniciará la partida.
     */
     int whoStarts(int nPlayers){
-        return generator.ints(0, nPlayers-1).findFirst().getAsInt();
+        return generator.nextInt(nPlayers-1);
+    }
+    
+    /*
+     * @brief Genera SPACESTATION con una probabilidad de FIRSTSHOTPROB y ENEMYSTARSHIP 
+     * en otro caso. Determina quién (de los dos tipos de personajes del juego) 
+     * dispara primero en un combate: la estación espacial o la nave enemiga.
+    */
+    GameCharacter firstShot(){
+        GameCharacter primero= generator.nextFloat() <= FIRSTSHOTPROB ? GameCharacter.SPACESTATION : GameCharacter.ENEMYSTARSHIP;
+        return primero;
+    }
+    
+    /*
+     * @brief Devuelve true con una probabilidad de speed y false en caso contrario 
+     * (se asume que speed será un número entre 0 y 1). Determina si la estación
+     * espacial se moverá para esquivar un disparo. La probabilidad de moverse 
+     * será mayor cuanto más cerca está la velocidad potencial actual de la estación 
+     * espacial de su velocidad máxima potencial.
+    */
+    boolean spaceStationMoves(float speed){
+        boolean prob= generator.nextFloat() <= speed ? true : false;
+        return prob;
     }
     
     

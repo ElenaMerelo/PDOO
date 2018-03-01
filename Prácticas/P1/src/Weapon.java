@@ -43,7 +43,7 @@ class Weapon {
     public float useIt(){
         if( uses > 0){
             uses--;
-            return power();
+            return this.power();
         }
         return 1.0f;
     }
