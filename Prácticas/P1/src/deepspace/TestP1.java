@@ -4,6 +4,9 @@
  */
 package deepspace;
 
+//Para leer datos desde teclado
+import java.util.Scanner;
+
 public class TestP1 {
     public static void main(String args[]){
         //Prueba de la clase Loot
@@ -54,10 +57,74 @@ public class TestP1 {
             System.out.println(w1);
         }
         
-        //Prueba de la clase Dice 
-        Dice d1= new Dice();
+        /*Crea una instancia de la clase Dice, llama a cada método 100 veces y 
+        calcula cuantas veces se obtiene cada uno de los valores posibles. 
+        Comprueba si se cumplen a nivel práctico las instrucciones relativas a 
+        las probabilidades de cada evento.*/
+        Dice d= new Dice();
+        Scanner reader= new Scanner (System.in);
+        System.out.print("Introduzca número de jugadores: ");
+        int num_players= reader.nextInt();
         
-        System.out.println("Game started with " + d1.initWithNHangars() + " hangars, "
-                + d1.initWithWeapons() + " weapons, " + d1.initWithNShields() + " shields.");
+        int prob_hangar_0= 0, prob_hangar_1= 0, prob_shield_0= 0, prob_shield_1= 0;
+        int prob_weapon_1= 0, prob_weapon_2= 0, prob_weapon_3= 0, prob_true= 0, prob_false= 0;
+        float speed= 0.75f;
+        int prob_space_station= 0, prob_enemy_starship= 0;
+        
+        for(int i= 0; i< 100; i++){
+            //Prueba de initWithNHangars()
+            if(d.initWithNHangars() == 0)
+               prob_hangar_0++;
+            
+            if(d.initWithNHangars() == 1)
+                prob_hangar_1++;
+            
+            //Prueba de initWithNWeapons()
+            if(d.initWithNWeapons() == 1)
+               prob_weapon_1++;
+  
+            if(d.initWithNWeapons() == 2)
+                prob_weapon_2++;
+            
+            if (d.initWithNWeapons() == 3)
+                prob_weapon_3++;
+            
+            
+            //Prueba de initWithNShields
+            if(d.initWithNShields() == 0)
+               prob_shield_0++;
+            
+            if(d.initWithNShields() == 1)
+                prob_shield_1++;
+            
+            //Prueba de whoStarts()
+            System.out.println("Empieza el jugador: " + d.whoStarts(num_players));
+            
+            //Prueba de firstShot()
+            if(d.firstShot() == GameCharacter.SPACESTATION)
+                prob_space_station++;
+            
+            if(d.firstShot() == GameCharacter.ENEMYSTARSHIP)
+                prob_enemy_starship++;
+            
+            //Prueba de spaceStationMoves()
+            if(d.spaceStationMoves(speed) == true)
+                prob_true++;
+           
+            if(d.spaceStationMoves(speed) == false)
+                prob_false++;
+        }
+        
+        System.out.println("Hay un " + prob_hangar_0 + "% de que salga el hangar 0, y un " + prob_hangar_1 +  "% de que salga el 1");
+        System.out.println("Hay un " + prob_weapon_1 + "% de que salga la weapon 1, un " + prob_weapon_2 +  "% de que salga 2 y un " + prob_weapon_3 + "% de que salga 3");
+        System.out.println("Hay un " + prob_shield_0 + "% de que salga el shield 0, y un " + prob_shield_1 +  "% de que salga 1");
+        System.out.println("Hay un " + prob_true + "% de que se mueve la spaceStation, y un " + prob_false +  "% de que no lo haga");
+        System.out.println("Hay un " + prob_space_station + "% de que dispare primero spaceStation, y un " + prob_enemy_starship +  "% de que lo haga enemyStarship");
+
+        
+      
+        
+        
     }
+    
 }

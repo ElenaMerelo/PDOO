@@ -27,9 +27,7 @@ class Dice {
      * Este método determina el número de hangares que recibirá una estación espacial al ser creada.
     */
     int initWithNHangars(){
-        if( generator.nextFloat() <= NHANGARSPROB )
-            return 0;
-        return 1;
+        return generator.nextFloat() <= NHANGARSPROB ? 0 : 1;
     }
     
     /*
@@ -37,7 +35,7 @@ class Dice {
      * y 3 con una probabilidad de (1-2* NWEAPONSPROB). Este método determina el
      * número de armas que recibirá una estación espacial al ser creada.
     */
-    int initWithWeapons(){
+    int initWithNWeapons(){
         float n= 1 - 2*NWEAPONSPROB;
         if ( generator.nextFloat() <= NWEAPONSPROB )
             return 1;
@@ -69,8 +67,7 @@ class Dice {
      * dispara primero en un combate: la estación espacial o la nave enemiga.
     */
     GameCharacter firstShot(){
-        GameCharacter primero= generator.nextFloat() <= FIRSTSHOTPROB ? GameCharacter.SPACESTATION : GameCharacter.ENEMYSTARSHIP;
-        return primero;
+        return generator.nextFloat() <= FIRSTSHOTPROB ? GameCharacter.SPACESTATION : GameCharacter.ENEMYSTARSHIP;
     }
     
     /*
@@ -81,8 +78,7 @@ class Dice {
      * espacial de su velocidad máxima potencial.
     */
     boolean spaceStationMoves(float speed){
-        boolean prob= generator.nextFloat() <= speed ? true : false;
-        return prob;
+        return generator.nextFloat() <= speed ? true : false;
     }
     
     
