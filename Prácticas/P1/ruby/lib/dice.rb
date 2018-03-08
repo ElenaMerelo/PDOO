@@ -20,13 +20,22 @@ module Deepspace
     creada.
 =end
     def initWithNHangars
-      @generator.rand < @NHANGARSPROB ? 0 : 1
+      @generator.rand <= @NHANGARSPROB ? 0 : 1
+    end
+
+=begin
+    Devuelve 0 con una probabilidad de NSHIELDSPROB y 1 en caso contrario.
+    Este método determina el número de potenciadores de escudo que recibirá una estación espacial al
+    ser creada.
+=end 
+    def initWithNShields
+      @generator.rand <= @NSHIELDSPROB ? 0 : 1
     end
     
 =begin
-Devuelve 1 con una probabilidad de NWEAPONSPROB, 2 con la misma
-probabilidad y 3 con una probabilidad de (1-2* NWEAPONSPROB). Este método determina el
-número de armas que recibirá una estación espacial al ser creada.
+    Devuelve 1 con una probabilidad de NWEAPONSPROB, 2 con la misma
+    probabilidad y 3 con una probabilidad de (1-2* NWEAPONSPROB). Este método determina el
+    número de armas que recibirá una estación espacial al ser creada.
 =end
     def initWithNWeapons
       rng= @generator.rand
@@ -38,6 +47,33 @@ número de armas que recibirá una estación espacial al ser creada.
       else
         3
       end
+    end
+    
+=begin
+    Genera un número aleatorio del intervalo [0,nPlayers-1].Determina el jugador (su índice) que
+    iniciará la partida.
+=end
+    def whoStarts(num_players)
+      @generator.rand(num_players-1)
+    end
+    
+=begin
+    Genera SPACESTATION con una probabilidad de FIRSTSHOTPROB y ENEMYSTARSHIP en otro caso. 
+    Determina quién (de los dos tipos de personajes del juego) dispara primero 
+    en un combate: la estación espacial o la nave enemiga.
+=end
+    def firstShot
+      @generator.rand <= @FIRSTSHOTPROB ? GameCharacter::SPACESTATION : GameCharacter::ENEMYSTARSHIP
+    end
+    
+=begin
+    Devuelve true con una probabilidad de speed y false en otro caso 
+    (se asume que speed será un número entre 0 y 1). Este método determina si la estación
+    espacial se moverá para esquivar un disparo. La probabilidad de moverse será mayor cuanto más
+    cerca está la velocidad potencial actual de la estación espacial de su velocidad máxima potencial.
+=end
+    def spaceStationMoves(speed)
+      @generator.rand <= speed ? true : false
     end
   end
 end
