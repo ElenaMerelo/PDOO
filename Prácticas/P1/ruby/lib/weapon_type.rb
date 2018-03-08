@@ -7,13 +7,11 @@ de arma.
 module Deepspace
   module WeaponType
      class Type
-       @power
-
-       attr_reader :power
-
        def initialize (another_power)
          @power= another_power
        end
+       
+       attr_reader :power
      end
 
      LASER= Type.new(2.0)

@@ -2,10 +2,6 @@
 
 module Deepspace
   class ShieldBooster
-    @name
-    @boost
-    @uses
-    
     def initialize(name, boost, uses)
       @name= name
       @boost= boost

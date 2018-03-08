@@ -6,12 +6,6 @@ y/o medallas
 
 module Deepspace
   class Loot
-    @nSupplies
-    @nWeapons
-    @nShields
-    @nHangars
-    @nMedals  
-      
     def initialize(supplies, weapons, shields, hangars, medals)
       @nSupplies= supplies
       @nWeapons= weapons

@@ -5,10 +5,6 @@ armamento, combustible y/o energía para los escudos
 
 module Deepspace
   class SuppliesPackage
-    @ammoPower
-    @fuelUnits
-    @shieldPower
-    
     def initialize(ammo, fuel, power)
       @ammoPower= ammo
       @fuelUnits= fuel

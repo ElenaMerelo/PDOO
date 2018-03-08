@@ -5,10 +5,6 @@ energía al disparar
 
 module Deepspace
   class Weapon
-    @name
-    @type
-    @uses
-
     def initialize(name, type, uses)
       @name= name
       @type= type
