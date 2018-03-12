@@ -6,6 +6,8 @@ y/o medallas
 
 module Deepspace
   class Loot
+    attr_reader :nSupplies, :nWeapons, :nShields, :nHangars, :nMedals
+
     def initialize(supplies, weapons, shields, hangars, medals)
       @nSupplies= supplies
       @nWeapons= weapons
@@ -14,6 +16,5 @@ module Deepspace
       @nMedals= medals
     end
     
-    attr_reader :nSupplies, :nWeapons, :nShields, :nHangars, :nMedals
   end
 end

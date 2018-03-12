@@ -2,17 +2,17 @@
 
 module Deepspace
   class ShieldBooster
+    attr_reader :name, :boost, :uses
+    
     def initialize(name, boost, uses)
       @name= name
       @boost= boost
       @uses= uses
     end
     
-    def newCopy(sb)
+    def self.newCopy(sb)
       ShieldBooster.new(sb.name, sb.boost, sb.uses)
     end
-    
-    attr_reader :name, :boost, :uses
     
     def useIt
       if @uses > 0 

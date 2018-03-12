@@ -17,11 +17,11 @@ module Deepspace
   class TestP1
     def main
       #Weapon 
-      puts "\nWeapon: "
+      puts "Weapon: "
       w1= Weapon.new("arma peligrosa", WeaponType::LASER, 5) 
       w2= Weapon.newCopy(w1)
-      puts "\nName: #{w1.name}, type: #{w1.type}, uses: #{w1.uses}"
-      puts "\nName: #{w2.name}, type: #{w2.type}, uses: #{w2.uses}"
+      print "\nName: #{w1.name}, type: #{w1.type.power}, uses: #{w1.uses}"
+      print "\nName: #{w2.name}, type: #{w2.type.power}, uses: #{w2.uses}"
     end
   end
   test= TestP1.new 

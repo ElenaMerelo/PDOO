@@ -5,16 +5,17 @@ armamento, combustible y/o energía para los escudos
 
 module Deepspace
   class SuppliesPackage
+    attr_reader :ammoPower, :fuelUnits, :shieldPower
+    
     def initialize(ammo, fuel, power)
       @ammoPower= ammo
       @fuelUnits= fuel
       @shieldPower= power
     end
     
-    def newCopy(s)
+    def self.newCopy(s)
       SuppliesPackage.new(s.ammoPower, s.fuelUnits, s.shieldPower)
     end
     
-    attr_reader :ammoPower, :fuelUnits, :shieldPower
   end
 end
