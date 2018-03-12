@@ -38,11 +38,12 @@ public class TestP1 {
                 sh2.getUses() + " uses." );
         
         for(int i= 0; i< 4; i++){
-            System.out.println("useIt(): " + sh1.useIt());
             System.out.println(sh1);
+            System.out.println("useIt(): " + sh1.useIt());
         }
         
         //Prueba de la clase Weapon 
+        //MISSILE
         Weapon w1= new Weapon("patata nuclear", WeaponType.MISSILE, 2);
         Weapon w2= new Weapon(w1);
         
@@ -53,8 +54,38 @@ public class TestP1 {
                 + ", name: " + w2.getName());
         
         for(int i= 0; i< 4; i++){
-            System.out.println("Use: " + w1.useIt());
             System.out.println(w1);
+            System.out.println("Use: " + w1.useIt());
+        }
+        
+        //LASER
+        Weapon l1= new Weapon("Láser tóh potente", WeaponType.LASER, 3);
+        Weapon l2= new Weapon(l1);
+        
+        System.out.println("l1: Type: " + l1.getType() + ", uses: " + l1.getUses() 
+                + ", name: " + l1.getName());
+        
+        System.out.println("l2: Type: " + l2.getType() + ", uses: " + l2.getUses() 
+                + ", name: " + l2.getName());
+        
+        for(int i= 0; i< 4; i++){
+            System.out.println(l1);
+            System.out.println("Use: " + l1.useIt());
+        }
+        
+        //PLASMA
+        Weapon p1= new Weapon("Te vas a quedar plasmado", WeaponType.PLASMA, 1);
+        Weapon p2= new Weapon(p1);
+        
+        System.out.println("p1: Type: " + p1.getType() + ", uses: " + p1.getUses() 
+                + ", name: " + p1.getName());
+        
+        System.out.println("p2: Type: " + p2.getType() + ", uses: " + p2.getUses() 
+                + ", name: " + p2.getName());
+        
+        for(int i= 0; i< 4; i++){
+            System.out.println(p1);
+            System.out.println("Use: " + p1.useIt());
         }
         
         /*Crea una instancia de la clase Dice, llama a cada método 100 veces y 

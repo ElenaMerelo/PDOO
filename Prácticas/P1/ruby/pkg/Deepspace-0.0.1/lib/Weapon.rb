@@ -5,6 +5,8 @@ energía al disparar
 
 module Deepspace
   class Weapon
+    attr_reader :name, :type, :uses
+    
     def initialize(name, type, uses)
       @name= name
       @type= type
@@ -14,8 +16,6 @@ module Deepspace
     def newCopy(w)
       Weapon.new(w.name, w.type, w.uses)
     end
-
-    attr_reader :name, :type, :uses
 
     def power
       @type.power
@@ -29,5 +29,6 @@ module Deepspace
         1.0
       end
     end
+    
   end
 end

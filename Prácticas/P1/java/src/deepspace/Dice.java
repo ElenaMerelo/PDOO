@@ -39,9 +39,10 @@ class Dice {
         float n= 1 - 2*NWEAPONSPROB;
         if ( generator.nextFloat() <= NWEAPONSPROB )
             return 1;
-        if (generator.nextFloat() > NWEAPONSPROB && generator.nextFloat() <= n )
+        else if (generator.nextFloat() > NWEAPONSPROB && generator.nextFloat() <= n )
             return 2;
-        return 3; 
+        else
+            return 3; 
     }
     
     /*
