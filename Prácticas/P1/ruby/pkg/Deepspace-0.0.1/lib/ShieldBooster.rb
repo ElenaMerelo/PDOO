@@ -10,8 +10,8 @@ module Deepspace
       @uses= uses
     end
     
-    def self.newCopy(sb)
-      ShieldBooster.new(sb.name, sb.boost, sb.uses)
+    def newCopy
+      ShieldBooster.new(@name, @boost, @uses)
     end
     
     def useIt
@@ -21,6 +21,10 @@ module Deepspace
       else
         1.0
       end
+    end
+    
+    def to_s
+      "name #{@name}, boost #{@boost}, uses #{@uses}"
     end
   end
 end

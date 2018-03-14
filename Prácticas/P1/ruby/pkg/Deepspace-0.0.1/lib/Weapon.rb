@@ -13,7 +13,7 @@ module Deepspace
       @uses= uses
     end
 
-    def self.newCopy(w)
+    def newCopy(w)
       Weapon.new(w.name, w.type, w.uses)
     end
     
@@ -28,6 +28,10 @@ module Deepspace
       else
         1.0
       end
+    end
+    
+    def to_s
+      "Name #{@name}, type #{@type.power}, uses #{@uses}"
     end
     
   end
