@@ -13,8 +13,8 @@ module Deepspace
       @uses= uses
     end
 
-    def newCopy(w)
-      Weapon.new(w.name, w.type, w.uses)
+    def self.newCopy(w)
+      new(w.name, w.type, w.uses)
     end
     
     def power
@@ -36,3 +36,4 @@ module Deepspace
     
   end
 end
+
