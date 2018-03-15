@@ -17,5 +17,9 @@ module Deepspace
       new(s.ammoPower, s.fuelUnits, s.shieldPower)
     end
     
+    def to_s
+      "ammoPower #{@ammoPower}, fuelUnits #{@fuelUnits}, shieldPower #{@shieldPower}"
+    end
+    
   end
 end

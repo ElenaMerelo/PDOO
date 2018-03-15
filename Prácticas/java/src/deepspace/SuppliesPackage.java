@@ -32,4 +32,8 @@ class SuppliesPackage{
         return shieldPower;
     }
     
+    public String to_string(){
+        return ammoPower + " ammoPower" + fuelUnits + " fuelUnits" + shieldPower + " shieldPower";
+    }
+    
 }

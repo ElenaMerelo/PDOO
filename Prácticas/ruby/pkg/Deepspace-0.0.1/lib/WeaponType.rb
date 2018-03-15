@@ -12,6 +12,10 @@ module Deepspace
        def initialize (another_power)
          @power= another_power
        end
+       
+       def to_s
+         "power #{@power}"
+       end
      end
 
      LASER= Type.new(2.0)

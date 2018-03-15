@@ -31,7 +31,7 @@ module Deepspace
     end
     
     def to_s
-      "Name #{@name}, type #{@type.power}, uses #{@uses}"
+      "Name #{@name}, power #{@type.power}, uses #{@uses}"
     end
     
   end

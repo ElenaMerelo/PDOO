@@ -42,4 +42,8 @@ class Loot {
         return nSupplies + " supplies, " + nWeapons + " weapons, " + nShields
                 + " shields, " + nHangars + " hangars, " + nMedals + " medals.";
     }
+    
+    LootToUI getUIVersion(){
+        return new LootoUI(this);
+    }
 }
