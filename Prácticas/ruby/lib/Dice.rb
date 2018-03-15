@@ -42,7 +42,7 @@ module Deepspace
       prob= 1 - 2*@NWEAPONSPROB
       if rng <= @NWEAPONSPROB
         1
-      elsif rng > @NWEAPONSPROB && rng < prob
+      elsif rng > @NWEAPONSPROB && rng <= prob
         2
       else
         3
