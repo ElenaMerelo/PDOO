@@ -1,2 +1,2 @@
 # PDOO
-Apuntes/ ejercicios/ cosas útiles/ prácticas/... de la asignatura programación y diseño orientado a objetos 
+Apuntes/ ejercicios/ cosas útiles/ práctfficas/... de la asignatura programación y diseño orientado a objetos 
