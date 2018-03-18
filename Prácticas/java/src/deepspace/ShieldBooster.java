@@ -48,4 +48,8 @@ class ShieldBooster {
         return name + ": " + boost + " boost, " + uses + " uses.";
     }
     
+    ShieldToUI getUIversion(){
+        return new ShieldToUI(this);
+    }
+    
 }

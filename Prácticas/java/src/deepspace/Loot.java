@@ -44,6 +44,6 @@ class Loot {
     }
     
     LootToUI getUIVersion(){
-        return new LootoUI(this);
+        return new LootToUI(this);
     }
 }
