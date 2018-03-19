@@ -7,20 +7,20 @@ package deepspace;
 
 import java.util.ArrayList;
 
-public class Hangar {
+class Hangar {
     private int maxElements;
     private ArrayList<Weapon> weapons;
-    private ArrayList<ShieldBooster> shield_boosters;
+    private ArrayList<ShieldBooster> shieldBoosters;
     
     //Constructores 
-    Hangar(int capacity, ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
+    Hangar(int capacity){
         maxElements= capacity;
-        weapons= new ArrayList<> (w);
-        shield_boosters= new ArrayList<> (s);
     }
     
     Hangar(Hangar h){
-        this(h.maxElements, h.weapons, h.shield_boosters);
+        maxElements= h.maxElements;
+        weapons= new ArrayList<>(h.weapons);
+        shieldBoosters= new ArrayList<>(h.shieldBoosters);
     }
     
     //getters
@@ -37,7 +37,7 @@ public class Hangar {
     }
     
     public ArrayList<ShieldBooster> getShieldBoosters(){
-        return shield_boosters;
+        return shieldBoosters;
     }
     
     /*
@@ -45,7 +45,7 @@ public class Hangar {
      * tanto no se ha llegado a la capacidad máxima.
     */
     private boolean spaceAvalaible(){
-        return weapons.size() + shield_boosters.size() < maxElements;
+        return weapons.size() + shieldBoosters.size() < maxElements;
     }
     
     /*
@@ -66,7 +66,7 @@ public class Hangar {
     */
     public boolean addShieldBooster(ShieldBooster s){
         if(spaceAvalaible() == true){
-            shield_boosters.add(s);
+            shieldBoosters.add(s);
             return true;
         }
         return false;
@@ -91,8 +91,8 @@ public class Hangar {
     */
     ShieldBooster removeShieldBooster(int n){
         if(n > 0 && n < weapons.size()){
-            ShieldBooster removed= new ShieldBooster(shield_boosters.get(n));
-            shield_boosters.remove(n);
+            ShieldBooster removed= new ShieldBooster(shieldBoosters.get(n));
+            shieldBoosters.remove(n);
             return removed;
         }
         return null;  
