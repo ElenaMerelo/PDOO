@@ -23,14 +23,14 @@ class Damage {
         nShields= s;
     }
     
-    Damage(int s, ArrayList<WeaponType> w){
+    Damage(ArrayList<WeaponType> w, int s){
         nShields= s;
         nWeapons= w.size();
         weapons= w;
     }
     
     Damage(Damage d){
-        this(d.nShields, d.weapons);
+        this(d.weapons, d.nShields);
     }
     
     //Getters
@@ -109,9 +109,5 @@ class Damage {
     public boolean hasNoEffect(){
         return nWeapons== 0 && nShields == 0;
     }
-    
-    
-    
-    
     
 }
