@@ -12,8 +12,8 @@ module Deepspace
       @uses= uses
     end
     
-    def self.newCopy(sh)
-      new(sh.name, sh.boost, sh.uses)
+    def self.newCopy(s)
+      new(s.name, s.boost, s.uses)
     end
     
     def useIt
