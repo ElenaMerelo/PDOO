@@ -89,7 +89,7 @@ class Hangar {
      * @brief Elimina el potenciador de escudo número s del hangar y lo devuelve, 
      * siempre que éste exista. Si el índice suministrado es incorrecto devuelve null.
     */
-    ShieldBooster removeShieldBooster(int n){
+    public ShieldBooster removeShieldBooster(int n){
         if(n > 0 && n < weapons.size()){
             ShieldBooster removed= new ShieldBooster(shieldBoosters.get(n));
             shieldBoosters.remove(n);

@@ -6,8 +6,8 @@ package deepspace;
 public class EnemyStarShip {
     private float ammoPower, shieldPower;
     private String name;
-    private Damage damage;
     private Loot loot;
+    private Damage damage;
     
     //Constructores 
     EnemyStarShip(String n, float a, float s, Loot l, Damage d){

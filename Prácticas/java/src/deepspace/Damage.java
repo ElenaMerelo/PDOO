@@ -18,7 +18,7 @@ class Damage {
     private ArrayList<WeaponType> weapons;
     
     //Constructores 
-    Damage(int s, int w){
+    Damage(int w, int s){
         nWeapons= w;
         nShields= s;
     }
