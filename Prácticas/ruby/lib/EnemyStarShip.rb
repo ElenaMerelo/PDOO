@@ -4,7 +4,7 @@ require relative "EnemyToUI"
 
 module Deepspace
   class EnemyStarShip
-    attr_reader :name, :ammoPower, :ShieldPower, :loot, :damage
+    attr_reader :name, :ammoPower, :shieldPower, :loot, :damage
     def initialize(n, a, s, l, d)
       @name= n
       @ammoPower= a
@@ -22,11 +22,11 @@ module Deepspace
     end
 
     def fire
-      self.ammoPower
+      @ammoPower
     end
 
     def protection
-      self.shieldPower
+      @shieldPower
     end
 
     def receiveShot(shot)
