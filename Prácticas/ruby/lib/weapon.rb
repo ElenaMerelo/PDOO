@@ -3,6 +3,8 @@ Representa a las armas de las que puede disponer una estación espacial para pot
 energía al disparar
 =end
 
+require_relative 'WeaponToUI'
+
 module Deepspace
   class Weapon
     def initialize(name, type, uses)
@@ -11,7 +13,7 @@ module Deepspace
       @uses= uses
     end
 
-    def newCopy(w)
+    def newCopy(w) #Aqui deberias subir self
       Weapon.new(w.name, w.type, w.uses)
     end
 
@@ -28,6 +30,10 @@ module Deepspace
       else
         1.0
       end
+    end
+    
+    def getUIversion
+      WeaponToUI.new(self)
     end
   end
 end
