@@ -8,7 +8,7 @@ instancias de objetos mutables (modificables)
 By: Elena Merelo
 =end
 
-require relative "DamageToUI"
+require_relative "DamageToUI"
 
 module Deepspace
   class Damage
@@ -20,12 +20,12 @@ module Deepspace
       @weapons= Array.new(w)
     end
     
-    def newNumericWeapons(w, s)
+    def self.newNumericWeapons(w, s) #Porque son constructores de la clase.
       new(w, s, 0)
     end
     
-    def newSpecificWeapons(w, s)
-      new(w.length, s, w)
+    def self.newSpecificWeapons(wl, s) #wl segun el diagrama de clases
+      new(wl.length, s, wl)
     end
     
     def self.newCopy(d)
@@ -41,23 +41,19 @@ module Deepspace
         @weapons.delete(w)
       else
         if @nWeapons > 0
-          @nWeapons= @nWeapons -1
+          @nWeapons-=1
         end
       end
     end
     
     def discardShieldBooster
       if @nShields > 0
-        @nShields= @nShields -1
+        @nShields-=1
       end
     end
     
     def hasNoEffect
-      if @nWeapons == 0 && @nShields == 0
-        true
-      else
-        false
-      end
+      @nWeapons == 0 && @nShields == 0
     end
     
     private
