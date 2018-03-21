@@ -63,7 +63,7 @@ module Deepspace
     end
     
     def haveAWinner
-      @currentStation.nMedals == @@WIN ? true : false
+      @currentStation.nMedals == @@WIN
     end
     
     def init(names)
@@ -88,11 +88,7 @@ module Deepspace
     
     private
     def correct_game_state
-      if @gameState.state == GameState::INIT or @gameState.state == GameState::AFTERCOMBAT
-        true
-      else
-        false
-      end
+      @gameState.state == GameState::INIT or @gameState.state == GameState::AFTERCOMBAT
     end
     
   end #class
