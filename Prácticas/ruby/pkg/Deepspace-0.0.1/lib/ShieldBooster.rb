@@ -1,6 +1,6 @@
 # Representa a los potenciadores de escudo que pueden tener las estaciones espaciales
 
-require relative "ShieldToUI"
+require_relative "ShieldToUI"
 
 module Deepspace
   class ShieldBooster

@@ -1,4 +1,4 @@
-require relative "HangarToUI"
+require_relative "HangarToUI"
 
 
 module Deepspace
@@ -31,7 +31,7 @@ module Deepspace
     
     def removeWeapon(w)
       #Guardamos la weapon en la posición w en una variable, devolvemos null si está fuera de rango
-      removed= Weapon.new(@weapons.fetch(w, null)) 
+      removed= Weapon.new(@weapons.fetch(w, nil)) 
       @weapons.delete_at(w)
       removed
     end
@@ -46,7 +46,7 @@ module Deepspace
     end
     
     def removeShieldBooster(s)
-      removed= ShieldBooster.new(@shieldBoosters.fetch(s, null))
+      removed= ShieldBooster.new(@shieldBoosters.fetch(s, nil))
       @shieldBoosters.delete_at(s)
       removed
     end

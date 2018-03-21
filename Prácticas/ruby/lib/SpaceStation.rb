@@ -1,6 +1,6 @@
 # Author: Elena Merelo
 
-require relative "SpaceStationToUI"
+require_relative "SpaceStationToUI"
 
 module Deepspace
   class SpaceStation
@@ -28,7 +28,7 @@ module Deepspace
     end
 
     def discardHangar
-      @hangar= null
+      @hangar= nil
     end
 
     def discardShieldBooster(i)
@@ -36,7 +36,7 @@ module Deepspace
     end
 
     def discardShieldBoosterInHangar(i)
-      if @hangar != null 
+      if @hangar != nil
         @hangar.removeShieldBooster(i)
       end
     end
@@ -46,7 +46,7 @@ module Deepspace
     end
 
     def discardWeaponInHangar(i)
-      if @hangar != null
+      if @hangar != nil
         @hangar.removeWeapon(i)
       end
     end
@@ -64,18 +64,18 @@ module Deepspace
     end
 
     def mountShieldBooster(i)
-      if @hangar != null
+      if @hangar != nil
         success= @hangar.removeShieldBooster(i)
-        if success != null
+        if success != nil
           @shieldBoosters.push(success)
         end
       end
     end
 
     def mountWeapon(i)
-      if @hangar != null
+      if @hangar != nil
         success= @hangar.removeWeapon(i)
-        if success != null
+        if success != nil
           @weapons.push(success)
         end
       end
@@ -92,13 +92,13 @@ module Deepspace
     end
 
     def receiveHangar(h)
-      if @hangar == null
+      if @hangar == nil
         @hangar= h
       end
     end
 
     def receiveShieldBooster(s)
-      if @hangar == null
+      if @hangar == nil
         false
       else
         @hangar.addShieldBooster(s)
@@ -116,7 +116,7 @@ module Deepspace
     end
 
     def receiveWeapon(w)
-      if hangar == null 
+      if hangar == nil 
         false
       else
         @hangar.addWeapon(w)
@@ -132,7 +132,7 @@ module Deepspace
     end
 
     def validState
-      @pendingDamage == null || @pendingDamage.hasNoEffect ? true : false
+      @pendingDamage == nil || @pendingDamage.hasNoEffect ? true : false
     end
 
     private
@@ -144,7 +144,7 @@ module Deepspace
 
     def cleanPendingDamage
       if pendingDamage.hasNoEffect
-        pendingDamage= null
+        pendingDamage= nil
       end
     end
   end

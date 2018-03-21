@@ -1,10 +1,10 @@
 # By Elena Merelo
 
-require relative "EnemyToUI"
+require_relative "EnemyToUI"
 
 module Deepspace
   class EnemyStarShip
-    attr_reader :name, :ammoPower, :shieldPower, :loot, :damage
+    attr_reader :name, :ammoPower, :ShieldPower, :loot, :damage
     def initialize(n, a, s, l, d)
       @name= n
       @ammoPower= a
@@ -22,11 +22,11 @@ module Deepspace
     end
 
     def fire
-      @ammoPower
+      self.ammoPower
     end
 
     def protection
-      @shieldPower
+      self.shieldPower
     end
 
     def receiveShot(shot)

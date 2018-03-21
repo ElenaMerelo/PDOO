@@ -4,7 +4,7 @@ que representen un número de paquetes de suministros, armas, potenciadores de e
 y/o medallas
 =end
 
-require relative "LootToUI"
+require_relative "LootToUI"
 
 module Deepspace
   class Loot

@@ -1,6 +1,6 @@
 # Author: Elena Merelo
 
-require relative "GameUniverseToUI"
+require_relative "GameUniverseToUI"
 
 module Deepspace
   class GameUniverse

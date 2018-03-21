@@ -8,7 +8,7 @@ instancias de objetos mutables (modificables)
 By: Elena Merelo
 =end
 
-require relative "DamageToUI"
+require_relative "DamageToUI"
 
 module Deepspace
   class Damage
@@ -21,7 +21,7 @@ module Deepspace
     end
     
     def newNumericWeapons(w, s)
-      new(w, s, 0)
+      new(w, s, nil)
     end
     
     def newSpecificWeapons(w, s)
