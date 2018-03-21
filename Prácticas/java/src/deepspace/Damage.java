@@ -57,7 +57,7 @@ class Damage {
      * mismo pero reducida si es necesario para que no implique perder armas o potenciadores de escudos
      * que no están en las colecciones de los parámetros.
     */
-    private Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
+    public Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
         nShields= s.size();
         nWeapons= w.size();
         
