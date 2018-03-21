@@ -4,6 +4,8 @@ que representen un número de paquetes de suministros, armas, potenciadores de e
 y/o medallas
 =end
 
+require relative "LootToUI"
+
 module Deepspace
   class Loot
     attr_reader :nSupplies, :nWeapons, :nShields, :nHangars, :nMedals
@@ -18,6 +20,10 @@ module Deepspace
     
     def to_s
       "nSupplies #{@nSupplies}, nWeapons #{@nWeapons}, nShields #{@nShields}, nHangars #{@nHangars}, nMedals #{@nMedals}"
+    end
+    
+    def getUIversion
+      LootToUI.new(self)
     end
     
   end

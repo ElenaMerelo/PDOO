@@ -36,7 +36,7 @@ class CardDeck
       @count=0;
     end
       
-    return card
+    return card.class.newCopy(card)
   end
   
   def justShuffled()
