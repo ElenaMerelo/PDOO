@@ -3,6 +3,8 @@ Representa a las armas de las que puede disponer una estación espacial para pot
 energía al disparar
 =end
 
+require_relative "WeaponToUI"
+
 module Deepspace
   class Weapon
     attr_reader :name, :type, :uses
@@ -32,6 +34,10 @@ module Deepspace
     
     def to_s
       "Name #{@name}, power #{@type.power}, uses #{@uses}"
+    end
+    
+    def getUIversion
+      WeaponToUI.new(self)
     end
     
   end
