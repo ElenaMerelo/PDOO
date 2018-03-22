@@ -54,9 +54,7 @@ module Deepspace
       end
     end
     
-    def state 
-      @gameState.state
-    end
+    attr_reader :gameState
     
     def getUIversion
       GameUniverseToUI.new(self)
