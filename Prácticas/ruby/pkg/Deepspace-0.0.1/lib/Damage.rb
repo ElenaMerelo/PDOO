@@ -16,8 +16,17 @@ module Deepspace
     
     def initialize(nw, ns, w)
       @nShields= ns
-      @nWeapons= nw
-      @weapons= Array.new(w)
+    
+      if w == nil
+        @weapons= nil
+        @nWeapons= nw
+      else
+        @nWeapons= nil
+        @weapons= Array.new
+        for i in w
+          @weapons.push(i)
+        end
+      end  
     end
     
     def self.newNumericWeapons(w, s)
@@ -25,7 +34,7 @@ module Deepspace
     end
     
     def self.newSpecificWeapons(w1, s)
-      new(w1.length, s, w1)
+      new(0, s, w1) #w1.length
     end
     
     def self.newCopy(d)
@@ -37,11 +46,11 @@ module Deepspace
     end
     
     def discardWeapon(w)
-      if @weapons.length > 0
+      if @weapons != nil
         @weapons.delete(w)
       else
         if @nWeapons > 0
-          @nWeapons -= -1
+          @nWeapons -= 1
         end
       end
     end
@@ -56,34 +65,43 @@ module Deepspace
       @nWeapons == 0 && @nShields == 0
     end
     
-    private
-    def adjust(w, s)
-      if (@nShields > s.length)
-        @nShields= s.length
+    def to_s
+      if @weapons == nil
+        "nWeapons #{@nWeapons}, nShields #{@nShields}"
+      else
+        "nShields #{@nShields}, weapons #{@weapons.join(",")}"
+
       end
-      
-      adjusted = Damage.newCopy(self)
-      copy = w.clone()
-      
-      for i in @weapons
-        index= arrayContainsType(copy, i)
-        if index == -1
-          adjusted.weapons.delete(i)
-        else
-          copy.delete_at(index)
-        end
-      end
-      
-      adjusted
     end
     
-    def arrayContainsType(w, t)
-      for i in w
-        if i.type == t
-          return w.index(i)
-        end
+    def adjust(w, s)
+      ns = [s.length, @nShields].min
+      
+      aux = Damage.new(nil, ns, @weapons)
+      copy = Array.new(w)
+      
+      if @weapons != nil
+        @weapons.each {|x|
+          index=arrayContainsType(copy, x)
+
+          if(index==-1)
+            aux.weapons.delete_at(aux.weapons.index(x))
+          else
+            copy.delete_at(index)
+          end
+        }
       end
-      return -1
+      aux
+    end
+    
+    private
+    def arrayContainsType(w, t)
+      index= w.index(t)
+      if index == nil
+        -1
+      else
+        index
+      end
     end
     
   end #class
@@ -112,24 +130,4 @@ def adjust(w,s)
       Damage.newNumericWeapons([@nWeapons,w.length].min, [@nShields,s.length].min)      
     end    
 end
-
-def adjust(w,s)
-      aux = Damage.newCopy(self)
-      copy = w.clone()
-      
-      @weapons.each {|x|
-        index=arrayContainsType(copy, x)
-        if(index==-1)
-          aux.weapons.delete(x)
-        else
-          copy.delete_at(index)
-        end
-      }
-      
-      if(@nShields>s.size)
-        aux.nShields=s.size
-      end
-      
-return aux
-
 =end

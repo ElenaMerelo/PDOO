@@ -11,9 +11,7 @@ module Deepspace
     end
     
     def self.newCopy(h)
-      @maxElements= h.maxElements
-      @weapons= h.weapons
-      @shieldBoosters= h.shieldBoosters
+      new(h.maxElements)
     end
     
     def getUIversion
