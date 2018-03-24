@@ -72,50 +72,41 @@ module Deepspace
       
       #Dice
       d= Dice.new
-      prob_hangar_0 = prob_hangar_1 = prob_shield_0 = prob_shield_1 = 
-        prob_weapon_1 = prob_weapon_2 = prob_weapon_3 = prob_true = prob_false=
-        prob_space_station = prob_enemy = 0
+      #La posición 0 se corresponde con initWithNHangars, 1 con initWithNShields,
+      # 2 con initWithNWeapons cuando sale 1, 3 con initWithNWeapons cuando sale 2,
+      # 4 con firstShot y 5 con spaceStationMoves
+      prob= [0, 0, 0, 0, 0, 0]
       
       for k in 0..99 do
         if d.initWithNHangars == 0
-          prob_hangar_0 += 1
-        else
-          prob_hangar_1 += 1
+          prob[0] += 1
         end
-        
-        if d.initWithNWeapons == 1
-          prob_weapon_1 += 1
-        elsif d.initWithNWeapons == 2
-            prob_weapon_2 += 1
-        else 
-          prob_weapon_3 += 1
-        end
-        
+
         if d.initWithNShields == 0
-          prob_shield_0 += 1
-        else 
-          prob_shield_1 += 1
+          prob[1] += 1
         end
-        
-        if d.firstShot() == GameCharacter::SPACESTATION
-            prob_space_station += 1
-        else
-            prob_enemy += 1
+
+        if d.initWithNWeapons == 1
+          prob[2] += 1
+        elsif d.initWithNWeapons == 2
+          prob[3] += 1
+        end
+
+        if d.firstShot == GameCharacter::SPACESTATION
+            prob[4] += 1
         end
 
         if d.spaceStationMoves(0.34) == true 
-            prob_true += 1
-        else
-          prob_false += 1
+            prob[5] += 1
         end
       puts "Empieza el jugador #{d.whoStarts(23)}"
       end
       
-      puts "Hay un #{prob_hangar_0}% de que salga el hangar 0, y un #{prob_hangar_1}% de que salga el 1"
-      puts "Hay un #{prob_weapon_1}% de que salga la weapon 1, un #{prob_weapon_2}% de que salga 2 y un #{prob_weapon_3}% de que salga 3"
-      puts "Hay un #{prob_shield_0}% de que salga el shield 0, y un #{prob_shield_1}% de que salga 1"
-      puts "Hay un #{prob_true}% de que se mueve la spaceStation, y un #{prob_false}% de que no lo haga"
-      puts "Hay un #{prob_space_station}% de que dispare primero spaceStation, y un #{prob_enemy}% de que lo haga enemyStarship"
+      puts "Hay un #{prob[0]}% de que salga el hangar 0, y un #{100 - prob[0]}% de que salga el 1"
+      puts "Hay un #{prob[2]}% de que salga la weapon 1, un #{prob[3]}% de que salga 2 y un #{100 - prob[3] - prob[2]}% de que salga 3"
+      puts "Hay un #{prob[1]}% de que salga el shield 0, y un #{100 - prob[1]}% de que salga 1"
+      puts "Hay un #{prob[5]}% de que se mueve la spaceStation, y un #{100- prob[5]}% de que no lo haga"
+      puts "Hay un #{prob[4]}% de que dispare primero spaceStation, y un #{100 - prob[4]}% de que lo haga enemyStarship"
 
     end
   end

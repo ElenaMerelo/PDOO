@@ -4,6 +4,8 @@ Es como una especie de dado, pero algo más sofisticado, ya que no proporciona s
 número del 1 al 6, sino decisiones concretas en base a una serie de probabilidades establecidas
 =end
 
+require_relative 'GameCharacter'
+
 module Deepspace
   class Dice
     def initialize
@@ -39,7 +41,7 @@ module Deepspace
 =end
     def initWithNWeapons
       rng= @generator.rand
-      prob= 1 - 2*@NWEAPONSPROB
+      prob= 2*@NWEAPONSPROB
       if rng <= @NWEAPONSPROB
         1
       elsif rng > @NWEAPONSPROB && rng <= prob
@@ -54,7 +56,7 @@ module Deepspace
     iniciará la partida.
 =end
     def whoStarts(num_players)
-      @generator.rand(num_players-1)
+      @generator.rand(num_players)
     end
     
 =begin

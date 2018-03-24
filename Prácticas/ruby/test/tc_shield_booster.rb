@@ -44,5 +44,26 @@ module Deepspace
         assert_not_same @s1, @s2, "@s1 es el mismo objeto que s2"
         assert_same @s, @s3, "s no es el mismo objeto que s3"
       end
+      
+      def test_uses
+        for i in 0..2
+          assert_equal 43.32, @s.useIt, "Error en useIt"
+        end
+        
+        assert_equal 1.0, @s.useIt, "Error en useIt"
+        
+        for i in 0..2
+          assert_equal 43.32, @s1.useIt, "Error en useIt"
+        end
+        
+        assert_equal 1.0, @s1.useIt, "Error en useIt"
+        
+        for i in 0..2
+          assert_equal 43.32, @s2.useIt, "Error en useIt"
+        end
+        
+        assert_equal 1.0, @s2.useIt, "Error en useIt"
+       
+      end
   end
 end
