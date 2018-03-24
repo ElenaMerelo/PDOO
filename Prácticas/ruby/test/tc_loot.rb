@@ -7,6 +7,7 @@ module Deepspace
   class TC_Loot < Test::Unit::TestCase
     def setup
       @l= Loot.new(1, 2, 3, 4, 5)
+      @l1= Loot.new(1, 2, 3, 4, 5)
     end
     
     def test_equals
@@ -18,20 +19,13 @@ module Deepspace
     end
     
     def test_instance_of
-      l1= @l 
-      l2= Loot.new(1, 2, 3, 4, 5)
       assert_instance_of Loot, @l, "l no es una instancia de Loot"
-      assert_instance_of Loot, l1, "l1 no es una instancia de Loot"
-      assert_instance_of Loot, l2, "l2 no es una instancia de Loot"
+      assert_instance_of Loot, @l1, "l1 no es una instancia de Loot"
     end
     
     def test_comparison
-      l1= @l 
-      l2= Loot.new(1, 2, 3, 4, 5)
-      assert_equal @l, l1, "l != l1"
-      assert_equal @l, l2, "l != l2"
-      assert_same @l, l1, "l= Loot.new(1, 2, 3, 4, 5) no es el mismo objeto que l1= l"
-      assert_same @l, l2, "l= Loot.new(1, 2, 3, 4, 5) no es el mismo objeto que l2= Loot.new(1, 2, 3, 4, 5)"
+      assert_not_equal @l, @l1, "l != l1"
+      assert_not_same @l, @l1, "l= Loot.new(1, 2, 3, 4, 5) no es el mismo objeto que l1= l"
     end
   end #class
 end #module

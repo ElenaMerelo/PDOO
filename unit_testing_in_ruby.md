@@ -218,4 +218,21 @@ Básicamente, un fichero_rake define las tareas que rake puede hacer. En el fich
 
     a.equal? b  # Output: => true
     ~~~
+
+> Diferencias entre assert_equal y assert_same
+
+`assert_equal expected, actual` comprueba que actual == expected, que referencien al mismo objeto. Así, si tenemos un objeto de la clase Foo llamado f1, `f1 = Foo.new(1, 2, 3)`, `f2 = Foo.new(1, 2, 3)`, `f3= Foo.newCopy(f1)` al escribir `assert_equal f1, f2` nos da error, ya que no son iguales en el sentido de que "apuntan" al mismo objeto, aunque sus atributos de instancia estén inicializados a los mismos valores. Igualmente con `assert_equal f1, f3` dará failure, son objetos distintos, uno es copia de otro, pero no referencian a lo mismo.
+
+Para que dos cosas que comparemos con assert_same sean iguales han de tener el mismo object_id
+
+
+
+
+
+
+
+
+
+
+
 #

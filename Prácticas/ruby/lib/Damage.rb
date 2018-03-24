@@ -47,7 +47,17 @@ module Deepspace
     
     def discardWeapon(w)
       if @weapons != nil
-        @weapons.delete(w)
+        indexes= Array.new
+        index= 0
+        for i in @weapons
+          if i.type == w
+            indexes.push(index)
+          end
+          index += 1
+        end
+        
+        @weapons.delete_at(indexes[0])
+        
       else
         if @nWeapons > 0
           @nWeapons -= 1

@@ -4,6 +4,7 @@ require 'test/unit'
 require_relative 'tc_weapon_type'
 require_relative 'tc_loot'
 require_relative 'tc_supplies_package'
+require_relative 'tc_shield_booster'
 
 
 module Deepspace
