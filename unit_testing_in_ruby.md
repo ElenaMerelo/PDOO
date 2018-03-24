@@ -51,7 +51,8 @@ end
 
 Test::Unit provides a rich set of assertions, which are documented thoroughly at Ruby-Doc. Here's a brief synopsis (assertions and their negative are grouped together. The text description is usually for the first one listed -- the names should make some logical sense):
 
-| ------------- |-------------|
+Assertion | Explanation
+--- |---
 | assert( boolean, [message] ) | 	True if boolean
 | assert_equal( expected, actual, [message] ), assert_not_equal( expected, actual, [message] ) |	True if expected == actual
 | assert_match( pattern, string, [message] ), assert_no_match( pattern, string, [message] ) |	True if string =~ pattern
