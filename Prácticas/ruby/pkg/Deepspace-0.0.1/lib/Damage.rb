@@ -16,16 +16,13 @@ module Deepspace
     
     def initialize(nw, ns, w)
       @nShields= ns
-    
-      if w == nil
+      
+      if w == nil   #si es numericWeapons
         @weapons= nil
         @nWeapons= nw
       else
-        @nWeapons= nil
-        @weapons= Array.new
-        for i in w
-          @weapons.push(i)
-        end
+        @nWeapons= 0
+        @weapons= Array.new(w)
       end  
     end
     
@@ -34,7 +31,7 @@ module Deepspace
     end
     
     def self.newSpecificWeapons(w1, s)
-      new(0, s, w1) #w1.length
+      new(0, s, w1)
     end
     
     def self.newCopy(d)
@@ -47,17 +44,14 @@ module Deepspace
     
     def discardWeapon(w)
       if @weapons != nil
-        indexes= Array.new
         index= 0
         for i in @weapons
-          if i.type == w
-            indexes.push(index)
+          if i.type == w.type
+            @weapons.delete_at(index)
+            break
           end
           index += 1
         end
-        
-        @weapons.delete_at(indexes[0])
-        
       else
         if @nWeapons > 0
           @nWeapons -= 1
@@ -72,7 +66,7 @@ module Deepspace
     end
     
     def hasNoEffect
-      @nWeapons == 0 && @nShields == 0
+        @nWeapons == 0 && @weapons == nil && @nShields == 0
     end
     
     def to_s
@@ -118,26 +112,3 @@ module Deepspace
 end #module
 
 
-=begin
-
-def adjust(w,s)
-    # Primero miramos si es numérico o armas concretas el arma
-    if @nWeapons == -1 # Entonces es específico
-      weaponTypes = []
-      w.each{|elem|
-        weaponTypes.push(elem.type)
-      }   
-      # Calculamos la intersección entre weaponTypes & @weapons
-      aux = weaponTypes & @weapons
-      for i in 0...aux.length
-        k = [weaponTypes.count(aux[i]), @weapons.count(aux[i])].min
-        for j in 2..k
-          aux.push(aux[i])
-        end
-      end
-      Damage.newSpecificWeapons(aux, [@nShields,s.length].min)      
-    else # Entonces es numérico
-      Damage.newNumericWeapons([@nWeapons,w.length].min, [@nShields,s.length].min)      
-    end    
-end
-=end

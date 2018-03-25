@@ -2,6 +2,7 @@
 
 require 'test/unit'
 require_relative 'tc_hangar'
+require_relative 'tc_damage'
 
 module Deepspace
   class TS_p2
@@ -9,6 +10,7 @@ module Deepspace
       suite= Test::Unit::TestSuite.new
       
       suite << TC_Hangar.suite
+      suite << TC_Damage.suite
       
       return suite
     end

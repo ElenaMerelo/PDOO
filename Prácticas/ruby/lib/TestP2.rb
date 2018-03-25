@@ -49,7 +49,7 @@ module Deepspace
       h1.removeShieldBooster(0)
       h1.removeWeapon(2)
       
-      puts "Tras quitar w3 y sh1 h1: #{h1}"
+      puts "Tras quitar w(3) y sh(0) h1: #{h1}"
       
       h1.removeWeapon(1)
       puts "Tras quitar w2 h1: #{h1}"
@@ -61,7 +61,7 @@ module Deepspace
       #Damage
       d1= Damage.newNumericWeapons(3,3)
       d2= Damage.newCopy(d1)
-      v1= [l1, l1, m1, m1, m1, p1]
+      v1= [l1, m1]
       v2= [sh1, sh1, sh1]
       v3= [l1, l1, l1, m1, m1, p1]
       
@@ -79,10 +79,45 @@ module Deepspace
       d1.discardWeapon(l1)
       puts "Discarding l1 in d1: #{d1.nWeapons}"
       d3.discardWeapon(l1)
+      d3.discardWeapon(l1)
+      d3.discardWeapon(m1)
+      d3.discardWeapon(p1)
       puts "Discarding l1 in d3: #{d3.weapons.join(",")}"
       
+      d5= Damage.new(0, 0, v1)
+      
+      if d3.hasNoEffect
+        puts "d3 has no effect"
+      else
+        puts "d3 has effect"
+      end
+      
+      if d5.hasNoEffect
+        puts "d5 has no effect"
+      else
+        puts "d5 has effect"
+      end
     end
   end #class
   test= TestP2.new
   test.main
 end #module
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
