@@ -27,5 +27,13 @@ module Deepspace
       assert_not_equal @l, @l1, "l != l1"
       assert_not_same @l, @l1, "l= Loot.new(1, 2, 3, 4, 5) no es el mismo objeto que l1= l"
     end
+    
+    def test_responses
+      assert_respond_to @l, :to_s, "l doesn't respond to to_s"
+      assert_respond_to @l1, :to_s, "l1 doesn't respond to to_s"
+      
+      assert_respond_to @l, :getUIversion, "l doesn't respond to getUIversion"
+      assert_respond_to @l1, :getUIversion, "l1 doesn't respond to getUIversion"
+    end
   end #class
 end #module

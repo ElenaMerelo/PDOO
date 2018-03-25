@@ -50,5 +50,11 @@ module Deepspace
       assert_not_same @sp1, @sp2, "@sp1= SuppliesPackage.new(@sp) es el mismo objeto que sp2= @sp"
       assert_same @sp3, @sp, "sp3 y sp tienen el mismo object id"
     end
+    
+    def test_responses
+      assert_respond_to @sp, :to_s, "sp doesn't respond to to_s"
+      assert_respond_to @sp1, :to_s, "sp1 doesn't respond to to_s"
+    end
+    
   end #class
 end #module

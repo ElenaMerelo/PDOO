@@ -19,7 +19,7 @@ module Deepspace
     end
     
     def addWeapon(w)
-      if spaceAvailable
+      if spaceAvailable == true
         @weapons.push(w)
         true
       else
@@ -32,8 +32,8 @@ module Deepspace
     end
     
     def addShieldBooster(s)
-      if spaceAvailable
-        @shieldBoosters << s
+      if spaceAvailable == true
+        @shieldBoosters.push(s)
         true
       else
         false
@@ -50,7 +50,7 @@ module Deepspace
     
     private
     def spaceAvailable
-      (@weapons.length + @shieldBoosters.length) < @maxElements
+      (@weapons.length + @shieldBoosters.length) < @maxElements ? true : false
     end
   end
 end

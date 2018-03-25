@@ -74,5 +74,17 @@ module Deepspace
       assert_equal 1.0, @m1.useIt, "Error en useIt de m1"
       assert_equal 1.0, @p1.useIt, "Error en useIt de p1"
     end
+    
+    def test_responses 
+      v = [@l, @m, @p, @l1, @m1, @p1]
+      
+      for i in v
+        assert_respond_to i, :power, "#{i} doesn't respond to power"
+        assert_respond_to i, :useIt, "#{i} doesn't respond to useIt"
+        assert_respond_to i, :to_s, "#{i} doesn't respond to to_s"
+        assert_respond_to i, :getUIversion, "#{i} doesn't respond getUIversion"
+      end
+     
+    end
   end #class
 end #module

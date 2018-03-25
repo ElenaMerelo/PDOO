@@ -13,13 +13,13 @@ module Deepspace
     end
 
     def test_equals
-        assert_equal "s", @s.name, "Error en name de s"
-        assert_equal 43.32, @s.boost, "Error en boost de s"
-        assert_equal 3, @s.uses, "Error en uses de s"
-        
-        assert_equal "s", @s1.name, "Error en name de s1"
-        assert_equal 43.32, @s1.boost, "Error en boost de s1"
-        assert_equal 3, @s1.uses, "Error en uses de s1"
+      assert_equal "s", @s.name, "Error en name de s"
+      assert_equal 43.32, @s.boost, "Error en boost de s"
+      assert_equal 3, @s.uses, "Error en uses de s"
+
+      assert_equal "s", @s1.name, "Error en name de s1"
+      assert_equal 43.32, @s1.boost, "Error en boost de s1"
+      assert_equal 3, @s1.uses, "Error en uses de s1"
         
       assert_equal "s", @s3.name, "Error en name de s3"
       assert_equal 43.32, @s3.boost, "Error en boost de s3"
@@ -64,6 +64,14 @@ module Deepspace
         
         assert_equal 1.0, @s2.useIt, "Error en useIt"
        
+      end
+      
+      def test_other_methods_definition
+        assert_respond_to @s, :getUIversion, "Error en @s.getUIversion"
+        assert_respond_to @s1, :getUIversion, "Error en @s.getUIversion"
+        
+        assert_respond_to @s, :to_s, "Error en to_s de @s"
+        assert_respond_to @s1, :to_s, "Error en to_s de @s1"
       end
   end
 end

@@ -1,4 +1,4 @@
-# Author: Elena Merlo
+# Author: Elena Merelo
 
 
 require 'test/unit'
@@ -54,6 +54,15 @@ module Deepspace
       assert_operator prob[3], :<, 0.34, "initWithNWeapons sale 2 con una prob que no esta entre 0.33 y 0.66"
       assert_operator prob[4], :<, 0.51, "firstShot sale GameCharacter::SPACESTATION con una prob mayor que 0.5"
       assert_operator prob[5], :<, 0.35, "spaceStationMoves con una prob > 0.34"
+    end
+    
+    def test_responses
+      assert_respond_to @d, :initWithNHangars, "Error en initWithNHangars"
+      assert_respond_to @d, :initWithNShields, "Error en initWithNShields"
+      assert_respond_to @d, :initWithNWeapons, "Error en initWithNWeapons"
+      assert_respond_to @d, :firstShot, "Error en firstShot"
+      assert_respond_to @d, :spaceStationMoves, "Error en spaceStationMoves"
+      assert_respond_to @d, :whoStarts, "Error en whoStarts"
     end
   end #class
 end #module
