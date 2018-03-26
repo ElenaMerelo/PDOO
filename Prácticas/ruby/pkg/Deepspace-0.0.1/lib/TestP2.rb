@@ -25,6 +25,9 @@ module Deepspace
       m1= Weapon.new("m1", WeaponType::MISSILE, 4)
       p1= Weapon.new("p1", WeaponType::PLASMA, 2)
       
+      l= WeaponType::LASER
+      m= WeaponType::MISSILE
+      p= WeaponType::PLASMA
       
       puts "h1: #{h1}"
       puts "h2: maxElements #{h2.maxElements}, weapons #{h2.weapons.join(", ")}, shieldBoosters #{h2.shieldBoosters.join(", ")}"
@@ -61,9 +64,9 @@ module Deepspace
       #Damage
       d1= Damage.newNumericWeapons(3,3)
       d2= Damage.newCopy(d1)
-      v1= [l1, m1]
+      v1= [m1, m1, p1]
       v2= [sh1, sh1, sh1]
-      v3= [l1, l1, l1, m1, m1, p1]
+      v3= [l, l, l, m, m, p]
       
       puts "d1: #{d1}"
       puts "d2: nWeapons #{d2.nWeapons}, nShields #{d2.nShields}"

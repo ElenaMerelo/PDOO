@@ -9,6 +9,8 @@ By: Elena Merelo
 =end
 
 require_relative "DamageToUI"
+require_relative 'WeaponType'
+require_relative 'Weapon'
 
 module Deepspace
   class Damage
@@ -45,8 +47,8 @@ module Deepspace
     def discardWeapon(w)
       if @weapons != nil
         index= 0
-        for i in @weapons
-          if i.type == w.type
+        for i in @weapons #es un vector de weaponType
+          if i == w.type
             @weapons.delete_at(index)
             break
           end
@@ -79,23 +81,35 @@ module Deepspace
     end
     
     def adjust(w, s)
-      ns = [s.length, @nShields].min
+      n_shields= [s.length, @nShields].min
       
-      aux = Damage.new(nil, ns, @weapons)
-      copy = Array.new(w)
-      
-      if @weapons != nil
-        @weapons.each {|x|
-          index=arrayContainsType(copy, x)
-
-          if(index==-1)
-            aux.weapons.delete_at(aux.weapons.index(x))
-          else
-            copy.delete_at(index)
-          end
-        }
-      end
-      aux
+      if @weapons == nil  #si son numericWeapons
+        n_weapons= [w.length, @nWeapons].min  #nos quedamos con quien tenga menos armas
+        aux= Damage.newNumericWeapons(n_weapons, n_shields)
+      else
+        #Contamos el número de weapons de cada tipo que tienen ambos vectores
+        freq_1 = Hash.new(0)
+        @weapons.each { |weapon_type| freq_1[weapon_type] += 1 }
+        
+        freq_2 = Hash.new(0)
+        w.each { |weapon| freq_2[weapon.type] += 1 }
+        
+        min_freq= []
+        l= WeaponType::LASER
+        m= WeaponType::MISSILE
+        p= WeaponType::PLASMA
+        
+        [freq_1[l], freq_2[l]].min.times { min_freq << l }
+        [freq_1[m], freq_2[m]].min.times { min_freq << m }
+        [freq_1[p], freq_2[p]].min.times { min_freq << p }
+        
+        for i in min_freq
+          puts "#{i.power}"
+        end
+        
+        aux= Damage.newSpecificWeapons(min_freq, n_shields)
+       end
+       aux
     end
     
     private
