@@ -1,8 +1,5 @@
 # Author: Elena Merelo
 
-gem 'rspec', '~> 2.4'
-require 'rspec'
-
 require 'test/unit'
 require_relative '../lib/Damage'
 require_relative '../lib/Weapon'
@@ -128,21 +125,23 @@ module Deepspace
       w2= [@lt, @lt, @mt, @mt, @pt]
       
       @d2.discardWeapon(@l)
-      expect(@d2.weapons).to match_array(w2)
+      assert_equal @d2.weapons, w2, "@d2.weapons != w2"
       
       @d2.discardWeapon(@m)
-      expect(@d2.weapons).to match_array(w2.delete_at(2))
+      w2.delete_at(2)
+      assert_equal @d2.weapons, w2, "@d2.weapons != w2.delete_at(2)"
+     
+      @d2.discardWeapon(@p)
+      w2.delete_at(3)
+      assert_equal @d2.weapons, w2, "@d2.weapons, w2.delete_at(3)"
       
       @d2.discardWeapon(@p)
-      expect(@d2.weapons).to match_array(w2.delete_at(3))
-      
-      @d2.discardWeapon(@p)
-      expect(@d2.weapons).to match_array(w2)
+      assert_equal @d2.weapons, w2, "@d2.weapons != w2"
       
       @d2.discardWeapon(@m)
       @d2.discardWeapon(@l)
       @d2.discardWeapon(@l)
-      assert_nil @d2.weapons, "nil != @d2.weapons"
+      assert_empty @d2.weapons, "nil != @d2.weapons"
       
     end
     
@@ -232,9 +231,9 @@ module Deepspace
       
       #d2
       a_v3= [@lt, @mt, @pt]
-      
-      expect(@d2.adjust(v1, s1).weapons).to match_array(v1)
-      expect(@d2.adjust(v3, s1).weapons).to match_array(a_v3)
+      a_v1= [@lt, @lt, @mt, @mt]
+      assert_equal @d2.adjust(v1, s1).weapons, a_v1, "@d2.adjust(v1, s1).weapons != a_v1"
+      assert_equal @d2.adjust(v3, s1).weapons, a_v3, "@d2.adjust(v3, s1).weapons != a_v3"
       assert_empty @d2.adjust(v2, s2).weapons, "d2.adjust(v2, s2).weapons != empty"
       
       assert_equal 1, @d2.adjust(v1, s1).nShields, "1 != d2.adjust(v1, s1).nShields"
@@ -253,7 +252,7 @@ module Deepspace
       #d4
       a_d4= [@lt, @lt, @mt, @mt]
       assert_empty @d4.adjust(v2, s1).weapons, "d4.adjust(v2, s1) != empty"
-      expect(@d4.adjust(v1, s1).weapons).to match_array(a_d4)
+      assert_equal @d4.adjust(v1, s1).weapons, a_d4, "@d4.adjust(v1, s1).weapons != a_d4"
       
       assert_equal 1, @d4.adjust(v1, s1).nShields, "1 != d4.adjust(v1,s1).nShields"
       assert_equal 2, @d4.adjust(v1, s2).nShields, "2 != d4.adjust(v1,s1).nShields"

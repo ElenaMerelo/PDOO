@@ -103,10 +103,6 @@ module Deepspace
         [freq_1[m], freq_2[m]].min.times { min_freq << m }
         [freq_1[p], freq_2[p]].min.times { min_freq << p }
         
-        for i in min_freq
-          puts "#{i.power}"
-        end
-        
         aux= Damage.newSpecificWeapons(min_freq, n_shields)
        end
        aux
