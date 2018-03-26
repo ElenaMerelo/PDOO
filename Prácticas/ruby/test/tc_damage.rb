@@ -1,10 +1,13 @@
 # Author: Elena Merelo
 
+gem 'rspec', '~> 2.4'
+require 'rspec'
+
 require 'test/unit'
 require_relative '../lib/Damage'
 require_relative '../lib/Weapon'
-#require_relative '../lib/ShieldBooster'
-#require_relative '../lib/WeaponType'
+require_relative '../lib/ShieldBooster'
+require_relative '../lib/WeaponType'
 
 module Deepspace
   class TC_Damage < Test::Unit::TestCase
@@ -13,17 +16,23 @@ module Deepspace
       @m= Weapon.new("m", WeaponType::MISSILE, 3)
       @p= Weapon.new("p", WeaponType::PLASMA, 3)
       
-      @w= [@l, @l, @l, @m, @m, @p]
+      @lt= WeaponType::LASER
+      @mt= WeaponType::MISSILE
+      @pt= WeaponType::PLASMA
+      
+      @wt= [@lt, @lt, @lt, @mt, @mt, @pt]
       
       @d1= Damage.new(3, 2, nil)
-      @d2= Damage.new(3,2, @w)
+      @d2= Damage.new(3,2, @wt)
       @d3= Damage.newNumericWeapons(6, 2)
-      @d4= Damage.newSpecificWeapons(@w, 2)
+      @d4= Damage.newSpecificWeapons(@wt, 2)
       
       @d5= Damage.newCopy(@d1)
       @d6= Damage.newCopy(@d2)
       @d7= Damage.newCopy(@d3)
       @d8= Damage.newCopy(@d4)
+      
+      @sb= ShieldBooster.new("sb", 654.35, 3)
     end
     
     def test_initialize_d1
@@ -38,7 +47,7 @@ module Deepspace
       
       index= 0
       for i in @d2.weapons
-        assert_equal @w[index], i, " #{@w[index]} != #{i}"
+        assert_equal @wt[index], i, " #{@wt[index]} != #{i}"
         index += 1
       end
     end
@@ -55,7 +64,7 @@ module Deepspace
       
       index= 0
       for i in @d4.weapons
-        assert_equal @w[index], i, " #{@w[index]} != #{i}"
+        assert_equal @wt[index], i, " #{@wt[index]} != #{i}"
         index += 1
       end
     end
@@ -72,7 +81,7 @@ module Deepspace
       
       index= 0
       for i in @d6.weapons
-        assert_equal @w[index], i, " #{@w[index]} != #{i}"
+        assert_equal @wt[index], i, " #{@wt[index]} != #{i}"
         index += 1
       end
     end
@@ -89,7 +98,7 @@ module Deepspace
       
       index= 0
       for i in @d8.weapons
-        assert_equal @w[index], i, " #{@w[index]} != #{i}"
+        assert_equal @wt[index], i, " #{@wt[index]} != #{i}"
         index += 1
       end
     end
@@ -116,63 +125,51 @@ module Deepspace
     end
     
     def test_discard_weapon_d2
-      w2= [@l, @l, @m, @m, @p]
+      w2= [@lt, @lt, @mt, @mt, @pt]
       
       @d2.discardWeapon(@l)
-      index= 0
-      for i in @d2.weapons
-        assert_equal w2[index], i, " #{w2[index]} != #{i}"
-        index += 1
-      end
+      expect(@d2.weapons).to match_array(w2)
       
       @d2.discardWeapon(@m)
-      index= 0
-      w2.delete_at(2)
-      for i in @d2.weapons
-        assert_equal w2[index], i, " #{w2[index]} != #{i}"
-        index += 1
-      end
+      expect(@d2.weapons).to match_array(w2.delete_at(2))
       
       @d2.discardWeapon(@p)
-      index= 0
-      w2.delete_at(3)
-      for i in @d2.weapons
-        assert_equal w2[index], i, " #{w2[index]} != #{i}"
-        index += 1
-      end
+      expect(@d2.weapons).to match_array(w2.delete_at(3))
       
       @d2.discardWeapon(@p)
-      index= 0
-      for i in @d2.weapons
-        assert_equal w2[index], i, " #{w2[index]} != #{i}"
-        index += 1
-      end
+      expect(@d2.weapons).to match_array(w2)
+      
+      @d2.discardWeapon(@m)
+      @d2.discardWeapon(@l)
+      @d2.discardWeapon(@l)
+      assert_nil @d2.weapons, "nil != @d2.weapons"
+      
     end
     
     def test_discard_weapon_d3
       for i in 0..5
-      assert_equal 5-i, @d3.discardWeapon(@p), "#{5-i} != d3.discardWeapon(@p)"
-    end
+        assert_equal 5-i, @d3.discardWeapon(@p), "#{5-i} != d3.discardWeapon(@p)"
+      end
       assert_equal 0, @d3.nWeapons, "d3.nWeapons != 0"
     end
     
     def test_discard_weapon_d4
       @d4.discardWeapon(@p)
-      @w.pop 
+      @wt.pop 
       for i in 0..4
-        assert_equal @d4.weapons[i], @w[i], "#{@d4.weapons[i]} != #{@w[i]}"
+        assert_equal @d4.weapons[i], @wt[i], "#{@d4.weapons[i]} != #{@wt[i]}"
       end
       
       @d4.discardWeapon(@m)
-      @w.delete_at(3)
-      for i in 0..4
-        assert_equal @d4.weapons[i], @w[i], "#{@d4.weapons[i]} != #{@w[i]}"
+      @wt.delete_at(3)
+      for i in 0..3
+        assert_equal @d4.weapons[i], @wt[i], "#{@d4.weapons[i]} != #{@wt[i]}"
       end
       
       @d4.discardWeapon(@m)
-      @w.delete(@m)
-      for i in 0..4
-        assert_equal @d4.weapons[i], @w[i], "#{@d4.weapons[i]} != #{@w[i]}"
+      @wt.delete(@m)
+      for i in 0..2
+        assert_equal @d4.weapons[i], @wt[i], "#{@d4.weapons[i]} != #{@wt[i]}"
       end
       
       for i in 0..2
@@ -206,32 +203,60 @@ module Deepspace
     end
     
     def test_has_no_effect
-      assert_false @d1.hasNoEffect, "d1 has no effect"
-      assert_false @d2.hasNoEffect, "d2 has no effect"
-      assert_false @d3.hasNoEffect, "d3 has no effect"
-      assert_false @d4.hasNoEffect, "d4 has no effect"
+      assert_equal false, @d1.hasNoEffect, "d1 has no effect"
+      assert_equal false, @d2.hasNoEffect, "d2 has no effect"
+      assert_equal false, @d3.hasNoEffect, "d3 has no effect"
+      assert_equal false, @d4.hasNoEffect, "d4 has no effect"
       
-      d9= Damage.new(0, 0, @w)
-      assert_false d9.hasNoEffect, "d9 has effect"
+      d9= Damage.new(0, 0, @wt)
+      assert_equal false, d9.hasNoEffect, "d9 has effect"
       
       d10= Damage.new(0, 0, nil)
       assert d10.hasNoEffect, "d10 has effect"
     end
     
     def test_adjust
+      v1= [@l, @l, @m, @m, @m]
+      s1= [@sb]
       
+      v2= []
+      s2= [@sb, @sb]
+      
+      v3= [@l, @m, @p, @p]
+      #d1
+      assert_equal 3, @d1.adjust(v1, s1).nWeapons, "3 != d1.adjust(v1, s1).nWeapons"
+      assert_equal 1, @d1.adjust(v1, s1).nShields, "1 != d1.adjust(v1, s1).nShields"
+      
+      assert_equal 0, @d1.adjust(v2, s2).nWeapons, "0 != d1.adjust(v2, s2).nWeapons"
+      assert_equal 2, @d1.adjust(v2, s2).nShields, "2 != d1.adjust(v2, s2).nShields"
+      
+      #d2
+      a_v3= [@lt, @mt, @pt]
+      
+      expect(@d2.adjust(v1, s1).weapons).to match_array(v1)
+      expect(@d2.adjust(v3, s1).weapons).to match_array(a_v3)
+      assert_empty @d2.adjust(v2, s2).weapons, "d2.adjust(v2, s2).weapons != empty"
+      
+      assert_equal 1, @d2.adjust(v1, s1).nShields, "1 != d2.adjust(v1, s1).nShields"
+      assert_equal 2, @d2.adjust(v1, s2).nShields, "1 != d2.adjust(v1, s2).nShields"
+      
+      #d3
+      assert_equal 5, @d3.adjust(v1, s1).nWeapons, "5 != d3.adjust(v1,s1).nWeapons"
+      assert_equal 1, @d3.adjust(v1, s1).nShields, "5 != d3.adjust(v1,s1).nShields"
+      
+      2.times {v1 << @m}
+      assert_equal 6, @d3.adjust(v1, s1).nWeapons, "5 != d3.adjust(v1,s1).nWeapons"
+      
+      assert_equal 1, @d3.adjust(v1, s1).nShields, "1 != d3.adjust(v1,s1).nShields"
+      assert_equal 2, @d3.adjust(v1, s2).nShields, "2 != d3.adjust(v1,s1).nShields"
+      
+      #d4
+      a_d4= [@lt, @lt, @mt, @mt]
+      assert_empty @d4.adjust(v2, s1).weapons, "d4.adjust(v2, s1) != empty"
+      expect(@d4.adjust(v1, s1).weapons).to match_array(a_d4)
+      
+      assert_equal 1, @d4.adjust(v1, s1).nShields, "1 != d4.adjust(v1,s1).nShields"
+      assert_equal 2, @d4.adjust(v1, s2).nShields, "2 != d4.adjust(v1,s1).nShields"
     end
-    
-    @w= [@l, @l, @l, @m, @m, @p]
-      
-      @d1= Damage.new(3, 2, nil)
-      @d2= Damage.new(3,2, @w)
-      @d3= Damage.newNumericWeapons(6, 2)
-      @d4= Damage.newSpecificWeapons(@w, 2)
-      
-      @d5= Damage.newCopy(@d1)
-      @d6= Damage.newCopy(@d2)
-      @d7= Damage.newCopy(@d3)
-      @d8= Damage.newCopy(@d4)
-  end
-end
+  end #class 
+end #module

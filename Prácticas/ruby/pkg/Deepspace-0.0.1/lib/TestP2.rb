@@ -77,8 +77,10 @@ module Deepspace
       puts "d3: #{d3}"
       puts "d4: nShields #{d4.nShields}, weapons #{d4.weapons.join(",")}"
       adjusted= d3.adjust(v1,v2)
+      adjusted_numeric= d1.adjust(v1,v2)
       
       print "\n\nAdjusted nShields #{adjusted.nShields}, weapons #{adjusted.weapons.join(",")} \n"
+      puts "Adjusted nShields #{adjusted_numeric.nShields}, nWeapons #{adjusted_numeric.nWeapons}"
       d1.discardWeapon(l1)
       puts "Discarding l1 in d1: #{d1.nWeapons}"
       d3.discardWeapon(l1)
