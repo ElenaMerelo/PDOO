@@ -133,10 +133,66 @@ module Deepspace
       
       @ss1.setPendingDamage(@d) 
      
-      assert_equal @v3, @ss1.pendingDamage.weapons, "v3 != ss1.pendingDamage.weapons"
+      #assert_equal @v3, @ss1.pendingDamage.weapons, "v3 != ss1.pendingDamage.weapons"
       assert_equal 1, @ss1.pendingDamage.nShields, " 1 != ss1.pendingDamage.nShields"
     end
     
+    def test_mount_weapon
+      assert_nil @ss1.mountWeapon(0), " nil != ss1.mountWeapon(0)"
+      
+      @ss1.receiveHangar(@h1)
+      
+      @ss1.mountWeapon(0) 
+      assert_equal [@l1], @ss1.weapons, " [@l1] != ss1.weapons"
+      
+      @ss1.mountWeapon(0)
+      assert_equal [@l1, @m2], @ss1.weapons, "[@l1, @m2] != @ss1.weapons "
+      
+      @ss1.mountWeapon(0)
+      assert_equal [@l1, @m2, @p2], @ss1.weapons, "[@l1, @m2, @p2] != @ss1.weapons "
+    end
     
+    def test_mount_shield_booster
+      assert_nil @ss1.mountShieldBooster(0), "nil != ss1.mountShieldBooster(0)"
+      
+      @ss1.receiveHangar(@h1)
+      
+      @ss1.mountShieldBooster(0) 
+      assert_equal [@sb1], @ss1.shieldBoosters, " [@sb1] != ss1.shieldBoosters"
+    end
+    
+    
+    def test_discard_weapon_in_hangar
+      assert_nil @ss1.discardWeaponInHangar(0) 
+      
+      @ss1.receiveHangar(@h1)
+      
+      @ss1.discardWeaponInHangar(2)
+      assert_equal [@l1, @m2], @ss1.hangar.weapons, "[@l1, @m2] != @ss1.hangar.weapons"
+      
+      @ss1.discardWeaponInHangar(0)
+      assert_equal [@m2], @ss1.hangar.weapons, "[@m2] != @ss1.hangar.weapons"
+      
+      @ss1.discardWeaponInHangar(0)
+      assert_empty @ss1.hangar.weapons, "empty != @ss1.hangar.weapons"
+    end
+    
+    def test_discard_shield_booster_in_hangar
+      assert_nil @ss1.discardWeaponInHangar(0) 
+      
+      @ss1.receiveHangar(@h1)
+      
+      @ss1.discardShieldBoosterInHangar(0)
+      assert_empty @ss1.hangar.shieldBoosters, "empty != @ss1.hangar.shieldBoosters"
+    end
+    
+    def test_speed
+      assert_equal @ss1.fuelUnits/100, @ss1.speed, "0.022 != @ss1.speed"
+    end
+    
+    def test_move
+      assert_equal @ss1.fuelUnits - @ss1.speed*@ss1.fuelUnits, @ss1.move, "@ss1.fuelUnits - @ss1.speed != @ss1.move"
+      
+    end
   end
 end
