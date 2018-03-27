@@ -68,7 +68,7 @@ module Deepspace
     end
     
     def hasNoEffect
-        @nWeapons == 0 && @weapons == nil && @nShields == 0
+        @nWeapons == 0 && ( @weapons == nil or @weapons.empty? ) && @nShields == 0
     end
     
     def to_s

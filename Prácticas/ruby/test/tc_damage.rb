@@ -2,9 +2,7 @@
 
 require 'test/unit'
 require_relative '../lib/Damage'
-require_relative '../lib/Weapon'
-require_relative '../lib/ShieldBooster'
-require_relative '../lib/WeaponType'
+
 
 module Deepspace
   class TC_Damage < Test::Unit::TestCase
@@ -212,6 +210,9 @@ module Deepspace
       
       d10= Damage.new(0, 0, nil)
       assert d10.hasNoEffect, "d10 has effect"
+      
+      d11= Damage.new(0, 0, [])
+      assert d11.hasNoEffect, "d11 has effect"
     end
     
     def test_adjust
