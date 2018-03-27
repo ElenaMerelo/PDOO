@@ -56,7 +56,7 @@ module Deepspace
     end
 
     def speed
-      @fuelUnits/@@MAXFUEL
+      @fuelUnits.to_f/@@MAXFUEL
     end
 
     def getUIversion
@@ -82,9 +82,8 @@ module Deepspace
     end
 
     def move
-      if @fuelUnits - self.speed > 0
-        @fuelUnits= @fuelUnits - self.speed 
-      end
+      @fuelUnits-= @fuelUnits*speed   
+    end
     end
 
     def protection
