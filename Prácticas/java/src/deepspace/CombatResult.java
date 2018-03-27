@@ -4,5 +4,5 @@
  */
 package deepspace;
 
-public enum CombatResult { ENEMYWINS, NOCOMBAT, STATIONSCAPES, STATIONWINS }
+public enum CombatResult { ENEMYWINS, NOCOMBAT, STATIONESCAPES, STATIONWINS }
 

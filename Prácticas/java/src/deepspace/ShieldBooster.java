@@ -32,7 +32,7 @@ class ShieldBooster {
         return uses;
     }
     
-    /*
+    /**
      * @brief Si el valor de uses es mayor que 0, lo decrementa en una unidad 
      * y devuelve el valor del atributo boost; devuelve el valor 1.0 en otro caso.
     */

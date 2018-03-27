@@ -22,21 +22,21 @@ class Dice {
         this.FIRSTSHOTPROB=0.5f;
     }
     
-    /*
+    /**
      * @brief Devuelve 0 con una probabilidad de NHANGARSPROB y 1 en caso contrario. 
-     * Este método determina el número de hangares que recibirá una estación espacial al ser creada.
+     * Determina el número de hangares que recibirá una estación espacial al ser creada.
     */
     int initWithNHangars(){
         return generator.nextFloat() <= NHANGARSPROB ? 0 : 1;
     }
     
-    /*
+    /**
      * @brief Devuelve 1 con una probabilidad de NWEAPONSPROB, 2 con la misma probabilidad 
-     * y 3 con una probabilidad de (1-2* NWEAPONSPROB). Este método determina el
-     * número de armas que recibirá una estación espacial al ser creada.
+     * y 3 con una probabilidad de (1-2* NWEAPONSPROB). Determina el número de armas
+     * que recibirá una estación espacial al ser creada.
     */
     int initWithNWeapons(){
-        float n= 1 - 2*NWEAPONSPROB;
+        float n= 2*NWEAPONSPROB;
         if ( generator.nextFloat() <= NWEAPONSPROB )
             return 1;
         else if (generator.nextFloat() > NWEAPONSPROB && generator.nextFloat() <= n )
@@ -45,7 +45,7 @@ class Dice {
             return 3; 
     }
     
-    /*
+    /**
      * @brief Devuelve 0 con una probabilidad de NSHIELDSPROB y 1 en caso contrario.
      * Este método determina el número de potenciadores de escudo que recibirá 
      * una estación espacial al ser creada.
@@ -54,7 +54,7 @@ class Dice {
         return generator.nextFloat() <= NSHIELDSPROB ? 0: 1;
     }
     
-    /*
+    /**
      * @brief Genera un número aleatorio del intervalo [0,nPlayers-1]. Determina 
      * el jugador (su índice) que iniciará la partida.
     */
@@ -62,7 +62,7 @@ class Dice {
         return generator.nextInt(nPlayers-1);
     }
     
-    /*
+    /**
      * @brief Genera SPACESTATION con una probabilidad de FIRSTSHOTPROB y ENEMYSTARSHIP 
      * en otro caso. Determina quién (de los dos tipos de personajes del juego) 
      * dispara primero en un combate: la estación espacial o la nave enemiga.
@@ -71,7 +71,7 @@ class Dice {
         return generator.nextFloat() <= FIRSTSHOTPROB ? GameCharacter.SPACESTATION : GameCharacter.ENEMYSTARSHIP;
     }
     
-    /*
+    /**
      * @brief Devuelve true con una probabilidad de speed y false en caso contrario 
      * (se asume que speed será un número entre 0 y 1). Determina si la estación
      * espacial se moverá para esquivar un disparo. La probabilidad de moverse 

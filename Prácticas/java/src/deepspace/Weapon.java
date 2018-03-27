@@ -34,14 +34,14 @@ class Weapon {
         return uses;
     }
     
-    /*
+    /**
      * @brief Devuelve la potencia de disparo indicada por el tipo de arma.
     */
     public float power(){
         return type.getPower();
     }
     
-    /*
+    /**
     * @brief Si el valor del atributo uses es mayor que 0, lo decrementa en una 
     * unidad y devuelve el valor del método power(); devuelve el valor 1.0 en 
     * otro caso.
