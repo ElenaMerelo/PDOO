@@ -1,6 +1,7 @@
 # Author: Elena Merelo
 
 require_relative "SpaceStationToUI"
+require_relative 'Damage'
 
 module Deepspace
   class SpaceStation
@@ -16,10 +17,10 @@ module Deepspace
       @fuelUnits= supplies.fuelUnits 
       @shieldPower= supplies.shieldPower
       @nMedals= 0
-      @pendingDamage= Damage.new
+      #@pendingDamage= nil
       @weapons= Array.new 
       @shieldBoosters= Array.new
-      @hangar= Hangar.new
+      @hangar= nil
     end
 
     def cleanUpMountedItems
@@ -76,7 +77,7 @@ module Deepspace
       if @hangar != nil
         success= @hangar.removeWeapon(i)
         if success != nil
-          @weapons.push(success)
+          @weapons << success
         end
       end
     end
@@ -110,13 +111,13 @@ module Deepspace
     end
 
     def receiveSupplies(s)
-      @ammoPower= @ammoPower + s.ammoPower
-      @fuelUnits= @fueltUnits + s.fuelUnits
-      @shieldPower= @shieldPower + s.shieldPower
+      @ammoPower += s.ammoPower
+      assignFuelValue(@fuelUnits + s.fuelUnits)
+      @shieldPower += s.shieldPower
     end
 
     def receiveWeapon(w)
-      if hangar == nil 
+      if @hangar == nil 
         false
       else
         @hangar.addWeapon(w)
@@ -128,7 +129,8 @@ module Deepspace
     end
 
     def setPendingDamage(d)
-      @pendingDamage= d.adjust(@weapons, @shieldBoosters)
+      aux= d.adjust(@weapons, @shieldBoosters)
+      @pendingDamage= Damage.newSpecificWeapons(aux.weapons, aux.nShields)
     end
 
     def validState
@@ -139,12 +141,14 @@ module Deepspace
     def assignFuelValue(f)
       if f < @@MAXFUEL
         @fuelUnits= f
+      else
+        @fuelUnits= @@MAXFUEL
       end
     end
 
     def cleanPendingDamage
       if pendingDamage.hasNoEffect
-        pendingDamage= nil
+        @pendingDamage= nil
       end
     end
   end #class

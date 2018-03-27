@@ -86,9 +86,6 @@ module Deepspace
 
       assert_equal ShotResult::DONOTRESIST, @es2.receiveShot(4), "ShotResult::DONOTRESIST != @es2.receiveShot(3)"
       assert_equal ShotResult::RESIST, @es2.receiveShot(3.3), "ShotResult::RESIST != @es2.receiveShot(3.5)"
-
-
-
     end
   end
 end
