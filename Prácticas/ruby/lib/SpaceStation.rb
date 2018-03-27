@@ -17,7 +17,7 @@ module Deepspace
       @fuelUnits= supplies.fuelUnits 
       @shieldPower= supplies.shieldPower
       @nMedals= 0
-      #@pendingDamage= nil
+      @pendingDamage= nil
       @weapons= Array.new 
       @shieldBoosters= Array.new
       @hangar= nil
@@ -131,8 +131,7 @@ module Deepspace
     end
 
     def setPendingDamage(d)
-      aux= d.adjust(@weapons, @shieldBoosters)
-      @pendingDamage= Damage.newSpecificWeapons(aux.weapons, aux.nShields)
+      @pendingDamage= Damage.newSpecificWeapons((d.adjust(@weapons, @shieldBoosters)).weapons, (d.adjust(@weapons, @shieldBoosters)).nShields)
     end
 
     def validState

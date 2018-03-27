@@ -192,7 +192,29 @@ module Deepspace
     
     def test_move
       assert_equal @ss1.fuelUnits - @ss1.speed*@ss1.fuelUnits, @ss1.move, "@ss1.fuelUnits - @ss1.speed != @ss1.move"
+    end
+    
+    def test_valid_state
+      assert @ss1.validState, "ss1 no esta en un estado valido"
+      # No va setPendingDamage, por eso no funciona
+      # @ss1.setPendingDamage(@d)
+      # assert_equal false, @ss1.validState, "ss1 esta en un estado valido"
+    end
+    
+    def test_clean_up_mounted_items
+      @ss1.receiveHangar(@h)
       
+      for i in 0..@ss1.hangar.weapons.length-1
+        @ss1.mountWeapon(i)
+      end
+      
+      for i in 0..@ss1.hangar.shieldBoosters.length-1
+        @ss1.mountShieldBooster(i)
+      end
+      
+      @ss1.cleanUpMountedItems 
+      assert_equal [@l1, @m1, @p1], @ss1.weapons, "[@l1, @m1, @p1] != @ss1.weapons"
+      assert_equal [@sb1], @ss1.shieldBoosters, "[@sb1] != @ss1.shieldBoosters"
     end
   end
 end
