@@ -11,7 +11,7 @@ class GameStateController
 
     attr_reader :state
     
-    def initialize () 
+    def initialize
         @state=GameState::CANNOTPLAY;        
     end
 

@@ -216,5 +216,9 @@ module Deepspace
       assert_equal [@l1, @m1, @p1], @ss1.weapons, "[@l1, @m1, @p1] != @ss1.weapons"
       assert_equal [@sb1], @ss1.shieldBoosters, "[@sb1] != @ss1.shieldBoosters"
     end
+    
+    def test_getUIversion
+      assert_respond_to @ss1, :getUIversion, "ss1 doesn't respond to getUIversion"
+    end
   end
 end

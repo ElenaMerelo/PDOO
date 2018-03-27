@@ -10,9 +10,6 @@ module Deepspace
       @currentStationIndex= 0
       @turns= 0
       @dice= Dice.new
-      @currentStation= SpaceStation.new 
-      @spaceStations= Array.new(1)
-      @currentEnemy= EnemyStarShip.new
       @gameState= GameStateController.new
     end
     
