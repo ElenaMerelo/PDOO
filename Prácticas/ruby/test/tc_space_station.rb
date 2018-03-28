@@ -55,10 +55,6 @@ module Deepspace
       end
       
       @h1.addShieldBooster(@sb1)
-      
-      
-      #Damage
-      @d= Damage.new(3, 2, @v1)
     end
 
     def test_initialize 
@@ -120,21 +116,26 @@ module Deepspace
     end
     
     def test_set_pending_damage
-      @ss1.receiveHangar(@h1) 
+      @ss1.receiveHangar(Hangar.new(10))
       
-      for i in 0..2
+      for i in @v1
+        @ss1.receiveWeapon(i)
+      end
+   
+      @ss1.receiveShieldBooster(@sb1)
+      
+      for i in 0..@v1.length-1
         @ss1.mountWeapon(0)
       end
       
       @ss1.mountShieldBooster(0)
       
-      assert_equal @v3, @ss1.weapons, " v3 != ss1.weapons"
-      assert_equal @v4, @ss1.shieldBoosters, " v4 != ss1.shieldBoosters"
+      weapon_types= [WeaponType::LASER, WeaponType::MISSILE, WeaponType::PLASMA]
       
-      @ss1.setPendingDamage(@d) 
-     
-      #assert_equal @v3, @ss1.pendingDamage.weapons, "v3 != ss1.pendingDamage.weapons"
-      assert_equal 1, @ss1.pendingDamage.nShields, " 1 != ss1.pendingDamage.nShields"
+      @ss1.setPendingDamage(Damage.newSpecificWeapons(weapon_types, 2))
+      
+      assert_equal @ss1.pendingDamage.nShields, 1, "1 != ss1.pendingDamage.nShields "
+      assert_equal weapon_types, @ss1.pendingDamage.weapons, "weapon_types != @ss1.pendingDamage.weapons" 
     end
     
     def test_mount_weapon
@@ -196,9 +197,37 @@ module Deepspace
     
     def test_valid_state
       assert @ss1.validState, "ss1 no esta en un estado valido"
-      # No va setPendingDamage, por eso no funciona
-      # @ss1.setPendingDamage(@d)
-      # assert_equal false, @ss1.validState, "ss1 esta en un estado valido"
+      
+      @ss1.receiveHangar(Hangar.new(10))
+      
+      for i in @v1
+        @ss1.receiveWeapon(i)
+      end
+   
+      @ss1.receiveShieldBooster(@sb1)
+      
+      for i in 0..@v1.length-1
+        @ss1.mountWeapon(0)
+      end
+      
+      @ss1.mountShieldBooster(0)
+      weapon_types= [WeaponType::LASER, WeaponType::MISSILE, WeaponType::PLASMA]
+      @ss1.setPendingDamage(Damage.newSpecificWeapons(weapon_types, 2))
+      
+      assert_equal false, @ss1.validState, "ss1 esta en un estado valido"
+      
+      @ss1.setPendingDamage(Damage.newSpecificWeapons([], 0))
+      assert @ss1.validState, "ss1 no esta en un estado valido"
+      
+      @ss1.setPendingDamage(Damage.newSpecificWeapons([], 1))
+      assert_equal false, @ss1.validState, "ss1 esta en un estado valido"
+      
+      @ss1.setPendingDamage(Damage.newNumericWeapons(3, 2))
+      assert_equal false, @ss1.validState, "ss1 esta en un estado valido"
+      
+      @ss1.setPendingDamage(Damage.newNumericWeapons(0, 0))
+      assert @ss1.validState, "ss1 no esta en un estado valido"
+  
     end
     
     def test_clean_up_mounted_items

@@ -11,6 +11,9 @@ module Deepspace
       @turns= 0
       @dice= Dice.new
       @gameState= GameStateController.new
+      @currentStation= nil
+      @spaceStations= Array.new
+      @currentEnemy= nil
     end
     
     def combat(station, enemy)

@@ -131,7 +131,7 @@ module Deepspace
     end
 
     def setPendingDamage(d)
-      @pendingDamage= Damage.newSpecificWeapons((d.adjust(@weapons, @shieldBoosters)).weapons, (d.adjust(@weapons, @shieldBoosters)).nShields)
+      @pendingDamage= d.adjust(@weapons, @shieldBoosters)
     end
 
     def validState
