@@ -76,11 +76,9 @@ class Hangar {
      * @brief Elimina el arma número n del hangar y la devuelve, siempre que
      * ésta exista. Si el índice suministrado es incorrecto devuelve null.
     */
-    public Weapon removeWeapon(int n){
-        if(n > 0 && n < weapons.size()){
-            Weapon removed= new Weapon(weapons.get(n));
-            weapons.remove(n);
-            return removed;
+    public Weapon removeWeapon(int w){
+        if(n >= 0 && n < weapons.size()){
+            return weapons.remove(w);
         }
         return null; 
     }
@@ -89,11 +87,9 @@ class Hangar {
      * @brief Elimina el potenciador de escudo número s del hangar y lo devuelve, 
      * siempre que éste exista. Si el índice suministrado es incorrecto devuelve null.
     */
-    public ShieldBooster removeShieldBooster(int n){
-        if(n > 0 && n < weapons.size()){
-            ShieldBooster removed= new ShieldBooster(shieldBoosters.get(n));
-            shieldBoosters.remove(n);
-            return removed;
+    public ShieldBooster removeShieldBooster(int s){
+        if(n >= 0 && n < shieldBoosters.size()){
+            return shieldBoosters.remove(s);
         }
         return null;  
     }
