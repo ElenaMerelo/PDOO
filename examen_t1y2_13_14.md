@@ -102,4 +102,102 @@ t1.copiaAtributo(t2)  #Da error de que no se puede acceder a otro.atributo, al n
 puts t1.to_s  # No llega a esta parte al dar error anteriormente
 puts t2.to_s
 ~~~
-Una solución paa eliminar el error sin que eso implique dar acceso de lectura total al atributo sería crear el método como si fuera un constructor de copia:
+
+# Ejercicio 3
+**Indicar razonadamente si el programa anterior se ejecutaría sin errores. En caso contrario indicar
+posibles soluciones.**
+
+~~~java
+package testvisisiblidad;
+
+class otraClase {
+  int atributo=111;
+}
+_____________________________________
+package testvisisiblidad;
+
+public class TestVisisiblidad {
+  public static void main(String[] args) {
+    otraClase o=new otraClase();
+    System.out.println(o.atributo);
+    o.atributo=333;
+    System.out.println(o.atributo);
+  }
+}
+~~~
+
+Yo creo que no da errores, al estar declarándose atributo con visibilidad de paquete, que es la que hay por defecto, y estamos accediendo a él desde una clase diferente pero que se halla dentro del mismo paquete. Cuando ejecutamos comprobamos que en efecto se imprime por pantalla 111 y 333.
+
+# Ejercicio 4
+**Indicar razonadamente si el programa anterior se ejecutaría sin errores. En caso contrario indicar
+posibles soluciones.**
+
+~~~java
+package testvisisiblidad;
+
+class otraClase {
+  private int atributo;
+
+  otraClase() {
+    this.atributo = 111;
+  }
+
+  void copiaAtributo(otraClase o) {
+    atributo=o.atributo;
+  }
+}
+
+public class TestVisisiblidad {
+  public static void main(String[] args) {
+    otraClase o=new otraClase();
+    otraClase o2=new otraClase();
+    o2.copiaAtributo(o);
+  }
+}
+~~~
+No daría error, aunque se esté accediendo a un atributo privado de otraClase, al estar haciéndolo desde dentro de la misma.
+
+# Ejercicio 5
+**Escribir el código fuente Java asociado al diagrama de clases adjunto**
+
+~~~java
+class A {
+  private int a1;
+  int a2;
+  public int a3;
+  private static int a4;
+  ArrayList<B> item;
+  C origen;
+
+  private void op1(){
+    ...
+  }
+
+  public static void op2(){
+    ...
+  }
+}
+
+class B{
+  private int b1;
+  public int op1(){
+    ...
+  }
+}
+
+class C{
+  ArrayList<A> item;
+}
+
+
+
+~~~
+
+
+
+
+
+
+
+
+#

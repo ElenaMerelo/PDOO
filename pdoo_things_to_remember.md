@@ -251,7 +251,7 @@ todo.
 + Dependencia -- línea discontínua
 + Restricción de navegabilidad si la flechita pequeña va al final de la línea, si pone trabaja para > en mitad la navegabilidad es en ambos sentidos
 + Si no se indica nada la multiplicidad por defecto es 1
-
++ Atributo de referencia son aquellos que no aparecen explícitamente en el diagrama de la clase, en su cajita, sino que se obtienen fijándonos en las relaciones de asociación con otras clases, por ejemplo si tenemos una clase barrio, un atributo de referencia será `private ArrayList<Ciudadano> ciudadanos`, si viene una flechita que va de Barrio a Ciudadano y pone la cardinalidad 1..*
 
 
   #
