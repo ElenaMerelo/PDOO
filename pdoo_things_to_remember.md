@@ -247,6 +247,10 @@ equal? e == se usan para comparar, dan true si se referencia al mismo objeto. La
 fuerte, en que la/s parte/s no tiene/n sentido sin el
 todo.
 
++ Asociación -- marcada con línea contínua
++ Dependencia -- línea discontínua
++ Restricción de navegabilidad si la flechita pequeña va al final de la línea, si pone trabaja para > en mitad la navegabilidad es en ambos sentidos
++ Si no se indica nada la multiplicidad por defecto es 1
 
 
 
