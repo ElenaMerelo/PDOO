@@ -32,7 +32,7 @@ class SuppliesPackage{
         return shieldPower;
     }
     
-    public String to_string(){
+    public String toString(){
         return ammoPower + " ammoPower" + fuelUnits + " fuelUnits" + shieldPower + " shieldPower";
     }
     

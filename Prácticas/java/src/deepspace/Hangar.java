@@ -1,5 +1,4 @@
 /**
- *
  * @author Elena Merelo
  */
 
@@ -73,13 +72,13 @@ class Hangar {
     }
     
     /* 
-     * @brief Elimina el arma número n del hangar y la devuelve, siempre que
+     * @brief Elimina el arma número w del hangar y la devuelve, siempre que
      * ésta exista. Si el índice suministrado es incorrecto devuelve null.
     */
     public Weapon removeWeapon(int w){
-        if(n >= 0 && n < weapons.size()){
+        if(w >= 0 && w < weapons.size())
             return weapons.remove(w);
-        }
+        
         return null; 
     }
     
@@ -88,11 +87,12 @@ class Hangar {
      * siempre que éste exista. Si el índice suministrado es incorrecto devuelve null.
     */
     public ShieldBooster removeShieldBooster(int s){
-        if(n >= 0 && n < shieldBoosters.size()){
-            return shieldBoosters.remove(s);
-        }
+        if(s >= 0 && s < shieldBoosters.size())
+           return shieldBoosters.remove(s);
+        
         return null;  
     }
+    
 }
 
 

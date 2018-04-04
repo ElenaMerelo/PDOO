@@ -10,6 +10,7 @@
 
 package deepspace;
 
+import static com.google.common.collect.Lists.newArrayList;
 import java.util.ArrayList;
 
 class Damage {
@@ -17,20 +18,30 @@ class Damage {
     private int nWeapons;
     private ArrayList<WeaponType> weapons;
     
-    //Constructores 
+    //Constructores
+    Damage(int nw, int ns, ArrayList<WeaponType> w){
+        nShields= ns;
+        
+        if(w != null){
+            weapons= new ArrayList<WeaponType>(w);
+            nWeapons= 0;
+        }
+        else{
+            weapons= null;
+            nWeapons= nw;
+        }
+    }
+    
     Damage(int w, int s){
-        nWeapons= w;
-        nShields= s;
+        this(w, s, null);
     }
     
     Damage(ArrayList<WeaponType> w, int s){
-        nShields= s;
-        nWeapons= w.size();
-        weapons= w;
+        this(0, s, w);
     }
     
     Damage(Damage d){
-        this(d.weapons, d.nShields);
+        this(d.getNWeapons(), d.getNShields(), d.getWeapons());   
     }
     
     //Getters
@@ -58,11 +69,21 @@ class Damage {
      * que no están en las colecciones de los parámetros.
     */
     public Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
-        nShields= s.size();
-        nWeapons= w.size();
+        nShields= Math.min(s.size(), nShields);
         
-        //Tenemos que recorrer la colección de armas pasada como parámetro y ajustarla
-        // a nuestro arraylist de weapontype
+        if(weapons != null){
+            ArrayList<WeaponType> wt= newArrayList(WeaponType.LASER, WeaponType.MISSILE, WeaponType.PLASMA);
+            wt.add(WeaponType.LASER);
+            wt.add(WeaponType.MISSILE);
+            wt.add(WeaponType.PLASMA);
+            if(arrayContainsType(w, WeaponType.LASER) != -1){
+                
+            }
+                
+        }
+        else
+            nWeapons= Math.min(nWeapons, w.size());
+        
         return this;
     }
     
@@ -73,7 +94,11 @@ class Damage {
      * colección del tipo indicado por el segundo parámetro.
     */
     private int arrayContainsType(ArrayList<Weapon> w, WeaponType t){
-        return w.indexOf(t);
+        for(int i= 0; i< w.size(); i++){
+            if(w.get(i).getType() == t)
+                return i;
+        }
+        return -1;   
     }
     
     /*
@@ -83,15 +108,15 @@ class Damage {
      * ser inferior a cero en ningún caso.
     */
     public void discardWeapon(Weapon w){
-        for(int i= 0; i< weapons.size(); i++){
-            if(weapons.get(i) == w.getType())
-                weapons.remove(i);
-            else{
-                if(nWeapons > 0)
-                    nWeapons--;
-            }   
-        }
+        if(weapons != null)    //Si tenemos una lista de tipos concretos de armas
+            weapons.remove(w.getType());
+        
+        else{
+            if(nWeapons > 0)
+                nWeapons--;
+        }    
     }
+    
     
     /* 
      * @brief Decrementa en una unidad el número de potenciadores de escudo que
@@ -107,7 +132,7 @@ class Damage {
      * implica la pérdida de ningún tipo de accesorio (armas o potenciadores de escudo).
     */
     public boolean hasNoEffect(){
-        return nWeapons== 0 && nShields == 0;
+        return nWeapons== 0 && nShields == 0 && ( weapons == null || weapons.isEmpty());
     }
     
 }
