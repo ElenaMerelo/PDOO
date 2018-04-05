@@ -89,19 +89,12 @@ module Deepspace
       d3.discardWeapon(p1)
       puts "Discarding l1 in d3: #{d3.weapons.join(",")}"
       
-      d5= Damage.new(0, 0, v1)
-      
       if d3.hasNoEffect
         puts "d3 has no effect"
       else
         puts "d3 has effect"
       end
       
-      if d5.hasNoEffect
-        puts "d5 has no effect"
-      else
-        puts "d5 has effect"
-      end
     end
   end #class
   test= TestP2.new

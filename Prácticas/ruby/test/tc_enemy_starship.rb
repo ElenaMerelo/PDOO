@@ -18,8 +18,8 @@ module Deepspace
 
       @w= [@laser, @m , @p]
 
-      @d1= Damage.new(3, 2, nil)
-      @d2= Damage.new(3, 2, @w)
+      @d1= Damage.newNumericWeapons(3, 2)
+      @d2= Damage.newSpecificWeapons(@w, 2)
 
       @es1= EnemyStarShip.new("es1", 2.3, 3.4, @l, @d1)
       @es2= EnemyStarShip.new("es2", 2.3, 3.4, @l, @d2)

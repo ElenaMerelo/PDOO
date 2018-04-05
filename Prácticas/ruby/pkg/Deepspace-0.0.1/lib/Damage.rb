@@ -117,6 +117,8 @@ module Deepspace
       aux
     end
     
+    private_class_method :new
+    
     private
     def arrayContainsType(w, t)
       index= w.index(t)

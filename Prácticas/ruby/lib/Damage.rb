@@ -85,10 +85,7 @@ module Deepspace
       
       if @weapons == nil  #si son numericWeapons
         n_weapons= [w.length, @nWeapons].min  #nos quedamos con quien tenga menos armas
-<<<<<<< HEAD
         
-=======
->>>>>>> 4d1a9d03a79f1bb9357c6450094e99f4c2fa7a7a
         if n_weapons==0 && n_shields==0
           aux=nil
         else
@@ -111,7 +108,6 @@ module Deepspace
         [freq_1[m], freq_2[m]].min.times { min_freq << m }
         [freq_1[p], freq_2[p]].min.times { min_freq << p }
         
-<<<<<<< HEAD
         if min_freq.length == 0 && n_shields == 0
           aux= nil
         else
@@ -119,16 +115,9 @@ module Deepspace
         end
       end
       aux
-=======
-        if min_freq.length==0 && n_shields==0
-          aux=nil
-        else
-          aux= Damage.newSpecificWeapons(min_freq, n_shields)
-        end
-       end
-       aux
->>>>>>> 4d1a9d03a79f1bb9357c6450094e99f4c2fa7a7a
     end
+    
+    private_class_method :new
     
     private
     def arrayContainsType(w, t)
