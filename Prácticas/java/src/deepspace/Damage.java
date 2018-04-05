@@ -10,8 +10,8 @@
 
 package deepspace;
 
-import static com.google.common.collect.Lists.newArrayList;
 import java.util.ArrayList;
+import java.util.Collections;
 
 class Damage {
     private int nShields;
@@ -72,15 +72,38 @@ class Damage {
         nShields= Math.min(s.size(), nShields);
         
         if(weapons != null){
-            ArrayList<WeaponType> wt= newArrayList(WeaponType.LASER, WeaponType.MISSILE, WeaponType.PLASMA);
-            wt.add(WeaponType.LASER);
-            wt.add(WeaponType.MISSILE);
-            wt.add(WeaponType.PLASMA);
-            if(arrayContainsType(w, WeaponType.LASER) != -1){
+            int[] freq= new int[0];
+            int j= 0;
+            
+            ArrayList<WeaponType> types= new ArrayList<WeaponType>();
+            types.add(WeaponType.LASER);
+            types.add(WeaponType.MISSILE);
+            types.add(WeaponType.PLASMA);
+            
+            ArrayList<WeaponType> adjusted= new ArrayList<WeaponType>();
+            
+            //Obtenemos al array con los tipos de armas de w
+            ArrayList<WeaponType> wt= new ArrayList<WeaponType>();
+            for(Weapon i: w)
+                wt.add(i.getType());
+            
+            for(WeaponType i: types){
+                if(arrayContainsType(w, i) != -1)
+                    freq[j]= Math.min(Collections.frequency(wt, i), Collections.frequency(this.weapons, i));
+                
+                else
+                    freq[j]= 0;
+                
+                //Una vez obtenida la frecuencia mínima de ocurrencias del weaponType i lo metemos en adjusted
+                for(int k= 0; k < freq[j]; k++)
+                    adjusted.add(i);
+                
+                j++;
+            }
                 
             }
                 
-        }
+        
         else
             nWeapons= Math.min(nWeapons, w.size());
         
