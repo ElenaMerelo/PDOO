@@ -33,7 +33,7 @@ module Deepspace
     end
     
     def self.newSpecificWeapons(w1, s)
-      new(0, s, w1)
+      new(nil, s, w1)
     end
     
     def self.newCopy(d)
@@ -68,7 +68,11 @@ module Deepspace
     end
     
     def hasNoEffect
-        @nWeapons == 0 && ( @weapons == nil or @weapons.empty? ) && @nShields == 0
+      if @weapons == nil
+        @nWeapons == 0 && @nShields == 0
+      else
+         @weapons.empty? && @nShields == 0
+      end
     end
     
     def to_s
@@ -86,11 +90,8 @@ module Deepspace
       if @weapons == nil  #si son numericWeapons
         n_weapons= [w.length, @nWeapons].min  #nos quedamos con quien tenga menos armas
         
-        if n_weapons==0 && n_shields==0
-          aux=nil
-        else
-          aux= Damage.newNumericWeapons(n_weapons, n_shields)
-        end
+        aux= Damage.newNumericWeapons(n_weapons, n_shields)
+        
       else
         #Contamos el número de weapons de cada tipo que tienen ambos vectores
         freq_1 = Hash.new(0)
@@ -108,11 +109,8 @@ module Deepspace
         [freq_1[m], freq_2[m]].min.times { min_freq << m }
         [freq_1[p], freq_2[p]].min.times { min_freq << p }
         
-        if min_freq.length == 0 && n_shields == 0
-          aux= nil
-        else
-          aux= Damage.newSpecificWeapons(min_freq, n_shields)
-        end
+        aux= Damage.newSpecificWeapons(min_freq, n_shields)
+        
       end
       aux
     end

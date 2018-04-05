@@ -121,10 +121,7 @@ module Deepspace
       assert_equal false, @d4.hasNoEffect, "d4 has no effect"
       
       d9= Damage.newSpecificWeapons(@wt, 0)
-      assert_equal false, d9.hasNoEffect, "d9 has effect"
-      
-      d10= Damage.newSpecificWeapons(nil, 0)
-      assert d10.hasNoEffect, "d10 has effect"
+      assert_equal false, d9.hasNoEffect, "d9 has no effect"
       
       d11= Damage.newSpecificWeapons([], 0)
       assert d11.hasNoEffect, "d11 has effect"
