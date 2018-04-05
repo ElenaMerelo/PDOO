@@ -61,7 +61,7 @@ class Damage {
         return weapons;
     }
     
-    /*
+    /**
      * @brief Devuelve una versión ajustada del objeto a las colecciones de 
      * armas y potenciadores de escudos suministradas como parámetro.
      * Partiendo del daño representado por el objeto que recibe este mensaje, se devuelve una copia del

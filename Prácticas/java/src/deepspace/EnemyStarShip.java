@@ -49,11 +49,11 @@ class EnemyStarShip {
     
     //Otros métodos 
     public float fire(){
-        return getAmmoPower();
+        return ammoPower;
     }
     
     public float protection(){
-        return getShieldPower();
+        return shieldPower;
     }
     
     /*
@@ -67,16 +67,7 @@ class EnemyStarShip {
         if(shieldPower < shot)
             return ShotResult.DONOTRESIST;
         return ShotResult.RESIST;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    } 
 }
 
 

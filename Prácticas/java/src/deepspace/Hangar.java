@@ -39,7 +39,7 @@ class Hangar {
         return shieldBoosters;
     }
     
-    /*
+    /**
      * @brief  Devuelve true si aún hay espacio para añadir elementos y por lo
      * tanto no se ha llegado a la capacidad máxima.
     */
@@ -47,7 +47,7 @@ class Hangar {
         return weapons.size() + shieldBoosters.size() < maxElements;
     }
     
-    /*
+    /**
      * @brief Añade el arma al hangar si queda espacio en el Hangar, devolviendo 
      * true en ese caso. Devuelve false en cualquier otro caso.
     */
@@ -59,7 +59,7 @@ class Hangar {
         return false;
     }
     
-    /*
+    /**
      * @brief Añade el potenciador de escudo al hangar si queda espacio. Devuelve 
      * true si ha sido posible añadir el potenciador, false en otro caso.
     */
@@ -71,7 +71,7 @@ class Hangar {
         return false;
     }
     
-    /* 
+    /** 
      * @brief Elimina el arma número w del hangar y la devuelve, siempre que
      * ésta exista. Si el índice suministrado es incorrecto devuelve null.
     */
@@ -82,7 +82,7 @@ class Hangar {
         return null; 
     }
     
-    /*
+    /**
      * @brief Elimina el potenciador de escudo número s del hangar y lo devuelve, 
      * siempre que éste exista. Si el índice suministrado es incorrecto devuelve null.
     */
