@@ -16,6 +16,56 @@ class SpaceStation {
     private ArrayList<ShieldBooster> shieldBoosters;
     private Hangar hangar;
     
+    //Constructor
+    SpaceStation(String n, SuppliesPackage supplies){
+        name= n;
+        ammoPower= supplies.getAmmoPower();
+        fuelUnits= supplies.getFuelUnits();
+        shieldPower= supplies.getShieldPower();
+        
+    }
+    
+    //Getters
+    public float getAmmoPower(){
+        return ammoPower;
+    }
+    
+    public float getFuelUnits(){
+        return fuelUnits;
+    }
+    
+    public Hangar getHangar(){
+        return hangar;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public int getNMedals(){
+        return nMedals;
+    }
+    
+    public Damage getPendingDamage(){
+        return pendingDamage;
+    }
+    
+    public ArrayList<ShieldBooster> getShieldBoosters(){
+        return shieldBoosters;
+    }
+    
+    public float getShieldPower(){
+        return shieldPower;
+    }
+    
+    public SpaceStationToUI getUIversion(){
+        return new SpaceStationToUI(this);
+    }
+    
+    public ArrayList<Weapon> getWeapons(){
+        return weapons;
+    }
+    
     /**
      * @brief Fija la cantidad de combustible al valor pasado como parámetro sin
      * que nunca se exceda el límite.
@@ -32,15 +82,6 @@ class SpaceStation {
     private void cleanPendingDamage(){
         if(pendingDamage.hasNoEffect())
             pendingDamage= null;
-    }
-    
-    //Constructor
-    SpaceStation(String n, SuppliesPackage supplies){
-        name= n;
-        ammoPower= supplies.getAmmoPower();
-        fuelUnits= supplies.getFuelUnits();
-        shieldPower= supplies.getShieldPower();
-        
     }
     
     public boolean receiveWeapon(Weapon w){
@@ -113,10 +154,34 @@ class SpaceStation {
     }
     
     public void cleanUpMountedItems(){
-        for(Weapon w: weapons)
+       weapons.removeIf(w -> w.getUses() == 0);
+       shieldBoosters.removeIf(s -> s.getUses() == 0);
     }
     
+    //Próxima práctica
+    public float fire(){
+        throw new UnsupportedOperationException();
+    }
     
+    public float protection(){
+        throw new UnsupportedOperationException();
+    }
+    
+    public ShotResult receiveShot(float shot){
+        throw new UnsupportedOperationException();
+    }
+    
+    public void setLoot(Loot loot){
+        throw new UnsupportedOperationException();
+    }
+    
+    public void discardWeapon(int i){
+        throw new UnsupportedOperationException();
+    }
+    
+    public void discardShieldBooster(int i){
+        throw new UnsupportedOperationException();
+    }
 }
 
 

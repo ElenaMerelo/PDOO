@@ -3,7 +3,7 @@
  */
 package deepspace;
 
-class EnemyStarShip {
+class EnemyStarShip{
     private float ammoPower, shieldPower;
     private String name;
     private Loot loot;

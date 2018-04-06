@@ -6,7 +6,7 @@ package deepspace;
 
 import java.util.ArrayList;
 
-class Hangar {
+class Hangar{
     private int maxElements;
     private ArrayList<Weapon> weapons;
     private ArrayList<ShieldBooster> shieldBoosters;

@@ -4,7 +4,7 @@
  */
 package deepspace;
 
-class ShieldBooster {
+class ShieldBooster{
     private String name;
     private float boost;
     private int uses;

@@ -43,7 +43,7 @@ class Loot {
                 + " shields, " + nHangars + " hangars, " + nMedals + " medals.";
     }
     
-    LootToUI getUIVersion(){
+    LootToUI getUIversion(){
         return new LootToUI(this);
     }
 }
