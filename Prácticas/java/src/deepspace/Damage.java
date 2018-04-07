@@ -108,7 +108,7 @@ class Damage {
         
     }
     
-    /*
+    /**
      * @brief Devuelve el índice de la posición de la primera arma de la 
      * colección de armas (primer parámetro) cuyo tipo coincida con el tipo indicado
      * por el segundo parámetro. Devuelve -1 si no hay ninguna arma en la 
@@ -122,7 +122,7 @@ class Damage {
         return -1;   
     }
     
-    /*
+    /**
      * @brief Si la instancia dispone de una lista de tipos concretos de armas,
      * intenta eliminar el tipo del arma pasada como parámetro de esa lista. En otro caso simplemente
      * decrementa en una unidad el contador de armas que deben ser eliminadas. Ese contador no puede
@@ -139,7 +139,7 @@ class Damage {
     }
     
     
-    /* 
+    /** 
      * @brief Decrementa en una unidad el número de potenciadores de escudo que
      * deben ser eliminados. Ese contador no puede ser inferior a cero en ningún caso.
     */
@@ -148,7 +148,7 @@ class Damage {
             nShields--;
     }
     
-    /* 
+    /**
      * @brief Devuelve true si el daño representado no tiene ningún efecto, no 
      * implica la pérdida de ningún tipo de accesorio (armas o potenciadores de escudo).
     */

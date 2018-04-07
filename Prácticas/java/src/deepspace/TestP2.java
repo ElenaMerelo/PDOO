@@ -143,14 +143,7 @@ class TestP2 {
         
         //adjust
         ArrayList<Weapon> w5= new ArrayList<>(Arrays.asList(l, l, m, m, m));
-        /*ArrayList<Weapon> w1= new ArrayList<>(Arrays.asList(l));
-        ArrayList<Weapon> w2= new ArrayList<>(Arrays.asList(l, m));
-        ArrayList<Weapon> w3= new ArrayList<>(Arrays.asList(l, m, p));
-        ArrayList<ArrayList<Weapon>> w= new ArrayList<>(Arrays.asList(w1, w2, w3));
-        
-        ArrayList<ShieldBooster> s1= new ArrayList<>(Arrays.asList(sb1));
-        ArrayList<ShieldBooster> s2= new ArrayList<>(Arrays.asList(sb1, sb2));
-        ArrayList<ArrayList<ShieldBooster>> s= new ArrayList<>(Arrays.asList(s1, s2));*/
+       
         if(d1.adjust(w5, s2).getNWeapons() != 3 || d1.adjust(w5,s2).getNShields() != 1 || d1.adjust(w5,s2).getWeapons() != null)
             System.out.println("Error en primer adjust de d1");
         
@@ -161,6 +154,49 @@ class TestP2 {
         if(d3.adjust(w5, s1).getNWeapons() != 0 || d3.adjust(w5, s1).getNShields() != 1 || !d3.adjust(w5, s1).getWeapons().equals(adjusted) )
             System.out.println("Error en adjust de d3");
         
+        //discard* en caso de numericWeapons
+        for(int i= 0; i< 3; i++){
+            d1.discardWeapon(l);
+            if(d1.getNWeapons() != 3- i -1)
+                System.out.println("Error en discardWeapon de d1 iteración " + i + "d1.getNWeapons(): " + d1.getNWeapons());
+        }
+        
+        d1.discardShieldBooster();
+        if(d1.getNShields() != 0 || !d1.hasNoEffect())
+            System.out.println("Error en discardShieldBooster");
+        
+        //discard* en caso de specificWeapons
+        d3.discardWeapon(l);
+        
+        if(!d3.getWeapons().equals(new ArrayList<WeaponType>(Arrays.asList(laser, laser, missile, missile, plasma))))
+            System.out.println("Error en discardWeapon(l) de d3, d3.getWeapons: " + d3.getWeapons());
+        
+        d3.discardWeapon(m);
+        
+        if(!d3.getWeapons().equals(new ArrayList<WeaponType>(Arrays.asList(laser, laser, missile, plasma))))
+            System.out.println("Error en discardWeapon(l) de d3, d3.getWeapons: " + d3.getWeapons());
+        
+        d3.discardWeapon(p);
+        
+        if(!d3.getWeapons().equals(new ArrayList<WeaponType>(Arrays.asList(laser, laser, missile))))
+            System.out.println("Error en discardWeapon(l) de d3, d3.getWeapons: " + d3.getWeapons());
+        
+        d3.discardWeapon(l);
+        d3.discardWeapon(l);
+        d3.discardWeapon(m);
+        
+        if(!d3.getWeapons().equals(new ArrayList<>()))
+            System.out.println("Error en discardWeapon(l) de d3, d3.getWeapons: " + d3.getWeapons());
+        
+        d3.discardShieldBooster();
+        
+        if(d3.getNShields() != 1)
+            System.out.println("Error en discarShieldBooster de d3");
+        
+        d3.discardShieldBooster();
+        
+        if(!d3.hasNoEffect())
+            System.out.println("Error en hasNoEffect de d3");
     }
     
 }
