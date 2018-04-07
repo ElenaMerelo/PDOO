@@ -124,6 +124,7 @@ class TestP2 {
         
         //constructores 
         Damage d1= new Damage(3, 1);
+        Damage d2= new Damage(7, 3);
         Damage d3= new Damage(wt, 2);
         Damage d1_copy= new Damage(d1);
         Damage d3_copy= new Damage(d3);
@@ -140,8 +141,26 @@ class TestP2 {
         if(d3_copy.getNShields() != 2 || !d3_copy.getWeapons().equals(wt) || d3_copy.hasNoEffect() || d3_copy.getNWeapons() != 0)
             System.out.println("Error al construir d3_copy");
         
-        //adjust 
-        Damage d2= new Damage(7, 3);
+        //adjust
+        ArrayList<Weapon> w5= new ArrayList<>(Arrays.asList(l, l, m, m, m));
+        /*ArrayList<Weapon> w1= new ArrayList<>(Arrays.asList(l));
+        ArrayList<Weapon> w2= new ArrayList<>(Arrays.asList(l, m));
+        ArrayList<Weapon> w3= new ArrayList<>(Arrays.asList(l, m, p));
+        ArrayList<ArrayList<Weapon>> w= new ArrayList<>(Arrays.asList(w1, w2, w3));
+        
+        ArrayList<ShieldBooster> s1= new ArrayList<>(Arrays.asList(sb1));
+        ArrayList<ShieldBooster> s2= new ArrayList<>(Arrays.asList(sb1, sb2));
+        ArrayList<ArrayList<ShieldBooster>> s= new ArrayList<>(Arrays.asList(s1, s2));*/
+        if(d1.adjust(w5, s2).getNWeapons() != 3 || d1.adjust(w5,s2).getNShields() != 1 || d1.adjust(w5,s2).getWeapons() != null)
+            System.out.println("Error en primer adjust de d1");
+        
+        if(d1.adjust(w2, s1).getNWeapons() != 2 || d1.adjust(w2,new ArrayList<ShieldBooster>()).getNShields() != 0 || d1.adjust(w2,s1).getWeapons() != null )
+            System.out.println("Error en segundo adjust de d1");
+        
+        ArrayList<WeaponType> adjusted= new ArrayList<>(Arrays.asList(laser, laser, missile, missile));
+        if(d3.adjust(w5, s1).getNWeapons() != 0 || d3.adjust(w5, s1).getNShields() != 1 || !d3.adjust(w5, s1).getWeapons().equals(adjusted) )
+            System.out.println("Error en adjust de d3");
+        
     }
     
 }

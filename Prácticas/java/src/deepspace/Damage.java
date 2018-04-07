@@ -70,42 +70,42 @@ class Damage {
      * que no están en las colecciones de los parámetros.
     */
     public Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
-        nShields= Math.min(s.size(), nShields);
+        int n_shields= Math.min(s.size(), nShields);
         
         if(weapons != null){
-            int[] freq= new int[0];
-            int j= 0;
+            int freq;
             
-            ArrayList<WeaponType> types= new ArrayList<WeaponType>(Arrays.asList(WeaponType.LASER, WeaponType.MISSILE, WeaponType.PLASMA));
+            ArrayList<WeaponType> types= new ArrayList<>(Arrays.asList(WeaponType.LASER, WeaponType.MISSILE, WeaponType.PLASMA));
             
-            ArrayList<WeaponType> adjusted= new ArrayList<WeaponType>();
+            ArrayList<WeaponType> adjusted= new ArrayList<>();
             
             //Obtenemos al array con los tipos de armas de w
-            ArrayList<WeaponType> wt= new ArrayList<WeaponType>();
+            ArrayList<WeaponType> wt= new ArrayList<>();
             for(Weapon i: w)
                 wt.add(i.getType());
             
             for(WeaponType i: types){
-                if(arrayContainsType(w, i) != -1)
-                    freq[j]= Math.min(Collections.frequency(wt, i), Collections.frequency(this.weapons, i));
+                if(arrayContainsType(w, i) != -1){
+                    freq= Math.min(Collections.frequency(wt, i), Collections.frequency(weapons, i));
+                    
+                    //Una vez obtenida la frecuencia mínima de ocurrencias del weaponType i lo metemos en adjusted
+                    for(int k= 0; k < freq; k++)
+                        adjusted.add(i);
+                }
                 
                 else
-                    freq[j]= 0;
-                
-                //Una vez obtenida la frecuencia mínima de ocurrencias del weaponType i lo metemos en adjusted
-                for(int k= 0; k < freq[j]; k++)
-                    adjusted.add(i);
-                
-                j++;
+                    freq= 0;
+               
             }
+            return new Damage(adjusted, n_shields);
                 
-            }
-                
+        }
+       
+        else{
+            int n_weapons= Math.min(nWeapons, w.size());
+            return new Damage(n_weapons, n_shields);
+        }
         
-        else
-            nWeapons= Math.min(nWeapons, w.size());
-        
-        return this;
     }
     
     /*
