@@ -12,6 +12,7 @@ package deepspace;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Arrays;
 
 class Damage {
     private int nShields;
@@ -19,7 +20,7 @@ class Damage {
     private ArrayList<WeaponType> weapons;
     
     //Constructores
-    Damage(int nw, int ns, ArrayList<WeaponType> w){
+    private Damage(int nw, int ns, ArrayList<WeaponType> w){
         nShields= ns;
         
         if(w != null){
@@ -75,10 +76,7 @@ class Damage {
             int[] freq= new int[0];
             int j= 0;
             
-            ArrayList<WeaponType> types= new ArrayList<WeaponType>();
-            types.add(WeaponType.LASER);
-            types.add(WeaponType.MISSILE);
-            types.add(WeaponType.PLASMA);
+            ArrayList<WeaponType> types= new ArrayList<WeaponType>(Arrays.asList(WeaponType.LASER, WeaponType.MISSILE, WeaponType.PLASMA));
             
             ArrayList<WeaponType> adjusted= new ArrayList<WeaponType>();
             
@@ -155,7 +153,10 @@ class Damage {
      * implica la pérdida de ningún tipo de accesorio (armas o potenciadores de escudo).
     */
     public boolean hasNoEffect(){
-        return nWeapons== 0 && nShields == 0 && ( weapons == null || weapons.isEmpty());
+        if(weapons == null)
+            return nWeapons== 0 && nShields == 0;
+        else 
+            return weapons.isEmpty() && nShields ==  0;
     }
     
 }

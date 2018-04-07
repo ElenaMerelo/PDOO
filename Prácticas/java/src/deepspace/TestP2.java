@@ -28,7 +28,7 @@ class TestP2 {
         Hangar h1= new Hangar(5);
         Hangar h2= new Hangar(h1);
         
-        //Prueba de los constructores
+        //constructores
         if(h1.getMaxElements() != 5 || !h1.getWeapons().isEmpty() || !h1.getShieldBoosters().isEmpty())
             System.out.println("Error construyendo h1");
 
@@ -115,8 +115,33 @@ class TestP2 {
         if(!h1.getShieldBoosters().isEmpty())
             System.out.println("No se ha modificado h1.shieldBoosters tras eliminar elemento restante");
         
-         
-         
+        /*-----------------------------Damage---------------------------------*/ 
+        WeaponType laser= WeaponType.LASER;
+        WeaponType missile= WeaponType.MISSILE;
+        WeaponType plasma= WeaponType.PLASMA;
+        
+        ArrayList<WeaponType> wt= new ArrayList<>(Arrays.asList(laser, laser, laser, missile, missile, plasma));
+        
+        //constructores 
+        Damage d1= new Damage(3, 1);
+        Damage d3= new Damage(wt, 2);
+        Damage d1_copy= new Damage(d1);
+        Damage d3_copy= new Damage(d3);
+        
+        if(d1.getNShields() != 1 || d1.getNWeapons() != 3 || d1.hasNoEffect() || d1.getWeapons() != null)
+            System.out.println("Error al construir d1");
+        
+        if(d3.getNShields() != 2 || !d3.getWeapons().equals(wt) || d3.hasNoEffect() || d3.getNWeapons() != 0)
+            System.out.println("Error al construir d3");
+        
+        if(d1_copy.getNShields() != 1 || d1_copy.getNWeapons() != 3 || d1_copy.hasNoEffect() || d1_copy.getWeapons() != null)
+            System.out.println("Error al construir d1_copy");
+        
+        if(d3_copy.getNShields() != 2 || !d3_copy.getWeapons().equals(wt) || d3_copy.hasNoEffect() || d3_copy.getNWeapons() != 0)
+            System.out.println("Error al construir d3_copy");
+        
+        //adjust 
+        Damage d2= new Damage(7, 3);
     }
     
 }
