@@ -85,3 +85,155 @@ public class Details {
 Output:
 
 ArrayList items: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+
+# Conditionally remove elements from a List in Java 8
+Java 8 introduces a new method available for Collection types: removeIf(). It accepts a predicate which defines the condition on which the elements should be removed. It returns a boolean where a true response means that at least one item has been removed and false otherwise:
+~~~java
+
+Collection<String> stringStack = new Stack<>();
+stringStack.add("Hello");
+stringStack.add("my");
+stringStack.add("dear");
+stringStack.add("world");
+
+stringStack.removeIf(s -> s.contains("ll"));
+~~~
+The above example will remove “Hello” from the list stack.
+
+Note that not all collections support item removal. In that case the method will throw an `UnsupportedOperationException` in case an attempt is made to remove a matching element. The ArrayList is one such collection:
+
+~~~java
+Collection<String> asList = Arrays.asList("hello", "my", "dear", "world");
+asList.removeIf(s -> s.contains("ll"));
+~~~
+This will throw an exception unfortunately as the Array.asList method returns an ArrayList of type java.util.Arrays.ArrayList (which is read only and fixed size) and not the classic java.util.ArrayList (resizable and item-removable).
+
+# Printing an arrayList as a String
+
+Gotten from: https://stackoverflow.com/questions/31601952/need-to-print-an-arraylist-using-tostring-and-also-add-remove-elements
+
+Q:I am tinkering with a code for a library and am having a lot of trouble so the first thing I need to sort out is how to add and remove books while also using a tostring to print the current and previous contents of the array. It is printing them out fine, but it isn't removing them. Could anyone let me know why? and when it prints them out I want it to only say title once like
+
+title: The Gunlsinger
+
+The Drawing of the three
+
+not: Title:Gunslinger
+
+Title:Drawing of the Three
+~~~java
+class Library {
+
+    private String books;
+
+    Library(String b) {
+        // this.owner=o;
+        this.books = b;
+    }
+
+    //
+    public String toString() {
+        return "\nTitle:" + this.books;
+        // System.out.println
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Library> books = new ArrayList<Library>();
+        books.add(new Library("The Gunslinger"));
+        books.add(new Library("The Drawing of the Three"));
+        books.remove("The Gunslinger");
+        for (Library a : books) {
+            System.out.println(a);
+        }
+
+    }
+}
+~~~
+A: Let's look at what you were trying.
+
+    You added 2 objects to an ArrayList
+    You then tried to remove one of the objects from the ArrayList by calling remove(String s).
+
+First, there is no remove(String s). What your code is actually calling is remove(Object o). Even though a String is an Object, the Object this method really expects is your Library object, which is why you have answers that suggest that you have to override the equals() and hashCode()
+
+Another approach would be to extend the ArrayList class with your own custom class (Library), that has Book objects, and implement a remove(String s).
+
+As far as the "Titles: " only appearing once in your results, an `@Override toString()` is in order for that.
+
+Library custom class that extends ArrayList:
+~~~java
+public static class Library extends ArrayList<Book> {
+    // Adding an overload remove method that accepts a String
+    public void remove(String book) {
+        // Find the book to remove
+        for (int i = 0; i < size(); i++) {
+            if (get(i).getTitle().equals(book)) {
+                // This remove() is one of the default remove methods
+                // that is part of an ArrayList
+                remove(i);
+                break;
+            }
+        }
+    }
+
+    // This will display "Titles: " once along with every
+    // book in the ArrayList
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Titles: ");
+        // Append each book to the returning String
+        forEach(book -> sb.append(book).append("\n"));
+        return sb.toString();
+    }
+}
+~~~
+
+Book custom class:
+
+~~~java
+public static class Book {
+    private String title;
+
+    public Book(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public String toString() {
+        // You could append additional information like
+        // author, publisher, etc...
+        return title;
+    }
+}
+~~~
+Usage:
+
+~~~java
+public static void main(String[] args) throws Exception {
+    Library books = new Library();
+    books.add(new Book("The Gunslinger"));
+    books.add(new Book("The Drawing of the Three"));
+    System.out.println("After add: ");
+    System.out.println(books);
+
+    books.remove("The Gunslinger");
+    System.out.println("After remove: ");
+    System.out.println(books);      
+}
+~~~
+
+Entonces, si en mi clase Hangar del proyecto deepspace tengo un vector de weapons, cuyos elementos son de tipo Weapon, y tienen sobrecargado el toString, para sobrecargar el método toString de Hangar basta añadir en la clase Hangar:
+
+~~~java
+public String toString(){
+    StringBuilder sb = new StringBuilder("Weapons: ");
+    // Append each weapon to the returning String
+    for(Weapon w: weapons)
+        sb.append(w).append("\n");
+    return sb.toString();
+}
+~~~
