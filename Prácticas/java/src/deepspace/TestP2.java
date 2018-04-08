@@ -124,7 +124,6 @@ class TestP2 {
         
         //constructores 
         Damage d1= new Damage(3, 1);
-        Damage d2= new Damage(7, 3);
         Damage d3= new Damage(wt, 2);
         Damage d1_copy= new Damage(d1);
         Damage d3_copy= new Damage(d3);
@@ -197,6 +196,47 @@ class TestP2 {
         
         if(!d3.hasNoEffect())
             System.out.println("Error en hasNoEffect de d3");
-    }
     
+        /*----------------------------EnemyStarShip--------------------------------*/ 
+        Damage d2= new Damage(7, 3);
+        Damage d4= new Damage(wt, 2);
+        Loot l1= new Loot(1, 2, 3, 4, 5);
+
+        EnemyStarShip e1= new EnemyStarShip("e1", 1.2f, 3.4f, l1, d2);
+        EnemyStarShip e2= new EnemyStarShip("e2", 2.2f, 1.1f, l1, d4);
+        EnemyStarShip e1_copy= new EnemyStarShip(e1);
+        EnemyStarShip e2_copy= new EnemyStarShip(e2);
+        
+        //Constructores 
+        if(!e1.getName().equals("e1") || e1.getAmmoPower() != 1.2f || e1.getShieldPower() != 3.4f || !e1.getLoot().equals(l1) || !e1.getDamage().equals(d2))
+            System.out.println("Error en constructor de e1");
+        
+        if(!e2.getName().equals("e2") || e2.getAmmoPower() != 2.2f || e2.getShieldPower() != 1.1f || !e2.getLoot().equals(l1) || !e2.getDamage().equals(d4))
+            System.out.println("Error en constructor de e2");
+        
+        if(!e1_copy.getName().equals("e1") || e1_copy.getAmmoPower() != 1.2f || e1_copy.getShieldPower() != 3.4f || !e1_copy.getLoot().equals(l1) || !e1_copy.getDamage().equals(d2))
+            System.out.println("Error en constructor de e1_copy");
+        
+        if(!e2_copy.getName().equals("e2") || e2_copy.getAmmoPower() != 2.2f || e2_copy.getShieldPower() != 1.1f || !e2_copy.getLoot().equals(l1) || !e2_copy.getDamage().equals(d4))
+            System.out.println("Error en constructor de e2_copy");
+        
+        //fire and protection 
+        if(e1.fire() != e1.getAmmoPower() || e2.fire() != e2.getAmmoPower())
+            System.out.println("Error en fire");
+        
+        if(e1.protection() != e1.getShieldPower() || e2.protection() != e2.getShieldPower())
+            System.out.println("Error en protection");
+        
+        //receiveShot
+        if(!e1.receiveShot(3.5f).equals(ShotResult.DONOTRESIST))
+            System.out.println("Error en receiveShot cuando shot> shieldPower");
+        
+        if(!e1.receiveShot(3.4f).equals(ShotResult.RESIST))
+            System.out.println("Error en receiveShot cuando shot< shieldPower");
+        
+        
+        
+        
+        
+    }
 }

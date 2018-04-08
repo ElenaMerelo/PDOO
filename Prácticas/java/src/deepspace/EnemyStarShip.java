@@ -56,7 +56,7 @@ class EnemyStarShip{
         return shieldPower;
     }
     
-    /*
+    /**
      * @brief Devuelve el resultado que se produce al recibir un disparo de
      * una determinada potencia (pasada como parámetro). Si el nivel de protección 
      * de los escudos es menor que la intensidad del disparo, la nave enemiga 
