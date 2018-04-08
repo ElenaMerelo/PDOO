@@ -20,6 +20,7 @@ class GameUniverse {
         gameState= new GameStateController();
         turns= 0;
         dice= new Dice();
+        spaceStations= new ArrayList<>();
     }
     
     //Getters
@@ -29,17 +30,7 @@ class GameUniverse {
 
     public GameState getState() {
         return gameState.getState();
-    }
-    
-    //Se abordará en la siguiente práctica
-    CombatResult combat(SpaceStation station, EnemyStarShip enemy){
-        throw new UnsupportedOperationException();
-    }
-    
-    //Siguiente práctica
-    public CombatResult combat(){
-        throw new UnsupportedOperationException();
-    }
+    } 
     
     public void discardHangar(){
         if(gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT)
@@ -70,12 +61,6 @@ class GameUniverse {
         return currentStation.getNMedals() == WIN;
     }
     
-    //Se abordará en la siguiente práctica
-    public void init(ArrayList<String> names){
-        throw new UnsupportedOperationException();
-
-    }
-    
     public void mountShieldBooster(int i){
         if(gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT)
             currentStation.mountShieldBooster(i);
@@ -87,9 +72,20 @@ class GameUniverse {
     }
     
     //Siguiente práctica
+    CombatResult combat(SpaceStation station, EnemyStarShip enemy){
+        throw new UnsupportedOperationException();
+    }
+
+    public void init(ArrayList<String> names){
+        throw new UnsupportedOperationException();
+    }
+    
+    public CombatResult combat(){
+        throw new UnsupportedOperationException();
+    }
+    
     public boolean nextTurn(){
         throw new UnsupportedOperationException();
-
     }
 }
 

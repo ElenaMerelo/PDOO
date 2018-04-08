@@ -364,16 +364,14 @@ class TestP2 {
         ss1.discardShieldBoosterInHangar(0);
         if(!ss1.getHangar().getShieldBoosters().equals(new ArrayList<>()))
             System.out.println("Error en discardShieldBoosterInHangar(0)");
+
+        /*----------------------------GameUniverse--------------------------------*/
+        //Constructores
+        GameUniverse g= new GameUniverse();
         
+        if(!g.getState().equals(GameState.CANNOTPLAY))
+            System.out.println("Error en la inicialización de g");
         
-        
-        
-        
-        
-        
-        
-            
-        
-        
+        //Con los métodos que tenemos no se pueden probar más cosas.
     }
 }
