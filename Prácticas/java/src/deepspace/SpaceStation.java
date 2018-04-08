@@ -22,7 +22,9 @@ class SpaceStation {
         ammoPower= supplies.getAmmoPower();
         fuelUnits= supplies.getFuelUnits();
         shieldPower= supplies.getShieldPower();
-        
+        nMedals= 0;
+        weapons= new ArrayList<>();
+        shieldBoosters= new ArrayList<>();
     }
     
     //Getters
@@ -73,6 +75,8 @@ class SpaceStation {
     private void assignFuelValue(float f){
         if(f < MAXFUEL)
             fuelUnits= f;
+        else 
+            fuelUnits= MAXFUEL;
     }
     
     /**
@@ -117,15 +121,19 @@ class SpaceStation {
     }
     
     public void mountWeapon(int i){
+        Weapon w= new Weapon("w", null, 0);
         if(hangar != null)
-            if(hangar.removeWeapon(i) != null)
-                weapons.add(hangar.removeWeapon(i));
+            w= hangar.removeWeapon(i);
+            if(w != null)
+                weapons.add(w);
     }
     
     public void mountShieldBooster(int i){
+        ShieldBooster sb= new ShieldBooster("sb", 0.0f, 0);
         if(hangar != null)
-            if(hangar.removeShieldBooster(i) != null)
-                shieldBoosters.add(hangar.removeShieldBooster(i));
+            sb= hangar.removeShieldBooster(i);
+            if(sb != null)
+                shieldBoosters.add(sb);
     }
     
     public void discardWeaponInHangar(int i){

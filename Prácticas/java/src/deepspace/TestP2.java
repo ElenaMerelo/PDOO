@@ -232,9 +232,80 @@ class TestP2 {
             System.out.println("Error en receiveShot cuando shot> shieldPower");
         
         if(!e1.receiveShot(3.4f).equals(ShotResult.RESIST))
-            System.out.println("Error en receiveShot cuando shot< shieldPower");
+            System.out.println("Error en receiveShot cuando shot<= shieldPower");
         
+        /*----------------------------SpaceStation--------------------------------*/
+        /*Damage d2= new Damage(7, 3);
+        Damage d4= new Damage(wt, 2);
+        ArrayList<Weapon> w5= new ArrayList<>(Arrays.asList(l, l, m, m, m));
+        ArrayList<ShieldBooster> s2= new ArrayList<>(Arrays.asList(sb1, sb2));
         
+        */
+        Hangar h3= new Hangar(5);
+        SuppliesPackage sp= new SuppliesPackage(1.1f, 3.3f, 2.2f);
+        SuppliesPackage sp2= new SuppliesPackage(1.1f, 50.5f, 2.2f);
+        
+        //Constructor
+        SpaceStation ss1= new SpaceStation("ss1", sp);
+        
+        if(!ss1.getName().equals("ss1") || ss1.getAmmoPower() != 1.1f || ss1.getFuelUnits() != 3.3f || ss1.getShieldPower() != 2.2f || ss1.getNMedals() != 0 || !ss1.getWeapons().isEmpty() || !ss1.getShieldBoosters().isEmpty() || ss1.getHangar() != null || ss1.getPendingDamage() != null || ss1.validState() != true)
+            System.out.println("Error en constructor de ss1");
+        
+        //receiveSupplies 
+        final double EPSILON = 0.000001;
+        ss1.receiveSupplies(sp2);
+        
+        if(ss1.getAmmoPower() != 2.2f || ss1.getShieldPower() != 4.4f || ss1.getFuelUnits() != 53.8f)
+            System.out.println("Error en primer receiveSupplies, ss1.getAmmoPower(): " + ss1.getAmmoPower() + "ss1.getShieldPower(): " + ss1.getShieldPower() + " ss1.getFuelUnits(): " + ss1.getFuelUnits() );
+        
+        ss1.receiveSupplies(sp2);
+        
+        if( Math.abs(ss1.getAmmoPower() - 3.3f) > EPSILON || Math.abs(ss1.getShieldPower() - 6.6f) > EPSILON || ss1.getFuelUnits() != 100.0f)
+            System.out.println("Error en segundo receiveSupplies, ss1.getAmmoPower(): " + ss1.getAmmoPower() + "ss1.getShieldPower(): " + ss1.getShieldPower() + " ss1.getFuelUnits(): " + ss1.getFuelUnits() );
+        
+        //receiveWeapon, receiveShieldBooster, receiveHangar, mountWeapon y mountShieldBooster
+        if(ss1.receiveWeapon(l) != false || ss1.receiveShieldBooster(sb1) != false)
+            System.out.println("Error en receive* cuando hangar= null");
+        
+        ss1.receiveHangar(h3);
+        
+        if(!ss1.getHangar().equals(h3))
+            System.out.println("Error en primer getHangar ");
+        
+        if(ss1.receiveWeapon(l) != true || ss1.receiveShieldBooster(sb1) != true)
+            System.out.println("Error en receive* cuando hangar != null");
+        
+        if(!ss1.getHangar().getWeapons().equals(new ArrayList<>(Arrays.asList(l))))
+            System.out.println("Error al añadir l a la lista de weapons de hangar, ss1.getHangar().getWeapons(): " + ss1.getHangar().getWeapons());
+        
+        if(!ss1.getHangar().getShieldBoosters().equals(new ArrayList<>(Arrays.asList(sb1))))
+            System.out.println("Error al añadir sb1 a la lista de shieldBoosters de hangar, ss1.getHangar().getShieldBoosters(): " + ss1.getHangar().getShieldBoosters());
+        
+        ss1.receiveWeapon(m);
+        ss1.receiveWeapon(p);
+        ss1.receiveShieldBooster(sb2);
+        
+        if(!ss1.getHangar().getWeapons().equals(new ArrayList<>(Arrays.asList(l, m, p))))
+            System.out.println("Error al añadir m y p a la lista de weapons de hangar, ss1.getHangar().getWeapons(): " + ss1.getHangar().getWeapons());
+        
+        if(!ss1.getHangar().getShieldBoosters().equals(new ArrayList<>(Arrays.asList(sb1, sb2))))
+            System.out.println("Error al añadir sb2 a la lista de shieldBoosters de hangar, ss1.getHangar().getShieldBoosters(): " + ss1.getHangar().getShieldBoosters());
+        
+        if(ss1.receiveWeapon(l) != false || ss1.receiveShieldBooster(sb1) != false)
+            System.out.println("Sigue habiendo espacio en el hangar");
+        
+        for(int i= 0; i<= ss1.getHangar().getWeapons().size() + 1; i++){
+            ss1.mountWeapon(0);
+            ss1.mountShieldBooster(0);
+        }
+        
+        if(!ss1.getHangar().getWeapons().isEmpty() || !ss1.getHangar().getShieldBoosters().isEmpty())
+            System.out.println("Error al eliminar del hangar, ss1.getHangar().getWeapons(): " + ss1.getHangar().getWeapons() + " ss1.getHangar().getShieldBoosters(): " + ss1.getHangar().getShieldBoosters());
+        
+        if(!ss1.getWeapons().equals(new ArrayList<>(Arrays.asList(l, m, p))) || !ss1.getShieldBoosters().equals(new ArrayList<>(Arrays.asList(sb1, sb2))))
+            System.out.println("Error de montaje en ss1, ss1.getWeapons(): " + ss1.getWeapons() + ", ss1.getShieldBoosters(): " + ss1.getShieldBoosters());
+        
+      
         
         
         
