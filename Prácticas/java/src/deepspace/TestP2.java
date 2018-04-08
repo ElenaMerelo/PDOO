@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 class TestP2 {
     public static void main(String args[]){
-        Weapon l= new Weapon("l", WeaponType.LASER, 3);
+        Weapon l= new Weapon("l", WeaponType.LASER, 0);
         Weapon m= new Weapon("m", WeaponType.MISSILE, 2);
         Weapon p= new Weapon("p", WeaponType.PLASMA, 1);
         
@@ -19,12 +19,13 @@ class TestP2 {
         ArrayList<ArrayList<Weapon>> w= new ArrayList<>(Arrays.asList(w1, w2, w3));
         
         ShieldBooster sb1= new ShieldBooster("sb1", 2.3f, 3);
-        ShieldBooster sb2= new ShieldBooster("sb2", 3.2f, 2);
+        ShieldBooster sb2= new ShieldBooster("sb2", 3.2f, 0);
         ArrayList<ShieldBooster> s1= new ArrayList<>(Arrays.asList(sb1));
         ArrayList<ShieldBooster> s2= new ArrayList<>(Arrays.asList(sb1, sb2));
         ArrayList<ArrayList<ShieldBooster>> s= new ArrayList<>(Arrays.asList(s1, s2));
         
         /*-----------------------------Hangar---------------------------------*/
+        
         Hangar h1= new Hangar(5);
         Hangar h2= new Hangar(h1);
         
@@ -116,6 +117,7 @@ class TestP2 {
             System.out.println("No se ha modificado h1.shieldBoosters tras eliminar elemento restante");
         
         /*-----------------------------Damage---------------------------------*/ 
+        
         WeaponType laser= WeaponType.LASER;
         WeaponType missile= WeaponType.MISSILE;
         WeaponType plasma= WeaponType.PLASMA;
@@ -198,6 +200,7 @@ class TestP2 {
             System.out.println("Error en hasNoEffect de d3");
     
         /*----------------------------EnemyStarShip--------------------------------*/ 
+        
         Damage d2= new Damage(7, 3);
         Damage d4= new Damage(wt, 2);
         Loot l1= new Loot(1, 2, 3, 4, 5);
@@ -235,12 +238,7 @@ class TestP2 {
             System.out.println("Error en receiveShot cuando shot<= shieldPower");
         
         /*----------------------------SpaceStation--------------------------------*/
-        /*Damage d2= new Damage(7, 3);
-        Damage d4= new Damage(wt, 2);
-        ArrayList<Weapon> w5= new ArrayList<>(Arrays.asList(l, l, m, m, m));
-        ArrayList<ShieldBooster> s2= new ArrayList<>(Arrays.asList(sb1, sb2));
         
-        */
         Hangar h3= new Hangar(5);
         SuppliesPackage sp= new SuppliesPackage(1.1f, 3.3f, 2.2f);
         SuppliesPackage sp2= new SuppliesPackage(1.1f, 50.5f, 2.2f);
@@ -305,8 +303,76 @@ class TestP2 {
         if(!ss1.getWeapons().equals(new ArrayList<>(Arrays.asList(l, m, p))) || !ss1.getShieldBoosters().equals(new ArrayList<>(Arrays.asList(sb1, sb2))))
             System.out.println("Error de montaje en ss1, ss1.getWeapons(): " + ss1.getWeapons() + ", ss1.getShieldBoosters(): " + ss1.getShieldBoosters());
         
-      
+        //setPendingDamage y validState
+        ss1.setPendingDamage(d4);
+        if(!ss1.getPendingDamage().getWeapons().equals(new ArrayList<>(Arrays.asList(laser, missile, plasma))) || ss1.getPendingDamage().getNShields() != 2)
+            System.out.println("Error en primer setPendingDamage de ss1");
         
+        if(ss1.validState() != false)
+            System.out.println("ss1 está en un estado válido");
+        
+        Damage d5= new Damage(new ArrayList<>(), 0);
+        ss1.setPendingDamage(d5);
+        
+        if(ss1.validState() != true)
+            System.out.println("ss1 no está en un estado válido");
+        
+        //getSpeed
+        if(ss1.getSpeed() != ss1.getFuelUnits()/100)
+            System.out.println("Error en getSpeed de ss1");
+        
+        //discardHangar
+        if(ss1.getHangar() == null)
+            System.out.println("El hangar es nulo");
+        
+        ss1.discardHangar();
+        
+        if(ss1.getHangar() != null)
+            System.out.println("El hangar no es nulo");
+        
+        //cleanUpMountedItems
+        ss1.cleanUpMountedItems();
+        
+        if(!ss1.getWeapons().equals(new ArrayList<>(Arrays.asList(m, p))) || !ss1.getShieldBoosters().equals(new ArrayList<>(Arrays.asList(sb1))))
+                System.out.println("Error en cleanUpMountedItems");
+        
+        //discard*InHangar 
+        ss1.receiveHangar(h3);
+        ss1.receiveWeapon(l);
+        ss1.receiveWeapon(m);
+        ss1.receiveWeapon(p);
+        
+        ss1.receiveShieldBooster(sb1);
+        ss1.receiveShieldBooster(sb2);
+        
+        ss1.discardWeaponInHangar(2);
+        if(!ss1.getHangar().getWeapons().equals(new ArrayList<>(Arrays.asList(l, m))))
+            System.out.println("Error en discardWeaponInHangar(2)");
+        
+        ss1.discardWeaponInHangar(0);
+        if(!ss1.getHangar().getWeapons().equals(new ArrayList<>(Arrays.asList(m))))
+            System.out.println("Error en primer discardWeaponInHangar(0)");
+        
+        ss1.discardWeaponInHangar(0);
+        if(!ss1.getHangar().getWeapons().equals(new ArrayList<>()))
+            System.out.println("Error en segundo discardWeaponInHangar(0)");
+        
+        ss1.discardShieldBoosterInHangar(1);
+        if(!ss1.getHangar().getShieldBoosters().equals(new ArrayList<>(Arrays.asList(sb1))))
+            System.out.println("Error en discardShieldBoosterInHangar(1)");
+        
+        ss1.discardShieldBoosterInHangar(0);
+        if(!ss1.getHangar().getShieldBoosters().equals(new ArrayList<>()))
+            System.out.println("Error en discardShieldBoosterInHangar(0)");
+        
+        
+        
+        
+        
+        
+        
+        
+            
         
         
     }

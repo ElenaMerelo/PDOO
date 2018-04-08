@@ -91,7 +91,7 @@ class SpaceStation {
     public boolean receiveWeapon(Weapon w){
         if(hangar != null)
            return hangar.addWeapon(w);
-        
+      
         return false;
     }
     
@@ -122,7 +122,7 @@ class SpaceStation {
     
     public void mountWeapon(int i){
         Weapon w= new Weapon("w", null, 0);
-        if(hangar != null)
+        if(hangar != null || !hangar.getWeapons().isEmpty())
             w= hangar.removeWeapon(i);
             if(w != null)
                 weapons.add(w);
@@ -130,7 +130,7 @@ class SpaceStation {
     
     public void mountShieldBooster(int i){
         ShieldBooster sb= new ShieldBooster("sb", 0.0f, 0);
-        if(hangar != null)
+        if(hangar != null || !hangar.getShieldBoosters().isEmpty())
             sb= hangar.removeShieldBooster(i);
             if(sb != null)
                 shieldBoosters.add(sb);
