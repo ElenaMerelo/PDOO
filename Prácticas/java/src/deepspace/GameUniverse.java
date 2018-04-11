@@ -5,7 +5,7 @@ package deepspace;
 
 import java.util.ArrayList;
 
-class GameUniverse {
+public class GameUniverse {
     private static final int WIN= 10;
     private int currentStationIndex;
     private int turns;

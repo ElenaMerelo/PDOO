@@ -166,21 +166,69 @@ class SpaceStation {
        shieldBoosters.removeIf(s -> s.getUses() == 0);
     }
     
-    //Próxima práctica
+    /**
+     * @brief Realiza un disparo y se devuelve la energía o potencia del mismo. 
+     * Para ello se multiplica la potencia de disparo por los factores potenciadores
+     * proporcionados por todas las armas.
+     */
     public float fire(){
-        throw new UnsupportedOperationException();
+        float factor= 1.0f;
+        
+        for(int i= 0; i< weapons.size(); i++)
+          factor *= weapons.get(i).useIt();  
+        
+        return ammoPower*factor;
     }
     
+    /**
+     * @brief Se usa el escudo de protección y se devuelve la energía del mismo. 
+     * Para ello se multiplica la potencia del escudo por los factores potenciadores
+     * proporcionados por todos los potenciadores de escudos de los que se dispone.
+     */
     public float protection(){
-        throw new UnsupportedOperationException();
+        float factor= 1.0f;
+        
+        for(int i= 0; i< shieldBoosters.size(); i++)
+            factor *= shieldBoosters.get(i).useIt();
+        
+        return shieldPower*factor;
     }
     
+    /**
+     * @brief Realiza las operaciones relacionadas con la recepción del impacto 
+     * de un disparo enemigo. Ello implica decrementar la potencia del escudo en 
+     * función de la energía del disparo recibido como parámetro y devolver el 
+     * resultado de si se ha resistido el disparo o no.
+     */
     public ShotResult receiveShot(float shot){
-        throw new UnsupportedOperationException();
+        if(protection() >= shot){
+            shieldPower -= SHIELDLOSSPERUNITSHOT*shot;
+            shieldPower= Math.max(0.0f, shieldPower);
+            
+            return ShotResult.RESIST;
+        }
+        else return ShotResult.DONOTRESIST;
     }
     
+    /**
+     * @brief Recepción de un botín. Por cada elemento que indique el botín (pasado
+     * como parámetro) se le pide a CardDealer un elemento de ese tipo y se intenta
+     * almacenar con el método receive*() correspondiente. Para las medallas, 
+     * simplemente se incrementa su número según lo que indique el botín.
+     */
     public void setLoot(Loot loot){
-        throw new UnsupportedOperationException();
+        CardDealer dealer= CardDealer.getInstance();
+        int h= loot.getNHangars();
+        
+        if(h > 0){
+            hangar= dealer.nextHangar();
+            receiveHangar(hangar);
+        }
+        
+        for(int i= 1; i< loot.getNSupplies(); i++){
+            SuppliesPackage sup= dealer.nextSuppliesPackage();
+            receiveSupplies(sup);
+        }
     }
     
     public void discardWeapon(int i){
