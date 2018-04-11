@@ -218,25 +218,53 @@ class SpaceStation {
      */
     public void setLoot(Loot loot){
         CardDealer dealer= CardDealer.getInstance();
-        int h= loot.getNHangars();
+        int i;
         
-        if(h > 0){
-            hangar= dealer.nextHangar();
-            receiveHangar(hangar);
-        }
+        if(loot.getNHangars() > 0)
+            receiveHangar(dealer.nextHangar());
         
-        for(int i= 1; i< loot.getNSupplies(); i++){
-            SuppliesPackage sup= dealer.nextSuppliesPackage();
-            receiveSupplies(sup);
-        }
+        for(i= 1; i< loot.getNSupplies(); i++)
+            receiveSupplies(dealer.nextSuppliesPackage());
+        
+        for(i= 1; i< loot.getNWeapons(); i++)
+            receiveWeapon(dealer.nextWeapon());
+        
+        for(i= 1; i< loot.getNShields(); i++)
+            receiveShieldBooster(dealer.nextShieldBooster());
+        
+        nMedals += loot.getNMedals();
     }
     
+    /**
+     * @brief Se intenta descartar el arma con índice i de la colección de armas en uso.
+     * Además de perder el arma, se debe actualizar el daño pendiente (pendingDamage) 
+     * si es que se tiene alguno.
+     */
     public void discardWeapon(int i){
-        throw new UnsupportedOperationException();
+        if(i>= 0 && i< weapons.size()){
+            Weapon w= weapons.remove(i);
+            
+            if(pendingDamage != null){
+                pendingDamage.discardWeapon(w);
+                cleanPendingDamage();
+            }
+        }
     }
     
+    /**
+     * @brief Se intenta descartar el potenciador de escudo con índice i de la
+     * colección de potenciadores de escudo en uso. Además de perder el potenciador 
+     * de escudo, se debe actualizar el daño pendiente (pendingDamage) si es que se tiene alguno.
+     */
     public void discardShieldBooster(int i){
-        throw new UnsupportedOperationException();
+        if(i>= 0 && i< shieldBoosters.size()){
+            ShieldBooster s= shieldBoosters.remove(i);
+            
+            if(pendingDamage != null){
+                pendingDamage.discardShieldBooster();
+                cleanPendingDamage();
+            }
+        }
     }
 }
 
