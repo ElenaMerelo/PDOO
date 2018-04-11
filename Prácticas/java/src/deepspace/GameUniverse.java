@@ -20,7 +20,6 @@ public class GameUniverse {
         gameState= new GameStateController();
         turns= 0;
         dice= new Dice();
-        spaceStations= new ArrayList<>();
     }
     
     //Getters
@@ -71,21 +70,122 @@ public class GameUniverse {
             currentStation.mountWeapon(i);
     }
     
-    //Siguiente práctica
+    /**
+     * @brief Se realiza un combate entre la estación espacial y el enemigo que 
+     * se reciben como parámetros. Se sigue el procedimiento descrito en las reglas 
+     * del juego: sorteo de quién dispara primero, posibilidad de escapar, asignación 
+     * del botín, anotación del daño pendiente, etc. Se devuelve el resultado del combate.
+    */
     CombatResult combat(SpaceStation station, EnemyStarShip enemy){
-        throw new UnsupportedOperationException();
+        boolean enemyWins;
+        CombatResult combatResult;
+        
+        if(dice.firstShot() == GameCharacter.ENEMYSTARSHIP){
+            ShotResult result= station.receiveShot(enemy.fire());
+            
+            if(result == ShotResult.RESIST){
+                result= enemy.receiveShot(station.fire());
+                enemyWins= result == ShotResult.RESIST;
+            }
+            else enemyWins= true;  
+        }
+        else
+            enemyWins= enemy.receiveShot(station.fire()) == ShotResult.RESIST;
+        
+        if(enemyWins){
+            boolean moves= dice.spaceStationMoves(station.getSpeed());
+            
+            if(!moves){
+                station.setPendingDamage(enemy.getDamage());
+                combatResult= CombatResult.ENEMYWINS;
+            }
+            else{
+                station.move();
+                combatResult= CombatResult.STATIONESCAPES;
+            }
+        }
+        else{
+            station.setLoot(enemy.getLoot());
+            combatResult= CombatResult.STATIONWINS;
+        }
+        
+        gameState.next(turns, spaceStations.size());
+        return combatResult;
     }
-
+    
+    /** 
+     * @brief Inicia una partida. Recibe una colección con los nombres de los jugadores. 
+     * Para cada jugador, se crea una estación espacial y se equipa con suministros, 
+     * hangares, armas y potenciadores de escudos tomados de los mazos de cartas
+     * correspondientes. Se sortea qué jugador comienza la partida, se establece 
+     * el primer enemigo y comienza el primer turno. 
+     */
     public void init(ArrayList<String> names){
-        throw new UnsupportedOperationException();
+        if(gameState.getState() == GameState.CANNOTPLAY){
+            spaceStations= new ArrayList<>();
+            CardDealer dealer= CardDealer.getInstance();
+            int nh, nw, ns;
+            
+            for(String name: names){
+                SuppliesPackage supplies= dealer.nextSuppliesPackage();
+                
+                SpaceStation station= new SpaceStation(name, supplies);
+                nh= dice.initWithNHangars();
+                nw= dice.initWithNWeapons();
+                ns= dice.initWithNShields();
+              
+                station.setLoot(new Loot(0, nh, nw, ns, 0));
+                spaceStations.add(station);
+            }
+            
+            currentStationIndex= dice.whoStarts(names.size());
+            
+            currentStation= spaceStations.get(currentStationIndex);
+            currentEnemy= dealer.nextEnemy();
+            
+            gameState.next(turns, spaceStations.size());
+        }
     }
     
+    /**
+     * @brief Si la aplicación se encuentra en un estado en donde el combatir está
+     * permitido, se realiza un combate entre la estación espacial que tiene el 
+     * turno y el enemigo actual. Se devuelve el resultado del combate.
+     */
     public CombatResult combat(){
-        throw new UnsupportedOperationException();
+        GameState state= gameState.getState();
+        
+        if(state == GameState.BEFORECOMBAT || state == GameState.INIT)
+            return combat(currentStation, currentEnemy);
+        
+        else return CombatResult.NOCOMBAT;
     }
     
+    /**
+     * @brief Se comprueba que el jugador actual no tiene ningún daño pendiente 
+     * de cumplir, en cuyo caso se realiza un cambio de turno al siguiente jugador 
+     * con un nuevo enemigo con quien combatir, devolviendo true. Se devuelve false 
+     * en otro caso.
+     */
     public boolean nextTurn(){
-        throw new UnsupportedOperationException();
+        if(gameState.getState() == GameState.AFTERCOMBAT){
+            if(currentStation.validState()){
+                currentStationIndex= (currentStationIndex +1)%spaceStations.size();
+                turns++;
+                
+                currentStation= spaceStations.get(currentStationIndex);
+                currentStation.cleanUpMountedItems();
+                
+                CardDealer dealer= CardDealer.getInstance();
+                currentEnemy= dealer.nextEnemy();
+                
+                gameState.next(turns, spaceStations.size());
+                
+                return true;
+            }
+            else return false;
+        }
+        else return false;
     }
 }
 

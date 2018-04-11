@@ -223,13 +223,13 @@ class SpaceStation {
         if(loot.getNHangars() > 0)
             receiveHangar(dealer.nextHangar());
         
-        for(i= 1; i< loot.getNSupplies(); i++)
+        for(i= 0; i< loot.getNSupplies(); i++)
             receiveSupplies(dealer.nextSuppliesPackage());
         
-        for(i= 1; i< loot.getNWeapons(); i++)
+        for(i= 0; i< loot.getNWeapons(); i++)
             receiveWeapon(dealer.nextWeapon());
         
-        for(i= 1; i< loot.getNShields(); i++)
+        for(i= 0; i< loot.getNShields(); i++)
             receiveShieldBooster(dealer.nextShieldBooster());
         
         nMedals += loot.getNMedals();
