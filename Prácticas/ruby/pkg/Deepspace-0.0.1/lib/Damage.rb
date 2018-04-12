@@ -71,7 +71,7 @@ module Deepspace
       if @weapons == nil
         @nWeapons == 0 && @nShields == 0
       else
-         @weapons.empty? && @nShields == 0
+         @weapons.length == 0  && @nShields == 0
       end
     end
     

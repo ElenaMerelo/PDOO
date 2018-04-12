@@ -51,7 +51,7 @@ module Deepspace
 
     def discardWeapon(i)
       if i>= 0 && i< @weapons.length
-        w= @weapons.remove(i)
+        w= @weapons.delete(i)
         
         if @pendingDamage != nil
           @pendingDamage.discardWeapon w
