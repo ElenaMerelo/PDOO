@@ -33,7 +33,14 @@ module Deepspace
     end
 
     def discardShieldBooster(i)
-      #Próxima práctica
+      if i>= 0 && i< @shieldBoosters.length
+        s= @shieldBoosters.remove(i)
+        
+        if @pendingDamage != nil
+          @pendingDamage.discardShieldBooster s
+          cleanPendingDamage
+        end
+      end
     end
 
     def discardShieldBoosterInHangar(i)
@@ -43,7 +50,14 @@ module Deepspace
     end
 
     def discardWeapon(i)
-      #próxima práctica
+      if i>= 0 && i< @weapons.length
+        w= @weapons.remove(i)
+        
+        if @pendingDamage != nil
+          @pendingDamage.discardWeapon w
+          cleanPendingDamage
+        end
+      end
     end
 
     def discardWeaponInHangar(i)
@@ -53,7 +67,13 @@ module Deepspace
     end
 
     def fire
-      #próxima práctica
+      factor= 1.0
+      
+      for i in @weapons
+        factor *= i.useIt
+      end
+      
+      @ammoPower*factor
     end
 
     def speed
@@ -91,7 +111,13 @@ module Deepspace
     end
 
     def protection
-      #próxima práctica
+      factor= 1.0 
+      
+      for s in @shieldBoosters 
+        factor *= s.useIt 
+      end
+      
+      @shieldPower*factor
     end
 
     def receiveHangar(h)
@@ -109,7 +135,16 @@ module Deepspace
     end
 
     def receiveShot(shot)
-      #próxima práctica
+      if(protection >= shot)
+        @shieldPower -= @@SHIELDLOSSPERUNITSHOT*shot
+        @shieldPower= [0.0, @shieldPower].max
+        
+        return ShotResult::RESIST
+        
+      else 
+        @shieldPower= 0.0
+        return ShotResult::DONOTRESIST
+      end
     end
 
     def receiveSupplies(s)
@@ -126,8 +161,26 @@ module Deepspace
       end
     end
 
-    def setLoot(l)
-      #próxima práctica
+    def setLoot(loot)
+      dealer= CardDealer.instance
+      
+      if loot.getNHangars > 0 
+        receiceHangar(dealer.nextHangar)
+      end
+      
+      for i in 0..loot.getNSupplies
+        receiveSupplies(dealer.nextSuppliesPackage)
+      end
+      
+      for i in 0..loot.getNWeapons
+        receiveWeapon(dealer.nextWeapon)
+      end
+      
+      for i in 0..loot.getNShields
+        receiveShieldBooster(dealer.nextShieldBooster)
+      end
+      
+      @nMedals += loot.getNMedals
     end
 
     def setPendingDamage(d)

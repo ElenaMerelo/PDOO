@@ -1,4 +1,6 @@
 #encoding:utf-8
+# 2.3.17 - Translation from Java
+# @author Profesor
 
 require 'singleton'
 
@@ -13,9 +15,6 @@ require_relative 'Damage'
 require_relative 'EnemyStarShip'
 
 module Deepspace
-
-# 2.3.17 - Translatio from Java
-# @author Profesor
     
 class CardDealer 
     include Singleton
@@ -75,6 +74,8 @@ class CardDealer
         @suppliesPackages.add(SuppliesPackage.new(3,50,3))  
         @suppliesPackages.add(SuppliesPackage.new(40,100,40))
         @suppliesPackages.add(SuppliesPackage.new(100,100,100))
+        
+        @suppliesPackage.add(SuppliesPackage.new(0.0, 0.0, 0.0))
     end
     
     def createWeapons() 
@@ -102,7 +103,9 @@ class CardDealer
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
        @weapons.add(Weapon.new("Cañón ACME",WeaponType::PLASMA,1)) 
-       @weapons.add(Weapon.new("Cañón mejorado",WeaponType::PLASMA,2))       
+       @weapons.add(Weapon.new("Cañón mejorado",WeaponType::PLASMA,2))
+
+       @weapons.add(Weapon.new("La caña de España", WeaponType::PLASMA, 3))
        
     end
     
@@ -118,6 +121,8 @@ class CardDealer
        @shieldBoosters.add(ShieldBooster.new("Escudo ACME",1.5,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",3.0,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",4.0,2))
+       
+       @shieldBooosters.add(ShieldBooster.new("Ghostbooster", 0.0, 3))
     end
                                
     def createHangars() 
@@ -130,6 +135,8 @@ class CardDealer
         @hangars.add(Hangar.new(2))
         @hangars.add(Hangar.new(1))
         @hangars.add(Hangar.new(1))
+        
+        @hangar.add(Hangar.new(5))
     end
     
     def createEnemies() 
@@ -138,11 +145,15 @@ class CardDealer
         badLoot=Loot.new(1,1,1,0,1)
         goodLoot=Loot.new(2,2,2,1,2)
         
+        my_loot= Loot.new(2, 3, 2, 1, 0)
+        
         regularDamage0=Damage.newNumericWeapons(2,1) 
         regularDamage1=Damage.newNumericWeapons(1,1) 
         lowDamage0=Damage.newNumericWeapons(1,1)
         lowDamage1=Damage.newNumericWeapons(0,1)
         lowDamage2=Damage.newNumericWeapons(1,0)
+        
+        my_numeric_damage= Damage.newNumericWeapons(3,2)
         
         regularSpecificDamage0=Damage.newSpecificWeapons([WeaponType::LASER,WeaponType::MISSILE,WeaponType::PLASMA],1)
         hardSpecificDamage0=Damage.newSpecificWeapons([WeaponType::LASER,WeaponType::LASER,WeaponType::LASER, \
@@ -153,6 +164,7 @@ class CardDealer
         softSpecificDamage2=Damage.newSpecificWeapons([WeaponType::PLASMA],1)  
         mediumSpecificDamage0=Damage.newSpecificWeapons([WeaponType::LASER,WeaponType::MISSILE],2)  
         
+        my_specific_damage= Damage.newSpecificWeapons([WeaponType::LASER, WeaponType::LASER, WeaponType::LASER, WeaponType::MISSILE, WeaponType::MISSILE, WeaponType::PLASMA], 0)
         @enemies.add(EnemyStarShip.new("Enemigo fácil -1",0,0,regularLoot0,lowDamage0));
         @enemies.add(EnemyStarShip.new("Enemigo fácil -1",0,10,badLoot,lowDamage0));
         @enemies.add(EnemyStarShip.new("Enemigo fácil -1",10,0,badLoot,lowDamage0));
@@ -181,6 +193,9 @@ class CardDealer
         @enemies.add(EnemyStarShip.new("Enemigo difícil 1",100,200,goodLoot,hardSpecificDamage0));   
         
         @enemies.add(EnemyStarShip.new("Enemigo imposible",500,500,goodLoot,hardSpecificDamage0));              
+        
+        @enemies.add(EnemyStarship.new("Luffy", 0, 400, my_loot, my_specific_damage))
+        @enemies.add(EnemyStarShip.new("Luffy", 400, 0, my_loot, my_numeric_damage))
     end
 end # class
 

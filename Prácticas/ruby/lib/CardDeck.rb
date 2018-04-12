@@ -1,9 +1,8 @@
 #encoding:utf-8
-
-module Deepspace
-
 # 2.3.17 - Translation from Java
 # @author Profesor
+
+module Deepspace
     
 class CardDeck 
   
