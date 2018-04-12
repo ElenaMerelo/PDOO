@@ -67,7 +67,25 @@ module Deepspace
     end
     
     def init(names)
-      #próxima práctica
+      if @gameState.state == GameState::CANNOTPLAY
+        spaceStations= []
+        dealer= CardDealer.instance 
+        
+        for i in names
+          supplies= dealer.nextSuppliesPackage
+          station= SpaceStation.new(i, supplies)
+          l= Loot.new(0, @dice.initWithNHangars, @dice.initWithNWeapons, @dice.initWithNShields, 0)
+          station.setLoot(l)
+          
+          spaceStations.add(station)
+        end
+        
+        @currentStationIndex= @dice.whoStarts(names.length) 
+        @currentStation= spaceStations.get(@currentStationIndex) 
+        @currentEnemy= dealer.nextEnemy 
+        
+        @gameState.next(@turns, spaceStations.length)
+      end
     end
     
     def mountShieldBooster(i)
@@ -83,7 +101,7 @@ module Deepspace
     end
     
     def nextTurn
-      #próxima práctica
+      if @ga
     end
     
     private
