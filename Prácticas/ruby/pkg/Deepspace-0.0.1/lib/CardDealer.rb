@@ -75,7 +75,7 @@ class CardDealer
         @suppliesPackages.add(SuppliesPackage.new(40,100,40))
         @suppliesPackages.add(SuppliesPackage.new(100,100,100))
         
-        @suppliesPackage.add(SuppliesPackage.new(0.0, 0.0, 0.0))
+        @suppliesPackages.add(SuppliesPackage.new(0.0, 0.0, 0.0))
     end
     
     def createWeapons() 
@@ -122,7 +122,7 @@ class CardDealer
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",3.0,2))
        @shieldBoosters.add(ShieldBooster.new("Escudo normal",4.0,2))
        
-       @shieldBooosters.add(ShieldBooster.new("Ghostbooster", 0.0, 3))
+       @shieldBoosters.add(ShieldBooster.new("Ghostbooster", 0.0, 3))
     end
                                
     def createHangars() 
@@ -136,7 +136,7 @@ class CardDealer
         @hangars.add(Hangar.new(1))
         @hangars.add(Hangar.new(1))
         
-        @hangar.add(Hangar.new(5))
+        @hangars.add(Hangar.new(5))
     end
     
     def createEnemies() 
@@ -194,7 +194,7 @@ class CardDealer
         
         @enemies.add(EnemyStarShip.new("Enemigo imposible",500,500,goodLoot,hardSpecificDamage0));              
         
-        @enemies.add(EnemyStarship.new("Antonio", 0, 400, my_loot, my_specific_damage))
+        @enemies.add(EnemyStarShip.new("Antonio", 0, 400, my_loot, my_specific_damage))
         @enemies.add(EnemyStarShip.new("Antonio", 400, 0, my_loot, my_numeric_damage))
     end
 end # class

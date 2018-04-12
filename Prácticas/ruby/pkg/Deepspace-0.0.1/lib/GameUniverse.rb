@@ -1,6 +1,12 @@
 # Author: Elena Merelo
 
-require_relative "GameUniverseToUI"
+require_relative 'Dice'
+require_relative 'GameStateController'
+require_relative 'GameUniverseToUI'
+require_relative 'CardDealer'
+require_relative 'SpaceStation'
+require_relative 'CombatResult'
+require_relative 'GameCharacter'
 
 module Deepspace
   class GameUniverse
@@ -20,7 +26,7 @@ module Deepspace
       if(@dice.firstShot == GameCharacter::ENEMYSTARSHIP)
         result= station.receiveShot(enemy.fire)
         
-        if result == ShotResul::RESIST
+        if result == ShotResult::RESIST
           result= enemy.receiveShot(station.fire)
           enemyWins= result == ShotResult::RESIST
         else
@@ -94,7 +100,7 @@ module Deepspace
     end
     
     def getUIversion
-      GameUniverseToUI.new(self)
+      GameUniverseToUI.new(@currentStation, @currentEnemy)
     end
     
     def haveAWinner
@@ -103,7 +109,6 @@ module Deepspace
     
     def init(names)
       if @gameState.state == GameState::CANNOTPLAY
-        spaceStations= []
         dealer= CardDealer.instance 
         
         for i in names
@@ -112,14 +117,14 @@ module Deepspace
           l= Loot.new(0, @dice.initWithNHangars, @dice.initWithNWeapons, @dice.initWithNShields, 0)
           station.setLoot(l)
           
-          spaceStations.add(station)
+          @spaceStations << station
         end
         
         @currentStationIndex= @dice.whoStarts(names.length) 
-        @currentStation= spaceStations.get(@currentStationIndex) 
+        @currentStation= @spaceStations.at(@currentStationIndex) 
         @currentEnemy= dealer.nextEnemy 
         
-        @gameState.next(@turns, spaceStations.length)
+        @gameState.next(@turns, @spaceStations.length)
       end
     end
     
@@ -136,18 +141,18 @@ module Deepspace
     end
     
     def nextTurn
-      if @gameState == GameState.AFTERCOMBAT
+      if @gameState == GameState::AFTERCOMBAT
         if @currentStation.validState
-          @currentStationIndex = (@currentStationIndex + 1)% spaceStations.length
+          @currentStationIndex = (@currentStationIndex + 1)% @spaceStations.length
           turns += 1
           
-          @currentStation= spaceStations.get(@currentStationIndex)
+          @currentStation= @spaceStations.at(@currentStationIndex)
           @currentStation.cleanUpMountedItems
           
           dealer= CardDealer.instance
           @currentEnemy= dealer.nextEnemy
           
-          @gameState.next(turns, spaceStations.length)
+          @gameState.next(turns, @spaceStations.length)
           
           return true
         end

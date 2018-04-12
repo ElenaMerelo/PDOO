@@ -160,23 +160,23 @@ module Deepspace
     def setLoot(loot)
       dealer= CardDealer.instance
       
-      if loot.getNHangars > 0 
-        receiceHangar(dealer.nextHangar)
+      if loot.nHangars > 0 
+        receiveHangar(dealer.nextHangar)
       end
       
-      for i in 0..loot.getNSupplies
+      for i in 0..loot.nSupplies
         receiveSupplies(dealer.nextSuppliesPackage)
       end
       
-      for i in 0..loot.getNWeapons
+      for i in 0..loot.nWeapons
         receiveWeapon(dealer.nextWeapon)
       end
       
-      for i in 0..loot.getNShields
+      for i in 0..loot.nShields
         receiveShieldBooster(dealer.nextShieldBooster)
       end
       
-      @nMedals += loot.getNMedals
+      @nMedals += loot.nMedals
     end
 
     def setPendingDamage(d)

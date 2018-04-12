@@ -1,6 +1,7 @@
 # By Elena Merelo
 
 require_relative "EnemyToUI"
+require_relative 'ShotResult'
 
 module Deepspace
   class EnemyStarShip
