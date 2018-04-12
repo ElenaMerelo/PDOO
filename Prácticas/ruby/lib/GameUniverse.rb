@@ -38,7 +38,7 @@ module Deepspace
       end
       
       if enemyWins
-        moves= @dice.spaceStationMoves(station.speed)
+        moves= @dice.spaceStationMoves(station.getSpeed)
         
         if !moves
           station.setPendingDamage(enemy.damage)

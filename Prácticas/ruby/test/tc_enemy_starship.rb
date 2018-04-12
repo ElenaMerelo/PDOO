@@ -48,15 +48,17 @@ module Deepspace
       assert_equal @es1.ammoPower, @es3.ammoPower, "es1.ammoPower != es3.ammoPower"
       assert_equal @es1.shieldPower, @es3.shieldPower, "es1.shieldPower != es3.shieldPower"
       assert_equal @es1.loot, @es3.loot, "@es1.loot != es3.loot"
-      assert_equal @es1.damage, @es3.damage, "@es1.damage != es3.damage"
+      assert_equal @es1.damage.nWeapons, @es3.damage.nWeapons, "@es1.damage.nWeapons != es3.damage.nWeapons"
+      assert_equal @es1.damage.nShields, @es3.damage.nShields, "@es1.damage.nShields != es3.damage,nShields"
     end
-
+    
     def test_inititialize_es4
       assert_equal @es2.name, @es4.name, "es2.name != es4.name"
       assert_equal @es2.ammoPower, @es4.ammoPower, "es2.ammoPower != es4.ammoPower"
       assert_equal @es2.shieldPower, @es4.shieldPower, "es2.shieldPower != es4.shieldPower"
       assert_equal @es2.loot, @es4.loot, "@es2.loot != es4.loot"
-      assert_equal @es2.damage, @es4.damage, "@es2.damage != es4.damage"
+      assert_equal @es2.damage.weapons, @es4.damage.weapons, "@es2.damage.weapons != es4.damage.weapons"
+      assert_equal @es2.damage.nShields, @es4.damage.nShields, "@es1.damage.nShields != es3.damage.nShields"
     end
 
     def test_responses
