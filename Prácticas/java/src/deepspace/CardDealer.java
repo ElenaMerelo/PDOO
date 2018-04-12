@@ -225,7 +225,8 @@ class CardDealer {
         
         enemies.add(new EnemyStarShip("Enemigo imposible",500,500,goodLoot,hardSpecificDamage0)); 
         
-        enemies.add(new EnemyStarShip("Luffy", 150, 150, my_loot, my_specific_damage));
+        enemies.add(new EnemyStarShip("Antonio", 0, 400, my_loot, my_specific_damage));
+        enemies.add(new EnemyStarShip("Antonio", 400, 0, my_loot, my_numeric_damage));
     }
 }
 

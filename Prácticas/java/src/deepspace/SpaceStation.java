@@ -151,10 +151,7 @@ class SpaceStation {
     }
     
     public void move(){
-        if(fuelUnits - fuelUnits*getSpeed() <= 0)
-            fuelUnits= 0;
-        else
-            fuelUnits -= fuelUnits*getSpeed();
+        fuelUnits -= fuelUnits*getSpeed();
     }
     
     public boolean validState(){
