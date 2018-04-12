@@ -45,19 +45,10 @@ module Deepspace
     end
     
     def discardWeapon(w)
-      if @weapons != nil
-        index= 0
-        for i in @weapons #es un vector de weaponType
-          if i == w.type
-            @weapons.delete_at(index)
-            break
-          end
-          index += 1
-        end
+      if @weapons == nil && @nWeapons > 0
+        @nWeapons -= 1
       else
-        if @nWeapons > 0
-          @nWeapons -= 1
-        end
+        @weapons.delete_at(@weapons.index(w.type))
       end
     end
     
@@ -68,11 +59,7 @@ module Deepspace
     end
     
     def hasNoEffect
-      if @weapons == nil
-        @nWeapons == 0 && @nShields == 0
-      else
-         @weapons.length == 0  && @nShields == 0
-      end
+      @nWeapons == 0 && @nShields == 0 && (@weapons == nil or @weapons.empty? == true)
     end
     
     def to_s

@@ -34,10 +34,10 @@ module Deepspace
 
     def discardShieldBooster(i)
       if i>= 0 && i< @shieldBoosters.length
-        s= @shieldBoosters.remove(i)
+        @shieldBoosters.delete_at(i)
         
         if @pendingDamage != nil
-          @pendingDamage.discardShieldBooster s
+          @pendingDamage.discardShieldBooster
           cleanPendingDamage
         end
       end
@@ -51,10 +51,10 @@ module Deepspace
 
     def discardWeapon(i)
       if i>= 0 && i< @weapons.length
-        w= @weapons.delete(i)
+        w= @weapons.delete_at(i)
         
         if @pendingDamage != nil
-          @pendingDamage.discardWeapon w
+          @pendingDamage.discardWeapon(w)
           cleanPendingDamage
         end
       end
@@ -76,7 +76,7 @@ module Deepspace
       @ammoPower*factor
     end
 
-    def speed
+    def getSpeed
       @fuelUnits.to_f/@@MAXFUEL
     end
 
@@ -88,7 +88,7 @@ module Deepspace
       if @hangar != nil
         success= @hangar.removeShieldBooster(i)
         if success != nil
-          @shieldBoosters.push(success)
+          @shieldBoosters << success
         end
       end
     end
@@ -103,7 +103,7 @@ module Deepspace
     end
 
     def move
-        @fuelUnits -= @fuelUnits*self.speed
+        @fuelUnits -= @fuelUnits.to_f*getSpeed
     end
 
     def protection
@@ -135,11 +135,11 @@ module Deepspace
         @shieldPower -= @@SHIELDLOSSPERUNITSHOT*shot
         @shieldPower= [0.0, @shieldPower].max
         
-        return ShotResult::RESIST
+        ShotResult::RESIST
         
       else 
         @shieldPower= 0.0
-        return ShotResult::DONOTRESIST
+        ShotResult::DONOTRESIST
       end
     end
 
@@ -197,7 +197,7 @@ module Deepspace
     end
 
     def cleanPendingDamage
-      if pendingDamage.hasNoEffect
+      if @pendingDamage.hasNoEffect && @pendingDamage != nil
         @pendingDamage= nil
       end
     end

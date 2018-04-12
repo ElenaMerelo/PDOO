@@ -187,12 +187,12 @@ module Deepspace
       assert_empty @ss1.hangar.shieldBoosters, "empty != @ss1.hangar.shieldBoosters"
     end
     
-    def test_speed
-      assert_equal @ss1.fuelUnits/100, @ss1.speed, "0.022 != @ss1.speed"
+    def test_getSpeed
+      assert_equal @ss1.fuelUnits/100, @ss1.getSpeed, "0.022 != @ss1.speed"
     end
     
     def test_move
-      assert_equal @ss1.fuelUnits - @ss1.speed*@ss1.fuelUnits, @ss1.move, "@ss1.fuelUnits - @ss1.speed != @ss1.move"
+      assert_equal @ss1.fuelUnits - @ss1.getSpeed*@ss1.fuelUnits, @ss1.move, "@ss1.fuelUnits - @ss1.speed != @ss1.move"
     end
     
     def test_valid_state

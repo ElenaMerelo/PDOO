@@ -11,7 +11,11 @@ module Deepspace
     end
     
     def self.newCopy(h)
-      new(h.maxElements)
+      copy= Hangar.new(h.maxElements)
+      
+      h.weapons.each { |w| copy.weapons.push(Weapon.new(w)) }
+      
+      h.shieldBoosters.each { |s| copy.shieldBoosters.push(ShieldBooster.new(s)) }
     end
     
     def getUIversion
