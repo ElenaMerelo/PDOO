@@ -16,12 +16,47 @@ module Deepspace
       @currentEnemy= nil
     end
     
-    def combat(station, enemy)
-      #próxima práctica
+    def combatGo(station, enemy)
+      if(@dice.firstShot == GameCharacter::ENEMYSTARSHIP)
+        result= station.receiveShot(enemy.fire)
+        
+        if result == ShotResul::RESIST
+          result= enemy.receiveShot(station.fire)
+          enemyWins= result == ShotResult::RESIST
+        else
+          enemyWins= true
+        end
+      else
+        result= enemy.receiveShot(station.fire)
+        enemyWins= result == ShotResult::RESIST
+      end
+      
+      if enemyWins
+        moves= @dice.spaceStationMoves(station.speed)
+        
+        if !moves
+          station.setPendingDamage(enemy.damage)
+          combatResult= CombatResult::ENEMYWINS 
+        else
+          station.move 
+          combatResult= CombatResult::STATIONESCAPES
+        end
+      else
+        station.setLoot(enemy.loot)
+        combatResult= CombatResult::STATIONWINS
+      end
+      
+      @gameState.next(@turns, @spaceStations.length)
+      combatResult
     end
     
     def combat
-      #próxima práctica
+      state= @gameState.state
+      if state == GameState::BEFORECOMBAT or state == GameState::INIT
+        combatGo(@currentStation, @currentEnemy)
+      else 
+        CombatResult.NOCOMBAT
+      end
     end
     
     def discardHangar
@@ -101,7 +136,24 @@ module Deepspace
     end
     
     def nextTurn
-      if @ga
+      if @gameState == GameState.AFTERCOMBAT
+        if @currentStation.validState
+          @currentStationIndex = (@currentStationIndex + 1)% spaceStations.length
+          turns += 1
+          
+          @currentStation= spaceStations.get(@currentStationIndex)
+          @currentStation.cleanUpMountedItems
+          
+          dealer= CardDealer.instance
+          @currentEnemy= dealer.nextEnemy
+          
+          @gameState.next(turns, spaceStations.length)
+          
+          return true
+        end
+        return false
+      end
+      return false
     end
     
     private

@@ -103,11 +103,7 @@ module Deepspace
     end
 
     def move
-      if @fuelUnits - @fuelUnits*self.speed > 0
         @fuelUnits -= @fuelUnits*self.speed
-      else
-        @fuelUnits= 0
-      end
     end
 
     def protection
