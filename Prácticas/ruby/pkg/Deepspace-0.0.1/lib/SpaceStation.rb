@@ -38,7 +38,7 @@ module Deepspace
         
         if @pendingDamage != nil
           @pendingDamage.discardShieldBooster
-          self.cleanPendingDamage
+          cleanPendingDamage
         end
       end
     end
@@ -55,7 +55,7 @@ module Deepspace
         
         if @pendingDamage != nil
           @pendingDamage.discardWeapon(w)
-          self.cleanPendingDamage
+          cleanPendingDamage
         end
       end
     end

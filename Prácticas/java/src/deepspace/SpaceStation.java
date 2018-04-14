@@ -84,7 +84,7 @@ class SpaceStation {
      * referencia al mismo a null.
      */
     private void cleanPendingDamage(){
-        if(pendingDamage.hasNoEffect())
+        if(pendingDamage.hasNoEffect() && pendingDamage != null)
             pendingDamage= null;
     }
     
@@ -121,19 +121,19 @@ class SpaceStation {
     }
     
     public void mountWeapon(int i){
-        Weapon w= new Weapon("w", null, 0);
-        if(hangar != null || !hangar.getWeapons().isEmpty())
-            w= hangar.removeWeapon(i);
+        if(hangar != null && !hangar.getWeapons().isEmpty()){
+            Weapon w= hangar.removeWeapon(i);
             if(w != null)
                 weapons.add(w);
+        }
     }
     
     public void mountShieldBooster(int i){
-        ShieldBooster sb= new ShieldBooster("sb", 0.0f, 0);
-        if(hangar != null || !hangar.getShieldBoosters().isEmpty())
-            sb= hangar.removeShieldBooster(i);
+        if(hangar != null && !hangar.getShieldBoosters().isEmpty()){
+            ShieldBooster sb= hangar.removeShieldBooster(i);
             if(sb != null)
                 shieldBoosters.add(sb);
+        }
     }
     
     public void discardWeaponInHangar(int i){
@@ -155,7 +155,7 @@ class SpaceStation {
     }
     
     public boolean validState(){
-        return pendingDamage == null || pendingDamage.hasNoEffect() == true;
+        return pendingDamage == null || pendingDamage.hasNoEffect();
     }
     
     public void cleanUpMountedItems(){

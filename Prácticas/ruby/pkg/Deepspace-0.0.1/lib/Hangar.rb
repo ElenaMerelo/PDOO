@@ -39,11 +39,7 @@ module Deepspace
     end
     
     def removeWeapon(w)
-      if w >= 0 && w < @weapons.length
-        @weapons.delete_at(w)
-      else
-        nil
-      end
+       @weapons.delete_at(w)
     end
     
     def addShieldBooster(s)
@@ -56,15 +52,11 @@ module Deepspace
     end
     
     def removeShieldBooster(s)
-      if s >= 0 && s< @shieldBoosters.length
-        @shieldBoosters.delete_at(s)
-      else
-        nil
-      end
+       @shieldBoosters.delete_at(s)
     end
     
     def to_s
-      "maxElements #{@maxElements}, weapons #{@weapons.join(", ")}, shieldBoosters #{@shieldBoosters.join(", ")}"
+      "Hangar: maxElements #{@maxElements}, weapons #{@weapons.join(", ")}, shieldBoosters #{@shieldBoosters.join(", ")}"
     end
     
     private

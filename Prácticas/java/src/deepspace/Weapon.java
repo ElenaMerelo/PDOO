@@ -55,7 +55,7 @@ class Weapon{
     }
     
     public String toString(){
-        return name + " " + type + " " + uses;
+        return "Arma " + name + " " + type + " " + uses;
     }
     
     WeaponToUI getUIversion(){
