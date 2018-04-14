@@ -38,7 +38,7 @@ module Deepspace
         
         if @pendingDamage != nil
           @pendingDamage.discardShieldBooster
-          cleanPendingDamage
+          self.cleanPendingDamage
         end
       end
     end
@@ -55,7 +55,7 @@ module Deepspace
         
         if @pendingDamage != nil
           @pendingDamage.discardWeapon(w)
-          cleanPendingDamage
+          self.cleanPendingDamage
         end
       end
     end
@@ -103,7 +103,7 @@ module Deepspace
     end
 
     def move
-        @fuelUnits -= @fuelUnits.to_f*getSpeed
+        @fuelUnits -= @fuelUnits.to_f*self.getSpeed
     end
 
     def protection

@@ -141,10 +141,10 @@ module Deepspace
     end
     
     def nextTurn
-      if @gameState == GameState::AFTERCOMBAT
+      if @gameState.state == GameState::AFTERCOMBAT
         if @currentStation.validState
           @currentStationIndex = (@currentStationIndex + 1)% @spaceStations.length
-          turns += 1
+          @turns += 1
           
           @currentStation= @spaceStations.at(@currentStationIndex)
           @currentStation.cleanUpMountedItems
@@ -152,7 +152,7 @@ module Deepspace
           dealer= CardDealer.instance
           @currentEnemy= dealer.nextEnemy
           
-          @gameState.next(turns, @spaceStations.length)
+          @gameState.next(@turns, @spaceStations.length)
           
           return true
         end

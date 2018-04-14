@@ -4,6 +4,7 @@ require_relative "HangarToUI"
 module Deepspace
   class Hangar
     attr_reader :maxElements, :weapons, :shieldBoosters
+    
     def initialize(capacity)
       @maxElements= capacity
       @weapons= Array.new
@@ -38,11 +39,15 @@ module Deepspace
     end
     
     def removeWeapon(w)
-      @weapons.delete_at(w)
+      if w >= 0 && w < @weapons.length
+        @weapons.delete_at(w)
+      else
+        nil
+      end
     end
     
     def addShieldBooster(s)
-      if spaceAvailable == true
+      if spaceAvailable == true 
         @shieldBoosters << s
         true
       else
@@ -51,7 +56,11 @@ module Deepspace
     end
     
     def removeShieldBooster(s)
-      @shieldBoosters.delete_at(s)
+      if s >= 0 && s< @shieldBoosters.length
+        @shieldBoosters.delete_at(s)
+      else
+        nil
+      end
     end
     
     def to_s

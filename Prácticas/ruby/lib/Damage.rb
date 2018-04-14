@@ -23,7 +23,7 @@ module Deepspace
         @weapons= nil
         @nWeapons= nw
       else
-        @nWeapons= 0
+        @nWeapons= nil
         @weapons= Array.new(w)
       end  
     end
@@ -59,7 +59,11 @@ module Deepspace
     end
     
     def hasNoEffect
-      @nWeapons == 0 && @nShields == 0 && (@weapons == nil or @weapons.empty? == true)
+      if @weapons == nil
+        @nWeapons == 0 and @nShields == 0
+      else
+        @weapons.empty? and @nShields == 0
+      end
     end
     
     def to_s
