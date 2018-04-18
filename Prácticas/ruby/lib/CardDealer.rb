@@ -75,7 +75,8 @@ class CardDealer
         @suppliesPackages.add(SuppliesPackage.new(40,100,40))
         @suppliesPackages.add(SuppliesPackage.new(100,100,100))
         
-        @suppliesPackages.add(SuppliesPackage.new(0.0, 0.0, 0.0))
+        @suppliesPackages.add(SuppliesPackage.new(20, 20 , 20))
+        #@suppliesPackages.add(SuppliesPackage.new(0.0, 0.0, 0.0))
     end
     
     def createWeapons() 
