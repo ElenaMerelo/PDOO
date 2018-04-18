@@ -24,7 +24,7 @@ class Damage {
         nShields= ns;
         
         if(w != null){
-            weapons= new ArrayList<WeaponType>(w);
+            weapons= new ArrayList<>(w);
             nWeapons= 0;
         }
         else{

@@ -31,28 +31,32 @@ public class GameUniverse {
         return gameState.getState();
     } 
     
+    private boolean correct_game_state(){
+        return gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT;
+    }
+    
     public void discardHangar(){
-        if(gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT)
+        if(correct_game_state())
             currentStation.discardHangar();
     }
     
     public void discardShieldBooster(int i){
-        if(gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT)
+        if(correct_game_state())
             currentStation.discardShieldBooster(i);
     }
     
     public void discardShieldBoosterInHangar(int i){
-        if(gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT)
+        if(correct_game_state())
             currentStation.discardShieldBoosterInHangar(i);
     } 
     
     public void discardWeapon(int i){
-        if(gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT)
+        if(correct_game_state())
             currentStation.discardWeapon(i);
     }
     
     public void discardWeaponInHangar(int i){
-        if(gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT)
+        if(correct_game_state())
             currentStation.discardWeaponInHangar(i);
     }
     
@@ -61,12 +65,12 @@ public class GameUniverse {
     }
     
     public void mountShieldBooster(int i){
-        if(gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT)
+        if(correct_game_state())
             currentStation.mountShieldBooster(i);
     }
     
     public void mountWeapon(int i){
-        if(gameState.getState() == GameState.INIT || gameState.getState() == GameState.AFTERCOMBAT)
+        if(correct_game_state())
             currentStation.mountWeapon(i);
     }
     
@@ -79,9 +83,10 @@ public class GameUniverse {
     CombatResult combat(SpaceStation station, EnemyStarShip enemy){
         boolean enemyWins;
         CombatResult combatResult;
+        ShotResult result;
         
         if(dice.firstShot() == GameCharacter.ENEMYSTARSHIP){
-            ShotResult result= station.receiveShot(enemy.fire());
+            result= station.receiveShot(enemy.fire());
             
             if(result == ShotResult.RESIST){
                 result= enemy.receiveShot(station.fire());
@@ -89,8 +94,10 @@ public class GameUniverse {
             }
             else enemyWins= true;  
         }
-        else
-            enemyWins= enemy.receiveShot(station.fire()) == ShotResult.RESIST;
+        else{
+            result= enemy.receiveShot(station.fire());
+            enemyWins= result == ShotResult.RESIST;
+        }
         
         if(enemyWins){
             boolean moves= dice.spaceStationMoves(station.getSpeed());

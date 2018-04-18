@@ -255,7 +255,7 @@ class SpaceStation {
      */
     public void discardShieldBooster(int i){
         if(i>= 0 && i< shieldBoosters.size()){
-            ShieldBooster s= shieldBoosters.remove(i);
+            shieldBoosters.remove(i);
             
             if(pendingDamage != null){
                 pendingDamage.discardShieldBooster();
