@@ -25,7 +25,7 @@ class Damage {
         
         if(w != null){
             weapons= new ArrayList<>(w);
-            nWeapons= 0;
+            nWeapons= -1;
         }
         else{
             weapons= null;
@@ -38,7 +38,7 @@ class Damage {
     }
     
     Damage(ArrayList<WeaponType> w, int s){
-        this(0, s, w);
+        this(-1, s, w);
     }
     
     Damage(Damage d){

@@ -23,7 +23,7 @@ module Deepspace
         @weapons= nil
         @nWeapons= nw
       else
-        @nWeapons= nil
+        @nWeapons= -1
         @weapons= Array.new(w)
       end  
     end
@@ -33,7 +33,7 @@ module Deepspace
     end
     
     def self.newSpecificWeapons(w1, s)
-      new(nil, s, w1)
+      new(-1, s, w1)
     end
     
     def self.newCopy(d)
