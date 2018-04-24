@@ -33,7 +33,7 @@ module Deepspace
     end
     
     def test_initialize_d4
-      assert_nil @d4.nWeapons, "0 != d4.nWeapons"
+      assert_equal -1, @d4.nWeapons, "-1 != d4.nWeapons"
       assert_equal 2, @d4.nShields, "2 != d4.nShields"
       
       index= 0
@@ -50,7 +50,7 @@ module Deepspace
     end
     
     def test_initialize_d8
-      assert_nil @d8.nWeapons, "0 != d8.nWeapons"
+      assert_equal -1, @d8.nWeapons, "-1 != d8.nWeapons"
       assert_equal 2, @d8.nShields, "2 != d8.nShields"
       
       index= 0
