@@ -41,10 +41,9 @@ module Deepspace
 =end
     def initWithNWeapons
       rng= @generator.rand
-      prob= 2*@NWEAPONSPROB
       if rng <= @NWEAPONSPROB
         1
-      elsif rng > @NWEAPONSPROB && rng <= prob
+      elsif rng > @NWEAPONSPROB && rng <= 2*@NWEAPONSPROB
         2
       else
         3

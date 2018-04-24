@@ -33,7 +33,7 @@ module Deepspace
     end
     
     def to_s
-      "Name #{@name}, power #{@type.power}, uses #{@uses}"
+      "Name #{@name}, type #{@type}, uses #{@uses}"
     end
     
     def getUIversion

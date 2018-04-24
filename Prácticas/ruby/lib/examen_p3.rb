@@ -8,14 +8,15 @@ require_relative "CardDealer"
 
 module TestP3
     class Examen
-      def principal
+      def self.principal
         #Ejercicio 2
         d= Deepspace::Dice.new
         prob=  [0, 0, 0]
         for i in 0..1000
-          if d.initWithNWeapons == 1
+          n= d.initWithNWeapons
+          if n == 1
             prob[0] += 1
-          elsif d.initWithNWeapons == 2
+          elsif n == 2
             prob[1] += 1
           else
             prob[2] += 1
@@ -34,7 +35,7 @@ module TestP3
         dealer= Deepspace::CardDealer.instance
         supplies= dealer.nextSuppliesPackage
         station= Deepspace::SpaceStation.new("station", supplies)
-        l2= Deepspace::Loot.new(0, 3, 2, 1, 0)
+        l2= Deepspace::Loot.new(0, 4, 2, 1, 0)
         station.setLoot(l2)
         
         o_station= Deepspace::SpaceStationToUI.new(station)
@@ -66,7 +67,6 @@ module TestP3
         puts o_station
       end
       
-      test= Examen.new
-      test.principal
+      test= Examen.principal
     end
 end

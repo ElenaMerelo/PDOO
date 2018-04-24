@@ -9,17 +9,18 @@ module Deepspace
      class Type
        attr_reader :power
        
-       def initialize (another_power)
-         @power= another_power
+       def initialize (p, n)
+         @power= p
+         @name= n
        end
        
        def to_s
-         "power #{@power}"
+         "Name #{@name}, power #{@power}"
        end
      end
 
-     LASER= Type.new(2.0)
-     MISSILE= Type.new(3.0)
-     PLASMA= Type.new(4.0)
+     LASER= Type.new(2.0, "LASER")
+     MISSILE= Type.new(3.0, "MISSILE")
+     PLASMA= Type.new(4.0, "PLASMA")
   end
 end
