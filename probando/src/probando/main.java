@@ -1,9 +1,9 @@
-package probando;
-
 /**
  *
  * @author elena
  */
+package probando;
+
 public class main {
     public static void main(String[] args) {
         persona p= new persona("1234Y", "elena");
@@ -17,8 +17,8 @@ public class main {
         System.out.println(profesor.get_n_personas());
         System.out.println(persona.get_n_personas());
         
-        pp.get_nombre();
-        pp.get_dni();
+        System.out.println(pp.asignatura);
+        System.out.println(pp.get_dni());
         pp.set_nombre("luis");
         pp.dni= "65432f";
         
@@ -30,6 +30,9 @@ public class main {
         
         persona nueva= new persona("1111", "t");
         System.out.println(nueva.hablar());
+        
+        System.out.println(p.get_planeta());
+        System.out.println(pp.get_planeta());
     }
     
 }

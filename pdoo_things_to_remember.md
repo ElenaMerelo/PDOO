@@ -251,7 +251,36 @@ todo.
 + Dependencia -- línea discontínua
 + Restricción de navegabilidad si la flechita pequeña va al final de la línea, si pone trabaja para > en mitad la navegabilidad es en ambos sentidos
 + Si no se indica nada la multiplicidad por defecto es 1
-+ Atributo de referencia son aquellos que no aparecen explícitamente en el diagrama de la clase, en su cajita, sino que se obtienen fijándonos en las relaciones de asociación con otras clases, por ejemplo si tenemos una clase barrio, un atributo de referencia será `private ArrayList<Ciudadano> ciudadanos`, si viene una flechita que va de Barrio a Ciudadano y pone la cardinalidad 1..*
++ Atributo de referencia son aquellos que no aparecen explícitamente en el diagrama de la clase, en su cajita, sino que se obtienen fijándonos en las relaciones de asociación con otras clases, por ejemplo si tenemos una clase barrio, un atributo de referencia será `private ArrayList<Ciudadano> ciudadanos`, si viene una flechita que va de Barrio a Ciudadano y pone la cardinalidad 1..* .
 
 
-  #
+# delete_at(position) en ruby
+
+Deletes the element at the specified index, returning that element, or nil if the index is out of range.
+
+~~~ruby
+a = %w( ant bat cat dog )
+a.delete_at(2)    #=> "cat"
+a                 #=> ["ant", "bat", "dog"]
+a.delete_at(99)   #=> nil
+~~~
+
+
+#Differences between interfaces and abstract classes java
++ `abstract` keyword is used to create an abstract class and it can be used with methods also whereas `interface` keyword is used to create interface and it can’t be used with methods.
+
++ Subclasses use `extends` keyword to extend an abstract class and **they need to provide implementation of all the declared methods in the abstract class unless the subclass is also an abstract class** whereas subclasses use `implements` keyword to implement interfaces and **should provide implementation for all the methods declared in the interface**.
+
++ Abstract classes can have methods with implementation whereas interface provides absolute abstraction and can’t have any method implementations.
+
++ Abstract classes can have constructors but interfaces can’t have constructors.
+
++ Abstract classes have all the features of a normal java class except that we can’t instantiate it. We can use abstract keyword to make a class abstract but **interfaces** are a completely different type and **can only have public static final constants and method declarations**.
+
++ Abstract classes methods can have access modifiers as public, private, protected, static but interface methods are implicitly public and abstract, we can’t use any other access modifiers with interface methods.
+
++ A subclass can extend only one abstract class but it can implement multiple interfaces.
+
++ Abstract classes can extend other classes and implement interfaces but interfaces can only extend other interfaces.
+
++ We can run an abstract class if it has main() method but we can’t run an interface because they can’t have main method implementation.

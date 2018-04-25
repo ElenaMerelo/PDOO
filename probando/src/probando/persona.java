@@ -8,6 +8,7 @@ public class persona {
     private static int n_personas= 0;
     protected String dni;
     private String nombre;
+    static String planeta= "Tierra";
     
     public persona(String d, String n){
         this.dni= d;
@@ -17,6 +18,10 @@ public class persona {
     
     static int get_n_personas(){
         return n_personas;
+    }
+    
+    public static String get_planeta(){
+        return planeta;
     }
     
     protected String get_nombre(){
