@@ -284,3 +284,226 @@ a.delete_at(99)   #=> nil
 + Abstract classes can extend other classes and implement interfaces but interfaces can only extend other interfaces.
 
 + We can run an abstract class if it has main() method but we can’t run an interface because they can’t have main method implementation.
+
++ Lo más importante, **si en una clase abstracta declaramos varios métodos abstractos, las clases que extienden dicha clase pueden implementarlos o no, mientras que si una clase "implementa" una interfaz ha de proveer una declaración de todos los métodos que en ella están.**
+
+
+> Interesting question in StackOverflow:
+
+A curious thing happens in Java when you use an abstract class to implement an interface: some of the interface's methods can be completely missing (i.e. neither an abstract declaration or an actual implementation is present), but the compiler does not complain.
+
+For example, given the interface:
+
+~~~java
+public interface IAnything {
+  void m1();
+  void m2();
+  void m3();
+}
+~~~
+
+the following abstract class gets merrily compiled without a warning or an error:
+
+~~~java
+public abstract class AbstractThing implements IAnything {
+  public void m1() {}
+  public void m3() {}
+}
+~~~
+
+Can you explain why?
+
+Several answers:
+
+That's fine. To understand the above, you have to understand the nature of abstract classes first. They are similar to interfaces in that respect. This is what Oracle say about this here.
+
+    Abstract classes are similar to interfaces. You cannot instantiate them, and they may contain a mix of methods declared with or without an implementation.
+
+So you have to think about what happens when an interface extends another interface. For example ...
+
+~~~java
+//Filename: Sports.java
+public interface Sports
+{
+   public void setHomeTeam(String name);
+   public void setVisitingTeam(String name);
+}
+
+//Filename: Football.java
+public interface Football extends Sports
+{
+   public void homeTeamScored(int points);
+   public void visitingTeamScored(int points);
+   public void endOfQuarter(int quarter);
+}
+~~~
+
+... as you can see, this also compiles perfectly fine. Simply because, just like an abstract class, an interface can NOT be instantiated. So, it is not required to explicitly mention the methods from its "parent". However, ALL the parent method signatures DO implicitly become a part of the extending interface or implementing abstract class. So, once a proper class (one that can be instantiated) extends the above, it WILL be required to ensure that every single abstract method is implemented.
+
+
+**That's because if a class is abstract, then by definition you are required to create subclasses of it to instantiate. The subclasses will be required (by the compiler) to implement any interface methods that the abstract class left out.**
+
+Following your example code, try making a subclass of AbstractThing without implementing the m2 method and see what errors the compiler gives you. It will force you to implement this method.
+
+## Herencia y polimorfismo
+
++ Por defecto en una interfaz los métodos son públicos
+
++ Si una clase que hereda de otra e implementa una interfaz y a su vez tiene clases hijas, las clases hijas no hace falta que rellenen los métodos de la interfaz, con que lo haga la clase en la que se pone el implements va, y desde las hijas se pueden llamar a dichos métodos, devolviéndose lo de la padre.
+
++ Sea por ejemplo la clase persona, que tiene una clase hija llamada alumno tal que cada una implementa el método hablar. Al ejecutar:
+
+~~~Java
+persona p4= new alumno("5432", "5432", "e", 1);
+System.out.println(p4.hablar());
+~~~~
+
+Se llama al hablar del hijo, aunque su tipo dinámico sea persona.
+
+Si ponemos:
+
+~~~Java
+persona p4= new persona("5432", "5432");
+System.out.println(((alumno)p4).hablar());
+~~~
+Da el siguiente error:
+~~~shell
+Exception in thread "main" java.lang.ClassCastException: probando.persona cannot be cast to probando.alumno
+	at probando.main.main(main.java:57)
+/home/elena/.cache/netbeans/8.2/executor-snippets/run.xml:53: Java returned: 1
+~~~
+
+Otra opción sería:
+
+~~~Java
+persona p4= new alumno("5432", "5432", "e", 1);
+System.out.println(((persona)p4).hablar());
+~~~
+
+Que llama al hablar de alumno.
+
+Si asignamos varios tipos dinámicos a la misma variable se queda con el último:
+
+~~~Java
+persona p4= new alumno("5432", "5432", "e", 1);
+p4= new persona("542", "432");
+System.out.println(p4.hablar());
+~~~
+
+Llama al hablar de persona.
+
+Teniendo en cuenta que buen_estudiante hereda de alumno:
+
+~~~java
+persona p4= new alumno("5432", "5432", "e", 1);
+persona p5= (buen_estudiante) p4;
+System.out.println(p4.hablar());
+System.out.println(p5.hablar());
+~~~
+
+Da el error `Exception in thread "main" java.lang.ClassCastException: probando.alumno cannot be cast to probando.buen_estudiante`
+
+Juntando los ejemplos anteriores, lo siguiente ejecutaría hablar desde alumno y hablar desde estudiante:
+
+~~~java
+persona p4= new alumno("5432", "5432", "e", 1);
+persona p5= new buen_estudiante("543", "543", "t3", 1, 0.0);
+System.out.println(((persona)p4).hablar());
+System.out.println(((alumno)p5).hablar());
+~~~
+
+Aunque no funcionaría:
+
+~~~Java
+persona p4= new alumno("5432", "5432", "e", 1);
+persona p5= new buen_estudiante("543", "543", "t3", 1, 0.0);
+System.out.println(((buen_estudiante)p4).hablar());
+System.out.println(((alumno)p5).hablar());
+~~~
+
+En definitiva: si declaramos una variable y como tipo estático ponemos una clase hija y de tipo dinámico su padre, da error al interpretarlo, antes incluso de compilar. Si una variable la creamos varias veces con distintos tipos dinámicos, se queda con la última llamada al constructor. A la hora de ejecutar, desde una clase hija se pueden hacer castings a clases que se encuentran por encima, no da errores de ningún tipo, pero al ejecutar ejecutará desde la clase de tipo dinámico. Dará error si hacemos casting desde una clase padre a una inferior.
+
+Al crear objetos mediante castings, dará error si intentamos hacer un casting de una clase padre a una hija, funcionará bien si hacemos casting de clase hija a clase padre, y ejecutará los métodos desde la clase que sea del tipo dinámico. Así, en el ejemplo de abajo no daría error al hacer casting y se llama a hablar desde alumno cuando se ejecuta `p6.hablar()`:
+
+~~~java
+persona p4= new alumno("5432", "5432", "e", 1);
+persona p5= new buen_estudiante("543", "543", "t3", 1, 0.0);
+System.out.println(((persona)p4).hablar());
+System.out.println(((alumno)p5).hablar());
+
+persona p6= (persona) p4;
+System.out.println(p6.hablar());
+~~~
+
+Por otro lado, si hacemos casting alumno a buen_estudiante da error (`Exception in thread "main" java.lang.ClassCastException: probando.alumno cannot be cast to probando.buen_estudiante`):
+
+~~~java
+persona p4= new alumno("5432", "5432", "e", 1);
+persona p5= new buen_estudiante("543", "543", "t3", 1, 0.0);
+System.out.println(((persona)p4).hablar());
+System.out.println(((alumno)p5).hablar());
+
+persona p6= (buen_estudiante) p4;
+System.out.println(p6.hablar());
+~~~
+
+Igualmente un casting de una clase hermana a otra da error, los castings solo compilan si son de clase hija a alguna superior.
+
+#### Otros casos
+
+~~~java
+// Animal > reptil y animal > ave, reptil y ave son clases hermanas
+Animal animal= new Animal();
+Reptil reptil = new Reptil();
+animal = reptil;  //ok
+reptil = animal; // da error en compilación al estar asignando a una clase hija su padre
+-------------------------------------------------------------------------
+Animal animal= new Animal();
+Reptil reptil = new Reptil();
+reptil = (Reptil) animal; //error en ejecución, se ejecutarán los métodos como si fuera reptil
+-------------------------------------------------------------------------
+Animal animal= new Reptil();
+Reptil reptil = new Reptil();
+reptil = animal; //Da error al interpretarlo, al ser el tipo estático de reptil hijo del de animal.
+~~~
+
+**No se puede convertir de una clase hija a una clase padre a la hora de crear objetos**. Veámoslo en nuestro ejemplo:
+
+~~~java
+persona p6= new persona("$325342", "gef");
+alumno a= new alumno("gtrew", "5432", "5432",1);
+
+p6= a;
+a= p6;
+System.out.println(p6.hablar());
+~~~
+
+Al ser alumno heredero de persona `a= p6` da error, dice que no puede convertir uno en otro. Al hacer `p6= a` el último tipo dinámico asignado a p6 es alumno, luego `p6.hablar()` se ejecutará desde alumno.
+
+El siguiente ejemplo ilustra la segunda parte de lo anterior:
+~~~java
+persona p6= new persona("5432", "persona");
+alumno a= new alumno("6543", "alumno", "5432",1);
+
+a= (alumno) p6;
+System.out.println(a.get_nombre());
+~~~
+
+No da error de compilación pero al ejecutar lo último devuelve alumno, que es el nombre de a, cuando debería devolver persona, porque se está haciendo el casting de una clase padre a una hija. Si se hace desde una hija a una padre no da error de ejecución:
+
+~~~java
+p3= new buen_estudiante("34", "buen estudiante", "54", 1, 4.5);
+persona p6= new persona("5432", "persona");
+alumno a= new alumno("6543", "alumno", "5432",1);
+
+a= (alumno) p3;
+System.out.println(a.get_nombre());
+~~~
+
+Imprime buen estudiante.
+
+
+
+
+
+#
