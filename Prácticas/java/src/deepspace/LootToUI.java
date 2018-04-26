@@ -1,10 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package deepspace;
 
 /**
  *
  * @author Profesor
  */
-
 public class LootToUI {
     private final int nSupplies;
     private final int nWeapons;
@@ -12,12 +16,18 @@ public class LootToUI {
     private final int nHangars;
     private final int nMedals;
 
+    private final boolean getEfficient;
+    private final boolean spaceCity;    
+    
     LootToUI(Loot l) {
         nSupplies=l.getNSupplies();
         nWeapons=l.getNWeapons();
         nShields=l.getNShields();
         nHangars=l.getNHangars();
         nMedals=l.getNMedals();
+        
+        getEfficient=l.getEfficient();
+        spaceCity=l.spaceCity();
     }  
 
     public int getnSupplies() {
@@ -39,6 +49,16 @@ public class LootToUI {
     public int getnMedals() {
         return nMedals;
     }
+
+    public boolean isGetEfficient() {
+        return getEfficient;
+    }
+
+    public boolean isSpaceCity() {
+        return spaceCity;
+    }
+    
+    
     
     
 }

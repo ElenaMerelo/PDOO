@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package deepspace;
 
 import java.util.ArrayList;
@@ -6,7 +11,6 @@ import java.util.ArrayList;
  *
  * @author Profesor
  */
-
 public class SpaceStationToUI {
     private String name;
     private int nMedals;
@@ -22,7 +26,7 @@ public class SpaceStationToUI {
     
     SpaceStationToUI(SpaceStation station) {
         weapons=new ArrayList();
-        shieldBoosters=new ArrayList(); 
+        shieldBoosters=new ArrayList();         
         
         name=station.getName();
         nMedals=station.getNMedals();
@@ -46,13 +50,16 @@ public class SpaceStationToUI {
         else {
             hangar=null;
         }
-            
+        
+        // MIGUEL: Añadido de  pendingDamage  y su consultor
+        
         Damage d = station.getPendingDamage();
         if (d != null) {
           pendingDamage = d.getUIversion();
         } else {
           pendingDamage = null;
         }
+            
     }
 
     public String getName() {
@@ -90,6 +97,4 @@ public class SpaceStationToUI {
     public DamageToUI getPendingDamage() {
         return pendingDamage;
     }
-    
-    
 }

@@ -19,7 +19,7 @@ public class HangarToUI {
     HangarToUI(Hangar h) {
         weapons=new ArrayList();
         shieldBoosters=new ArrayList(); 
-    
+        
         maxElements=h.getMaxElements();
         
         for (Weapon w:h.getWeapons()) {
