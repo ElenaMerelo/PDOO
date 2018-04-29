@@ -24,8 +24,9 @@ class establo { ... }
 ~~~
 
 # Módulos de ruby
-+ Permiten agrupar clases, constantes, trozos de código y métodos, los cuales pueden ejecutarse por otra clase o módulo o ejecutarse directamente
++ Permiten agrupar clases, constantes, trozos de código y métodos, los cuales pueden ejecutarse por otra clase o módulo o directamente
 + Pueden agrupar a otros módulos
+
 ~~~ruby
 module animales
   class leon
@@ -53,19 +54,10 @@ end
 ~~~
 
 # Uso de módulos de Ruby:
-• `require`: para indicar la ruta
-del fichero donde está el
-código que necesitamos
-cargar.
-• `require_relative`: si el
-fichero a cargar está en la
-carpeta actual.
-• `require*` solo si se utiliza el
-nombre de una clase de
-otro fichero.
-• `include` permite importar un
-módulo dentro de una
-clase.
++ `require`: para indicar la ruta del fichero donde está el código que necesitamos cargar.
++ `require_relative`: si el fichero a cargar está en la carpeta actual.
++ `require*` solo si se utiliza el nombre de una clase de otro fichero.
++ `include` permite importar un módulo dentro de una clase.
 
 ~~~Ruby
 module cronometro
@@ -85,6 +77,7 @@ rel.empezar
 ~~~
 
 #Especificadores de acceso java
+
 | Class | Package | Subclass | Subclass | World
            |       |         |(same pkg)|(diff pkg)|
 ————————————+———————+—————————+——————————+——————————+————————
@@ -100,13 +93,12 @@ private     |   +   |         |          |          |
 blank : not accessible
 
 # Especificadores de acceso ruby
-La visibilidad de las atributos de instancia, de clase y de instancia de la
-clase es privada en Ruby, mientas que la de las constantes es pública. No pueden cambiarse.
-• Por defecto los métodos son públicos.
-• Cuando un método es privado solo puede ser invocado sin un receptor
-explícito (tampoco self).
+La visibilidad de las atributos de instancia, de clase y de instancia de la clase es privada en Ruby, mientas que la de las constantes es pública. No pueden cambiarse.
 
-In Ruby, the inheritance hierarchy or the package/module don't really enter into the equation, it is rather all about which object is the receiver of a particular method call. When a method is declared private in Ruby, it means this method can never be called with an explicit receiver. Any time we're able to call a private method with an implicit receiver it will always succeed. This means **we can call a private method from within a class it is declared in as well as all subclasses of this class** e.g.
+Por defecto los métodos son públicos. Cuando un método es privado solo puede ser invocado sin un receptor explícito (tampoco self).
+
+In Ruby, the inheritance hierarchy or the package/module don't really enter into the equation, it is rather all about which object is the receiver of a particular method call. **When a method is declared private in Ruby, it means this method can never be called with an explicit receiver**. Any time we're able to call a private method with an implicit receiver it will always succeed. This means **we can call a private method from within a class it is declared in as well as all subclasses of this class.** For instance:
+
 ~~~ruby
 class A
   def main_method
@@ -226,11 +218,6 @@ a.rb:39:in main_method': protected method `method1' called for #<B:0x7fe81d00efa
 In this case B.new is no longer the same type of object as self and so trying to call a protected method with B.new as the receiver – fails. So, I guess the inheritance hierarchy does actually play a role when it comes to access control in Ruby, it's just not as big a role as it is in a language like Java.
 
 Public methods are – of course – accessible with any kind of explicit or implicit receiver from anywhere (as the name implies).
-En definitiva:
->
-+ Private -- desde el propio objeto
-+ Protected -- desde el propio objeto y la propia clase
-+ Public -- desde el propio objeto, la propia clase y otra clase
 
 # Comparando objetos en Ruby
 
@@ -285,7 +272,7 @@ a.delete_at(99)   #=> nil
 
 + We can run an abstract class if it has main() method but we can’t run an interface because they can’t have main method implementation.
 
-+ Lo más importante, **si en una clase abstracta declaramos varios métodos abstractos, las clases que extienden dicha clase pueden implementarlos o no, mientras que si una clase "implementa" una interfaz ha de proveer una declaración de todos los métodos que en ella están.**
++ Lo más importante, **si en una clase abstracta declaramos varios métodos abstractos, las clases que extienden dicha clase pueden implementarlos o no, mientras que si una clase "implementa" una interfaz ha de proveer una declaración de todos los métodos que en ella están.** Además, en las clases abstractas podemos poner atributos de instancia, en las interfaces no.
 
 
 > Interesting question in StackOverflow:
@@ -302,7 +289,7 @@ public interface IAnything {
 }
 ~~~
 
-the following abstract class gets merrily compiled without a warning or an error:
+The following abstract class gets merrily compiled without a warning or an error:
 
 ~~~java
 public abstract class AbstractThing implements IAnything {
@@ -315,7 +302,7 @@ Can you explain why?
 
 Several answers:
 
-That's fine. To understand the above, you have to understand the nature of abstract classes first. They are similar to interfaces in that respect. This is what Oracle say about this here.
+That's fine. To understand the above, you have to understand the nature of abstract classes first. They are similar to interfaces in that respect. This is what Oracle says about this:
 
     Abstract classes are similar to interfaces. You cannot instantiate them, and they may contain a mix of methods declared with or without an implementation.
 
@@ -358,7 +345,7 @@ persona p4= new alumno("5432", "5432", "e", 1);
 System.out.println(p4.hablar());
 ~~~~
 
-Se llama al hablar del hijo, aunque su tipo dinámico sea persona.
+Se llama al hablar del hijo, alumno, aunque su tipo dinámico sea persona.
 
 Si ponemos:
 
@@ -412,7 +399,7 @@ System.out.println(((persona)p4).hablar());
 System.out.println(((alumno)p5).hablar());
 ~~~
 
-Aunque no funcionaría:
+Aunque no funcionaría el hacer un casting de alumno a buen_estudiante:
 
 ~~~Java
 persona p4= new alumno("5432", "5432", "e", 1);
@@ -460,7 +447,7 @@ reptil = animal; // da error en compilación al estar asignando a una clase hija
 -------------------------------------------------------------------------
 Animal animal= new Animal();
 Reptil reptil = new Reptil();
-reptil = (Reptil) animal; //error en ejecución, se ejecutarán los métodos como si fuera reptil
+reptil = (Reptil) animal; //error en ejecución, se ejecutarán los métodos como si fuera animal, que es su tipo dinámico
 -------------------------------------------------------------------------
 Animal animal= new Reptil();
 Reptil reptil = new Reptil();
@@ -502,8 +489,15 @@ System.out.println(a.get_nombre());
 
 Imprime buen estudiante.
 
+# Visibilidad Java
 
++ Basically, `private` hides from other classes within the package, `public` exposes to classes outside the package and `protected` is a version of public restricted only to subclasses.
 
++ En resumen: `protected` se puede usar por una clase y subclases suyas ya sea desde el mismo paquete o distinto, es como public para las subclases, `public` desde todos lados, `default` desde la propia clase y subclases que estén en el mismo paquete y privado únicamente desde la propia clase en la que está declarado el método o atributo.
 
++ Se pueden pasar como parámetros cosas en plan test.visibilidad siempre que:
+  + el atributo al que referencian no sea privado
+  + Si la visibilidad del atributo es protegido o paquete se puede si están en el mismo paquete.
+  + si es público siempre
 
 #
