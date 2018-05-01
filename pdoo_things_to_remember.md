@@ -76,17 +76,12 @@ rel.mostrarHora
 rel.empezar
 ~~~
 
-#Especificadores de acceso java
+# Especificadores de acceso java
 
-| Class | Package | Subclass | Subclass | World
-           |       |         |(same pkg)|(diff pkg)|
-————————————+———————+—————————+——————————+——————————+————————
+Class | Package | Subclass | Subclass (same pkg) | Subclass (diff pkg) | World
 public      |   +   |    +    |    +     |     +    |   +     
-————————————+———————+—————————+——————————+——————————+————————
 protected   |   +   |    +    |    +     |     +    |         
-————————————+———————+—————————+——————————+——————————+————————
 no modifier |   +   |    +    |    +     |          |    
-————————————+———————+—————————+——————————+——————————+————————
 private     |   +   |         |          |          |    
 
 + : accessible
@@ -489,6 +484,72 @@ System.out.println(a.get_nombre());
 
 Imprime buen estudiante.
 
++ Si desde una instancia de una clase se llama a un método de clase, se imprimirá el de la clase correspondiente al tipo estático. Así por ejemplo si tenemos en un fichero llamado `Padre.java`:
+
+~~~Java
+package polimorfismo;
+
+
+public class Padre {
+
+    public void deInstancia() {
+        System.out.println("Desde el padre. Instancia");
+    }
+
+    public static void deClase() {
+        System.out.println("Desde el padre. Clase");
+    }    
+
+}
+~~~
+Y en otro llamado `Hija.java`:
+
+~~~java
+package polimorfismo;
+
+
+public class Hija extends Padre{
+
+    @Override
+    public void deInstancia() {
+        System.out.println("Desde la hija. Instancia");
+    }
+
+    public static void deClase() {
+        System.out.println("Desde la hija. Clase");
+    }   
+
+}
+~~~
+
+Y ejecutamos:
+
+~~~java
+package polimorfismo;
+
+
+public class Polimorfismo {
+    public static void main(String[] args) {  
+        Padre p1=new Padre();
+        p1.deInstancia(); //Desde el padre. instancia
+        Hija h1=new Hija();
+        h1.deInstancia(); //desde la hija. instancia
+        Padre p2=new Hija();
+        p2.deInstancia(); //desde la hija.instancia
+
+        Padre.deClase(); //desde el padre.clase
+        Hija.deClase();  //desde la hija.clase
+
+        //Recordad que no se debe hacer lo siguiente
+        //Quiero mostrar que a nivel de clase las cosas no funcionan igual
+        p1.deClase(); //desde el padre.clase
+        h1.deClase(); //desde la hija. clase
+        p2.deClase(); //desde el padre.clase      
+    }  
+}
+~~~
+`p1.deInstancia()` imprime "desde el padre. instancia", `h1.deInstancia()` "desde la hija.instancia", como es normal. Por otro lado `p2.deInstancia()` imprime "desde la hija. instancia", al ser Hija su tipo dinámico. `Padre.deClase()` e `Hija.deClase()` imprimen lo que podría esperarse, lo curioso es cuando llamas desde p1 al método `deClase()`, que ejecuta al mismo, pero ahora fijándose en el tipo estático, por ello `p2.deClase()` imprime "desde el padre. clase".
+
 # Visibilidad Java
 
 + Basically, `private` hides from other classes within the package, `public` exposes to classes outside the package and `protected` is a version of public restricted only to subclasses.
@@ -499,5 +560,87 @@ Imprime buen estudiante.
   + el atributo al que referencian no sea privado
   + Si la visibilidad del atributo es protegido o paquete se puede si están en el mismo paquete.
   + si es público siempre
+
+# super en ruby
+
+Sea el siguiente fichero:
+
+~~~ruby
+class Elem
+	def metodo2
+		puts "Elem2"
+	end
+end
+
+class Padre
+	def metodo
+		puts "Padre"
+		#La siguiente línea es importante para que funcione la siguiente comentada
+		return Elem.new
+	end
+
+	def metodo2
+		puts "Padre2"
+	end
+end
+
+class Hijo<Padre
+	def metodo
+		puts "Hijo"
+		###Un ejemplo en Ruby usando APARENTE sintaxis Java.
+		super.metodo2
+	end
+
+	def metodo2
+		puts "Hijo2"
+	end
+
+end
+
+Hijo.new.metodo
+~~~
+
+Al ejecutarlo, contrario a lo que podríamos pensar, devuelve
+
+~~~shell
+Hijo
+Padre
+Elem2
+~~~
+
+No da pues error al compilarlo pero sí al ejecutarlo, no hace lo que debiera, que es imprimir "Padre2", sino que simplemente llama a `metodo` de `Padre` después de llamar al de `Hijo`, y no imprime Hijo, Padre2. Si quitamos el `super` ejecuta el `metodo2` de `Hijo`:
+
+~~~sh
+Hijo
+Hijo2
+~~~
+
+Con poner `super` bastaría para que llamara a `metodo` de la clase padre. La única manera de llamar a un método de la clase padre desde otro método de la clase hija que no tenga el mismo nombre es haciendo un alias o un binding:
+
+~~~ruby
+class Parent
+    def method
+    end
+end
+
+class Child < Parent
+    alias_method :parent_method, :method
+    def method
+        super
+    end
+
+    def other_method
+        parent_method
+        #OR
+        Parent.instance_method(:method).bind(self).call
+    end
+end
+~~~
+
+
+
+
+
+
 
 #
