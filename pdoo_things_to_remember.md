@@ -79,9 +79,9 @@ rel.empezar
 # Especificadores de acceso java
 
 Class | Package | Subclass | Subclass (same pkg) | Subclass (diff pkg) | World
-public      |   +   |    +    |    +     |     +    |   +     
-protected   |   +   |    +    |    +     |     +    |         
-no modifier |   +   |    +    |    +     |          |    
+public | +| + | + | + | +     
+protected | + | + | + | + |         
+no modifier | + | + | + | - |    
 private     |   +   |         |          |          |    
 
 + : accessible
@@ -248,7 +248,7 @@ a.delete_at(99)   #=> nil
 ~~~
 
 
-#Differences between interfaces and abstract classes java
+# Differences between interfaces and abstract classes java
 + `abstract` keyword is used to create an abstract class and it can be used with methods also whereas `interface` keyword is used to create interface and it can’t be used with methods.
 
 + Subclasses use `extends` keyword to extend an abstract class and **they need to provide implementation of all the declared methods in the abstract class unless the subclass is also an abstract class** whereas subclasses use `implements` keyword to implement interfaces and **should provide implementation for all the methods declared in the interface**.
@@ -325,13 +325,12 @@ public interface Football extends Sports
 
 **That's because if a class is abstract, then by definition you are required to create subclasses of it to instantiate. The subclasses will be required (by the compiler) to implement any interface methods that the abstract class left out.**
 
-Following your example code, try making a subclass of AbstractThing without implementing the m2 method and see what errors the compiler gives you. It will force you to implement this method.
 
 ## Herencia y polimorfismo
 
 + Por defecto en una interfaz los métodos son públicos
 
-+ Si una clase que hereda de otra e implementa una interfaz y a su vez tiene clases hijas, las clases hijas no hace falta que rellenen los métodos de la interfaz, con que lo haga la clase en la que se pone el implements va, y desde las hijas se pueden llamar a dichos métodos, devolviéndose lo de la padre.
++ Si una clase hereda de otra e implementa una interfaz y a su vez tiene clases hijas, las clases hijas no hace falta que rellenen los métodos de la interfaz, con que lo haga la clase en la que se pone el implements va, y desde las hijas se pueden llamar a dichos métodos, devolviéndose lo de la padre.
 
 + Sea por ejemplo la clase persona, que tiene una clase hija llamada alumno tal que cada una implementa el método hablar. Al ejecutar:
 
@@ -340,7 +339,7 @@ persona p4= new alumno("5432", "5432", "e", 1);
 System.out.println(p4.hablar());
 ~~~~
 
-Se llama al hablar del hijo, alumno, aunque su tipo dinámico sea persona.
+Se llama al hablar del hijo, alumno, aunque su tipo estático sea persona.
 
 Si ponemos:
 
@@ -383,7 +382,7 @@ System.out.println(p4.hablar());
 System.out.println(p5.hablar());
 ~~~
 
-Da el error `Exception in thread "main" java.lang.ClassCastException: probando.alumno cannot be cast to probando.buen_estudiante`
+Da el error `Exception in thread "main" java.lang.ClassCastException: probando.alumno cannot be cast to probando.buen_estudiante`, al ser su tipo dinámico padre de la clase desde la cual hacemos casting.
 
 Juntando los ejemplos anteriores, lo siguiente ejecutaría hablar desde alumno y hablar desde estudiante:
 
@@ -491,15 +490,25 @@ package polimorfismo;
 
 
 public class Padre {
+    static int c= 33;
+    private int a= 44;
+
+    Padre(int b){
+        a= b;
+        System.out.println("Constructor de padre");
+    }
 
     public void deInstancia() {
         System.out.println("Desde el padre. Instancia");
     }
 
     public static void deClase() {
-        System.out.println("Desde el padre. Clase");
-    }    
+        System.out.println("Desde el padre. Clase" + c);
+    }
 
+    public void llama_c(){
+        System.out.println(c + " desde padre");
+    }  
 }
 ~~~
 Y en otro llamado `Hija.java`:
@@ -507,18 +516,24 @@ Y en otro llamado `Hija.java`:
 ~~~java
 package polimorfismo;
 
-
 public class Hija extends Padre{
+  Hija(int p){
+      super(p);
+  }
 
-    @Override
-    public void deInstancia() {
-        System.out.println("Desde la hija. Instancia");
-    }
+  @Override
+  public void deInstancia() {
+      System.out.println("Desde la hija. Instancia");
+  }
 
-    public static void deClase() {
-        System.out.println("Desde la hija. Clase");
-    }   
+  public static void deClase() {
+      System.out.println("Desde la hija. Clase" + c);
+  }
 
+  public void llama_c(){
+      c++;
+      System.out.println(c + " desde hija");
+  }
 }
 ~~~
 
@@ -530,26 +545,182 @@ package polimorfismo;
 
 public class Polimorfismo {
     public static void main(String[] args) {  
-        Padre p1=new Padre();
-        p1.deInstancia(); //Desde el padre. instancia
-        Hija h1=new Hija();
-        h1.deInstancia(); //desde la hija. instancia
-        Padre p2=new Hija();
-        p2.deInstancia(); //desde la hija.instancia
+        Padre p1=new Padre(5);
+        p1.deInstancia();
+        Hija h1=new Hija(6);
+        h1.deInstancia();
+        Padre p2=new Hija(3);
+        p2.deInstancia();
 
-        Padre.deClase(); //desde el padre.clase
-        Hija.deClase();  //desde la hija.clase
+        Padre.deClase();
+        Hija.deClase();
 
         //Recordad que no se debe hacer lo siguiente
         //Quiero mostrar que a nivel de clase las cosas no funcionan igual
-        p1.deClase(); //desde el padre.clase
-        h1.deClase(); //desde la hija. clase
-        p2.deClase(); //desde el padre.clase      
+        p1.deClase();
+        h1.deClase();
+        p2.deClase();      
     }  
 }
 ~~~
-`p1.deInstancia()` imprime "desde el padre. instancia", `h1.deInstancia()` "desde la hija.instancia", como es normal. Por otro lado `p2.deInstancia()` imprime "desde la hija. instancia", al ser Hija su tipo dinámico. `Padre.deClase()` e `Hija.deClase()` imprimen lo que podría esperarse, lo curioso es cuando llamas desde p1 al método `deClase()`, que ejecuta al mismo, pero ahora fijándose en el tipo estático, por ello `p2.deClase()` imprime "desde el padre. clase".
+`p1.deInstancia()` imprime "desde el padre. instancia", `h1.deInstancia()` "desde la hija.instancia", como es normal. Por otro lado `p2.deInstancia()` imprime "desde la hija. instancia", al ser Hija su tipo dinámico. `Padre.deClase()` e `Hija.deClase()` imprimen lo que podría esperarse, "desde el padre. clase 33" y "desde la hija. clase 33" lo curioso es cuando llamas desde p1 al método `deClase()`, que ejecuta al mismo, pero ahora fijándose en el tipo estático, por ello `p2.deClase()` imprime "desde el padre. clase". Si implementamos constructor en la clase padre tenemos que hacer otro para hija, al no funcionar ya los de por defecto.
 
+Si ahora en la clase padre creamos el método:
+
+~~~java
+void otro_met(){
+    System.out.println("Desde padre");
+    deClase();
+}
+~~~
+
+Y lo llamamos desde hija con:
+
+~~~Java
+void met_propio(){
+    otro_met();
+}
+~~~
+
+Entonces imprimirá "Desde padre" seguido de "desde el padre. clase", es decir, `met_propio()` busca a `otro_met()` en la clase padre, y ejecuta `deClase()` también desde el padre, no como en ruby; supongamos que tenemos el siguiente fichero:
+
+~~~ruby
+class Padre
+  @@deClase=333
+
+  def hablaPadre()
+    puts "Soy el padre"
+  end
+
+  def dime(*interlocutores)
+    if (interlocutores!=nil)
+      puts interlocutores.to_s
+    end
+    puts "bla,bla"
+  end
+
+  def self.deClase #si no ponemos self da error
+    @@deClase
+  end
+
+  def habla
+    "Yo soy tu padre "
+  end
+
+  def otro_met
+    puts "Desde el padre "
+    habla
+  end
+
+  private
+  def privadoPadre()
+    puts "Privado en el padre"
+  end
+
+end
+
+class Hija < Padre
+
+#  alias_method :superHablaPadre, :hablaPadre
+#  alias :superHablaPadre :hablaPadre
+
+
+  def hablaPadre()
+    puts "Impersonando a mi padre:"
+    super
+  end
+
+  def self.deClase
+    @@deClase += 1
+  end
+
+  def hablaHijo()
+    puts "Mi padre diria: "
+    hablaPadre
+    #superHablaPadre
+    puts "y yo soy el hijo "+@@deClase.to_s
+  end
+
+  def habla
+    puts "Yo soy la hija"
+  end
+
+  def dime(*interlocutores)
+    puts "Estimados"
+    super
+    #super()
+    #super(interlocutores[0])
+  end
+
+  def privadoPadre()
+    puts "Llamo a un metodo privado de mi padre:"
+    super
+  end
+
+  def met_propio
+    otro_met
+  end
+
+end
+
+
+p=Padre.new
+h=Hija.new
+
+p.hablaPadre
+puts Padre.deClase #si lo llamamos con p.deClase da error
+puts "---"
+h.hablaPadre
+puts Hija.deClase
+puts Padre.deClase
+puts "---"
+h.hablaHijo
+puts "---"
+p.dime("ana","pepe","juan")
+h.dime("ana","pepe","juan")
+puts "---"
+h.privadoPadre
+
+puts "-------------"
+h.met_propio
+~~~
+
+Al ejecutarlo imprimiría:
+
+~~~sh
+Soy el padre
+333
+---
+Impersonando a mi padre:
+Soy el padre
+334
+334
+---
+Mi padre diria:
+Impersonando a mi padre:
+Soy el padre
+y yo soy el hijo 334
+---
+["ana", "pepe", "juan"]
+bla,bla
+Estimados
+["ana", "pepe", "juan"]
+bla,bla
+---
+Llamo a un metodo privado de mi padre:
+Privado en el padre
+-------------
+Desde el padre
+Yo soy la hija
+~~~
+
+Vemos así el hecho de que si tenemos un atributo de clase en la clase padre y lo modificamos desde la clase hija, se modifica en la clase padre. Es más, si en la clase hija al principio ponemos `@@deClase= 0`, en la segunda línea imprimiría 0, toma el último valor con el que se haya inicializado el atributo de clase, incluso aunque lo hayamos cambiado en hija y lo llamemos primero desde padre. También, a diferencia de java, al ejecutar `met_propio` de hija se va a `otro_met` de padre, pero luego `habla` lo vuelve a ejecutar desde la hija. No muy arriba hemos visto que haciendo lo equivalente en java el método de dentro de `otro_met` lo ejecuta desde el padre.
+
+Lo de que si redefinimos el atributo de clase en la clase hija se cambie inmediatamente en la clase padre es diferente en java; si pongo en `Hija` `static int c= 0` las veces que imprima c desde padre imprimirá 33 o lo que valga, y cuando lo haga desde hija imprimirá 0, y será ese el que vaya incrementando, no el c de padre.
+
+> En resumen, en java si tenemos un atributo de clase en la clase padre y creamos uno igual en la clase hija con otro valor, al llamarlo desde la clase padre usará el valor que tenga en ésta, y en la clase hija el valor que tenga ahí, mientras que en ruby se cambia en los dos, si creo un atributo de clase en la clase hija con el mismo nombre que en la clase padre, la de la clase padre pasa a tener el valor del de la clase hija, y cualquier modificación desde la clase hija afecta el de la padre, cosa que no ocurre en java, donde son independientes.
+
+>También si desde la clase hija ejecutamos un método que llama a un método de la clase padre y a su vez desde éste se llama a un método que está implementado en las dos clases, en java se tomará el del padre mientras que en ruby se tomará la definición que se da en la clase Hija del mismo.
 # Visibilidad Java
 
 + Basically, `private` hides from other classes within the package, `public` exposes to classes outside the package and `protected` is a version of public restricted only to subclasses.
@@ -637,10 +808,67 @@ class Child < Parent
 end
 ~~~
 
+# What is the question mark in Java Generics used for?
 
+This is a type wildcard. It is a little bit convoluted, but let me show some examples first.
 
+~~~java
+    List<String> strings = ...
+    List<Object> list = strings; // syntax error
+~~~
+You would expect this to work, but it doesn't. Although `String` is an `Object`, this relationship does not extend into generics. A list of one type is not a list of the other, their types are invariant.
 
+You can loosen this by using wildcards. You can allow the type parameter to accept subclasses by using `<? extends T>`, and you can allow the type parameter to accept superclasses by using `<? super T>`:
+~~~java
+    List<? extends Object> strings = new ArrayList<String>();
+    List<? extends Object> objects = new ArrayList<Object>();
+    // You can abbreviate <? extends Object> to simply <?>
 
+    List<? super String> strings2 = new ArrayList<String>();
+    List<? super String> objects2 = new ArrayList<Object>();
+~~~
+There is a price to pay for this flexibility:
+
+    when you use `<? extends T>`, you are restricted to use only the covariant (T producing) methods of the class;
+    when you use `<? super T>`, you are restricted to use only the contravariant (T consuming) methods of the class.
+
+What does it mean in practical terms? In the first case, you lose the ability to call consuming methods such as add :
+
+~~~java
+    objects.add(new Object()); // syntax error
+    Object object = objects.get(0);
+~~~
+In the second case, you lose the ability to call producing methods, such as get on the strings variable:
+
+~~~java
+    strings2.add("d");
+    String string = strings2.get(0); // syntax error
+~~~
+The typical use-cases for both are usually summarised as P.E.C.S. mnemonic: Producer Extends, Consumer Super. Here are two examples from the source code of the List interface:
+
+~~~java
+    default void sort(Comparator<? super E> c) { ... }
+    boolean addAll(Collection<? extends E> c);
+~~~
+In the first case, the comparator will consume the values we provide to give us a sorting order. If we skipped the wildcard, we would not be able to use an Object comparator on any lists of strings.
+~~~java
+    List<String> strings = ArrayList<>(Arrays.asList("a", "b", "c"));
+    Comparator<Object> comparator = (o1, o2) -> o1.hashCode() - o2.hashCode();
+    strings.sort(comparator); // works!
+~~~
+In the second case the collection will produce the values we are going to add to the list. If we skipped the wildcard, we would not be able to add any subclass objects to lists.
+
+~~~java
+    List<Number> numbers = ArrayList<>();
+    List<Integer> integers = Arrays.asList(1, 2, 3);
+    numbers.addAll(integers); // works!
+~~~
+What if you need to use something as both a producer and a consumer? In that case, you simply cannot use wildcards at all. For example, another method from List interface is:
+
+`default void replaceAll(UnaryOperator<E> operator) { ... }`
+Here, the operator will consume a value to produce another value. If we try to use extends, the operator will not be able to consume values we pass, and if we try to use super, the operator will not be able to produce values for us to use.
+
+From https://www.quora.com/What-is-the-question-mark-in-Java-Generics-used-for
 
 
 #
