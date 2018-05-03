@@ -187,8 +187,8 @@ class SpaceStation implements SpaceFighter{
     public float fire(){
         float factor= 1.0f;
         
-        for(int i= 0; i< weapons.size(); i++)
-          factor *= weapons.get(i).useIt();  
+        for(Weapon w: weapons)
+          factor *= w.useIt();  
         
         return ammoPower*factor;
     }
