@@ -8,13 +8,16 @@ package deepspace;
 
 class Loot {
     private int nSupplies, nWeapons, nShields, nHangars, nMedals;
+    private boolean getEfficient, spaceCity;
         
-    Loot(int supplies, int weapons, int shields, int hangars, int medals){
+    protected Loot(int supplies, int weapons, int shields, int hangars, int medals, boolean ef, boolean city){
         this.nSupplies= supplies;
         this.nWeapons= weapons;
         this.nShields= shields;
         this.nHangars= hangars;
         this.nMedals= medals;
+        this.getEfficient= ef;
+        this.spaceCity= city;
     }
 
     //Consultores 
@@ -36,6 +39,14 @@ class Loot {
 
     public int getNMedals(){
         return nMedals;
+    }
+    
+    public boolean getEfficient(){
+        return getEfficient;
+    }
+    
+    public boolean spaceCity(){
+        return spaceCity;
     }
     
     public String toString(){

@@ -4,7 +4,7 @@
  */
 package deepspace;
 
-class ShieldBooster{
+class ShieldBooster implements CombatElement{
     private String name;
     private float boost;
     private int uses;
@@ -28,6 +28,7 @@ class ShieldBooster{
         return boost;
     }
     
+    @Override
     public int getUses(){
         return uses;
     }
@@ -36,6 +37,7 @@ class ShieldBooster{
      * @brief Si el valor de uses es mayor que 0, lo decrementa en una unidad 
      * y devuelve el valor del atributo boost; devuelve el valor 1.0 en otro caso.
     */
+    @Override
     public float useIt(){
         if (uses > 0){
             uses--;

@@ -25,9 +25,22 @@ public abstract class Damage {
         return nShields;
     }
     
+    public void discardShieldBooster(){
+        if(nShields > 0)
+            nShields--;
+    }
+    
+    public boolean hasNoEffect(){
+        return nShields == 0;
+    }
+    
     public abstract DamageToUI getUIversion();
    
     public abstract Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s);
     
+    public abstract void discardWeapon(Weapon w);
+    
+    public abstract Damage copy(Damage d);
+
 
 }

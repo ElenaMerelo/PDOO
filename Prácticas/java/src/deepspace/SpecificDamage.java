@@ -11,46 +11,21 @@ import java.util.Collections;
 
 
 public class SpecificDamage extends Damage {
-    private int nWeapons;
     private ArrayList<WeaponType> weapons;
     
-    //Constructores
-    private Damage(int nw, int ns, ArrayList<WeaponType> w){
-        nShields= ns;
-        
-        if(w != null){
-            weapons= new ArrayList<>(w);
-            nWeapons= -1;
-        }
-        else{
-            weapons= null;
-            nWeapons= nw;
-        }
+    SpecificDamage(ArrayList<WeaponType> w, int s){
+        super(s);
+        weapons= w;
     }
     
-    Damage(int w, int s){
-        this(w, s, null);
-    }
-    
-    Damage(ArrayList<WeaponType> w, int s){
-        this(-1, s, w);
-    }
-    
-    Damage(Damage d){
-        this(d.getNWeapons(), d.getNShields(), d.getWeapons());   
+    @Override
+    public SpecificDamage copy(Damage d){
+        return new SpecificDamage(((SpecificDamage )d).getWeapons(), d.getNShields());
     }
     
     //Getters
-    DamageToUI getUIversion(){
-        return new DamageToUI(this);
-    }
-    
-    public int getNShields(){
-        return nShields;
-    }
-    
-    public int getNWeapons(){
-        return nWeapons;
+    public SpecificDamageToUI getUIversion(){
+        return new SpecificDamageToUI(this);
     }
     
     public ArrayList<WeaponType> getWeapons(){
@@ -65,42 +40,31 @@ public class SpecificDamage extends Damage {
      * que no están en las colecciones de los parámetros.
     */
     public Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
-        int n_shields= Math.min(s.size(), nShields);
-        
-        if(weapons != null){
-            int freq;
-            
-            ArrayList<WeaponType> types= new ArrayList<>(Arrays.asList(WeaponType.LASER, WeaponType.MISSILE, WeaponType.PLASMA));
-            
-            ArrayList<WeaponType> adjusted= new ArrayList<>();
-            
-            //Obtenemos al array con los tipos de armas de w
-            ArrayList<WeaponType> wt= new ArrayList<>();
-            for(Weapon i: w)
-                wt.add(i.getType());
-            
-            for(WeaponType i: types){
-                if(arrayContainsType(w, i) != -1){
-                    freq= Math.min(Collections.frequency(wt, i), Collections.frequency(weapons, i));
-                    
-                    //Una vez obtenida la frecuencia mínima de ocurrencias del weaponType i lo metemos en adjusted
-                    for(int k= 0; k < freq; k++)
-                        adjusted.add(i);
-                }
-                
-                else
-                    freq= 0;
-               
+        int n_shields= Math.min(s.size(), super.getNShields());
+        int freq;
+
+        ArrayList<WeaponType> types= new ArrayList<>(Arrays.asList(WeaponType.LASER, WeaponType.MISSILE, WeaponType.PLASMA));
+        ArrayList<WeaponType> adjusted= new ArrayList<>();
+
+        //Obtenemos al array con los tipos de armas de w
+        ArrayList<WeaponType> wt= new ArrayList<>();
+        for(Weapon i: w)
+            wt.add(i.getType());
+
+        for(WeaponType i: types){
+            if(arrayContainsType(w, i) != -1){
+                freq= Math.min(Collections.frequency(wt, i), Collections.frequency(weapons, i));
+
+                //Una vez obtenida la frecuencia mínima de ocurrencias del weaponType i lo metemos en adjusted
+                for(int k= 0; k < freq; k++)
+                    adjusted.add(i);
             }
-            return new Damage(adjusted, n_shields);
-                
+
+            else
+                freq= 0;
+
         }
-       
-        else{
-            int n_weapons= Math.min(nWeapons, w.size());
-            return new Damage(n_weapons, n_shields);
-        }
-        
+        return new SpecificDamage(adjusted, n_shields);  
     }
     
     /**
@@ -124,33 +88,15 @@ public class SpecificDamage extends Damage {
      * ser inferior a cero en ningún caso.
     */
     public void discardWeapon(Weapon w){
-        if(weapons != null)    //Si tenemos una lista de tipos concretos de armas
-            weapons.remove(w.getType());
-        
-        else{
-            if(nWeapons > 0)
-                nWeapons--;
-        }    
+        weapons.remove(w.getType());       
     }
     
-    
-    /** 
-     * @brief Decrementa en una unidad el número de potenciadores de escudo que
-     * deben ser eliminados. Ese contador no puede ser inferior a cero en ningún caso.
-    */
-    public void discardShieldBooster(){
-        if(nShields > 0)
-            nShields--;
-    }
     
     /**
      * @brief Devuelve true si el daño representado no tiene ningún efecto, no 
      * implica la pérdida de ningún tipo de accesorio (armas o potenciadores de escudo).
     */
     public boolean hasNoEffect(){
-        if(weapons == null)
-            return nWeapons== 0 && nShields == 0;
-        else 
-            return weapons.isEmpty() && nShields ==  0;
+        return super.hasNoEffect() && weapons.isEmpty();
     }
 }

@@ -5,7 +5,7 @@
  */
 package deepspace;
 
-class Weapon{
+class Weapon implements CombatElement{
     private String name;
     private WeaponType type;
     private int uses;
@@ -30,6 +30,8 @@ class Weapon{
         return type;
     }
     
+    
+    @Override
     public int getUses(){
         return uses;
     }
@@ -46,6 +48,7 @@ class Weapon{
     * unidad y devuelve el valor del método power(); devuelve el valor 1.0 en 
     * otro caso.
     */
+    @Override
     public float useIt(){
         if( uses > 0){
             uses--;

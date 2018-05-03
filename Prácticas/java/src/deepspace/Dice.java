@@ -10,7 +10,7 @@ package deepspace;
 import java.util.Random;
 
 class Dice {
-    private final float NHANGARSPROB, NSHIELDSPROB, NWEAPONSPROB, FIRSTSHOTPROB;
+    private final float NHANGARSPROB, NSHIELDSPROB, NWEAPONSPROB, FIRSTSHOTPROB, EXTRAEFFICIENCYPROB;
     private Random generator;
     
     //Constructores
@@ -20,6 +20,7 @@ class Dice {
         this.NSHIELDSPROB=0.25f;
         this.NWEAPONSPROB=0.33f;
         this.FIRSTSHOTPROB=0.5f;
+        this.EXTRAEFFICIENCYPROB=0.8f;
     }
     
     /**
@@ -81,8 +82,5 @@ class Dice {
     boolean spaceStationMoves(float speed){
         return generator.nextFloat() <= speed ? true : false;
     }
-    
-    
-    
             
 }

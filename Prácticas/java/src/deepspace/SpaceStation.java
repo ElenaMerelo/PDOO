@@ -5,7 +5,7 @@ package deepspace;
 
 import java.util.ArrayList;
 
-class SpaceStation {
+class SpaceStation implements SpaceFighter{
     private static final int MAXFUEL= 100;
     private static final float SHIELDLOSSPERUNITSHOT= 0.1f;    
     private float ammoPower, fuelUnits, shieldPower;
@@ -16,7 +16,7 @@ class SpaceStation {
     private ArrayList<ShieldBooster> shieldBoosters;
     private Hangar hangar;
     
-    //Constructor
+    //Constructores 
     SpaceStation(String n, SuppliesPackage supplies){
         name= n;
         ammoPower= supplies.getAmmoPower();
@@ -25,6 +25,22 @@ class SpaceStation {
         nMedals= 0;
         weapons= new ArrayList<>();
         shieldBoosters= new ArrayList<>();
+    }
+    
+    public SpaceStation(SpaceStation station){
+        name= station.name;
+        ammoPower= station.ammoPower;
+        fuelUnits= station.fuelUnits;
+        shieldPower= station.shieldPower;
+        nMedals= station.nMedals;
+        for(Weapon w : station.weapons)
+            weapons.add(w);
+        
+        for(ShieldBooster s: station.shieldBoosters)
+            shieldBoosters.add(s);
+        
+        hangar= station.hangar;
+        pendingDamage= station.pendingDamage;
     }
     
     //Getters
@@ -213,7 +229,7 @@ class SpaceStation {
      * almacenar con el método receive*() correspondiente. Para las medallas, 
      * simplemente se incrementa su número según lo que indique el botín.
      */
-    public void setLoot(Loot loot){
+    public Transformation setLoot(Loot loot){
         CardDealer dealer= CardDealer.getInstance();
         int i;
         
