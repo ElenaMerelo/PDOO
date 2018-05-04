@@ -20,6 +20,7 @@ public class SpaceCity extends SpaceStation {
         return collaborators;
     }
     
+    @Override
     public float fire(){
         float f= 0;
         
@@ -31,6 +32,7 @@ public class SpaceCity extends SpaceStation {
         return f;
     }
     
+    @Override
     public float protection(){
         float p= 0;
         

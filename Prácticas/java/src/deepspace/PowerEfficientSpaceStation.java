@@ -6,17 +6,21 @@
 package deepspace;
 
 public class PowerEfficientSpaceStation extends SpaceStation {
-    private static final float EFFICIENCYFACTOR= 1.10f;
+    private static final float EFFICIENCYFACTOR= 1.1f;
     
     public PowerEfficientSpaceStation(SpaceStation station){
         super(station);
     }
     
     public float fire(){
-        float f= EFFICIENCYFACTOR;
-        for(Weapon w: super.weapons)
-          f *= w.useIt();  
-        
-        return super.ammoPower*f;
+        return super.fire()*EFFICIENCYFACTOR;
+    }
+    
+    public float protection(){
+        return super.protection()*EFFICIENCYFACTOR;
+    }
+    
+    public Transformation setLoot(){
+        return Transformation.NOTRANSFORM;
     }
 }

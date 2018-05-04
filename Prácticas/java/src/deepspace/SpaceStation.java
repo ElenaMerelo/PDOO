@@ -201,8 +201,8 @@ class SpaceStation implements SpaceFighter{
     public float protection(){
         float factor= 1.0f;
         
-        for(int i= 0; i< shieldBoosters.size(); i++)
-            factor *= shieldBoosters.get(i).useIt();
+        for(ShieldBooster s: shieldBoosters)
+            factor *= s.useIt();
         
         return shieldPower*factor;
     }
@@ -232,20 +232,26 @@ class SpaceStation implements SpaceFighter{
     public Transformation setLoot(Loot loot){
         CardDealer dealer= CardDealer.getInstance();
         int i;
-        
+
         if(loot.getNHangars() > 0)
             receiveHangar(dealer.nextHangar());
-        
+
         for(i= 0; i< loot.getNSupplies(); i++)
             receiveSupplies(dealer.nextSuppliesPackage());
-        
+
         for(i= 0; i< loot.getNWeapons(); i++)
             receiveWeapon(dealer.nextWeapon());
-        
+
         for(i= 0; i< loot.getNShields(); i++)
             receiveShieldBooster(dealer.nextShieldBooster());
-        
+
         nMedals += loot.getNMedals();
+    
+        if(loot.spaceCity())
+            return Transformation.SPACECITY;
+        else if(loot.getEfficient())
+            return Transformation.GETEFFICIENT;   
+        return Transformation.NOTRANSFORM;
     }
     
     /**

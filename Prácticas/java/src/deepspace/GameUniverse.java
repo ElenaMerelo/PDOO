@@ -14,6 +14,7 @@ public class GameUniverse {
     private Dice dice;
     private SpaceStation currentStation;
     private ArrayList<SpaceStation> spaceStations;
+    private boolean haveSpaceCity;
     
     //Constructor 
     public GameUniverse(){
@@ -193,6 +194,13 @@ public class GameUniverse {
             else return false;
         }
         else return false;
+    }
+    
+    private void createSpaceCity(){
+        if(!haveSpaceCity){
+            currentStation= new SpaceCity(currentStation, spaceStations);
+            haveSpaceCity = true;
+        }
     }
 }
 
