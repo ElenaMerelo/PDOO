@@ -7,7 +7,7 @@ package deepspace;
 import java.util.Random;
 
 public class BetaPowerEfficientSpaceStation extends PowerEfficientSpaceStation {
-    private static final float EFFICIENCYFACTOR= 1.2f;
+    private static final float EXTRAEFFICIENCY= 1.2f;
     private Dice dice;
     private Random generator;
     
@@ -17,10 +17,7 @@ public class BetaPowerEfficientSpaceStation extends PowerEfficientSpaceStation {
     
     public float fire(){
         float fire= super.fire();
-        return dice.extraEfficiency() ? fire*EFFICIENCYFACTOR : fire;
+        return dice.extraEfficiency() ? fire*EXTRAEFFICIENCY : fire;
     }
     
-    public float protection(){
-        return super.protection()*EFFICIENCYFACTOR;
-    } 
 }

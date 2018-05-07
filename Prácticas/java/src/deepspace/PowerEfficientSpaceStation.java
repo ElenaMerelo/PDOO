@@ -20,7 +20,8 @@ public class PowerEfficientSpaceStation extends SpaceStation {
         return super.protection()*EFFICIENCYFACTOR;
     }
     
-    public Transformation setLoot(){
+    public Transformation setLoot(Loot l){
+        super.setLoot(l);
         return Transformation.NOTRANSFORM;
     }
 }
