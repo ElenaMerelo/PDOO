@@ -44,12 +44,25 @@ public abstract class Damage {
     }
     
     public abstract DamageToUI getUIversion();
-   
+    
+    
+    /**
+     * @brief Devuelve una versión ajustada del objeto a las colecciones de 
+     * armas y potenciadores de escudos suministradas como parámetro.
+     * Partiendo del daño representado por el objeto que recibe este mensaje, se devuelve una copia del
+     * mismo pero reducida si es necesario para que no implique perder armas o potenciadores de escudos
+     * que no están en las colecciones de los parámetros.
+    */
     public abstract Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s);
     
+    /**
+     * @brief Si la instancia dispone de una lista de tipos concretos de armas,
+     * intenta eliminar el tipo del arma pasada como parámetro de esa lista. En otro caso simplemente
+     * decrementa en una unidad el contador de armas que deben ser eliminadas. Ese contador no puede
+     * ser inferior a cero en ningún caso.
+    */    
     public abstract void discardWeapon(Weapon w);
     
     public abstract Damage copy(Damage d);
-
-
+    
 }
