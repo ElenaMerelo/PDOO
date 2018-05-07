@@ -113,8 +113,13 @@ public class GameUniverse {
             }
         }
         else{
-            station.setLoot(enemy.getLoot());
+            Loot l= enemy.getLoot();
+            Transformation t= station.setLoot(l);
             combatResult= CombatResult.STATIONWINS;
+            if(t == Transformation.GETEFFICIENT)
+                makeStationEfficient();
+            else if(t == Transformation.SPACECITY)
+                createSpaceCity();
         }
         
         gameState.next(turns, spaceStations.size());
@@ -196,10 +201,15 @@ public class GameUniverse {
         else return false;
     }
     
+    private void makeStationEfficient(){
+        currentStation= dice.extraEfficiency()? new BetaPowerEfficientSpaceStation(currentStation) : new PowerEfficientSpaceStation(currentStation); 
+    }
+    
     private void createSpaceCity(){
         if(!haveSpaceCity){
             currentStation= new SpaceCity(currentStation, spaceStations);
             haveSpaceCity = true;
+            // spaceStations.set(currentStationIndex, currentStation);
         }
     }
 }

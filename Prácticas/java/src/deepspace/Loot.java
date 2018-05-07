@@ -19,6 +19,16 @@ class Loot {
         this.getEfficient= ef;
         this.spaceCity= city;
     }
+    
+    Loot(int supplies, int weapons, int shields, int hangars, int medals){
+    this.nSupplies= supplies;
+    this.nWeapons= weapons;
+    this.nShields= shields;
+    this.nHangars= hangars;
+    this.nMedals= medals;
+    this.getEfficient= false;
+    this.spaceCity= false;
+}
 
     //Consultores 
     public int getNSupplies(){
