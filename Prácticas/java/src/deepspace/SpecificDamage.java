@@ -40,7 +40,7 @@ public class SpecificDamage extends Damage {
      * que no están en las colecciones de los parámetros.
     */
     public Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
-        int n_shields= Math.min(s.size(), super.getNShields());
+        int n_shields= super.adjust_shields(s);
         int freq;
 
         ArrayList<WeaponType> types= new ArrayList<>(Arrays.asList(WeaponType.LASER, WeaponType.MISSILE, WeaponType.PLASMA));

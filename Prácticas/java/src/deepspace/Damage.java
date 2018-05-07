@@ -21,7 +21,7 @@ public abstract class Damage {
         nShields= n;
     }
     
-    int getNShields(){
+    public int getNShields(){
         return nShields;
     }
     
@@ -32,6 +32,15 @@ public abstract class Damage {
     
     public boolean hasNoEffect(){
         return nShields == 0;
+    }
+    
+    public int adjust_shields(ArrayList<ShieldBooster> s){
+        return Math.min(s.size(), nShields);
+    }
+    
+    @Override
+    public String toString(){
+        return "nShields- " + nShields;
     }
     
     public abstract DamageToUI getUIversion();
