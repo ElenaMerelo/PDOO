@@ -51,7 +51,7 @@ class Loot {
     
     public String toString(){
         return nSupplies + " supplies, " + nWeapons + " weapons, " + nShields
-                + " shields, " + nHangars + " hangars, " + nMedals + " medals.";
+                + " shields, " + nHangars + " hangars, " + nMedals + " medals, getEfficient: " + getEfficient + "spaceCity: " + spaceCity;
     }
     
     LootToUI getUIversion(){

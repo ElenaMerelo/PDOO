@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class SpaceCity extends SpaceStation {
     private SpaceStation base;
-    private ArrayList<SpaceStation> collaborators;
+    private ArrayList<SpaceStation> collaborators= new ArrayList();
     
     public SpaceCity(SpaceStation base, ArrayList<SpaceStation> rest){
         super(base);
@@ -22,24 +22,20 @@ public class SpaceCity extends SpaceStation {
     
     @Override
     public float fire(){
-        float f= 0;
+        float f= base.fire();
         
         for(SpaceStation s: collaborators)
             f += s.fire();
-        
-        f += base.fire();
         
         return f;
     }
     
     @Override
     public float protection(){
-        float p= 0;
+        float p= base.protection();
         
         for(SpaceStation s: collaborators)
             p += s.protection();
-        
-        p += base.protection();
         
         return p;
     }
