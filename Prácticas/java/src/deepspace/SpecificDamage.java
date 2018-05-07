@@ -24,6 +24,7 @@ public class SpecificDamage extends Damage {
     }
     
     //Getters
+    @Override
     public SpecificDamageToUI getUIversion(){
         return new SpecificDamageToUI(this);
     }
@@ -32,14 +33,8 @@ public class SpecificDamage extends Damage {
         return weapons;
     }
     
-    /**
-     * @brief Devuelve una versión ajustada del objeto a las colecciones de 
-     * armas y potenciadores de escudos suministradas como parámetro.
-     * Partiendo del daño representado por el objeto que recibe este mensaje, se devuelve una copia del
-     * mismo pero reducida si es necesario para que no implique perder armas o potenciadores de escudos
-     * que no están en las colecciones de los parámetros.
-    */
-    public Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
+    @Override
+    public SpecificDamage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s){
         int n_shields= super.adjust_shields(s);
         int freq;
 
@@ -80,23 +75,17 @@ public class SpecificDamage extends Damage {
         }
         return -1;   
     }
-    
-    /**
-     * @brief Si la instancia dispone de una lista de tipos concretos de armas,
-     * intenta eliminar el tipo del arma pasada como parámetro de esa lista. En otro caso simplemente
-     * decrementa en una unidad el contador de armas que deben ser eliminadas. Ese contador no puede
-     * ser inferior a cero en ningún caso.
-    */
+
     public void discardWeapon(Weapon w){
         weapons.remove(w.getType());       
     }
     
-    
-    /**
-     * @brief Devuelve true si el daño representado no tiene ningún efecto, no 
-     * implica la pérdida de ningún tipo de accesorio (armas o potenciadores de escudo).
-    */
     public boolean hasNoEffect(){
         return super.hasNoEffect() && weapons.isEmpty();
+    }
+    
+    @Override
+    public String toString(){
+        return super.toString() + "Weapons- " + weapons;
     }
 }
