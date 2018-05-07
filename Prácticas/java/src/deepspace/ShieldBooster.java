@@ -21,9 +21,11 @@ class ShieldBooster implements CombatElement{
     }
     
     //Consultores
+    /*
     public String getName(){
         return name;
-    }
+    }*/
+    
     public float getBoost(){
         return boost;
     }

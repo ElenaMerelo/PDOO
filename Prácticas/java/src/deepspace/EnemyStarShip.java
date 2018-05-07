@@ -67,7 +67,12 @@ class EnemyStarShip implements SpaceFighter{
         if(shieldPower < shot)
             return ShotResult.DONOTRESIST;
         return ShotResult.RESIST;
-    } 
+    }
+    
+    @Override
+    public String toString(){
+         return "EnemyStarShip ~ " + "ammoPower: " + ammoPower + ", shieldPower: " + shieldPower + ", name: " + name + ", loot: " + loot + ", damage: " + damage;
+    }
 }
 
 
