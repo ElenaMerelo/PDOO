@@ -16,40 +16,17 @@ module Deepspace
   class Damage
     attr_reader :nWeapons, :nShields,  :weapons
     
-    def initialize(nw, ns, w)
+    def initialize(ns)
       @nShields= ns
-      
-      if w == nil   #si es numericWeapons
-        @weapons= nil
-        @nWeapons= nw
-      else
-        @nWeapons= -1
-        @weapons= Array.new(w)
-      end  
     end
+  
     
-    def self.newNumericWeapons(w, s)
-      new(w, s, nil)
-    end
-    
-    def self.newSpecificWeapons(w1, s)
-      new(-1, s, w1)
-    end
-    
-    def self.newCopy(d)
-      new(d.nWeapons, d.nShields, d.weapons)
+    def copy(d)
+      @nShields= d.nShields
     end
     
     def getUIversion
       DamageToUI.new(self)
-    end
-    
-    def discardWeapon(w)
-      if @weapons == nil && @nWeapons > 0
-        @nWeapons -= 1
-      else
-        @weapons.delete_at(@weapons.index(w.type))
-      end
     end
     
     def discardShieldBooster
@@ -59,11 +36,7 @@ module Deepspace
     end
     
     def hasNoEffect
-      if @weapons == nil
-        @nWeapons == 0 and @nShields == 0
-      else
-        @weapons.empty? and @nShields == 0
-      end
+      @nShields == 0
     end
     
     def to_s

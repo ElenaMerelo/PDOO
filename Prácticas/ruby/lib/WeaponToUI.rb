@@ -1,4 +1,5 @@
-module Deepspace
+
+module Deepspace;
   
 class WeaponToUI 
 
