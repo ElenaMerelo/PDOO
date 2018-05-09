@@ -48,9 +48,6 @@ public class TestP1 {
         ShieldBooster sh1= new ShieldBooster("Chachi shield", 45.67f, 3);
         ShieldBooster sh2= new ShieldBooster(sh1);
         
-        if(!sh1.getName().equals("Chachi shield"))
-            System.out.println("Error en getName de sh1");
-        
         if(sh1.getBoost() != 45.67f)
             System.out.println("Error en getBoost de sh1");
         
@@ -64,7 +61,7 @@ public class TestP1 {
         if(sh1.useIt() != 1.0f)
             System.out.println("Error en useIt cuando uses = 0");
         
-        if(!sh2.getName().equals(sh1.getName()) || sh2.getBoost() != sh1.getBoost())
+        if(sh2.getBoost() != sh1.getBoost())
             System.out.println("Error en constructor de copia de ShieldBooster");
         
         System.out.println(sh1);
