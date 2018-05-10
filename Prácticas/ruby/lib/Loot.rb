@@ -11,7 +11,7 @@ module Deepspace
     attr_reader :nSupplies, :nWeapons, :nShields, :nHangars, :nMedals, :getEfficient, :spaceCity
 
     protected
-    def initialize(supplies, weapons, shields, hangars, medals, ef, city)
+    def initialize(supplies, weapons, shields, hangars, medals, ef=false, city= false)
       @nSupplies= supplies
       @nWeapons= weapons
       @nShields= shields
@@ -23,7 +23,7 @@ module Deepspace
     
     public
     def to_s
-      "nSupplies #{@nSupplies}, nWeapons #{@nWeapons}, nShields #{@nShields}, nHangars #{@nHangars}, nMedals #{@nMedals}"
+      "nSupplies #{@nSupplies}, nWeapons #{@nWeapons}, nShields #{@nShields}, nHangars #{@nHangars}, nMedals #{@nMedals}, getEfficient #{@getEfficient}, spaceCity #{@spaceCity}"
     end
     
     def getUIversion

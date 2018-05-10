@@ -2,6 +2,7 @@
 
 require_relative "SpaceStationToUI"
 require_relative 'Damage'
+require_relative 'Transformation'
 
 module Deepspace
   class SpaceStation
@@ -21,6 +22,23 @@ module Deepspace
       @weapons= Array.new 
       @shieldBoosters= Array.new
       @hangar= nil
+    end
+    
+    def self.newCopy(station)
+      supplies= SuppliesPackage.new(station.ammoPower, station.fuelUnits, station.ammoPower)
+      s= SpaceStation.new(station.name, supplies)
+      s.nMedals= station.nMedals 
+      s.setPendingDamage(station.pendingDamage)
+      for w in station.weapons 
+        s.weapons.push(w)
+      end
+      
+      for sb in station.shieldBoosters
+        s.shieldBoosters.push(sb)
+      end
+ 
+      s.receiveHangar(station.hangar)
+      s
     end
 
     def cleanUpMountedItems
@@ -177,6 +195,13 @@ module Deepspace
       end
       
       @nMedals += loot.nMedals
+      
+      if(loot.spaceCity)
+        return Transformation::SPACECITY
+      elsif loot.getEfficient
+        return Transformation::GETEFFICIENT
+      else return Transformation::NOTRANSFORM
+      end
     end
 
     def setPendingDamage(d)
