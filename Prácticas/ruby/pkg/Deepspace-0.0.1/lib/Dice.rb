@@ -13,6 +13,7 @@ module Deepspace
       @NSHIELDSPROB= 0.25
       @NWEAPONSPROB= 0.33
       @FIRSTSHOTPROB= 0.5
+      @EXTRAEFFICIENCYPROB= 0.8
       @generator= Random.new
     end
     
@@ -75,6 +76,14 @@ module Deepspace
 =end
     def spaceStationMoves(speed)
       @generator.rand <= speed ? true : false
+    end
+    
+    def extraEfficiency
+      @generator.nextFloat <= @EXTRAEFFICIENCYPROB ? false : true
+    end
+    
+    def to_s
+      "\nNHANGARSPROB= #{@NHANGARSPROB}, NSHIELDSPROB= #{@NSHIELDSPROB}, NWEAPONSPROB= #{@NWEAPONSPROB}, FIRSTSHOTPROB= #{@FIRSTSHOTPROB}, EXTRAEFFICIENCYPROB= #{@EXTRAEFFICIENCYPROB} "
     end
   end
 end
