@@ -40,46 +40,12 @@ module Deepspace
     end
     
     def to_s
-      if @weapons == nil
-        "nWeapons #{@nWeapons}, nShields #{@nShields}"
-      else
-        "nShields #{@nShields}, weapons #{@weapons.join(",")}"
-
-      end
+     ", nShields #{@nShields}"
     end
     
     def adjust(w, s)
-      n_shields= [s.length, @nShields].min
-      
-      if @weapons == nil  #si son numericWeapons
-        n_weapons= [w.length, @nWeapons].min  #nos quedamos con quien tenga menos armas
-        
-        aux= Damage.newNumericWeapons(n_weapons, n_shields)
-        
-      else
-        #Contamos el número de weapons de cada tipo que tienen ambos vectores
-        freq_1 = Hash.new(0)
-        @weapons.each { |weapon_type| freq_1[weapon_type] += 1 }
-        
-        freq_2 = Hash.new(0)
-        w.each { |weapon| freq_2[weapon.type] += 1 }
-        
-        min_freq= []
-        l= WeaponType::LASER
-        m= WeaponType::MISSILE
-        p= WeaponType::PLASMA
-        
-        [freq_1[l], freq_2[l]].min.times { min_freq << l }
-        [freq_1[m], freq_2[m]].min.times { min_freq << m }
-        [freq_1[p], freq_2[p]].min.times { min_freq << p }
-        
-        aux= Damage.newSpecificWeapons(min_freq, n_shields)
-        
-      end
-      aux
+      [s.length, @nShields].min
     end
-    
-    private_class_method :new
     
     private
     def arrayContainsType(w, t)

@@ -1,3 +1,6 @@
+require_relative "Damage"
+require_relative "NumericDamageToUI"
+
 module Deepspace
   class NumericDamage < Damage
     def initialize(nw, ns)
@@ -6,8 +9,7 @@ module Deepspace
     end
     
     def copy(d)
-      super(d.nShields)
-      @nWeapons= d.nWeapons
+      self.new(d.nWeapons, d.nShields)
     end
     
     def getUIversion
@@ -23,5 +25,15 @@ module Deepspace
     def hasNoEffect
       @nWeapons == 0 and super
     end  
+    
+    def to_s
+      "nWeapons: " + @nWeapons + super
+    end
+    
+    def adjust(w, s)
+      n_weapons= [w.length, @nWeapons].min  #nos quedamos con quien tenga menos armas
+        
+      Damage.newNumericWeapons(n_weapons, super)
+    end
   end
 end
