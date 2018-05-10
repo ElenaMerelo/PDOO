@@ -20,6 +20,7 @@ module Deepspace
       @currentStation= nil
       @spaceStations= Array.new
       @currentEnemy= nil
+      @haveSpaceCity= false
     end
     
     def combatGo(station, enemy)
@@ -48,8 +49,16 @@ module Deepspace
           combatResult= CombatResult::STATIONESCAPES
         end
       else
-        station.setLoot(enemy.loot)
+        t= station.setLoot(enemy.loot)
         combatResult= CombatResult::STATIONWINS
+        if t == Transformation::GETEFFICIENT
+          makeStationEfficient
+          combatResult= CombatResult::STATIONWINSANDCONVERTS
+        elsif t == Transformation::SPACECITY && !haveSpaceCity
+          createSpaceCity
+          combatResult= CombatResult::STATIONWINSANDCONVERTS
+        end
+        
       end
       
       @gameState.next(@turns, @spaceStations.length)
@@ -164,6 +173,21 @@ module Deepspace
     private
     def correct_game_state
       @gameState.state == GameState::INIT or @gameState.state == GameState::AFTERCOMBAT
+    end
+    
+    def makeStationEfficient
+      if @dice.extraEfficiency
+        @currentStation= BetaPowerEfficientSpaceStation(@currentStation).new 
+      else
+        @currentStation= PowerEfficientSpaceStation(@currentStation).new
+      end
+    end
+    
+    def createSpaceCity 
+      if !haveSpaceCity
+        @currentStation= SpaceCity.new(@currentStation, @spaceStations)
+        @haveSpaceCity= true
+      end
     end
     
   end #class
