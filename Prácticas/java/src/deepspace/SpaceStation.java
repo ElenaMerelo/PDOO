@@ -285,6 +285,11 @@ class SpaceStation implements SpaceFighter{
             }
         }
     }
+    
+    @Override
+    public String toString() {
+        return "SpaceStation--" + "ammoPower: " + ammoPower + ", fuelUnits: " + fuelUnits + ", name: " + name + ", nMedals: " + nMedals + ", shieldPower: " + shieldPower + ", weapons: " + weapons + ", shieldBoosters: " + shieldBoosters + ", hangar: " + hangar + ", pendingDamage: " + pendingDamage;
+}
 }
 
 

@@ -11,7 +11,7 @@ public class SpaceCity extends SpaceStation {
     private ArrayList<SpaceStation> collaborators= new ArrayList();
     
     public SpaceCity(SpaceStation base, ArrayList<SpaceStation> rest){
-        super(base);
+        super(base); //newCopy(base)?
         this.base= base;
         this.collaborators= rest;
     }
