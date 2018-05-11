@@ -16,7 +16,7 @@ module Deepspace
     end
 
     def self.newCopy(e)
-      EnemyStarShip.new(e.name, e.ammoPower, e.shieldPower, e.loot, Damage.newCopy(e.damage))
+      EnemyStarShip.new(e.name, e.ammoPower, e.shieldPower, e.loot, e.damage)
     end
 
     def getUIversion

@@ -8,8 +8,8 @@ module Deepspace
       super(ns)
     end
     
-    def copy(d)
-      self.new(d.nWeapons, d.nShields)
+    def self.newCopy(d)
+      NumericDamage.new(d.nWeapons, d.nShields)
     end
     
     def getUIversion
@@ -35,5 +35,8 @@ module Deepspace
         
       Damage.newNumericWeapons(n_weapons, super)
     end
+    
+    #public :adjust
+    #public_class_method :new
   end
 end

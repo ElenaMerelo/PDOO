@@ -8,8 +8,8 @@ module Deepspace
       @weapons= Array.new(w)
     end
     
-    def copy(d)
-      self.new(d.weapons, d.nShields)
+    def self.newCopy(d)
+      SpecificDamage.new(d.weapons, d.nShields)
     end
     
     def getUIversion
@@ -46,7 +46,9 @@ module Deepspace
         
         Damage.newSpecificWeapons(min_freq, super)
     end
-      
+    
+    #public :adjust
+    #public_class_method :new
     
   end #class
 end #module
