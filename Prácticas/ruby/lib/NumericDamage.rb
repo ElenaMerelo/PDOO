@@ -33,7 +33,7 @@ module Deepspace
     def adjust(w, s)
       n_weapons= [w.length, @nWeapons].min  #nos quedamos con quien tenga menos armas
         
-      Damage.newNumericWeapons(n_weapons, super)
+      NumericDamage.new(n_weapons, super)
     end
     
     #public :adjust

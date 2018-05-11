@@ -198,7 +198,7 @@ module Deepspace
       
       if(loot.spaceCity)
         return Transformation::SPACECITY
-      elsif loot.getEfficient
+      elsif loot.efficient
         return Transformation::GETEFFICIENT
       else return Transformation::NOTRANSFORM
       end
