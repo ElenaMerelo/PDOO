@@ -184,6 +184,7 @@ class SpaceStation implements SpaceFighter{
      * Para ello se multiplica la potencia de disparo por los factores potenciadores
      * proporcionados por todas las armas.
      */
+    @Override
     public float fire(){
         float factor= 1.0f;
         
@@ -198,6 +199,7 @@ class SpaceStation implements SpaceFighter{
      * Para ello se multiplica la potencia del escudo por los factores potenciadores
      * proporcionados por todos los potenciadores de escudos de los que se dispone.
      */
+    @Override
     public float protection(){
         float factor= 1.0f;
         
@@ -213,6 +215,7 @@ class SpaceStation implements SpaceFighter{
      * función de la energía del disparo recibido como parámetro y devolver el 
      * resultado de si se ha resistido el disparo o no.
      */
+    @Override
     public ShotResult receiveShot(float shot){
         if(protection() >= shot){
             shieldPower -= SHIELDLOSSPERUNITSHOT*shot;
