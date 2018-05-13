@@ -20,7 +20,7 @@ class Loot {
         this.spaceCity= city;
     }
     
-    Loot(int supplies, int weapons, int shields, int hangars, int medals){
+    protected Loot(int supplies, int weapons, int shields, int hangars, int medals){
     this.nSupplies= supplies;
     this.nWeapons= weapons;
     this.nShields= shields;
