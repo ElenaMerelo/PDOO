@@ -196,7 +196,7 @@ module Deepspace
       
       @nMedals += loot.nMedals
       
-      if(loot.spaceCity)
+      if loot.spaceCity
         return Transformation::SPACECITY
       elsif loot.efficient
         return Transformation::GETEFFICIENT
@@ -210,6 +210,12 @@ module Deepspace
 
     def validState
       @pendingDamage == nil || @pendingDamage.hasNoEffect
+    end
+    
+    def to_s
+      "Name: #{@name}, AmmoPower: #{@ammoPower}, FuelUnits: #{@fuelUnits},
+     ShieldPower: #{@shieldPower}, Medals: #{@nMedals}, Weapons: #{@weapons},
+     ShieldBoosters: #{@shieldBoosters}, Hangar: #{@hangar}, PendingDamage: #{@pendingDamage}"
     end
 
     private

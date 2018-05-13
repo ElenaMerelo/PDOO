@@ -54,7 +54,7 @@ module Deepspace
         if t == Transformation::GETEFFICIENT
           makeStationEfficient
           combatResult= CombatResult::STATIONWINSANDCONVERTS
-        elsif t == Transformation::SPACECITY && !haveSpaceCity
+        elsif t == Transformation::SPACECITY
           createSpaceCity
           combatResult= CombatResult::STATIONWINSANDCONVERTS
         end
@@ -184,7 +184,7 @@ module Deepspace
     end
     
     def createSpaceCity 
-      if !haveSpaceCity
+      if !@haveSpaceCity
         @currentStation= SpaceCity.new(@currentStation, @spaceStations)
         @haveSpaceCity= true
       end
