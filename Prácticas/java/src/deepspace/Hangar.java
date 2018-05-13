@@ -94,17 +94,12 @@ class Hangar{
         
         return null;  
     }
-    
-    /*
-    public String toString(){
-        StringBuilder sb = new StringBuilder("Weapons: ");
-        // Append each weapon to the returning String
-        for(Weapon w: weapons)
-            sb.append(w).append("\n");
-        return sb.toString();
-    
+
+    @Override
+    public String toString() {
+        return "Hangar{" + "maxElements=" + maxElements + ", weapons=" + weapons + ", shieldBoosters=" + shieldBoosters + '}';
     }
-    */
+
 }
 
 
