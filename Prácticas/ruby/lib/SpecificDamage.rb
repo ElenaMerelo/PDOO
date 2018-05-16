@@ -25,7 +25,7 @@ module Deepspace
     end
     
     def to_s
-      "weapons: " + @weapons + super
+      "weapons: " + @weapons.join(", ") + super
     end
     
     def adjust(w, s)

@@ -79,7 +79,7 @@ module Deepspace
     end
     
     def extraEfficiency
-      @generator.nextFloat <= @EXTRAEFFICIENCYPROB ? false : true
+      @generator.rand <= @EXTRAEFFICIENCYPROB ? false : true
     end
     
     def to_s
