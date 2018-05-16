@@ -4,10 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/BetaPowerEfficientSpaceStation.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/UI/TextUI.java</file>
             <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/SpaceCity.java</file>
             <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/Damage.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/CardDeck.java</file>
             <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/PowerEfficientSpaceStation.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/GameUniverse.java</file>
             <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/SpaceStation.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/CardDealer.java</file>
         </group>
     </open-files>
 </project-private>
