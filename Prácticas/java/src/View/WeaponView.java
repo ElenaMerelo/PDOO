@@ -5,9 +5,6 @@
 
 package View;
 
-import java.awt.Component;
-import java.util.ArrayList;
-import model.BankCheckToUI;
 import deepspace.WeaponToUI;
 
 public class WeaponView extends javax.swing.JPanel {
@@ -22,7 +19,7 @@ public class WeaponView extends javax.swing.JPanel {
     void setWeapon(WeaponToUI w){
         jLabel2.setText(w.getType().toString());
         jLabel4.setText(Float.toString(w.getPower()));
-        jLabel6.setText(Float.toString(w.getUses())); 
+        jLabel6.setText(Integer.toString(w.getUses())); 
         repaint();
         revalidate();
     }
