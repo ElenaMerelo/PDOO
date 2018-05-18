@@ -1,23 +1,16 @@
+package View;
+
 /**
  *
  * @author elena
  */
-
-package View;
-
-import deepspace.HangarToUI;
-
-public class HangarView extends javax.swing.JPanel {
+public class SpaceCityView extends javax.swing.JPanel {
 
     /**
-     * Creates new form HangarView
+     * Creates new form SpaceCityView
      */
-    HangarView() {
+    public SpaceCityView() {
         initComponents();
-    }
-    
-    void setHangarView(HangarToUI h){
-        
     }
 
     /**

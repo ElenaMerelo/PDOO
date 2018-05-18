@@ -26,7 +26,7 @@ public class LootView extends javax.swing.JPanel {
        jLabel14.setText(Boolean.toString(l.isSpaceCity()));
        
        repaint();
-       revalidate();
+      // revalidate();
     }
 
     /**
@@ -152,7 +152,7 @@ public class LootView extends javax.swing.JPanel {
                 .addContainerGap(153, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

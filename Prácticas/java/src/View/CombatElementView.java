@@ -4,6 +4,6 @@ package View;
  *
  * @author elena
  */
-public class DamageView {
+public class CombatElementView {
     
 }
