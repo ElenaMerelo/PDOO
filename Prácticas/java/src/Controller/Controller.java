@@ -1,33 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author elena
  */
 package Controller;
 
 import View.View;
+import View.MainWindow;
+import View.NamesCapture;
 import java.util.ArrayList;
-import model.AppState;
-import model.Model;
-import model.ModelToUI;
 
-/**
- *
- * @author Profe
- */
+import deepspace.CombatResult;
+import deepspace.GameState;
+import deepspace.GameUniverse;
+import deepspace.GameUniverseToUI;
+import deepspace.LootToUI;
+import deepspace.WeaponToUI;
+import deepspace.SpaceStationToUI;
+import deepspace.WeaponType;
+
+
+
 public class Controller {
-    private Model model;
+    private GameUniverse model;
     private View view;
 
-    public Controller(Model m, View v) {
+    public Controller(GameUniverse m, View v) {
         model = m;
         view = v;
         view.setController(this);
     }
 
     public void start() {
-        model.init(view.getNames());
-        view.updateView();
+        model.init( ( (MainWindow) view).getNames() );
+        //view.updateView();
         view.showView();
     }
     
@@ -36,35 +41,9 @@ public class Controller {
             System.exit(i);
     }
     
-    public AppState getAppState () {
-        return model.getAppState();
-    }
-    
-    public ModelToUI getModelToUI () {
-        return model.getUIversion();
+    public GameState getState(){
+        return model.getState();
     }
 
-    public void getNewBankChecks(int howMany) {
-        for (int i = 0; i < howMany; i++)
-            model.getAnotherBankCheck();
-        view.updateView();
-    }
-
-    public void next() {
-        model.next();
-        view.updateView();
-    }
-
-    public void spendBankChecks(ArrayList<Integer> selectedChecks) {
-        for (int i = selectedChecks.size() - 1; i >= 0; i--) {
-            model.spendBankCheck(selectedChecks.get(i));
-        }
-        view.updateView();
-    }
-    
-    public void spendBankChecks(int selectedCheck) {
-        model.spendBankCheck(selectedCheck);
-        view.updateView();
-    }
     
 }

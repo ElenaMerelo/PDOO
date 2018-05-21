@@ -11,22 +11,13 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.AppState;
+import deepspace.*;
 
 public class MainWindow extends JFrame implements View {
     static Controller controller;
-    private String appName= "deepspace 1.0";
-    //private BetaPowerEfficientSpaceStationView betaPowerEfficientSpaceStationView;
-    //private PowerEfficientSpaceStationView powerEfficientSpaceStationView;
-    private WeaponView weaponView;
-    private ShieldBoosterView shieldView;
-    private DamageView damageView;
-    //private NumericDamageView numericDamageView;
-    //private SpecificDamageView specificDamageView;
-    private EnemyView enemyView;
-    private GameUniverseView gameUniverseView;
-    private HangarView hangarView;
-    private LootView lootView;
-    private SpaceStationView spaceStationView;
+    private String appName= "DeepSpace";
+    //private SpaceStationView spaceStationView;
+    //private EnemyStarShipView enemyView;
     
     /**
      * Creates new form MainWindow
@@ -34,12 +25,8 @@ public class MainWindow extends JFrame implements View {
     public MainWindow() {
         initComponents();
         
-        weaponView= new WeaponView();
-        jpWeaponView.add(weaponView);
-        
-        
-        
         setTitle (appName);
+        getNames();
         repaint();
         setLocationRelativeTo(null);
         
@@ -52,6 +39,27 @@ public class MainWindow extends JFrame implements View {
         });     
         
         
+    }
+    
+    public String getAppName(){
+        return appName;
+    }
+    
+    public ArrayList<String> getNames(){
+        NamesCapture names= new NamesCapture(this);
+        return names.getNames();
+    }
+    
+    public boolean confirmExitMessage() {
+        return (JOptionPane.showConfirmDialog(this, "¿Estás segur@ que deseas salir?", getAppName(), JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+    }
+    
+    public void showView(){
+        setVisible(true);
+    }
+    
+    public void setController(Controller c){
+        controller= c;
     }
 
     /**
