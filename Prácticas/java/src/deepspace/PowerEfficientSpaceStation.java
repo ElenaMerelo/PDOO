@@ -12,16 +12,24 @@ public class PowerEfficientSpaceStation extends SpaceStation {
         super(station);
     }
     
+    @Override
     public float fire(){
         return super.fire()*EFFICIENCYFACTOR;
     }
     
+    @Override
     public float protection(){
         return super.protection()*EFFICIENCYFACTOR;
     }
     
+    @Override
     public Transformation setLoot(Loot l){
         super.setLoot(l);
         return Transformation.NOTRANSFORM;
+    }
+    
+    @Override
+    public PowerEfficientSpaceStationToUI getUIversion(){
+        return new PowerEfficientSpaceStationToUI(this);
     }
 }
