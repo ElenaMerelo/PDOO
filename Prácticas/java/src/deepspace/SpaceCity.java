@@ -40,8 +40,15 @@ public class SpaceCity extends SpaceStation {
         return p;
     }
     
+    @Override
     public Transformation setLoot(Loot l){
         super.setLoot(l);
         return Transformation.NOTRANSFORM;
     }
+
+    @Override
+    public SpaceCityToUI getUIversion(){
+        return new SpaceCityToUI(this);
+    }
+
 }
