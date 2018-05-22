@@ -15,9 +15,15 @@ public class BetaPowerEfficientSpaceStation extends PowerEfficientSpaceStation {
         super(station);
     }
     
+    @Override
     public float fire(){
         float fire= super.fire();
         return dice.extraEfficiency() ? fire*EXTRAEFFICIENCY : fire;
+    }
+    
+    @Override
+    public BetaPowerEfficientSpaceStationToUI getUIVersion(){
+        return new BetaPowerEfficientSpaceStationToUI(this);
     }
     
 }
