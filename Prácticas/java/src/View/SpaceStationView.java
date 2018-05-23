@@ -1,16 +1,62 @@
-package View;
-
 /**
  *
  * @author elena
  */
-public class SpaceStationView extends javax.swing.JPanel {
 
+package View;
+
+import java.util.ArrayList;
+
+import deepspace.SpaceStationToUI;
+import deepspace.WeaponToUI;
+import deepspace.ShieldToUI;
+
+public class SpaceStationView extends javax.swing.JPanel {
     /**
      * Creates new form SpaceStationView
      */
     public SpaceStationView() {
         initComponents();
+    }
+    
+    void setSpaceStationView(SpaceStationToUI s){
+        panel_weapon.removeAll();
+        panel_shields.removeAll();
+        panel_hangar.removeAll();
+        
+        jLabel1.setText(s.getName());
+        jLabel4.setText(Float.toString(s.getAmmoPower())); 
+        jLabel5.setText(Float.toString(s.getShieldPower()));
+        jLabel8.setText(Float.toString(s.getFuelUnits()));
+        jLabel9.setText(Integer.toString(s.getnMedals())); 
+        
+        //Panel del hangar
+        HangarView hv= new HangarView();
+        hv.setHangarView(s.getHangar());
+        panel_hangar.add(hv);
+        
+        //Panel de las armas 
+        ArrayList<WeaponToUI> w= s.getWeapons();
+        WeaponView wv;
+        for(WeaponToUI i: w){
+            wv= new WeaponView();
+            wv.setWeapon(i);
+            panel_weapon.add(wv);
+        }
+        
+        //Panel de los shieldBoosters 
+        ArrayList<ShieldToUI> sh= s.getShieldBoosters();
+        ShieldBoosterView sv;
+        for(ShieldToUI j: sh){
+            sv= new ShieldBoosterView();
+            sv.setShieldBooster(j);
+            panel_shields.add(sv);
+        }
+        
+        
+        repaint();
+        revalidate();
+        
     }
 
     /**
@@ -21,20 +67,176 @@ public class SpaceStationView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panel_weapon = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        panel_shields = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        panel_hangar = new javax.swing.JPanel();
+
+        setBorder(javax.swing.BorderFactory.createTitledBorder("SpaceStation"));
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jLabel1, org.jdesktop.beansbinding.ELProperty.create("${border.borderOpaque}"), this, org.jdesktop.beansbinding.BeanProperty.create("border"));
+        bindingGroup.addBinding(binding);
+
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setText("Potencia de ataque: ");
+
+        jLabel3.setText("Potencia de defensa: ");
+
+        jLabel4.setText("jLabel4");
+
+        jLabel5.setText("jLabel5");
+
+        jLabel6.setText("Nivel de combustible: ");
+
+        jLabel7.setText("Medallas: ");
+
+        jLabel8.setText("jLabel8");
+
+        jLabel9.setText("jLabel9");
+
+        panel_weapon.setBorder(javax.swing.BorderFactory.createTitledBorder("Armas"));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jScrollPane1, org.jdesktop.beansbinding.ELProperty.create("${border.borderOpaque}"), panel_weapon, org.jdesktop.beansbinding.BeanProperty.create("border"));
+        bindingGroup.addBinding(binding);
+
+        javax.swing.GroupLayout panel_weaponLayout = new javax.swing.GroupLayout(panel_weapon);
+        panel_weapon.setLayout(panel_weaponLayout);
+        panel_weaponLayout.setHorizontalGroup(
+            panel_weaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 456, Short.MAX_VALUE)
+        );
+        panel_weaponLayout.setVerticalGroup(
+            panel_weaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(panel_weapon);
+
+        panel_shields.setBorder(javax.swing.BorderFactory.createTitledBorder("Potenciadores de escudo"));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jScrollPane2, org.jdesktop.beansbinding.ELProperty.create("${border.borderOpaque}"), panel_shields, org.jdesktop.beansbinding.BeanProperty.create("border"));
+        bindingGroup.addBinding(binding);
+
+        javax.swing.GroupLayout panel_shieldsLayout = new javax.swing.GroupLayout(panel_shields);
+        panel_shields.setLayout(panel_shieldsLayout);
+        panel_shieldsLayout.setHorizontalGroup(
+            panel_shieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 456, Short.MAX_VALUE)
+        );
+        panel_shieldsLayout.setVerticalGroup(
+            panel_shieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jScrollPane2.setViewportView(panel_shields);
+
+        javax.swing.GroupLayout panel_hangarLayout = new javax.swing.GroupLayout(panel_hangar);
+        panel_hangar.setLayout(panel_hangarLayout);
+        panel_hangarLayout.setHorizontalGroup(
+            panel_hangarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 428, Short.MAX_VALUE)
+        );
+        panel_hangarLayout.setVerticalGroup(
+            panel_hangarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jScrollPane3.setViewportView(panel_hangar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(66, 66, 66)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8))))
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
+
+        jLabel4.getAccessibleContext().setAccessibleName("jl_ammoPower");
+
+        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPanel panel_hangar;
+    private javax.swing.JPanel panel_shields;
+    private javax.swing.JPanel panel_weapon;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
