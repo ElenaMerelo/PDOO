@@ -50,11 +50,32 @@ public class Controller {
         return model.getUIversion().getCurrentEnemy();
     }
     
-    public CombatResult combat(){
-        CombatResult r= model.combat();
+    public CombatResult combat() {
+        CombatResult result = model.combat();
+        switch( result ){
+            case ENEMYWINS:
+                view.showEnemyWinsMessage();
+                break;
+            case STATIONESCAPES:
+                view.showStationEscapesMessage();
+                break;
+            case STATIONWINS:
+                if( haveAWinner() ){
+                    view.showVictoryMessage();
+                    System.exit(0);
+                } else view.showYouWinMessage();
+                break;
+            case STATIONWINSANDCONVERTS:
+                if( haveAWinner() ){
+                    view.showVictoryMessage();
+                    System.exit(0);
+                } else view.showYouWinAndConvertMessage();
+                break;
+                
+        }
         view.updateView();
-        return r;
-    }    
+        return result;
+}   
     
     public boolean haveAWinner(){
         return model.haveAWinner();

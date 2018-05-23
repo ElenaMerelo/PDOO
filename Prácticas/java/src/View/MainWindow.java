@@ -88,6 +88,65 @@ public class MainWindow extends JFrame implements View {
         repaint();
         revalidate();
     }*/
+    
+    public void showNextTurnError(){
+        JOptionPane.showMessageDialog(
+                this,
+                "Debes combatir antes\nde pasar de turno.\n O cumplir tu castigo.",
+                "No puedes pasar de turno",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    @Override
+    public void showEnemyWinsMessage(){
+        JOptionPane.showMessageDialog(
+                this,
+                "Has perdido el combate.\nCumple tu castigo.",
+                "Has perdido el combate.",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    @Override
+    public void showStationEscapesMessage(){
+        JOptionPane.showMessageDialog(
+                this,
+                "Has logrado escapar del combate!\nEres una gallina espacial!",
+                "Has logrado escapar",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+    
+    @Override
+    public void showYouWinMessage(){
+        JOptionPane.showMessageDialog(
+                this,
+                "Has ganado el combate!!!!!\nDisfruta de tu botín",
+                "Has ganado el combate!",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+    
+    @Override
+    public void showYouWinAndConvertMessage(){
+        JOptionPane.showMessageDialog(
+                this,
+                "Has ganado el combate!\nDisfruta de tu botín.\n Y además te has convertido!",
+                "Has ganado el combate y te has convertido!",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    @Override
+    public void showVictoryMessage(){
+        JOptionPane.showMessageDialog(
+                this,
+                "Has ganado el juego!\nEnhorabuena!.",
+                "¡VICTORIA!",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,7 +172,7 @@ public class MainWindow extends JFrame implements View {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     /**
      * @param args the command line arguments
      */

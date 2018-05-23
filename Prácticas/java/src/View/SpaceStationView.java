@@ -11,6 +11,7 @@ import java.awt.Component;
 import deepspace.SpaceStationToUI;
 import deepspace.WeaponToUI;
 import deepspace.ShieldToUI;
+import Controller.Controller;
 
 public class SpaceStationView extends javax.swing.JPanel {
     HangarView hv;
@@ -60,7 +61,7 @@ public class SpaceStationView extends javax.swing.JPanel {
         revalidate();
         
     }
-     ArrayList<Integer> getSelectedWeapons(){
+    ArrayList<Integer> getSelectedWeapons(){
         ArrayList<Integer> sw = new ArrayList();
         int i = 0;
         for(Component c : panel_weapon.getComponents()){
@@ -72,6 +73,20 @@ public class SpaceStationView extends javax.swing.JPanel {
         return sw;
     }
     
+    ArrayList<Integer> getSelectedWeaponsInHangar(){
+        ArrayList<Integer> sw = new ArrayList();
+        int i = 0;
+        for(Component c : panel_weapon.getComponents()){
+            if(((WeaponView)c).isSelected()){
+                sw.add(i);
+            }
+            i++;
+        }
+        return sw;
+    }   
+     
+     
+    
     ArrayList<Integer> getSelectedShields(){
         ArrayList<Integer> ss = new ArrayList();
         int i = 0;
@@ -82,7 +97,7 @@ public class SpaceStationView extends javax.swing.JPanel {
             i++;
         }
         return ss;
-}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -268,7 +283,14 @@ public class SpaceStationView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_equiparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_equiparActionPerformed
-         Controller.Controller.mountCombatElements(hv.getHangarItems());
+        ArrayList<Integer> selected_weapons= getSelectedWeapons();
+        ArrayList<Integer> selected_shields= getSelectedShields();
+        
+        for(int i=selected_weapons.size()-1; i>=0; i--)
+            MainWindow.controller.mountWeapon(i);
+        
+        for(int i=selected_shields.size()-1; i>=0; i--)
+            MainWindow.controller.mountShieldBooster(i);
     }//GEN-LAST:event_jb_equiparActionPerformed
 
 
