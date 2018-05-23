@@ -123,7 +123,7 @@ module Deepspace
         for i in names
           supplies= dealer.nextSuppliesPackage
           station= SpaceStation.new(i, supplies)
-          l= Loot.new(0, @dice.initWithNHangars, @dice.initWithNWeapons, @dice.initWithNShields, 0)
+          l= Loot.new(0, @dice.initWithNWeapons, @dice.initWithNShields, @dice.initWithNHangars, 0)
           station.setLoot(l)
           
           @spaceStations << station
@@ -175,20 +175,23 @@ module Deepspace
       @gameState.state == GameState::INIT or @gameState.state == GameState::AFTERCOMBAT
     end
     
-    def makeStationEfficient
-      if @dice.extraEfficiency
-        @currentStation= BetaPowerEfficientSpaceStation(@currentStation).new 
-      else
-        @currentStation= PowerEfficientSpaceStation(@currentStation).new
-      end
+  def createSpaceCity
+    if (!@haveSpaceCity)
+      aux = Array.new(@spaceStations)
+      aux.delete_at(@currentStationIndex)
+      @currentStation = SpaceCity.new(@currentStation, aux)
+      @spaceStations[@currentStationIndex] = @currentStation
     end
-    
-    def createSpaceCity 
-      if !@haveSpaceCity
-        @currentStation= SpaceCity.new(@currentStation, @spaceStations)
-        @haveSpaceCity= true
-      end
+  end
+  
+  def makeStationEfficient
+    if(@dice.extraEfficiency)
+      @currentStation = BetaPowerEfficientSpaceStation.new(@currentStation)
+    else
+      @currentStation = PowerEfficientSpaceStation.new(@currentStation)
     end
+    @spaceStations[@currentStationIndex] = @currentStation
+  end
     
   end #class
 end #module
