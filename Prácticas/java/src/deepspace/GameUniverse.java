@@ -152,7 +152,7 @@ public class GameUniverse {
                 nw= dice.initWithNWeapons();
                 ns= dice.initWithNShields();
               
-                station.setLoot(new Loot(0, nh, nw, ns, 0));
+                station.setLoot(new Loot(0, nw, ns, nh, 0));
                 spaceStations.add(station);
             }
             
