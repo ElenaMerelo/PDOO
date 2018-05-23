@@ -16,6 +16,10 @@ import deepspace.*;
 public class MainWindow extends JFrame implements View {
     static Controller controller;
     private String appName= "DeepSpace";
+    //Probando HangarView
+    private HangarView hv;
+    private HangarToUI hangarUI;
+    private CardDealer c= CardDealer.getInstance();
     //private SpaceStationView spaceStationView;
     //private EnemyStarShipView enemyView;
     
@@ -29,6 +33,11 @@ public class MainWindow extends JFrame implements View {
         getNames();
         repaint();
         setLocationRelativeTo(null);
+        
+        //Probando HangarView 
+        hangarUI= new HangarToUI(c.nextHangar());
+        hv= new HangarView();
+        hv.setHangarView(hangarUI);
         
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {

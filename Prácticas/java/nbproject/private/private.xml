@@ -3,16 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/BetaPowerEfficientSpaceStation.java</file>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/UI/TextUI.java</file>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/SpaceCity.java</file>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/Damage.java</file>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/CardDeck.java</file>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/PowerEfficientSpaceStation.java</file>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/View/LootView.java</file>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/GameUniverse.java</file>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/SpaceStation.java</file>
-            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/CardDealer.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/View/View.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/View/WeaponView.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/Controller/Controller.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/HangarToUI.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/WeaponToUI.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/View/MainWindow.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/deepspace/ShieldToUI.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/View/HangarView.java</file>
+            <file>file:/home/elena/NetBeansProjects/deepspace/src/View/NamesCapture.java</file>
         </group>
     </open-files>
 </project-private>

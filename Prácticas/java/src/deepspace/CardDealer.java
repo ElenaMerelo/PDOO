@@ -12,7 +12,8 @@ import java.util.Arrays;
  *
  * @author Profesor
  */
-class CardDealer {
+//Poner public para probar HangarView
+public class CardDealer {
     private static final CardDealer instance=new CardDealer();
     
     SafeSuppliesCardDeck suppliesPackages;
