@@ -9,14 +9,7 @@ import View.MainWindow;
 import View.NamesCapture;
 import java.util.ArrayList;
 
-import deepspace.CombatResult;
-import deepspace.GameState;
-import deepspace.GameUniverse;
-import deepspace.GameUniverseToUI;
-import deepspace.LootToUI;
-import deepspace.WeaponToUI;
-import deepspace.SpaceStationToUI;
-import deepspace.WeaponType;
+import deepspace.*;
 
 
 
@@ -31,13 +24,13 @@ public class Controller {
     }
 
     public void start() {
-        model.init( ( (MainWindow) view).getNames() );
+        model.init(view.getNames());
         view.updateView();
         view.showView();
     }
     
     public GameUniverseToUI getUIversion(){
-        return new GameUniverseToUI(this.model);
+        return model.getUIversion();
     }
     
     public void finish(int i) {
@@ -49,9 +42,75 @@ public class Controller {
         return model.getState();
     }
     
-    public void mountCombatElements(ArrayList<Integer> hangar_items){
-        
+    public SpaceStationToUI currentStation(){
+        return model.getUIversion().getCurrentStation();
+    }
+    
+    public EnemyToUI currentEnemy(){
+        return model.getUIversion().getCurrentEnemy();
+    }
+    
+    public CombatResult combat(){
+        CombatResult r= model.combat();
+        view.updateView();
+        return r;
+    }    
+    
+    public boolean haveAWinner(){
+        return model.haveAWinner();
+    }
+    
+    public void discardHangar(){
+        model.discardHangar();
+        view.updateView();
+    }
+    
+    public boolean nextTurn(){
+        boolean t= model.nextTurn();
+        view.updateView();
+        return t;
+    }
+    
+    public void mountWeapon(int i){
+        model.mountWeapon(i); 
+        view.updateView();
+    }
+    
+    public void mountShieldBooster(int i){
+        model.mountShieldBooster(i);
+        view.updateView();
+    }
+    
+    public void discardWeapon(int i){
+        model.discardWeapon(i);
+        view.updateView();
+    }
+    
+    public void discardWeaponInHangar(int i){
+        model.discardWeaponInHangar(i);
+        view.updateView();
     }
 
+    public void discardShieldBooster(int i){
+        model.discardShieldBooster(i);
+        view.updateView();
+    }
+    
+    public void discardShieldBoosterInHangar(int i){
+        model.discardShieldBoosterInHangar(i);
+        view.updateView();
+    }   
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

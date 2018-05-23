@@ -1,25 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author elena
  */
 package Controller;
 
 import View.View;
+import View.MainWindow;
+import View.NamesCapture;
 import java.util.ArrayList;
-import model.AppState;
-import model.Model;
-import model.ModelToUI;
 
-/**
- *
- * @author Profe
- */
+import deepspace.*;
+
+
+
 public class Controller {
-    private Model model;
+    private GameUniverse model;
     private View view;
 
-    public Controller(Model m, View v) {
+    public Controller(GameUniverse m, View v) {
         model = m;
         view = v;
         view.setController(this);
@@ -31,40 +29,88 @@ public class Controller {
         view.showView();
     }
     
+    public GameUniverseToUI getUIversion(){
+        return model.getUIversion();
+    }
+    
     public void finish(int i) {
         if (view.confirmExitMessage())
             System.exit(i);
     }
     
-    public AppState getAppState () {
-        return model.getAppState();
+    public GameState getState(){
+        return model.getState();
     }
     
-    public ModelToUI getModelToUI () {
-        return model.getUIversion();
+    public SpaceStationToUI currentStation(){
+        return model.getUIversion().getCurrentStation();
     }
-
-    public void getNewBankChecks(int howMany) {
-        for (int i = 0; i < howMany; i++)
-            model.getAnotherBankCheck();
+    
+    public EnemyToUI currentEnemy(){
+        return model.getUIversion().getCurrentEnemy();
+    }
+    
+    public CombatResult combat(){
+        CombatResult r= model.combat();
         view.updateView();
+        return r;
+    }    
+    
+    public boolean haveAWinner(){
+        return model.haveAWinner();
     }
-
-    public void next() {
-        model.next();
-        view.updateView();
-    }
-
-    public void spendBankChecks(ArrayList<Integer> selectedChecks) {
-        for (int i = selectedChecks.size() - 1; i >= 0; i--) {
-            model.spendBankCheck(selectedChecks.get(i));
-        }
+    
+    public void discardHangar(){
+        model.discardHangar();
         view.updateView();
     }
     
-    public void spendBankChecks(int selectedCheck) {
-        model.spendBankCheck(selectedCheck);
+    public boolean nextTurn(){
+        boolean t= model.nextTurn();
+        view.updateView();
+        return t;
+    }
+    
+    public void mountWeapon(int i){
+        model.mountWeapon(i); 
         view.updateView();
     }
+    
+    public void mountShieldBooster(int i){
+        model.mountShieldBooster(i);
+        view.updateView();
+    }
+    
+    public void discardWeapon(int i){
+        model.discardWeapon(i);
+        view.updateView();
+    }
+    
+    public void discardWeaponInHangar(int i){
+        model.discardWeaponInHangar(i);
+        view.updateView();
+    }
+
+    public void discardShieldBooster(int i){
+        model.discardShieldBooster(i);
+        view.updateView();
+    }
+    
+    public void discardShieldBoosterInHangar(int i){
+        model.discardShieldBoosterInHangar(i);
+        view.updateView();
+    }   
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
