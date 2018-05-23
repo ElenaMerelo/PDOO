@@ -1,4 +1,5 @@
 require_relative 'SpaceStation'
+require_relative 'SpaceCityToUI'
 
 module Deepspace
   attr_reader :collaborators
@@ -33,6 +34,10 @@ module Deepspace
     def setLoot(l)
       super.setLoot(l) 
       Transformation::NOTRANSFORM
+    end
+    
+    def getUIversion
+      SpaceCityToUI.new(self)
     end
     
   end
