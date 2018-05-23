@@ -22,7 +22,7 @@ public class BetaPowerEfficientSpaceStation extends PowerEfficientSpaceStation {
     }
     
     @Override
-    public BetaPowerEfficientSpaceStationToUI getUIVersion(){
+    public BetaPowerEfficientSpaceStationToUI getUIversion(){
         return new BetaPowerEfficientSpaceStationToUI(this);
     }
     
