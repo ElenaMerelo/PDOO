@@ -152,7 +152,7 @@ public class GameUniverse {
                 nw= dice.initWithNWeapons();
                 ns= dice.initWithNShields();
               
-                station.setLoot(new Loot(0, nh, nw, ns, 0));
+                station.setLoot(new Loot(0, nw, ns, nh, 0));
                 spaceStations.add(station);
             }
             
@@ -208,13 +208,17 @@ public class GameUniverse {
     
     private void makeStationEfficient(){
         currentStation= dice.extraEfficiency()? new BetaPowerEfficientSpaceStation(currentStation) : new PowerEfficientSpaceStation(currentStation); 
+        spaceStations.set(currentStationIndex, currentStation);
     }
     
     private void createSpaceCity(){
         if(!haveSpaceCity){
-            currentStation= new SpaceCity(currentStation, spaceStations);
+            ArrayList<SpaceStation> aux = new ArrayList(spaceStations);
+            aux.remove(currentStationIndex);
+            currentStation = new SpaceCity(currentStation, aux);
+            spaceStations.set(currentStationIndex, currentStation);
             haveSpaceCity = true;
-            // spaceStations.set(currentStationIndex, currentStation);
+
         }
     }
 }
