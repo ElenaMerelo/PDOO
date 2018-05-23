@@ -1,9 +1,10 @@
-package View;
-
 /**
  *
  * @author elena
  */
-public class CombatElementView {
-    
+
+package View;
+
+interface CombatElementView {
+    boolean isSelected();
 }

@@ -7,14 +7,20 @@ package View;
 
 import deepspace.WeaponToUI;
 
-public class WeaponView extends javax.swing.JPanel {
-
+public class WeaponView extends javax.swing.JPanel implements CombatElementView {
+    private boolean selected= false;
     /**
      * Creates new form WeaponView
      */
     WeaponView() {
         initComponents();
     }
+    
+    @Override
+    public boolean isSelected(){
+        return selected;
+    }
+    
     
     void setWeapon(WeaponToUI w){
         jLabel2.setText(w.getType().toString());

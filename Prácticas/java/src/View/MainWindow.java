@@ -34,11 +34,11 @@ public class MainWindow extends JFrame implements View {
         repaint();
         setLocationRelativeTo(null);
         
-        //Probando HangarView 
+        /*Probando HangarView 
         hangarUI= new HangarToUI(c.nextHangar());
         hv= new HangarView();
         hv.setHangarView(hangarUI);
-        
+        hv.getHangarItems();*/
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override

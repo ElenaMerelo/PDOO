@@ -6,8 +6,8 @@
 package View;
 import deepspace.ShieldToUI;
 
-public class ShieldBoosterView extends javax.swing.JPanel {
-
+public class ShieldBoosterView extends javax.swing.JPanel implements CombatElementView {
+    private boolean selected= false;
     /**
      * Creates new form ShieldBoosterView
      */
@@ -21,6 +21,11 @@ public class ShieldBoosterView extends javax.swing.JPanel {
         
         repaint();
         revalidate();
+    }
+    
+    @Override
+    public boolean isSelected(){
+        return selected;
     }
 
     /**
