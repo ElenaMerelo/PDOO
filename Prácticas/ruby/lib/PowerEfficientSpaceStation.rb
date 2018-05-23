@@ -1,5 +1,5 @@
 require_relative 'SpaceStation'
-
+require_relative 'PowerEfficientSpaceStationToUI'
 
 module Deepspace
   class PowerEfficientSpaceStation < SpaceStation
@@ -20,6 +20,10 @@ module Deepspace
     def setLoot(l)
       super
       Transformation::NOTRANSFORM
+    end
+    
+    def getUIversion
+      PowerEfficientSpaceStationToUI.new(self)
     end
   end
 end
