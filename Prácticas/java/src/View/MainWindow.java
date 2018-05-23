@@ -16,10 +16,10 @@ import deepspace.*;
 public class MainWindow extends JFrame implements View {
     static Controller controller;
     private String appName= "DeepSpace";
-    //Probando HangarView
+    /*Probando HangarView
     private HangarView hv;
     private HangarToUI hangarUI;
-    private CardDealer c= CardDealer.getInstance();
+    private CardDealer c= CardDealer.getInstance();*/
     //private SpaceStationView spaceStationView;
     //private EnemyStarShipView enemyView;
     
