@@ -1,5 +1,7 @@
 require_relative 'PowerEfficientSpaceStation'
 require_relative 'Dice'
+require_relative 'BetaPowerEfficientSpaceStationToUI'
+
 module Deepspace
   class BetaPowerEfficientSpaceStation < PowerEfficientSpaceStation
     @@EXTRAEFFIENCY= 1.2.freeze
@@ -15,6 +17,10 @@ module Deepspace
       end
       
       super
+    end
+    
+    def getUIversion
+      return BetaPowerEfficientSpaceStationToUI.new(self)
     end
   end
 end
