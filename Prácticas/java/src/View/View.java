@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public interface View {
     public void setController(Controller c);
-    //public void updateView();
+    public void updateView();
     public void showView();
     public String getAppName();
     // Dialogs

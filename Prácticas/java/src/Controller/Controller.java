@@ -32,8 +32,12 @@ public class Controller {
 
     public void start() {
         model.init( ( (MainWindow) view).getNames() );
-        //view.updateView();
+        view.updateView();
         view.showView();
+    }
+    
+    public GameUniverseToUI getUIversion(){
+        return new GameUniverseToUI(this.model);
     }
     
     public void finish(int i) {
@@ -43,6 +47,10 @@ public class Controller {
     
     public GameState getState(){
         return model.getState();
+    }
+    
+    public void mountCombatElements(ArrayList<Integer> hangar_items){
+        
     }
 
     

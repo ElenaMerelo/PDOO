@@ -70,6 +70,23 @@ public class MainWindow extends JFrame implements View {
     public void setController(Controller c){
         controller= c;
     }
+    
+    public void updateView(){
+        stationPanel.removeAll();
+        
+        GameUniverseToUI modelToUI = controller.getUIversion();
+        SpaceStationView spaceView = new SpaceStationView();
+        spaceView.setSpaceStationToUI(modelToUI.getCurrentStation());
+        stationPanel.add( spaceView );
+        
+        enemyPanel.removeAll();
+        EnemyView enemyView = new EnemyView();
+        enemyView.setEnemyToUI(modelToUI.getCurrentEnemy());
+        enemyPanel.add( enemyView );
+        
+        repaint();
+        revalidate();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
