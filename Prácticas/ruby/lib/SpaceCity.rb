@@ -1,4 +1,5 @@
 require_relative 'SpaceStation'
+require_relative 'SpaceCityToUI'
 
 module Deepspace
   attr_reader :collaborators
