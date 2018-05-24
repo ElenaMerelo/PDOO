@@ -1,5 +1,5 @@
 require_relative 'SpaceStation'
-
+require_relative 'PowerEfficientSpaceStationToUI'
 
 module Deepspace
   class PowerEfficientSpaceStation < SpaceStation
