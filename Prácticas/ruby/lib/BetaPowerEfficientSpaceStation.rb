@@ -5,7 +5,7 @@ module Deepspace
     @@EXTRAEFFIENCY= 1.2.freeze
 
     def initialize(station)
-      newCopy(station)
+      super(station)
       @dice= Dice.new
     end
     
