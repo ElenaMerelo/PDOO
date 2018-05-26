@@ -1,12 +1,13 @@
 require_relative 'SpaceStation'
+require_relative 'PowerEfficientSpaceStationToUI'
 
 
 module Deepspace
   class PowerEfficientSpaceStation < SpaceStation
     @@EFFICIENCYFACTOR= 1.1.freeze
     
-    def initialize(station)
-      newCopy(station)
+    def initialize(s)
+       super(s.name, s.ammoPower, s.fuelUnits, s.shieldPower, s.hangar, s.weapons,s.shieldBoosters, s.pendingDamage,s.nMedals) 
     end
     
     def fire

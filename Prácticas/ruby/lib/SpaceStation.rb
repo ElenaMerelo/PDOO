@@ -12,17 +12,21 @@ module Deepspace
     @@MAXFUEL= 100.freeze
     @@SHIELDLOSSPERUNITSHOT= 0.1.freeze
 
-    def initialize(n, supplies)
-      @name= n
-      @ammoPower= supplies.ammoPower
-      @fuelUnits= supplies.fuelUnits 
-      @shieldPower= supplies.shieldPower
-      @nMedals= 0
-      @pendingDamage= nil
-      @weapons= Array.new 
-      @shieldBoosters= Array.new
-      @hangar= nil
-    end
+  def initialize(n, ap,fu,sp,h=nil,w=[],sb=[],pd=nil,m=0)
+    @name = n
+    @ammoPower = ap
+    @fuelUnits = fu
+    @shieldPower = sp
+    @hangar = h
+    @weapons = w
+    @shieldBoosters = sb
+    @pendingDamage = pd
+    @nMedals = m
+  end
+  
+  def self.newStation(n, s)
+      new(n,s.ammoPower,s.fuelUnits,s.shieldPower)
+  end
     
     def self.newCopy(station)
       supplies= SuppliesPackage.new(station.ammoPower, station.fuelUnits, station.ammoPower)
