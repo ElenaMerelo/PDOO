@@ -8,13 +8,11 @@ instancias de objetos mutables (modificables)
 By: Elena Merelo
 =end
 
-require_relative "DamageToUI"
-require_relative 'WeaponType'
-require_relative 'Weapon'
+require_relative 'DamageToUI'
 
 module Deepspace
   class Damage
-    attr_reader :nWeapons, :nShields,  :weapons
+    attr_reader :nShields
     
     def initialize(ns)
       @nShields= ns
@@ -40,21 +38,11 @@ module Deepspace
     end
     
     def to_s
-     ", nShields #{@nShields}"
+     " nShields #{@nShields}"
     end
     
-    def adjust(w, s)
+    def adjustShields(s)
       [s.length, @nShields].min
-    end
-    
-    private
-    def arrayContainsType(w, t)
-      index= w.index(t)
-      if index == nil
-        -1
-      else
-        index
-      end
     end
     
   end #class

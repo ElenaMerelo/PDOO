@@ -44,7 +44,17 @@ module Deepspace
         [freq_1[m], freq_2[m]].min.times { min_freq << m }
         [freq_1[p], freq_2[p]].min.times { min_freq << p }
         
-        SpecificDamage.new(min_freq, super)
+        SpecificDamage.new(min_freq, adjustShields(s))
+    end
+    
+    private
+    def arrayContainsType(w, t)
+      index= w.index(t)
+      if index == nil
+        -1
+      else
+        index
+      end
     end
     
     #public :adjust

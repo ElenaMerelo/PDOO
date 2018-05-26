@@ -4,8 +4,8 @@ require_relative "NumericDamageToUI"
 module Deepspace
   class NumericDamage < Damage
     def initialize(nw, ns)
-      @nWeapons= nw
       super(ns)
+      @nWeapons= nw
     end
     
     def self.newCopy(d)
@@ -33,7 +33,7 @@ module Deepspace
     def adjust(w, s)
       n_weapons= [w.length, @nWeapons].min  #nos quedamos con quien tenga menos armas
         
-      NumericDamage.new(n_weapons, super)
+      NumericDamage.new(n_weapons, adjustShields(s))
     end
     
     #public :adjust

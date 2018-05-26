@@ -1,9 +1,11 @@
 require_relative 'SpaceStation'
+require_relative 'Transformation'
+require_relative 'SpaceCityToUI'
 
 module Deepspace
-  attr_reader :collaborators
-  
   class SpaceCity < SpaceStation
+    attr_reader :collaborators
+    
     def initialize(base, rest)
       super(base)
       @base= base 
@@ -11,7 +13,7 @@ module Deepspace
     end
     
     def fire
-      f= base.fire 
+      f= @base.fire 
       
       for s in @collaborators
         f += s.fire
@@ -21,7 +23,7 @@ module Deepspace
     end
     
     def protection
-      p= base.protection 
+      p= @base.protection 
       
       for s in @collaborators
         p += s.protection 
@@ -31,7 +33,7 @@ module Deepspace
     end
     
     def setLoot(l)
-      super.setLoot(l) 
+      super
       Transformation::NOTRANSFORM
     end
     
