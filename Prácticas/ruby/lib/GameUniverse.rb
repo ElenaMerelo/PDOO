@@ -122,7 +122,7 @@ module Deepspace
         
         for i in names
           supplies= dealer.nextSuppliesPackage
-          station= SpaceStation.newSpaceStation(i, supplies)
+          station= SpaceStation.new(i, supplies)
           l= Loot.new(0, @dice.initWithNWeapons, @dice.initWithNShields, @dice.initWithNHangars, 0)
           station.setLoot(l)
           

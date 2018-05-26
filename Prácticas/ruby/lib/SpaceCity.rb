@@ -1,8 +1,5 @@
 require_relative 'SpaceStation'
-<<<<<<< HEAD
 require_relative 'Transformation'
-=======
->>>>>>> 6517b608a46db2f2c497f71638788347aeb026b9
 require_relative 'SpaceCityToUI'
 
 module Deepspace
