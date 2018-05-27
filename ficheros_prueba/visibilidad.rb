@@ -4,17 +4,17 @@
 class Test
   private
   def privado
-    puts "privado"
+    puts "Privado desde #{self.class}"
   end
 
   protected
   def protegido
-    puts "Protegido"
+    puts "Protegido desde #{self.class}"
   end
 
   public
   def publico
-    puts "Publico"
+    puts "Publico desde #{self.class}"
   end
 
   def otropublico(otro)
@@ -39,6 +39,14 @@ class Hija < Test
   end
 end
 
+class Hija2
+  def metodo
+    # Hija.new.privado
+    # Hija.new.protegido
+    Hija.new.publico
+  end
+end
+
 t=Test.new
 #t.privado
 #t.protegido
@@ -52,3 +60,6 @@ h=Hija.new
 h.publico
 h.metodo
 h.metodo2(Test.new)
+
+h2= Hija2.new
+h2.metodo

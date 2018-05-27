@@ -1,6 +1,6 @@
 # Paquetes de java
 + Permiten agrupar clases
-+ No permiten agrupar otros paquetes
++ No permiten agrupar otros paquetes, aunque parezca que sí
 + `import` permite acceder de forma directa a clases de otro paquete:
 
 ~~~java
@@ -65,7 +65,7 @@ module cronometro
   def parar ... end
 end
 ------------------------------------
-require_relative “crono”
+require_relative 'crono'
 class Reloj
   include cronometro
   def mostrarHora...end
@@ -76,19 +76,8 @@ rel.mostrarHora
 rel.empezar
 ~~~
 
-# Especificadores de acceso java
-
-Class | Package | Subclass | Subclass (same pkg) | Subclass (diff pkg) | World
-public | +| + | + | + | +     
-protected | + | + | + | + |         
-no modifier | + | + | + | - |    
-private     |   +   |         |          |          |    
-
-+ : accessible
-blank : not accessible
-
 # Especificadores de acceso ruby
-La visibilidad de las atributos de instancia, de clase y de instancia de la clase es privada en Ruby, mientas que la de las constantes es pública. No pueden cambiarse.
+La visibilidad de los atributos de instancia, de clase y de instancia de la clase es privada en Ruby, mientras que la de las constantes es pública. No pueden cambiarse.
 
 Por defecto los métodos son públicos. Cuando un método es privado solo puede ser invocado sin un receptor explícito (tampoco self).
 
@@ -122,7 +111,7 @@ hello from A
 hello from B
 ~~~
 
-However, as soon as we try to use an explicit receiver, even if the receiver is "self", the method call will fail e.g.
+However, as soon as we try to use an explicit receiver, even if the receiver is "self", the method call will fail:
 
 ~~~ruby
 class C < A
@@ -869,6 +858,154 @@ What if you need to use something as both a producer and a consumer? In that cas
 Here, the operator will consume a value to produce another value. If we try to use extends, the operator will not be able to consume values we pass, and if we try to use super, the operator will not be able to produce values for us to use.
 
 From https://www.quora.com/What-is-the-question-mark-in-Java-Generics-used-for
+
+# Copiando en java
+
+Si llamamos al método `clone()` desde cualquier clase que hayamos creado, si no es Object entonces habrá que hacer un casting a dicha clase. Por ejemplo, si tengo en una clase un atributo de instancia privado `ArrayList<numero> numeros`, donde numero es otra clase que tiene un Integer dentro, al hacer `numeros.clone()` me dirá que no se puede convertir de tipo Object a ArrayList<numero>, por eso hemos de hacer el casting:
+
+~~~java
+ArrayList<numero> getNumeros(){
+  return (ArrayList<numero>) numeros.clone(); //se hace el casting porque clone es de la clase Object
+}
+~~~
+
+# Mezclando herencia y clases abstractas
+
+Supongamos que tenemos en un archivo A.java:
+
+~~~java
+package pruebas;
+
+
+public class A {
+    private int a= 10;
+    private static String s= "hola";
+
+    A(int b, String r){
+        a= b;
+        s= r;
+    }
+
+    public void met1(int a){
+        this.a= a;
+    }
+
+    protected void met2(String s){
+        this.s= s;
+    }
+
+    public void showA(){
+        System.out.println(a);
+    }
+
+    public void showS(){
+        System.out.println(s);
+    }
+}
+~~~
+
+En otro llamado B.java:
+
+~~~java
+package pruebas;
+
+public abstract class B extends A {
+    B(){
+        super(100, "hola abstracto");
+    }
+}
+~~~
+Si no se pone ningún constructor nos dice que el constructor de A "cannot be applied to given types", tenemos que proveer con otro constructor, aunque en la clase C, que hereda de la clase abstracta B, si no ponemos constructor no pasa nada.
+Y en C.java:
+
+~~~java
+package pruebas;
+
+
+public class C extends B {
+
+}
+~~~
+
+Y ejecutamos main.java:
+
+~~~java
+package pruebas;
+
+
+public class main {
+    public static void main(String [] args){
+        C c= new C();
+        c.showA();
+        c.showS();
+
+        c.met1(5);
+        c.met2("adios");
+        c.showA();
+        c.showS();
+    }
+}
+~~~
+
+Muestra
+100
+hola abstracto
+5
+adios
+
+Vemos así como podemos usar métodos de la clase A aunque en B no hagamos nada, al ser su hija. Cambiemos ligeramente B:
+
+~~~java
+//B.java
+package pruebas;
+
+public abstract class B extends A {
+    B(){
+        super(100, "hola abstracto");
+    }
+
+    public void met1(int a){
+        System.out.println("Met1 abstracto");
+        super.met1(a+10);
+    }
+
+    public abstract void met2(String s);
+}
+~~~
+Al haber añadido un método abstracto, ahora en C tenemos que implementarlo:
+
+~~~java
+//C.java
+package pruebas;
+
+
+public class C extends B {
+    public void met2(String s){
+        System.out.println("Met2 modificado");
+    }
+}
+~~~
+
+Ahora, al ejecutar lo anterior obtenemos:
+100
+hola abstracto
+Met1 abstracto
+Met2 modificadoadios
+15
+hola abstracto
+
+Observamos así el hecho de que ahora que en B hemos hecho el método, cuando hacemos c.met1(5), usa el met1 de B, igual que met2, ya no los busca en la clase padre.
+
+
+
+
+
+
+
+
+
+
+
 
 
 #
