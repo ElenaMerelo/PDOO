@@ -256,7 +256,7 @@ a.delete_at(99)   #=> nil
 
 + We can run an abstract class if it has main() method but we can’t run an interface because they can’t have main method implementation.
 
-+ Lo más importante, **si en una clase abstracta declaramos varios métodos abstractos, las clases que extienden dicha clase pueden implementarlos o no, mientras que si una clase "implementa" una interfaz ha de proveer una declaración de todos los métodos que en ella están.** Además, en las clases abstractas podemos poner atributos de instancia, en las interfaces no.
++ En definitiva, **si en una clase abstracta declaramos varios métodos, las clases que extienden dicha clase pueden implementarlos o no (si son método abstract tienen que implementarlos sí o sí), mientras que si una clase "implementa" una interfaz ha de proveer una declaración de todos los métodos que en ella están.** Además, en las clases abstractas podemos poner atributos de instancia y constructores, en las interfaces no.
 
 
 > Interesting question in StackOverflow:
@@ -996,8 +996,52 @@ hola abstracto
 
 Observamos así el hecho de que ahora que en B hemos hecho el método, cuando hacemos c.met1(5), usa el met1 de B, igual que met2, ya no los busca en la clase padre.
 
+# Trasteando con interfaces
+
+Aunque en una interfaz declare un método con visibilidad de paquete, esto es, no le ponga ningún especificador de acceso, se declara como si fuera público, luego si creo una clase que implementa la interfaz, al hacer los métodos de la interfaz siempre hay que ponerlos públicos. Si pongo private o protected da error. Ejemplo:
+
+~~~java
+//Interfaz1.java
+package pruebas;
+
+public interface Interfaz1 {
+    public void met1();
+    void met2();
+}
+~~~
+
+~~~java
+//Interfaz2.java
+package pruebas;
 
 
+public interface Interfaz2 extends Interfaz1 {
+    void met1();
+    void met3();
+}
+~~~
+
+~~~java
+//HijaDeInterfaces.java
+package pruebas;
+
+
+public class HijaDeInterfaces implements Interfaz2 {
+    public void met1(){
+        System.out.println("Soy met1");
+    }
+
+    public void met2(){
+        System.out.println("Soy met2");
+    }
+
+    public void met3(){
+        System.out.println("Soy met3");
+    }
+}
+~~~
+Como vemos, en este último fichero he tenido que declarar todos los métodos públicos, si no decía `met3() in HijaDeInterfaces cannot implement met3() in Interfaz2
+  attempting to assign weaker access privileges; was public`
 
 
 
