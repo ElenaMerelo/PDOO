@@ -12,16 +12,16 @@ module Deepspace
     @@MAXFUEL= 100.freeze
     @@SHIELDLOSSPERUNITSHOT= 0.1.freeze
 
-    def initialize(n, supplies)
+    def initialize(n, a, fuel, shield, medals= 0, pending= nil, w=Array.new, sb= Array.new, h= nil)
       @name= n
-      @ammoPower= supplies.ammoPower
-      @fuelUnits= supplies.fuelUnits 
-      @shieldPower= supplies.shieldPower
-      @nMedals= 0
-      @pendingDamage= nil
-      @weapons= Array.new 
-      @shieldBoosters= Array.new
-      @hangar= nil
+      @ammoPower= a
+      @fuelUnits= fuel 
+      @shieldPower= shield
+      @nMedals= medals
+      @pendingDamage= pending
+      @weapons= w
+      @shieldBoosters= sb
+      @hangar= h
     end
     
     def self.newCopy(station)

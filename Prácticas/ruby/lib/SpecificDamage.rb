@@ -19,6 +19,13 @@ module Deepspace
     def discardWeapon(w)
       @weapons.delete_at(@weapons.index(w.type))
     end
+    
+    #Examen P4
+    def discardFirstWeapon
+      if(@weapons.length > 0)
+        @weapons.delete_at(0)
+      end
+    end
 
     def hasNoEffect
       @weapons.empty? and super

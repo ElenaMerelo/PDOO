@@ -7,7 +7,7 @@ module Deepspace
     attr_reader :collaborators
     
     def initialize(base, rest)
-      super(base)
+      super.newCopy(base)
       @base= base 
       @collaborators= rest
     end

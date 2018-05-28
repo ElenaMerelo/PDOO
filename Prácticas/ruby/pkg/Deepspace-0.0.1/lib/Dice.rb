@@ -14,6 +14,7 @@ module Deepspace
       @NWEAPONSPROB= 0.33
       @FIRSTSHOTPROB= 0.5
       @EXTRAEFFICIENCYPROB= 0.8
+      @FORGETPROB= 0.5
       @generator= Random.new
     end
     
@@ -80,6 +81,11 @@ module Deepspace
     
     def extraEfficiency
       @generator.rand <= @EXTRAEFFICIENCYPROB ? false : true
+    end
+    
+    #Examen P4
+    def forget 
+      @generator.rand <= @FORGETPROB ? true : false
     end
     
     def to_s
