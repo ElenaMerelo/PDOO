@@ -8,8 +8,8 @@ package probando;
 public class buen_estudiante extends alumno {
     private double nota;
     
-    buen_estudiante(String d, String n, String c, int a, double nota){
-        super(d, n, c, a);
+    buen_estudiante(String n, int a, double nota){
+        super(n, a);
         this.nota= nota;
     }
     

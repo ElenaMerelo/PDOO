@@ -6,13 +6,13 @@ package probando;
 
 public class persona {
     private static int n_personas= 0;
-    protected String dni;
     private String nombre;
+    private int anios;
     static String planeta= "Tierra";
     
-    public persona(String d, String n){
-        this.dni= d;
-        this.nombre= n;
+    public persona(String name, int anios){
+        this.nombre= name;
+        this.anios= anios;
         n_personas += 1;
     }
     
@@ -20,27 +20,23 @@ public class persona {
         return n_personas;
     }
     
-    public static String get_planeta(){
-        return planeta;
-    }
-    
     protected String get_nombre(){
         return nombre;
     }
     
-    protected String get_dni(){
-        return dni;
+    int get_anios(){
+        return anios;
     }
-    
+ 
     protected void set_nombre(String n){
         this.nombre= n;
     }
     
-    void set_dni(String d){
-        this.dni= d;
+    static String getPlaneta(){
+        return planeta;
     }
     
     Object hablar(){
-        return "bla bla bla";
+        return "bla bla bla desde persona";
     }
 }

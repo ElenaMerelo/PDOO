@@ -5,13 +5,8 @@
 package probando;
 
 public class alumno extends persona implements zombie{
-    String carrera;
-    int curso;
-    
-    public alumno(String d, String n, String c, int a){
-        super(d, n);
-        this.carrera= c;
-        this.curso= a;
+    public alumno(String name, int anios){
+        super(name, anios);
     }
     
     @Override

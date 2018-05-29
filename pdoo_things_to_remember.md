@@ -324,16 +324,14 @@ public interface Football extends Sports
 + Sea por ejemplo la clase persona, que tiene una clase hija llamada alumno tal que cada una implementa el método hablar. Al ejecutar:
 
 ~~~Java
-persona p4= new alumno("5432", "5432", "e", 1);
+persona p4= new alumno("e", 1);
 System.out.println(p4.hablar());
 ~~~~
 
-Se llama al hablar del hijo, alumno, aunque su tipo estático sea persona.
-
-Si ponemos:
+Se llama al hablar del hijo, alumno, aunque su tipo estático sea persona.Si ponemos:
 
 ~~~Java
-persona p4= new persona("5432", "5432");
+persona p4= new persona("5432", 32);
 System.out.println(((alumno)p4).hablar());
 ~~~
 Da el siguiente error:
@@ -342,11 +340,10 @@ Exception in thread "main" java.lang.ClassCastException: probando.persona cannot
 	at probando.main.main(main.java:57)
 /home/elena/.cache/netbeans/8.2/executor-snippets/run.xml:53: Java returned: 1
 ~~~
-
-Otra opción sería:
+Debido a que no toda persona es un alumno.Otra opción sería:
 
 ~~~Java
-persona p4= new alumno("5432", "5432", "e", 1);
+persona p4= new alumno("e", 1);
 System.out.println(((persona)p4).hablar());
 ~~~
 
@@ -355,8 +352,8 @@ Que llama al hablar de alumno.
 Si asignamos varios tipos dinámicos a la misma variable se queda con el último:
 
 ~~~Java
-persona p4= new alumno("5432", "5432", "e", 1);
-p4= new persona("542", "432");
+persona p4= new alumno("e", 1);
+p4= new persona("542", 12);
 System.out.println(p4.hablar());
 ~~~
 
@@ -365,19 +362,19 @@ Llama al hablar de persona.
 Teniendo en cuenta que buen_estudiante hereda de alumno:
 
 ~~~java
-persona p4= new alumno("5432", "5432", "e", 1);
+persona p4= new alumno("e", 1);
 persona p5= (buen_estudiante) p4;
 System.out.println(p4.hablar());
 System.out.println(p5.hablar());
 ~~~
 
-Da el error `Exception in thread "main" java.lang.ClassCastException: probando.alumno cannot be cast to probando.buen_estudiante`, al ser su tipo dinámico padre de la clase desde la cual hacemos casting.
+Da el error `Exception in thread "main" java.lang.ClassCastException: probando.alumno cannot be cast to probando.buen_estudiante`, al ser su tipo dinámico padre de la clase desde la cual hacemos casting, no todo alumno es un buen_estudiante aunque si sea cierto el recíproco.
 
 Juntando los ejemplos anteriores, lo siguiente ejecutaría hablar desde alumno y hablar desde estudiante:
 
 ~~~java
-persona p4= new alumno("5432", "5432", "e", 1);
-persona p5= new buen_estudiante("543", "543", "t3", 1, 0.0);
+persona p4= new alumno("e", 1);
+persona p5= new buen_estudiante("543", 1);
 System.out.println(((persona)p4).hablar());
 System.out.println(((alumno)p5).hablar());
 ~~~
@@ -385,13 +382,13 @@ System.out.println(((alumno)p5).hablar());
 Aunque no funcionaría el hacer un casting de alumno a buen_estudiante:
 
 ~~~Java
-persona p4= new alumno("5432", "5432", "e", 1);
-persona p5= new buen_estudiante("543", "543", "t3", 1, 0.0);
+persona p4= new alumno("e", 1);
+persona p5= new buen_estudiante("t3", 1);
 System.out.println(((buen_estudiante)p4).hablar());
 System.out.println(((alumno)p5).hablar());
 ~~~
 
-En definitiva: si declaramos una variable y como tipo estático ponemos una clase hija y de tipo dinámico su padre, da error al interpretarlo, antes incluso de compilar. Si una variable la creamos varias veces con distintos tipos dinámicos, se queda con la última llamada al constructor. A la hora de ejecutar, desde una clase hija se pueden hacer castings a clases que se encuentran por encima, no da errores de ningún tipo, pero al ejecutar ejecutará desde la clase de tipo dinámico. Dará error si hacemos casting desde una clase padre a una inferior.
+En definitiva: si declaramos una variable y como tipo estático ponemos una clase hija y de tipo dinámico su padre, da error al interpretarlo, antes incluso de compilar. Si una variable la creamos varias veces con distintos tipos dinámicos, se queda con la última llamada al constructor. A la hora de ejecutar, desde una clase hija se pueden hacer castings a clases que se encuentran por encima, no da errores de ningún tipo, pero al ejecutar ejecutará desde la clase de tipo dinámico. **Siempre se ejecutan los métodos desde el tipo dinámico.** Dará error si hacemos casting desde una clase padre a una inferior. **Si un método no está en el tipo estático y si en el dinámico, aunque no de error de compilación lo de da de ejecución.**
 
 Al crear objetos mediante castings, dará error si intentamos hacer un casting de una clase padre a una hija, funcionará bien si hacemos casting de clase hija a clase padre, y ejecutará los métodos desde la clase que sea del tipo dinámico. Así, en el ejemplo de abajo no daría error al hacer casting y se llama a hablar desde alumno cuando se ejecuta `p6.hablar()`:
 
@@ -417,7 +414,23 @@ persona p6= (buen_estudiante) p4;
 System.out.println(p6.hablar());
 ~~~
 
-Igualmente un casting de una clase hermana a otra da error, los castings solo compilan si son de clase hija a alguna superior.
+Igualmente un casting de una clase hermana a otra da error, los castings solo compilan si son de clase hija a alguna superior. Además, en la declaración el tipo dinámico ha de ser "menor o igual" que el estático; `buen_estudiante p7= new alumno("543", "p7", "543", 1);` hace que se muestre el siguiente error: `incompatible types: alumno cannot be converted to buen_estudiante`. El tipo estático es en el que se buscan los métodos, por lo que si tengo una interfaz zombie y declaro:
+
+~~~Java
+zombie z= new alumno("erwf", 23);
+z.suenio();
+System.out.println(z.getPlaneta());
+~~~
+
+Obtenemos:
+
+~~~shell
+cannot find symbol
+symbol:   method getPlaneta()
+location: variable z of type zombie
+~~~
+
+Aunque alumno herede de persona, en la que sí que tenemos definido `getPlaneta()`, solo se pueden llamar desde ella métodos que están en la interfaz. Igualmente, si ponemos en lugar de zombie persona, no podemos llamar al método `suenio()` que está en zombie, aunque alumno implemente esa interfaz, y sí a métodos de la clase persona --> **El tipo estático sirve para establecer en tiempo de compilación a qué métodos podemos llamar.**
 
 #### Otros casos
 
@@ -441,7 +454,7 @@ reptil = animal; //Da error al interpretarlo, al ser el tipo estático de reptil
 
 ~~~java
 persona p6= new persona("$325342", "gef");
-alumno a= new alumno("gtrew", "5432", "5432",1);
+alumno a= new alumno("5432",1);
 
 p6= a;
 a= p6;
@@ -453,7 +466,7 @@ Al ser alumno heredero de persona `a= p6` da error, dice que no puede convertir 
 El siguiente ejemplo ilustra la segunda parte de lo anterior:
 ~~~java
 persona p6= new persona("5432", "persona");
-alumno a= new alumno("6543", "alumno", "5432",1);
+alumno a= new alumno("alumno", 1);
 
 a= (alumno) p6;
 System.out.println(a.get_nombre());
@@ -462,9 +475,9 @@ System.out.println(a.get_nombre());
 No da error de compilación pero al ejecutar lo último devuelve alumno, que es el nombre de a, cuando debería devolver persona, porque se está haciendo el casting de una clase padre a una hija. Si se hace desde una hija a una padre no da error de ejecución:
 
 ~~~java
-p3= new buen_estudiante("34", "buen estudiante", "54", 1, 4.5);
-persona p6= new persona("5432", "persona");
-alumno a= new alumno("6543", "alumno", "5432",1);
+p3= new buen_estudiante("buen estudiante", 1, 4.5);
+persona p6= new persona("persona", 11);
+alumno a= new alumno("alumno", 1);
 
 a= (alumno) p3;
 System.out.println(a.get_nombre());
@@ -707,9 +720,10 @@ Vemos así el hecho de que si tenemos un atributo de clase en la clase padre y l
 
 Lo de que si redefinimos el atributo de clase en la clase hija se cambie inmediatamente en la clase padre es diferente en java; si pongo en `Hija` `static int c= 0` las veces que imprima c desde padre imprimirá 33 o lo que valga, y cuando lo haga desde hija imprimirá 0, y será ese el que vaya incrementando, no el c de padre.
 
-> En resumen, en java si tenemos un atributo de clase en la clase padre y creamos uno igual en la clase hija con otro valor, al llamarlo desde la clase padre usará el valor que tenga en ésta, y en la clase hija el valor que tenga ahí, mientras que en ruby se cambia en los dos, si creo un atributo de clase en la clase hija con el mismo nombre que en la clase padre, la de la clase padre pasa a tener el valor del de la clase hija, y cualquier modificación desde la clase hija afecta el de la padre, cosa que no ocurre en java, donde son independientes.
+> En resumen, en java si tenemos un atributo de clase en la clase padre y creamos uno igual en la clase hija con otro valor, al llamarlo desde la clase padre usará el valor que tenga en ésta, y en la clase hija el valor que tenga ahí, mientras que en ruby se cambia en los dos, si creo un atributo de clase en la clase hija con el mismo nombre que en la clase padre, la de la clase padre pasa a tener el valor del de la clase hija, aunque no creemos una instancia de hija ni la usemos, se queda con el último valor asignado al atributo de clase, y cualquier modificación desde la clase hija afecta el de la padre, cosa que no ocurre en java, donde son independientes.
 
 >También si desde la clase hija ejecutamos un método que llama a un método de la clase padre y a su vez desde éste se llama a un método que está implementado en las dos clases, en java se tomará el del padre mientras que en ruby se tomará la definición que se da en la clase Hija del mismo.
+
 # Visibilidad Java
 
 + Basically, `private` hides from other classes within the package, `public` exposes to classes outside the package and `protected` is a version of public restricted only to subclasses.
@@ -718,7 +732,7 @@ Lo de que si redefinimos el atributo de clase en la clase hija se cambie inmedia
 
 + Se pueden pasar como parámetros cosas en plan test.visibilidad siempre que:
   + el atributo al que referencian no sea privado
-  + Si la visibilidad del atributo es protegido o paquete se puede si están en el mismo paquete.
+  + Si la visibilidad del atributo es protegido o paquete se puede si es una subclase o están en el mismo paquete, respectivamente.
   + si es público siempre
 
 # super en ruby
