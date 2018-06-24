@@ -17,12 +17,12 @@ public class NumericDamage extends Damage {
     }
     
     @Override
-    public NumericDamage copy(Damage d){
-        return new NumericDamage(((NumericDamage) d).getNWeapons(), d.getNShields());
+    NumericDamage copy(){
+        return new NumericDamage(nWeapons, getNShields());
     }
     
     @Override
-    public NumericDamageToUI getUIversion(){
+    NumericDamageToUI getUIversion(){
         return new NumericDamageToUI(this);
     }
     
@@ -52,6 +52,6 @@ public class NumericDamage extends Damage {
     
     @Override 
     public String toString(){
-        return "nShields- " + super.toString() + ", nWeapons- " + nWeapons;
+        return super.toString() + ", nWeapons- " + nWeapons;
     }
 }

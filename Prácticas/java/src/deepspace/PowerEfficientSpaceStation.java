@@ -8,7 +8,7 @@ package deepspace;
 public class PowerEfficientSpaceStation extends SpaceStation {
     private static final float EFFICIENCYFACTOR= 1.1f;
     
-    public PowerEfficientSpaceStation(SpaceStation station){
+    PowerEfficientSpaceStation(SpaceStation station){
         super(station);
     }
     
@@ -24,8 +24,9 @@ public class PowerEfficientSpaceStation extends SpaceStation {
     
     @Override
     public Transformation setLoot(Loot l){
-        super.setLoot(l);
-        return Transformation.NOTRANSFORM;
+        if(super.setLoot(l) == Transformation.GETEFFICIENT)
+            return Transformation.GETEFFICIENT;
+        else return Transformation.NOTRANSFORM;
     }
     
     public PowerEfficientSpaceStationToUI getUIversion(){

@@ -3,16 +3,16 @@
  * @author elena
  */
 
-package deepspace;
-import java.util.Random;
+package deepspace;  
 
 public class BetaPowerEfficientSpaceStation extends PowerEfficientSpaceStation {
     private static final float EXTRAEFFICIENCY= 1.2f;
     private Dice dice;
-    private Random generator;
+  
     
     public BetaPowerEfficientSpaceStation(SpaceStation station){
         super(station);
+        dice= new Dice();
     }
     
     @Override
