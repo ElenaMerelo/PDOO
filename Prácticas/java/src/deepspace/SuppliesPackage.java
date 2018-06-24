@@ -33,7 +33,7 @@ class SuppliesPackage{
     }
     
     public String toString(){
-        return ammoPower + " ammoPower" + fuelUnits + " fuelUnits" + shieldPower + " shieldPower";
+        return ammoPower + " ammoPower" + fuelUnits + ", fuelUnits" + shieldPower + ", shieldPower";
     }
     
 }

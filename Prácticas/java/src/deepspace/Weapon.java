@@ -22,9 +22,10 @@ class Weapon implements CombatElement{
     }
     
     //Consultores
+    /*
     public String getName(){
         return name;
-    }
+    }*/
     
     public WeaponType getType(){
         return type;
@@ -57,6 +58,7 @@ class Weapon implements CombatElement{
         return 1.0f;
     }
     
+    @Override
     public String toString(){
         return "Arma " + name + " " + type + " " + uses;
     }
