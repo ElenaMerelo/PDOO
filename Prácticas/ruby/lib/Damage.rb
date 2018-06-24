@@ -49,9 +49,6 @@ module Deepspace
     def adjust(w,s)
     end
     
-    def copy
-    end
-    
     def discardWeapon(w)
     end
     

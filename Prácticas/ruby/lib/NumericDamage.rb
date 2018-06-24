@@ -1,8 +1,10 @@
-require_relative "Damage"
-require_relative "NumericDamageToUI"
+require_relative 'Damage'
+require_relative 'NumericDamageToUI'
 
 module Deepspace
   class NumericDamage < Damage
+    public_class_method :new
+    attr_reader :nWeapons
     def initialize(nw, ns)
       super(ns)
       @nWeapons= nw
