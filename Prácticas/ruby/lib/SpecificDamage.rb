@@ -1,8 +1,10 @@
-require_relative "Damage"
-require_relative "SpecificDamageToUI"
+require_relative 'Damage'
+require_relative 'SpecificDamageToUI'
 
 module Deepspace
   class SpecificDamage < Damage
+    attr_reader :weapons
+    public_class_method :new
     def initialize(w, ns)
       super(ns)
       @weapons= Array.new(w)
