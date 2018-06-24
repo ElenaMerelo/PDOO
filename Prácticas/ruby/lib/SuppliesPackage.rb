@@ -14,7 +14,7 @@ module Deepspace
     end
     
     def self.newCopy(s)
-      new(s.ammoPower, s.fuelUnits, s.shieldPower)
+      SuppliesPackage.new(s.ammoPower, s.fuelUnits, s.shieldPower)
     end
     
     def to_s
