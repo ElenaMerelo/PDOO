@@ -9,26 +9,26 @@ package deepspace;
 class Loot {
     private int nSupplies, nWeapons, nShields, nHangars, nMedals;
     private boolean getEfficient, spaceCity;
-        
-    protected Loot(int supplies, int weapons, int shields, int hangars, int medals, boolean ef, boolean city){
+    
+    Loot(int supplies, int weapons, int shields, int hangars, int medals){
         this.nSupplies= supplies;
         this.nWeapons= weapons;
         this.nShields= shields;
         this.nHangars= hangars;
         this.nMedals= medals;
+        this.getEfficient= false;
+        this.spaceCity= false;
+    }
+    
+    Loot(int supplies, int weapons, int shields, int hangars, int medals, boolean ef, boolean city){
+        this(supplies, weapons, shields, hangars, medals);
         this.getEfficient= ef;
         this.spaceCity= city;
     }
     
-    Loot(int supplies, int weapons, int shields, int hangars, int medals){
-    this.nSupplies= supplies;
-    this.nWeapons= weapons;
-    this.nShields= shields;
-    this.nHangars= hangars;
-    this.nMedals= medals;
-    this.getEfficient= false;
-    this.spaceCity= false;
-}
+    Loot(Loot l){
+        this(l.nSupplies, l.nWeapons, l.nShields, l.nHangars, l.nMedals, l.getEfficient, l.spaceCity);
+    }
 
     //Consultores 
     public int getNSupplies(){
@@ -60,7 +60,7 @@ class Loot {
     }
     
     public String toString(){
-        return nSupplies + " supplies, " + nWeapons + " weapons, " + nShields
+        return "Loot: " + nSupplies + " supplies, " + nWeapons + " weapons, " + nShields
                 + " shields, " + nHangars + " hangars, " + nMedals + " medals, getEfficient: " + getEfficient + "spaceCity: " + spaceCity;
     }
     
