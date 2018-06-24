@@ -19,7 +19,7 @@ class EnemyStarShip implements SpaceFighter{
     }
     
     EnemyStarShip(EnemyStarShip e){
-        this(e.name, e.ammoPower, e.shieldPower, e.loot, e.damage);
+        this(e.name, e.ammoPower, e.shieldPower, e.loot, e.damage.copy());
     }
     
     //Getters
@@ -64,14 +64,12 @@ class EnemyStarShip implements SpaceFighter{
      * Se devuelve el resultado producido por el disparo recibido.
     */
     public ShotResult receiveShot(float shot){
-        if(shieldPower < shot)
-            return ShotResult.DONOTRESIST;
-        return ShotResult.RESIST;
+        return shieldPower < shot ? ShotResult.DONOTRESIST : ShotResult.RESIST;
     }
     
     @Override
     public String toString(){
-         return "EnemyStarShip ~ " + "ammoPower: " + ammoPower + ", shieldPower: " + shieldPower + ", name: " + name + ", loot: " + loot + ", damage: " + damage;
+         return "EnemyStarShip ~ " + "ammoPower: " + ammoPower + ", shieldPower: " + shieldPower + ", name: " + name + ", loot: " + loot.toString() + ", damage: " + damage.toString();
     }
 }
 

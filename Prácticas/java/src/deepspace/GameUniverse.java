@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 public class GameUniverse {
     private static final int WIN= 10;
-    private int currentStationIndex;
-    private int turns;
+    private int currentStationIndex, turns;
     private EnemyStarShip currentEnemy;
     private GameStateController gameState;
     private Dice dice;
@@ -21,6 +20,7 @@ public class GameUniverse {
         gameState= new GameStateController();
         turns= 0;
         dice= new Dice();
+        haveSpaceCity= false;
     }
     
     //Getters
@@ -62,7 +62,7 @@ public class GameUniverse {
     }
     
     public boolean haveAWinner(){
-        return currentStation.getNMedals() == WIN;
+        return currentStation.getNMedals() >= WIN;
     }
     
     public void mountShieldBooster(int i){
@@ -115,16 +115,15 @@ public class GameUniverse {
         else{
             Loot l= enemy.getLoot();
             Transformation t= station.setLoot(l);
-            combatResult= CombatResult.STATIONWINS;
-            if(t == Transformation.GETEFFICIENT){
+            combatResult= CombatResult.STATIONWINSANDCONVERTS;
+            if(t == Transformation.GETEFFICIENT)
                 makeStationEfficient();
-                combatResult= CombatResult.STATIONWINSANDCONVERTS;
-
-            }
-            else if(t == Transformation.SPACECITY){
+                
+            else if(t == Transformation.SPACECITY && !haveSpaceCity)
                 createSpaceCity();
-                combatResult= CombatResult.STATIONWINSANDCONVERTS;
-            }
+            
+            else 
+                combatResult= CombatResult.STATIONWINS;
         }
         
         gameState.next(turns, spaceStations.size());
@@ -143,11 +142,13 @@ public class GameUniverse {
             spaceStations= new ArrayList<>();
             CardDealer dealer= CardDealer.getInstance();
             int nh, nw, ns;
+            SuppliesPackage supplies;
+            SpaceStation station;
             
             for(String name: names){
-                SuppliesPackage supplies= dealer.nextSuppliesPackage();
+                supplies= dealer.nextSuppliesPackage();
+                station= new SpaceStation(name, supplies);
                 
-                SpaceStation station= new SpaceStation(name, supplies);
                 nh= dice.initWithNHangars();
                 nw= dice.initWithNWeapons();
                 ns= dice.initWithNShields();
@@ -157,7 +158,6 @@ public class GameUniverse {
             }
             
             currentStationIndex= dice.whoStarts(names.size());
-            
             currentStation= spaceStations.get(currentStationIndex);
             currentEnemy= dealer.nextEnemy();
             
@@ -218,9 +218,13 @@ public class GameUniverse {
             currentStation = new SpaceCity(currentStation, aux);
             spaceStations.set(currentStationIndex, currentStation);
             haveSpaceCity = true;
-
         }
     }
+    
+    @Override
+    public String toString() {
+        return "CurrentStationIndex: " + currentStationIndex + ", turns: " + turns + ", dice: " + dice + ", gameState: " + gameState + ", currentStation: " + currentStation + ", spaceStations: " + spaceStations;
+}
 }
 
 

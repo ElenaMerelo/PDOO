@@ -11,10 +11,8 @@
 package deepspace;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Arrays;
 
-public abstract class Damage {
+abstract class Damage {
     private int nShields;
     
     Damage(int n){
@@ -34,7 +32,7 @@ public abstract class Damage {
         return nShields == 0;
     }
     
-    public int adjust_shields(ArrayList<ShieldBooster> s){
+    int adjust_shields(ArrayList<ShieldBooster> s){
         return Math.min(s.size(), nShields);
     }
     
@@ -43,7 +41,7 @@ public abstract class Damage {
         return "nShields- " + nShields;
     }
     
-    public abstract DamageToUI getUIversion();
+    abstract DamageToUI getUIversion();
     
     
     /**
@@ -53,7 +51,7 @@ public abstract class Damage {
      * mismo pero reducida si es necesario para que no implique perder armas o potenciadores de escudos
      * que no están en las colecciones de los parámetros.
     */
-    public abstract Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s);
+    abstract Damage adjust(ArrayList<Weapon> w, ArrayList<ShieldBooster> s);
     
     /**
      * @brief Si la instancia dispone de una lista de tipos concretos de armas,
@@ -61,8 +59,8 @@ public abstract class Damage {
      * decrementa en una unidad el contador de armas que deben ser eliminadas. Ese contador no puede
      * ser inferior a cero en ningún caso.
     */    
-    public abstract void discardWeapon(Weapon w);
+    abstract void discardWeapon(Weapon w);
     
-    public abstract Damage copy(Damage d);
+    abstract Damage copy();
     
 }
