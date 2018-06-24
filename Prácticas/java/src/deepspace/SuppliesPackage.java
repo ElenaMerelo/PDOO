@@ -16,7 +16,7 @@ class SuppliesPackage{
     }
     
     SuppliesPackage(SuppliesPackage s){
-        this(s.getAmmoPower(), s.getFuelUnits(), s.getShieldPower());
+        this(s.ammoPower, s.fuelUnits, s.shieldPower);
     }
     
     //Consultores
