@@ -28,7 +28,7 @@ class Dice {
      * Determina el número de hangares que recibirá una estación espacial al ser creada.
     */
     int initWithNHangars(){
-        return generator.nextFloat() <= NHANGARSPROB ? 0 : 1;
+        return generator.nextFloat() < NHANGARSPROB ? 0 : 1;
     }
     
     /**
@@ -37,10 +37,10 @@ class Dice {
      * que recibirá una estación espacial al ser creada.
     */
     int initWithNWeapons(){
-        float n= 2*NWEAPONSPROB;
-        if ( generator.nextFloat() <= NWEAPONSPROB )
+        float n= 2*NWEAPONSPROB, x= generator.nextFloat();
+        if ( x < NWEAPONSPROB )
             return 1;
-        else if (generator.nextFloat() > NWEAPONSPROB && generator.nextFloat() <= n )
+        else if (x >= NWEAPONSPROB && x < n )
             return 2;
         else
             return 3; 
@@ -52,7 +52,7 @@ class Dice {
      * una estación espacial al ser creada.
     */
     int initWithNShields(){
-        return generator.nextFloat() <= NSHIELDSPROB ? 0: 1;
+        return generator.nextFloat() < NSHIELDSPROB ? 0: 1;
     }
     
     /**
@@ -60,7 +60,7 @@ class Dice {
      * el jugador (su índice) que iniciará la partida.
     */
     int whoStarts(int nPlayers){
-        return generator.nextInt(nPlayers-1);
+        return generator.nextInt(nPlayers);
     }
     
     /**
@@ -69,7 +69,7 @@ class Dice {
      * dispara primero en un combate: la estación espacial o la nave enemiga.
     */
     GameCharacter firstShot(){
-        return generator.nextFloat() <= FIRSTSHOTPROB ? GameCharacter.SPACESTATION : GameCharacter.ENEMYSTARSHIP;
+        return generator.nextFloat() < FIRSTSHOTPROB ? GameCharacter.SPACESTATION : GameCharacter.ENEMYSTARSHIP;
     }
     
     /**
@@ -80,11 +80,11 @@ class Dice {
      * espacial de su velocidad máxima potencial.
     */
     boolean spaceStationMoves(float speed){
-        return generator.nextFloat() <= speed ? true : false;
+        return generator.nextFloat() < speed;
     }
     
     public boolean extraEfficiency(){
-        return generator.nextFloat() <= EXTRAEFFICIENCYPROB ? false : true;
+        return generator.nextFloat() < EXTRAEFFICIENCYPROB;
  
     }
             
