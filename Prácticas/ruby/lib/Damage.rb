@@ -45,6 +45,16 @@ module Deepspace
       [s.length, @nShields].min
     end
     
+    def adjust(w,s)
+    end
+    
+    def copy
+    end
+    
+    def discardWeapon(w)
+    end
+    
+    private_class_method :new
   end #class
 end #module
 
