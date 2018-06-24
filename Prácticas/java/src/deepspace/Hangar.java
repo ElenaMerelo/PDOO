@@ -54,7 +54,7 @@ class Hangar{
      * true en ese caso. Devuelve false en cualquier otro caso.
     */
     public boolean addWeapon(Weapon w){
-        if(spaceAvalaible() == true){
+        if(spaceAvalaible()){
             weapons.add(w);
             return true;
         }
@@ -66,7 +66,7 @@ class Hangar{
      * true si ha sido posible añadir el potenciador, false en otro caso.
     */
     public boolean addShieldBooster(ShieldBooster s){
-        if(spaceAvalaible() == true){
+        if(spaceAvalaible()){
             shieldBoosters.add(s);
             return true;
         }

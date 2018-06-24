@@ -20,27 +20,25 @@ class SpaceStation implements SpaceFighter{
     SpaceStation(String n, SuppliesPackage supplies){
         name= n;
         ammoPower= supplies.getAmmoPower();
-        fuelUnits= supplies.getFuelUnits();
+        assignFuelValue(supplies.getFuelUnits());
         shieldPower= supplies.getShieldPower();
         nMedals= 0;
         weapons= new ArrayList<>();
         shieldBoosters= new ArrayList<>();
+        hangar= null;
+        pendingDamage= null;
     }
     
-    public SpaceStation(SpaceStation station){
-        name= station.name;
-        ammoPower= station.ammoPower;
-        fuelUnits= station.fuelUnits;
-        shieldPower= station.shieldPower;
+    SpaceStation(SpaceStation station){
+        this(station.name, new SuppliesPackage(station.ammoPower, station.fuelUnits, station.shieldPower));
         nMedals= station.nMedals;
-        for(Weapon w : station.weapons)
-            weapons.add(w);
+        weapons= new ArrayList(station.weapons);
+        shieldBoosters= new ArrayList(station.shieldBoosters); 
+        if (station.hangar != null)
+            hangar= new Hangar(station.hangar);
         
-        for(ShieldBooster s: station.shieldBoosters)
-            shieldBoosters.add(s);
-        
-        hangar= station.hangar;
-        pendingDamage= station.pendingDamage;
+        if (station.pendingDamage != null )
+            pendingDamage= station.pendingDamage.copy();
     }
     
     //Getters
@@ -76,7 +74,7 @@ class SpaceStation implements SpaceFighter{
         return shieldPower;
     }
     
-    public SpaceStationToUI getUIversion(){
+    SpaceStationToUI getUIversion(){
         return new SpaceStationToUI(this);
     }
     
@@ -89,9 +87,11 @@ class SpaceStation implements SpaceFighter{
      * que nunca se exceda el límite.
      */
     private void assignFuelValue(float f){
-        if(f < MAXFUEL)
+        fuelUnits= 0;
+        
+        if(f < MAXFUEL && f >= 0)
             fuelUnits= f;
-        else 
+        else if (f >= MAXFUEL)
             fuelUnits= MAXFUEL;
     }
     
@@ -223,7 +223,10 @@ class SpaceStation implements SpaceFighter{
             
             return ShotResult.RESIST;
         }
-        else return ShotResult.DONOTRESIST;
+        else{
+            shieldPower= 0.0f;
+            return ShotResult.DONOTRESIST;
+        }
     }
     
     /**
