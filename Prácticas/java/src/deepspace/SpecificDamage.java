@@ -15,17 +15,17 @@ public class SpecificDamage extends Damage {
     
     SpecificDamage(ArrayList<WeaponType> w, int s){
         super(s);
-        weapons= w;
+        weapons= new ArrayList<>(w);
     }
     
     @Override
-    public SpecificDamage copy(Damage d){
-        return new SpecificDamage(((SpecificDamage )d).getWeapons(), d.getNShields());
+    SpecificDamage copy(){
+        return new SpecificDamage(weapons, getNShields());
     }
     
     //Getters
     @Override
-    public SpecificDamageToUI getUIversion(){
+    SpecificDamageToUI getUIversion(){
         return new SpecificDamageToUI(this);
     }
     
@@ -60,6 +60,25 @@ public class SpecificDamage extends Damage {
 
         }
         return new SpecificDamage(adjusted, n_shields);  
+        
+        /*Otra opción: 
+        ArrayList<Weapon> copy = new ArrayList<>(w);
+        
+        int ns = adjustShields(s); 
+        SpecificDamage aux = new SpecificDamage(weapons, ns);
+        
+        int index;
+        
+        for(WeaponType t: weapons){
+            index=arrayContainsType(copy, t);
+            if(index==-1)
+                aux.weapons.remove(t);
+            else
+                copy.remove(index);
+        }
+        
+        return aux;
+        */
     }
     
     /**
