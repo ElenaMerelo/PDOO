@@ -3,7 +3,7 @@ Representa a las armas de las que puede disponer una estación espacial para pot
 energía al disparar
 =end
 
-require_relative "WeaponToUI"
+require_relative 'WeaponToUI'
 
 module Deepspace
   class Weapon
@@ -16,7 +16,7 @@ module Deepspace
     end
 
     def self.newCopy(w)
-      new(w.name, w.type, w.uses)
+      Weapon.new(w.name, w.type, w.uses)
     end
     
     def power

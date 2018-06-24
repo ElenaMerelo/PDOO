@@ -24,7 +24,7 @@ module Deepspace
     creada.
 =end
     def initWithNHangars
-      @generator.rand <= @NHANGARSPROB ? 0 : 1
+      @generator.rand(1.0) < @NHANGARSPROB ? 0 : 1
     end
 
 =begin
@@ -33,7 +33,7 @@ module Deepspace
     ser creada.
 =end 
     def initWithNShields
-      @generator.rand <= @NSHIELDSPROB ? 0 : 1
+      @generator.rand(1.0) < @NSHIELDSPROB ? 0 : 1
     end
     
 =begin
@@ -42,10 +42,10 @@ module Deepspace
     número de armas que recibirá una estación espacial al ser creada.
 =end
     def initWithNWeapons
-      rng= @generator.rand
-      if rng <= @NWEAPONSPROB
+      rng= @generator.rand(1.0)
+      if rng < @NWEAPONSPROB
         1
-      elsif rng > @NWEAPONSPROB && rng <= 2*@NWEAPONSPROB
+      elsif rng >= @NWEAPONSPROB && rng < 2*@NWEAPONSPROB
         2
       else
         3
@@ -56,8 +56,8 @@ module Deepspace
     Genera un número aleatorio del intervalo [0,nPlayers-1].Determina el jugador (su índice) que
     iniciará la partida.
 =end
-    def whoStarts(num_players)
-      @generator.rand(num_players)
+    def whoStarts(nPlayers)
+      @generator.rand(nPlayers)
     end
     
 =begin
@@ -66,7 +66,7 @@ module Deepspace
     en un combate: la estación espacial o la nave enemiga.
 =end
     def firstShot
-      @generator.rand <= @FIRSTSHOTPROB ? GameCharacter::SPACESTATION : GameCharacter::ENEMYSTARSHIP
+      @generator.rand(1.0) < @FIRSTSHOTPROB ? GameCharacter::SPACESTATION : GameCharacter::ENEMYSTARSHIP
     end
     
 =begin
@@ -76,16 +76,16 @@ module Deepspace
     cerca está la velocidad potencial actual de la estación espacial de su velocidad máxima potencial.
 =end
     def spaceStationMoves(speed)
-      @generator.rand <= speed ? true : false
+      @generator.rand(1.0) < speed ? true : false
     end
     
     def extraEfficiency
-      @generator.rand <= @EXTRAEFFICIENCYPROB ? false : true
+      @generator.rand < @EXTRAEFFICIENCYPROB
     end
     
     #Examen P4
     def forget 
-      @generator.rand <= @FORGETPROB ? true : false
+      @generator.rand < @FORGETPROB
     end
     
     def to_s

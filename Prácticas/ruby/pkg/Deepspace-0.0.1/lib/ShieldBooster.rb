@@ -1,6 +1,6 @@
 # Representa a los potenciadores de escudo que pueden tener las estaciones espaciales
 
-require_relative "ShieldToUI"
+require_relative 'ShieldToUI'
 
 module Deepspace
   class ShieldBooster
@@ -13,7 +13,7 @@ module Deepspace
     end
     
     def self.newCopy(sh)
-      new(sh.name, sh.boost, sh.uses)
+      ShieldBooster.new(sh.name, sh.boost, sh.uses)
     end
     
     def useIt
@@ -26,7 +26,7 @@ module Deepspace
     end
     
     def to_s
-      "name #{@name}, boost #{@boost}, uses #{@uses}"
+      "Name #{@name}, boost #{@boost}, uses #{@uses}"
     end
     
     def getUIversion
