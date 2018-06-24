@@ -7,6 +7,9 @@ require_relative 'CardDealer'
 require_relative 'SpaceStation'
 require_relative 'CombatResult'
 require_relative 'GameCharacter'
+require_relative 'BetaPowerEfficientSpaceStation'
+require_relative 'PowerEfficientSpaceStation'
+require_relative 'SpaceCity'
 
 module Deepspace
   class GameUniverse
@@ -50,13 +53,13 @@ module Deepspace
         end
       else
         t= station.setLoot(enemy.loot)
-        combatResult= CombatResult::STATIONWINS
+        combatResult= CombatResult::STATIONWINSANDCONVERTS
         if t == Transformation::GETEFFICIENT
           makeStationEfficient
-          combatResult= CombatResult::STATIONWINSANDCONVERTS
         elsif t == Transformation::SPACECITY
           createSpaceCity
-          combatResult= CombatResult::STATIONWINSANDCONVERTS
+        else
+          combatResult= CombatResult::STATIONWINS
         end
         
       end
@@ -70,7 +73,7 @@ module Deepspace
       if state == GameState::BEFORECOMBAT or state == GameState::INIT
         combatGo(@currentStation, @currentEnemy)
       else 
-        CombatResult.NOCOMBAT
+        CombatResult::NOCOMBAT
       end
     end
     
@@ -113,7 +116,7 @@ module Deepspace
     end
     
     def haveAWinner
-      @currentStation.nMedals == @@WIN
+      @currentStation.nMedals >= @@WIN
     end
     
     def init(names)
@@ -177,9 +180,9 @@ module Deepspace
     
     def makeStationEfficient
       if @dice.extraEfficiency
-        @currentStation= BetaPowerEfficientSpaceStation(@currentStation).new 
+        @currentStation= BetaPowerEfficientSpaceStation.new(@currentStation)
       else
-        @currentStation= PowerEfficientSpaceStation(@currentStation).new
+        @currentStation= PowerEfficientSpaceStation.new(@currentStation)
       end
       
       @spaceStations[@currentStationIndex] = @currentStation
@@ -190,7 +193,8 @@ module Deepspace
         aux= Array.new(@spaceStations)
         aux.delete_at(@currentStationIndex)
         @currentStation= SpaceCity.new(@currentStation, aux)
-        @spaceStation[@currentStationIndex]= @currentStation
+        @spaceStations[@currentStationIndex]= @currentStation
+        @haveSpaceCity= true
       end
     end
     
