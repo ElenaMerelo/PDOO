@@ -6,14 +6,14 @@ module Deepspace
   class SpaceCity < SpaceStation
     attr_reader :collaborators
     
-    def initialize(base, rest)
-      super.newCopy(base)
+    def initialize(bas, rest)
+      super(bas.name,bas.getSupplies, bas.nMedals, bas.weapons,bas.shieldBoosters,bas.hangar,bas.pendingDamage)
       @base= base 
       @collaborators= rest
     end
     
     def fire
-      f= @base.fire 
+      f= super
       
       for s in @collaborators
         f += s.fire
@@ -23,7 +23,7 @@ module Deepspace
     end
     
     def protection
-      p= @base.protection 
+      p= super
       
       for s in @collaborators
         p += s.protection 
