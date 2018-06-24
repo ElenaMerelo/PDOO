@@ -87,12 +87,12 @@ class SpaceStation implements SpaceFighter{
      * que nunca se exceda el límite.
      */
     private void assignFuelValue(float f){
-        fuelUnits= 0;
-        
-        if(f < MAXFUEL && f >= 0)
+        if(f < MAXFUEL && f > 0)
             fuelUnits= f;
         else if (f >= MAXFUEL)
             fuelUnits= MAXFUEL;
+        else 
+            fuelUnits= 0;
     }
     
     /**
@@ -167,7 +167,7 @@ class SpaceStation implements SpaceFighter{
     }
     
     public void move(){
-        fuelUnits -= fuelUnits*getSpeed();
+        assignFuelValue(fuelUnits - fuelUnits*getSpeed());
     }
     
     public boolean validState(){
