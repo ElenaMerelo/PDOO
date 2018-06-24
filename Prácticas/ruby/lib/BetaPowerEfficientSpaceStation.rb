@@ -1,20 +1,22 @@
 require_relative 'PowerEfficientSpaceStation'
 require_relative 'Dice'
+
 module Deepspace
   class BetaPowerEfficientSpaceStation < PowerEfficientSpaceStation
     @@EXTRAEFFIENCY= 1.2.freeze
 
     def initialize(station)
-      newCopy(station)
+      super
       @dice= Dice.new
     end
     
     def fire
+      f= super
       if @dice.extraEfficiency
-        super * @@EXTRAEFFICIENCY  
+        f *= @@EXTRAEFFICIENCY  
       end
       
-      super
+      f
     end
     
     def getUIversion
