@@ -1,8 +1,10 @@
 # Author: Elena Merelo
 
-require_relative "SpaceStationToUI"
+require_relative 'SpaceStationToUI'
 require_relative 'Damage'
 require_relative 'Transformation'
+require_relative 'ShotResult'
+require_relative 'CardDealer'
 
 module Deepspace
   class SpaceStation
@@ -12,16 +14,27 @@ module Deepspace
     @@MAXFUEL= 100.freeze
     @@SHIELDLOSSPERUNITSHOT= 0.1.freeze
 
-    def initialize(n, a, fuel, shield, medals= 0, pending= nil, w=Array.new, sb= Array.new, h= nil)
+    def initialize(n, supplies, medals= 0, pending= nil, w=Array.new, sb= Array.new, h= nil)
       @name= n
-      @ammoPower= a
-      @fuelUnits= fuel 
-      @shieldPower= shield
+      @ammoPower= supplies.ammoPower
+      assignFuelValue(supplies.fuelUnits) 
+      @shieldPower= supplies.shieldPower
       @nMedals= medals
-      @pendingDamage= pending
-      @weapons= w
-      @shieldBoosters= sb
-      @hangar= h
+      
+      if pending != nil
+        @pendingDamage= pending.copy
+      else
+        @pendingDamage= nil
+      end 
+      
+      @weapons= Array.new(w)
+      @shieldBoosters= Array.new(sb)
+      
+      if h != nil
+        @hangar= Hangar.newCopy(h)
+      else
+        @hangar= nil
+      end
     end
     
     def self.newCopy(station)
@@ -121,7 +134,7 @@ module Deepspace
     end
 
     def move
-        @fuelUnits -= @fuelUnits.to_f*self.getSpeed
+      assignFuelValue(@fuelUnits - @fuelUnits.to_f*getSpeed)
     end
 
     def protection
@@ -182,15 +195,15 @@ module Deepspace
         receiveHangar(dealer.nextHangar)
       end
       
-      for i in 0..loot.nSupplies
+      for i in 0...loot.nSupplies # con ... va hasta loot.nSupplies-1, con .. lo incluye
         receiveSupplies(dealer.nextSuppliesPackage)
       end
       
-      for i in 0..loot.nWeapons
+      for i in 0...loot.nWeapons
         receiveWeapon(dealer.nextWeapon)
       end
       
-      for i in 0..loot.nShields
+      for i in 0...loot.nShields
         receiveShieldBooster(dealer.nextShieldBooster)
       end
       
@@ -214,14 +227,16 @@ module Deepspace
     
     def to_s
       "Name: #{@name}, AmmoPower: #{@ammoPower}, FuelUnits: #{@fuelUnits},
-     ShieldPower: #{@shieldPower}, Medals: #{@nMedals}, Weapons: #{@weapons},
-     ShieldBoosters: #{@shieldBoosters}, Hangar: #{@hangar}, PendingDamage: #{@pendingDamage}"
+     ShieldPower: #{@shieldPower}, Medals: #{@nMedals}, Weapons: #{@weapons.join(", ")},
+     ShieldBoosters: #{@shieldBoosters.join(", ")}, Hangar: #{@hangar}, PendingDamage: #{@pendingDamage}"
     end
 
     private
     def assignFuelValue(f)
-      if f < @@MAXFUEL
+      if f < @@MAXFUEL and f >= 0
         @fuelUnits= f
+      elsif f < 0
+        @fuelUnits= 0
       else
         @fuelUnits= @@MAXFUEL
       end
