@@ -18,10 +18,11 @@ module Deepspace
       @nShields= ns
     end
   
-    
+=begin    
     def self.newCopy(d)
       Damage.new(d.nShields)
     end
+=end
     
     def getUIversion
       DamageToUI.new(self)
