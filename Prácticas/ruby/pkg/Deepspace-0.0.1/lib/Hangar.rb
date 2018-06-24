@@ -40,9 +40,9 @@ module Deepspace
     
     def removeWeapon(w)
       if w >= 0 && w < @weapons.length
-        return @weapons.delete_at(w)
+        @weapons.delete_at(w)
       else
-        return nil
+        nil
       end
     end
     
@@ -57,9 +57,9 @@ module Deepspace
     
     def removeShieldBooster(s)
       if s >= 0 && s < @shieldBoosters.length
-        return @shieldBoosters.delete_at(s)
+        @shieldBoosters.delete_at(s)
       else
-        return nil
+        nil
       end
     end
     

@@ -1,6 +1,6 @@
 # By Elena Merelo
 
-require_relative "EnemyToUI"
+require_relative 'EnemyToUI'
 require_relative 'ShotResult'
 
 module Deepspace
@@ -24,11 +24,11 @@ module Deepspace
     end
 
     def fire
-      self.ammoPower
+      @ammoPower
     end
 
     def protection
-      self.shieldPower
+      @shieldPower
     end
 
     def receiveShot(shot)
