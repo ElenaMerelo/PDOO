@@ -6,7 +6,7 @@
 package main;
 
 import deepspace.GameUniverse;
-import View.View;
+import GUI.View;
 import View.GUI.MainView;
 import Controller.Controller;
 

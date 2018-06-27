@@ -72,9 +72,6 @@ public class TestP1 {
         Weapon w1= new Weapon("patata nuclear", WeaponType.MISSILE, 2);
         Weapon w2= new Weapon(w1);
         
-        if(!w1.getName().equals("patata nuclear"))
-            System.out.println("Error en getName de w1");
-        
         if(WeaponType.MISSILE != w1.getType())
             System.out.println("Error en getType de w1");
         
@@ -84,7 +81,7 @@ public class TestP1 {
         if(w1.power() != 3.0f)
             System.out.println("Error en power de w1");
         
-        if(!w2.getName().equals(w1.getName()) || w2.getType() != w1.getType() || w2.getUses() != w1.getUses())
+        if(w2.getType() != w1.getType() || w2.getUses() != w1.getUses())
             System.out.println("Error en constructor de copia de Weapon MISSILE");
         
         
@@ -103,8 +100,6 @@ public class TestP1 {
         Weapon l1= new Weapon("Láser tóh potente", WeaponType.LASER, 3);
         Weapon l2= new Weapon(l1);
         
-        if(!l1.getName().equals("Láser tóh potente"))
-            System.out.println("Error en getName de l1");
         
         if(WeaponType.LASER != l1.getType())
             System.out.println("Error en getType de l1");
@@ -115,7 +110,7 @@ public class TestP1 {
         if(l1.power() != 2.0f)
             System.out.println("Error en power de l1");
         
-        if(!l2.getName().equals(l1.getName()) || l2.getType() != l1.getType() || l2.getUses() != l1.getUses())
+        if(l2.getType() != l1.getType() || l2.getUses() != l1.getUses())
             System.out.println("Error en constructor de copia de Weapon LASER");
         
         
@@ -134,9 +129,6 @@ public class TestP1 {
         Weapon p1= new Weapon("Te vas a quedar plasmado", WeaponType.PLASMA, 1);
         Weapon p2= new Weapon(p1);
         
-        if(!p1.getName().equals("Te vas a quedar plasmado"))
-            System.out.println("Error en getName de p1");
-        
         if(WeaponType.PLASMA != p1.getType())
             System.out.println("Error en getType de p1");
         
@@ -146,7 +138,7 @@ public class TestP1 {
         if(p1.power() != 4.0f)
             System.out.println("Error en power de p1");
         
-        if(!p2.getName().equals(p1.getName()) || p2.getType() != p1.getType() || p2.getUses() != p1.getUses())
+        if(p2.getType() != p1.getType() || p2.getUses() != p1.getUses())
             System.out.println("Error en constructor de copia de Weapon PLASMA");
         
         
