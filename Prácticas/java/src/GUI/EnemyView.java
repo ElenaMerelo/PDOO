@@ -11,9 +11,6 @@ import deepspace.DamageToUI;
 
 
 public class EnemyView extends javax.swing.JPanel {
-    private LootToUI lUI;
-    private DamageToUI dUI;
-    
     public EnemyView() {
         initComponents();
     }
@@ -24,12 +21,15 @@ public class EnemyView extends javax.swing.JPanel {
         shieldPower.setText(Float.toString(e.getShieldPower()));
         
         LootView l= new LootView();
-        l.setLoot(lUI);
+        l.setLoot(e.getLoot());
         loot_panel.add(l);
         
         DamageView d= new DamageView();
-        d.setDamage(dUI);
+        d.setDamage(e.getDamage());
         perdidas_panel.add(d);
+        
+        repaint();
+        revalidate();
     }
 
     /**
