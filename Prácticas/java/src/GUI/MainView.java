@@ -4,30 +4,68 @@
  */
 
 package GUI;
+
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 import controller.Controller;
-import deepspace.SpaceStationToUI;
+import deepspace.CombatResult;
 import deepspace.GameUniverseToUI;
-import deepspace.EnemyToUI;
+import deepspace.GameState;
+
 
 public class MainView extends javax.swing.JFrame {
     static Controller controller;
-    
+    private String appName= "Deepspace";
     
     public MainView() {
         initComponents();
+        //Para que la aplicación finalice cuando se cierre la interfaz
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e){ 
+                controller.finish(0); 
+            }
+        });
+        
+        setTitle(appName);
+        
+        setLocationRelativeTo(null);
+        
+        repaint();
     }
     
-    void setGameUniverse(GameUniverseToUI g){
-       SpaceStationView sv= new SpaceStationView();
-       sv.setSpaceStation(g.getCurrentStation());
-       station_panel.add(sv);
-       
-       EnemyView ev= new EnemyView();
-       ev.setEnemy(g.getCurrentEnemy());
-       enemy_panel.add(ev);
-       
+    public void updateView(){
+        station_panel.removeAll();
+        enemy_panel.removeAll();
+        
+        GameState state = controller.getState();
+        GameUniverseToUI g= controller.getUIversion();
+        SpaceStationView sv= new SpaceStationView();
+        sv.setSpaceStation(g.getCurrentStation());
+        station_panel.add(sv);
+
+        EnemyView ev= new EnemyView();
+        ev.setEnemy(g.getCurrentEnemy());
+        enemy_panel.add(ev);
+        
+        /*
+        combat_button.setEnabled(false);
+         next_turn_button.setEnabled(true);
+         if((state == GameState.BEFORECOMBAT)||(state == GameState.INIT)){
+             combat_button.setEnabled(true);
+             next_turn_button.setEnabled(false);
+         }
+
+         ev.setVisible(false);
+         if(state == GameState.AFTERCOMBAT || controller.isEnemyVisible())
+             ev.setVisible(true);
+        */
+        repaint();
+        revalidate();   
     }
+    
     
     public ArrayList<String> getNames() {
         NamesCapture namesCapture = new NamesCapture (this, true);
@@ -40,6 +78,43 @@ public class MainView extends javax.swing.JFrame {
     
     public void showView(){
         this.setVisible(true);
+    }
+    
+    public boolean confirmExitMessage() {
+        return (JOptionPane.showConfirmDialog(this, "¿Estás segur@ que deseas salir?", getAppName(), JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+    }
+    
+    public String getAppName(){
+        return appName;
+    }
+    
+    public void showResultMessage(CombatResult cr){
+        
+        switch (cr) {
+              case ENEMYWINS :
+                JOptionPane.showMessageDialog(this,"Has PERDIDO el combate.\nCumple tu castigo.",getAppName(),JOptionPane.INFORMATION_MESSAGE);
+                break;
+              case STATIONESCAPES :
+                JOptionPane.showMessageDialog(this,"Has logrado escapar. Eres una Gallina Espacial.",getAppName(),JOptionPane.INFORMATION_MESSAGE);
+                break;
+              case STATIONWINS :
+                JOptionPane.showMessageDialog(this,"Has GANADO el combate. Disfruta de tu botín.",getAppName(),JOptionPane.INFORMATION_MESSAGE);
+                if (controller.haveAWinner()) {
+                    JOptionPane.showMessageDialog(this,"HAS GANADO LA PARTIDA",getAppName(),JOptionPane.INFORMATION_MESSAGE);
+                    System.exit (0);
+                }
+                break;
+              case STATIONWINSANDCONVERTS :
+                JOptionPane.showMessageDialog(this,"Has GANADO el combate y tu estación se ha transformado.",getAppName(),JOptionPane.INFORMATION_MESSAGE);
+                if (controller.haveAWinner()) {
+                    JOptionPane.showMessageDialog(this,"HAS GANADO LA PARTIDA",getAppName(),JOptionPane.INFORMATION_MESSAGE);
+                    System.exit (0);
+                }
+        }
+    }
+    
+    public void showNextTurnMessage(){
+        JOptionPane.showMessageDialog(this,"No puedes pasar turno.\nDebes cumplir tu castigo.",getAppName(),JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -144,15 +219,17 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void combat_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combat_buttonActionPerformed
-        controller.combat();
+        if(controller.combat() != CombatResult.NOCOMBAT) 
+            combat_button.setEnabled(true);
     }//GEN-LAST:event_combat_buttonActionPerformed
 
     private void next_turn_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_turn_buttonActionPerformed
-        controller.nextTurn();
+        if(controller.nextTurn())
+            next_turn_button.setEnabled(true);
     }//GEN-LAST:event_next_turn_buttonActionPerformed
 
     private void exit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit_buttonActionPerformed
-        controller.finish();
+        controller.finish(0);
     }//GEN-LAST:event_exit_buttonActionPerformed
 
     /**

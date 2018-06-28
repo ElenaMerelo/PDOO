@@ -36,6 +36,10 @@ public class Controller {
             System.exit(i);
     }
     
+    public boolean haveAWinner(){
+        return model.haveAWinner();
+    }
+    
     public GameState getState(){
         return model.getState();
     }
@@ -73,14 +77,27 @@ public class Controller {
        view.updateView();
     }
     
-    public void combat(){
-        model.combat();
+    public CombatResult combat(){
+        CombatResult cr= model.combat();
+        view.updateView();
+        return cr;
+    }
+    
+    public void updateView(){
         view.updateView();
     }
     
-    public void nextTurn(){
-        model.nextTurn();
-        view.updateView();
+    public GameUniverseToUI getUIversion(){
+        return model.getUIversion();
+    }
+    
+    public boolean nextTurn(){
+        boolean result = model.nextTurn();
+        if(!result)
+            view.showNextTurnMessage();
+        else
+            view.updateView();
+        return result;
     }
     
     
