@@ -220,7 +220,7 @@ public class MainView extends javax.swing.JFrame {
 
     private void combat_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combat_buttonActionPerformed
         if(controller.combat() != CombatResult.NOCOMBAT) 
-            combat_button.setEnabled(true);
+            combat_button.setEnabled(false);
     }//GEN-LAST:event_combat_buttonActionPerformed
 
     private void next_turn_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_turn_buttonActionPerformed

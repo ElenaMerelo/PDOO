@@ -51,6 +51,7 @@ public class Controller {
         
         for(i= s.size() -1; i >= 0; i--)
             model.mountShieldBooster(s.get(i)); 
+        view.updateView();
     }
     
     public void discardItemsInHangar(ArrayList<Integer> w, ArrayList<Integer> s){
@@ -79,6 +80,7 @@ public class Controller {
     
     public CombatResult combat(){
         CombatResult cr= model.combat();
+        view.showResultMessage(cr);
         view.updateView();
         return cr;
     }
@@ -95,8 +97,8 @@ public class Controller {
         boolean result = model.nextTurn();
         if(!result)
             view.showNextTurnMessage();
-        else
-            view.updateView();
+        
+        view.updateView();
         return result;
     }
     
