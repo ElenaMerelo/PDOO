@@ -1,16 +1,35 @@
-package GUI;
-
 /**
  *
  * @author elena
  */
-public class EnemyView extends javax.swing.JPanel {
 
-    /**
-     * Creates new form EnemyView
-     */
+package GUI;
+
+import deepspace.EnemyToUI;
+import deepspace.LootToUI;
+import deepspace.DamageToUI;
+
+
+public class EnemyView extends javax.swing.JPanel {
+    private LootToUI lUI;
+    private DamageToUI dUI;
+    
     public EnemyView() {
         initComponents();
+    }
+    
+    void setEnemy(EnemyToUI e){
+        enemy_name.setText(e.getName());
+        ammoPower.setText(Float.toString(e.getAmmoPower())); 
+        shieldPower.setText(Float.toString(e.getShieldPower()));
+        
+        LootView l= new LootView();
+        l.setLoot(lUI);
+        loot_panel.add(l);
+        
+        DamageView d= new DamageView();
+        d.setDamage(dUI);
+        perdidas_panel.add(d);
     }
 
     /**
