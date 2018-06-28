@@ -13,12 +13,9 @@ import deepspace.ShieldToUI;
 import deepspace.WeaponToUI;
 import deepspace.GameState;
 
-
 public class SpaceStationView extends javax.swing.JPanel {
-
-    /**
-     * Creates new form SpaceStationView
-     */
+    private HangarView hv;
+    
     public SpaceStationView() {
         initComponents();
     }
@@ -66,6 +63,34 @@ public class SpaceStationView extends javax.swing.JPanel {
         
         repaint();
         revalidate();
+    }
+    
+    ArrayList<Integer> getSelectedWeapons(){
+        ArrayList<Integer> selected_weapons= new ArrayList();
+        int i= 0;
+        for (Component c : getComponents()){
+            try{
+                if(((WeaponView) c).isSelected())
+                    selected_weapons.add(i);
+            }
+            catch(Exception e){}
+            i++;
+        }
+        return selected_weapons;
+    }
+    
+    ArrayList<Integer> getSelectedShields(){
+        ArrayList<Integer> selected_shields= new ArrayList();
+        int i= 0;
+        for(Component c: getComponents()){
+            try{
+                if(((ShieldBoosterView) c).isSelected())
+                    selected_shields.add(i); 
+            }
+            catch(Exception e){}
+            i++;
+        }  
+        return selected_shields;
     }
 
     /**
@@ -278,15 +303,18 @@ public class SpaceStationView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void equipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipActionPerformed
-        // TODO add your handling code here:
+        MainView.controller.mountItems(hv.getSelectedWeapons(), hv.getSelectedShields());
     }//GEN-LAST:event_equipActionPerformed
 
     private void discardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discardActionPerformed
-        // TODO add your handling code here:
+        MainView.controller.discardItemsInHangar(hv.getSelectedWeapons(), hv.getSelectedShields());
+        MainView.controller.discardShields(getSelectedShields());
+        MainView.controller.discardWeapons(getSelectedWeapons());
+        MainView.controller.updateView();
     }//GEN-LAST:event_discardActionPerformed
 
     private void discard_hangarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discard_hangarActionPerformed
-        // TODO add your handling code here:
+        MainView.controller.discardHangar();
     }//GEN-LAST:event_discard_hangarActionPerformed
 
 
