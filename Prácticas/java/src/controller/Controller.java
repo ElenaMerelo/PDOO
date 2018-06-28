@@ -73,6 +73,16 @@ public class Controller {
        view.updateView();
     }
     
+    public void combat(){
+        model.combat();
+        view.updateView();
+    }
+    
+    public void nextTurn(){
+        model.nextTurn();
+        view.updateView();
+    }
+    
     
     
     

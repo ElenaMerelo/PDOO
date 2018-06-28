@@ -101,7 +101,7 @@ public class LootView extends javax.swing.JPanel {
                         .addComponent(n_supplies)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(transform)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +122,7 @@ public class LootView extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(n_supplies)
                     .addComponent(transform))
-                .addGap(0, 45, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

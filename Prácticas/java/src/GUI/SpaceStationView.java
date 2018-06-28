@@ -138,17 +138,7 @@ public class SpaceStationView extends javax.swing.JPanel {
 
         nMedals.setText("jTextField4");
 
-        javax.swing.GroupLayout weapons_panelLayout = new javax.swing.GroupLayout(weapons_panel);
-        weapons_panel.setLayout(weapons_panelLayout);
-        weapons_panelLayout.setHorizontalGroup(
-            weapons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
-        );
-        weapons_panelLayout.setVerticalGroup(
-            weapons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
+        weapons_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Armas"));
         jScrollPane1.setViewportView(weapons_panel);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -166,17 +156,7 @@ public class SpaceStationView extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        javax.swing.GroupLayout shields_panelLayout = new javax.swing.GroupLayout(shields_panel);
-        shields_panel.setLayout(shields_panelLayout);
-        shields_panelLayout.setHorizontalGroup(
-            shields_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 457, Short.MAX_VALUE)
-        );
-        shields_panelLayout.setVerticalGroup(
-            shields_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
+        shields_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Escudos"));
         jScrollPane2.setViewportView(shields_panel);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -194,17 +174,7 @@ public class SpaceStationView extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        javax.swing.GroupLayout hangar_panelLayout = new javax.swing.GroupLayout(hangar_panel);
-        hangar_panel.setLayout(hangar_panelLayout);
-        hangar_panelLayout.setHorizontalGroup(
-            hangar_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
-        );
-        hangar_panelLayout.setVerticalGroup(
-            hangar_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
+        hangar_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Hangar"));
         jScrollPane3.setViewportView(hangar_panel);
 
         equip.setText("Equipar");

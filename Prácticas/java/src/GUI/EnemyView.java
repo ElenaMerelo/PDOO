@@ -62,6 +62,8 @@ public class EnemyView extends javax.swing.JPanel {
 
         shieldPower.setText("jTextField1");
 
+        loot_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Botín"));
+
         javax.swing.GroupLayout loot_panelLayout = new javax.swing.GroupLayout(loot_panel);
         loot_panel.setLayout(loot_panelLayout);
         loot_panelLayout.setHorizontalGroup(
@@ -73,6 +75,8 @@ public class EnemyView extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        perdidas_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Pérdidas"));
+
         javax.swing.GroupLayout perdidas_panelLayout = new javax.swing.GroupLayout(perdidas_panel);
         perdidas_panel.setLayout(perdidas_panelLayout);
         perdidas_panelLayout.setHorizontalGroup(
@@ -81,7 +85,7 @@ public class EnemyView extends javax.swing.JPanel {
         );
         perdidas_panelLayout.setVerticalGroup(
             perdidas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 94, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -103,7 +107,7 @@ public class EnemyView extends javax.swing.JPanel {
                             .addComponent(shieldPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ammoPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(perdidas_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +126,8 @@ public class EnemyView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loot_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(perdidas_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(perdidas_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

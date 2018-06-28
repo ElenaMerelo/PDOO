@@ -62,7 +62,7 @@ public class NamesCapture extends javax.swing.JDialog {
             }
         });
 
-        start_button.setText("jButton1");
+        start_button.setText("Empezar");
         start_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 start_buttonActionPerformed(evt);

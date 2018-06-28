@@ -6,6 +6,9 @@
 package GUI;
 import java.util.ArrayList;
 import controller.Controller;
+import deepspace.SpaceStationToUI;
+import deepspace.GameUniverseToUI;
+import deepspace.EnemyToUI;
 
 public class MainView extends javax.swing.JFrame {
     static Controller controller;
@@ -13,6 +16,17 @@ public class MainView extends javax.swing.JFrame {
     
     public MainView() {
         initComponents();
+    }
+    
+    void setGameUniverse(GameUniverseToUI g){
+       SpaceStationView sv= new SpaceStationView();
+       sv.setSpaceStation(g.getCurrentStation());
+       station_panel.add(sv);
+       
+       EnemyView ev= new EnemyView();
+       ev.setEnemy(g.getCurrentEnemy());
+       enemy_panel.add(ev);
+       
     }
     
     public ArrayList<String> getNames() {
@@ -37,21 +51,109 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        station_panel = new javax.swing.JPanel();
+        enemy_panel = new javax.swing.JPanel();
+        combat_button = new javax.swing.JButton();
+        next_turn_button = new javax.swing.JButton();
+        exit_button = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        station_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout station_panelLayout = new javax.swing.GroupLayout(station_panel);
+        station_panel.setLayout(station_panelLayout);
+        station_panelLayout.setHorizontalGroup(
+            station_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 253, Short.MAX_VALUE)
+        );
+        station_panelLayout.setVerticalGroup(
+            station_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        enemy_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout enemy_panelLayout = new javax.swing.GroupLayout(enemy_panel);
+        enemy_panel.setLayout(enemy_panelLayout);
+        enemy_panelLayout.setHorizontalGroup(
+            enemy_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        enemy_panelLayout.setVerticalGroup(
+            enemy_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 212, Short.MAX_VALUE)
+        );
+
+        combat_button.setText("Combatir");
+        combat_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combat_buttonActionPerformed(evt);
+            }
+        });
+
+        next_turn_button.setText("SIguiente turno");
+        next_turn_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                next_turn_buttonActionPerformed(evt);
+            }
+        });
+
+        exit_button.setText("Salir");
+        exit_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exit_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(station_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(enemy_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(next_turn_button)
+                        .addComponent(combat_button, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                    .addComponent(exit_button))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(enemy_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(combat_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(next_turn_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(exit_button)
+                        .addGap(0, 25, Short.MAX_VALUE))
+                    .addComponent(station_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void combat_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combat_buttonActionPerformed
+        controller.combat();
+    }//GEN-LAST:event_combat_buttonActionPerformed
+
+    private void next_turn_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_turn_buttonActionPerformed
+        controller.nextTurn();
+    }//GEN-LAST:event_next_turn_buttonActionPerformed
+
+    private void exit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit_buttonActionPerformed
+        controller.finish();
+    }//GEN-LAST:event_exit_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -89,5 +191,10 @@ public class MainView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton combat_button;
+    private javax.swing.JPanel enemy_panel;
+    private javax.swing.JButton exit_button;
+    private javax.swing.JButton next_turn_button;
+    private javax.swing.JPanel station_panel;
     // End of variables declaration//GEN-END:variables
 }
