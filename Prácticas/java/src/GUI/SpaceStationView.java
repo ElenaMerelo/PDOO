@@ -38,9 +38,31 @@ public class SpaceStationView extends javax.swing.JPanel {
             h.setHangar(s.getHangar());
             hangar_panel.add(h);
         }
-        else h.setHangar(null);
         
-        WeaponView w= new WeaponView();
+        WeaponView wv;
+        for(WeaponToUI w: s.getWeapons()){
+            wv= new WeaponView();
+            wv.setWeapon(w);
+            weapons_panel.add(wv);
+        }
+        
+        ShieldBoosterView sv;
+        for(ShieldToUI sh: s.getShieldBoosters()){
+            sv= new ShieldBoosterView();
+            sv.setShieldBooster(sh);
+            shields_panel.add(sv);
+        }
+        
+        if( MainView.controller.getState() == GameState.INIT || MainView.controller.getState() == GameState.AFTERCOMBAT ){
+            equip.setEnabled(true);
+            discard.setEnabled(true);
+            discard_hangar.setEnabled(true);
+        }
+        else{
+            equip.setEnabled(false);
+            discard.setEnabled(false);
+            discard_hangar.setEnabled(false);
+        }
         
         repaint();
         revalidate();
@@ -71,9 +93,9 @@ public class SpaceStationView extends javax.swing.JPanel {
         shields_panel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         hangar_panel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        equip = new javax.swing.JButton();
+        discard = new javax.swing.JButton();
+        discard_hangar = new javax.swing.JButton();
 
         jLabel1.setText("Potencia de ataque: ");
 
@@ -160,16 +182,26 @@ public class SpaceStationView extends javax.swing.JPanel {
 
         jScrollPane3.setViewportView(hangar_panel);
 
-        jButton1.setText("Equipar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        equip.setText("Equipar");
+        equip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                equipActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Descartar");
+        discard.setText("Descartar");
+        discard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discardActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Descartar hangar completo");
+        discard_hangar.setText("Descartar hangar completo");
+        discard_hangar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discard_hangarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -202,11 +234,11 @@ public class SpaceStationView extends javax.swing.JPanel {
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(equip)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)
+                                .addComponent(discard)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3)))
+                                .addComponent(discard_hangar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -238,25 +270,33 @@ public class SpaceStationView extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(equip)
+                    .addComponent(discard)
+                    .addComponent(discard_hangar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void equipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_equipActionPerformed
+
+    private void discardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_discardActionPerformed
+
+    private void discard_hangarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discard_hangarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_discard_hangarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ammoPower;
+    private javax.swing.JButton discard;
+    private javax.swing.JButton discard_hangar;
+    private javax.swing.JButton equip;
     private javax.swing.JTextField fuelUnits;
     private javax.swing.JPanel hangar_panel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

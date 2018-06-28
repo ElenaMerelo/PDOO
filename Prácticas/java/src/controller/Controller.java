@@ -5,10 +5,14 @@
 
 package controller;
 
-import GUI.*;
-import deepspace.*;
 import java.util.ArrayList;
 
+import GUI.MainView;
+import deepspace.GameUniverse;
+import deepspace.GameUniverseToUI;
+import deepspace.CombatResult;
+import deepspace.GameState;
+import deepspace.HangarToUI;
 
 public class Controller {
     private GameUniverse model;
@@ -28,8 +32,15 @@ public class Controller {
     }
     
     public void finish(int i){
-        System.exit(i);
+        if(view.confirmExitMessage())
+            System.exit(i);
     }
+    
+    public GameState getState(){
+        return model.getState();
+    }
+    
+    
     
     
 }
