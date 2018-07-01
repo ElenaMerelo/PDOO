@@ -136,29 +136,7 @@ public class MainView extends javax.swing.JFrame {
 
         station_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout station_panelLayout = new javax.swing.GroupLayout(station_panel);
-        station_panel.setLayout(station_panelLayout);
-        station_panelLayout.setHorizontalGroup(
-            station_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 253, Short.MAX_VALUE)
-        );
-        station_panelLayout.setVerticalGroup(
-            station_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         enemy_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout enemy_panelLayout = new javax.swing.GroupLayout(enemy_panel);
-        enemy_panel.setLayout(enemy_panelLayout);
-        enemy_panelLayout.setHorizontalGroup(
-            enemy_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        enemy_panelLayout.setVerticalGroup(
-            enemy_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 212, Short.MAX_VALUE)
-        );
 
         combat_button.setText("Combatir");
         combat_button.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +173,7 @@ public class MainView extends javax.swing.JFrame {
                         .addComponent(next_turn_button)
                         .addComponent(combat_button, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                     .addComponent(exit_button))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +188,7 @@ public class MainView extends javax.swing.JFrame {
                         .addComponent(next_turn_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exit_button)
-                        .addGap(0, 25, Short.MAX_VALUE))
+                        .addGap(0, 227, Short.MAX_VALUE))
                     .addComponent(station_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

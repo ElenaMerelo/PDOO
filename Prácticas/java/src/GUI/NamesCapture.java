@@ -48,14 +48,12 @@ public class NamesCapture extends javax.swing.JDialog {
 
         nombre2.setText("Nombre 2: ");
 
-        texto1.setText("jTextField1");
         texto1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 texto1ActionPerformed(evt);
             }
         });
 
-        texto2.setText("jTextField1");
         texto2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 texto2ActionPerformed(evt);
