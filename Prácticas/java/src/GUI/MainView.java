@@ -178,7 +178,7 @@ public class MainView extends javax.swing.JFrame {
                         .addComponent(next_turn_button)
                         .addComponent(combat_button, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                     .addComponent(exit_button))
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(406, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +193,7 @@ public class MainView extends javax.swing.JFrame {
                         .addComponent(next_turn_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exit_button)
-                        .addGap(0, 227, Short.MAX_VALUE))
+                        .addGap(0, 458, Short.MAX_VALUE))
                     .addComponent(station_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
