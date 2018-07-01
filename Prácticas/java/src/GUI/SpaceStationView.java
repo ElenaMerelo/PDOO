@@ -68,7 +68,7 @@ public class SpaceStationView extends javax.swing.JPanel {
     ArrayList<Integer> getSelectedWeapons(){
         ArrayList<Integer> selected_weapons= new ArrayList();
         int i= 0;
-        for (Component c : getComponents()){
+        for (Component c : weapons_panel.getComponents()){
             try{
                 if(((WeaponView) c).isSelected())
                     selected_weapons.add(i);
@@ -82,7 +82,7 @@ public class SpaceStationView extends javax.swing.JPanel {
     ArrayList<Integer> getSelectedShields(){
         ArrayList<Integer> selected_shields= new ArrayList();
         int i= 0;
-        for(Component c: getComponents()){
+        for(Component c: shields_panel.getComponents()){
             try{
                 if(((ShieldBoosterView) c).isSelected())
                     selected_shields.add(i); 
