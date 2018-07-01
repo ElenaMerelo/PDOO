@@ -92,7 +92,7 @@ public class HangarView extends javax.swing.JPanel {
 
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Número máximo de elementos:");
+        jLabel1.setText("MaxElements:");
         add(jLabel1);
 
         max_elements.setText("jLabel2");
