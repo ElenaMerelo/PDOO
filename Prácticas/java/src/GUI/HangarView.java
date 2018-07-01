@@ -85,42 +85,23 @@ public class HangarView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         max_elements = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         panel_items = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jLabel1.setText("Número máximo de elementos:");
+        add(jLabel1);
+
         max_elements.setText("jLabel2");
+        add(max_elements);
 
         panel_items.setBorder(new javax.swing.border.MatteBorder(null));
         jScrollPane2.setViewportView(panel_items);
 
-        jLabel1.setText("Número máximo de elementos:");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(max_elements)
-                .addGap(0, 144, Short.MAX_VALUE))
-            .addComponent(jScrollPane2)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(max_elements))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
+        add(jScrollPane2);
     }// </editor-fold>//GEN-END:initComponents
 
 
