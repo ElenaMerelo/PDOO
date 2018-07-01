@@ -42,51 +42,29 @@ public class EnemyView extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        enemy_name = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        ammoPower = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        shieldPower = new javax.swing.JTextField();
         loot_panel = new javax.swing.JPanel();
         perdidas_panel = new javax.swing.JPanel();
+        enemy_name = new javax.swing.JLabel();
+        ammoPower = new javax.swing.JLabel();
+        shieldPower = new javax.swing.JLabel();
 
         jLabel1.setText("Enemigo: ");
 
-        enemy_name.setText("jTextField1");
-
         jLabel2.setText("Potencia de fuego: ");
-
-        ammoPower.setText("jTextField1");
 
         jLabel3.setText("Potencia de defensa:  ");
 
-        shieldPower.setText("jTextField1");
-
         loot_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Botín"));
-
-        javax.swing.GroupLayout loot_panelLayout = new javax.swing.GroupLayout(loot_panel);
-        loot_panel.setLayout(loot_panelLayout);
-        loot_panelLayout.setHorizontalGroup(
-            loot_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 289, Short.MAX_VALUE)
-        );
-        loot_panelLayout.setVerticalGroup(
-            loot_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         perdidas_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Pérdidas"));
 
-        javax.swing.GroupLayout perdidas_panelLayout = new javax.swing.GroupLayout(perdidas_panel);
-        perdidas_panel.setLayout(perdidas_panelLayout);
-        perdidas_panelLayout.setHorizontalGroup(
-            perdidas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        perdidas_panelLayout.setVerticalGroup(
-            perdidas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 94, Short.MAX_VALUE)
-        );
+        enemy_name.setText("jLabel4");
+
+        ammoPower.setText("jLabel4");
+
+        shieldPower.setText("jLabel4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -103,29 +81,30 @@ public class EnemyView extends javax.swing.JPanel {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(enemy_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(shieldPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ammoPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(enemy_name)
+                            .addComponent(ammoPower)
+                            .addComponent(shieldPower))
+                        .addGap(34, 34, 34))
                     .addComponent(perdidas_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(enemy_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(enemy_name))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(ammoPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ammoPower))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(shieldPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(shieldPower))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loot_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
                 .addComponent(perdidas_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -133,13 +112,13 @@ public class EnemyView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ammoPower;
-    private javax.swing.JTextField enemy_name;
+    private javax.swing.JLabel ammoPower;
+    private javax.swing.JLabel enemy_name;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel loot_panel;
     private javax.swing.JPanel perdidas_panel;
-    private javax.swing.JTextField shieldPower;
+    private javax.swing.JLabel shieldPower;
     // End of variables declaration//GEN-END:variables
 }
