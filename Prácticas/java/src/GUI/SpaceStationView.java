@@ -30,10 +30,10 @@ public class SpaceStationView extends javax.swing.JPanel {
         nMedals.setText(Integer.toString(s.getnMedals()));
         shieldPower.setText(Float.toString(s.getShieldPower()));
         
-        HangarView h= new HangarView();
+        hv= new HangarView();
         if(s.getHangar() != null){
-            h.setHangar(s.getHangar());
-            hangar_panel.add(h);
+            hv.setHangar(s.getHangar());
+            hangar_panel.add(hv);
         }
         
         WeaponView wv;
@@ -266,7 +266,7 @@ public class SpaceStationView extends javax.swing.JPanel {
                     .addComponent(equip)
                     .addComponent(discard)
                     .addComponent(discard_hangar))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

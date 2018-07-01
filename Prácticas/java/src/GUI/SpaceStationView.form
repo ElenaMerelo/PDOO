@@ -99,7 +99,7 @@
                   <Component id="discard" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="discard_hangar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
