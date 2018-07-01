@@ -20,6 +20,7 @@ public class MainView extends javax.swing.JFrame {
     
     public MainView() {
         initComponents();
+        
         //Para que la aplicación finalice cuando se cierre la interfaz
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -50,18 +51,22 @@ public class MainView extends javax.swing.JFrame {
         ev.setEnemy(g.getCurrentEnemy());
         enemy_panel.add(ev);
         
-        /*
+        next_turn_button.setEnabled(true);
         combat_button.setEnabled(false);
-         next_turn_button.setEnabled(true);
-         if((state == GameState.BEFORECOMBAT)||(state == GameState.INIT)){
-             combat_button.setEnabled(true);
-             next_turn_button.setEnabled(false);
-         }
-
-         ev.setVisible(false);
-         if(state == GameState.AFTERCOMBAT || controller.isEnemyVisible())
-             ev.setVisible(true);
-        */
+        
+        if( (state== GameState.BEFORECOMBAT) || (state == GameState.INIT)){
+            combat_button.setEnabled(true);
+            next_turn_button.setEnabled(false);
+        }
+        
+        ev.setVisible(false);
+        if(state == GameState.AFTERCOMBAT){
+            ev.setVisible(true);
+        }
+        
+        /*if(controller.nextTurn())
+            next_turn_button.setEnabled(true);*/
+        
         repaint();
         revalidate();   
     }
@@ -197,13 +202,11 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void combat_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combat_buttonActionPerformed
-        if(controller.combat() != CombatResult.NOCOMBAT) 
-            combat_button.setEnabled(false);
+        controller.combat();
     }//GEN-LAST:event_combat_buttonActionPerformed
 
     private void next_turn_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_turn_buttonActionPerformed
-        if(controller.nextTurn())
-            next_turn_button.setEnabled(true);
+        controller.nextTurn();
     }//GEN-LAST:event_next_turn_buttonActionPerformed
 
     private void exit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit_buttonActionPerformed

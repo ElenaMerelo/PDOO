@@ -21,23 +21,26 @@ public class HangarView extends javax.swing.JPanel {
     }
     
     void setHangar(HangarToUI h){
-        ArrayList<WeaponToUI> weapons= h.getWeapons();
-        ArrayList<ShieldToUI> shields= h.getShieldBoosters();
-        WeaponView wv;
-        ShieldBoosterView sv;
-        
-        max_elements.setText(Integer.toString(h.getMaxElements()));
-        
-        for(WeaponToUI w: weapons){
-          wv= new WeaponView();
-          wv.setWeapon(w);
-          panel_items.add(wv);
-        }
-        
-        for(ShieldToUI s: shields){
-            sv= new ShieldBoosterView();
-            sv.setShieldBooster(s);
-            panel_items.add(sv);
+        if(h != null){
+            panel_items.removeAll();
+            ArrayList<WeaponToUI> weapons= h.getWeapons();
+            ArrayList<ShieldToUI> shields= h.getShieldBoosters();
+            WeaponView wv;
+            ShieldBoosterView sv;
+
+            max_elements.setText(Integer.toString(h.getMaxElements()));
+
+            for(WeaponToUI w: weapons){
+              wv= new WeaponView();
+              wv.setWeapon(w);
+              panel_items.add(wv);
+            }
+
+            for(ShieldToUI s: shields){
+                sv= new ShieldBoosterView();
+                sv.setShieldBooster(s);
+                panel_items.add(sv);
+            }
         }
         
         repaint();
