@@ -6,6 +6,7 @@
 package GUI;
 
 import deepspace.WeaponToUI;
+import java.awt.Color;
 
 public class WeaponView extends javax.swing.JPanel {
     private boolean selected= false;
@@ -42,6 +43,7 @@ public class WeaponView extends javax.swing.JPanel {
         type = new javax.swing.JLabel();
         uses = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -99,6 +101,9 @@ public class WeaponView extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         selected= !selected;
         setOpaque(selected);
+        if(selected) setBackground(Color.GREEN);
+        else setBackground( new java.awt.Color(255, 255, 102) );
+        
         repaint();
     }//GEN-LAST:event_formMouseClicked
 

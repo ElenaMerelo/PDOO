@@ -7,6 +7,7 @@ package GUI;
 
 
 import deepspace.ShieldToUI;
+import java.awt.Color;
 
 public class ShieldBoosterView extends javax.swing.JPanel {
     private boolean selected= false;
@@ -42,6 +43,7 @@ public class ShieldBoosterView extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -79,7 +81,7 @@ public class ShieldBoosterView extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(boost)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,6 +105,8 @@ public class ShieldBoosterView extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         selected= !selected;
         setOpaque(selected);
+        if(selected) setBackground(Color.GREEN);
+        else setBackground( new java.awt.Color(255, 255, 102) );
         repaint();
     }//GEN-LAST:event_formMouseClicked
 
