@@ -75,6 +75,10 @@ public class GameUniverse {
             currentStation.mountWeapon(i);
     }
     
+    public void reanimar(){
+        currentStation.reanimar();
+    }
+    
     /**
      * @brief Se realiza un combate entre la estación espacial y el enemigo que 
      * se reciben como parámetros. Se sigue el procedimiento descrito en las reglas 
@@ -224,7 +228,9 @@ public class GameUniverse {
     @Override
     public String toString() {
         return "CurrentStationIndex: " + currentStationIndex + ", turns: " + turns + ", dice: " + dice + ", gameState: " + gameState + ", currentStation: " + currentStation + ", spaceStations: " + spaceStations;
-}
+    }
+    
+    
 }
 
 

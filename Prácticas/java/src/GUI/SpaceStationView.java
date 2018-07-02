@@ -7,6 +7,7 @@ package GUI;
 
 import java.util.ArrayList;
 import java.awt.Component;
+import java.awt.Color;
 
 import deepspace.SpaceStationToUI;
 import deepspace.ShieldToUI;
@@ -60,6 +61,12 @@ public class SpaceStationView extends javax.swing.JPanel {
             equip.setEnabled(false);
             discard.setEnabled(false);
             discard_hangar.setEnabled(false);
+        }
+        
+        reanimar_button.setEnabled(false);
+        if(s.getWeapons().size() * s.getShieldBoosters().size() == 0 && (s.getHangar() == null || (s.getHangar().getWeapons().size() * s.getHangar().getShieldBoosters().size() == 0))){
+            reanimar_button.setEnabled(true);
+            this.setBackground(Color.RED);
         }
         
         repaint();
@@ -116,6 +123,7 @@ public class SpaceStationView extends javax.swing.JPanel {
         equip = new javax.swing.JButton();
         discard = new javax.swing.JButton();
         discard_hangar = new javax.swing.JButton();
+        reanimar_button = new javax.swing.JButton();
         ammoPower = new javax.swing.JLabel();
         fuelUnits = new javax.swing.JLabel();
         station_name = new javax.swing.JLabel();
@@ -197,6 +205,13 @@ public class SpaceStationView extends javax.swing.JPanel {
             }
         });
 
+        reanimar_button.setText("Reanimar");
+        reanimar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reanimar_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -206,11 +221,13 @@ public class SpaceStationView extends javax.swing.JPanel {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(equip)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(discard)
-                        .addGap(18, 18, 18)
-                        .addComponent(discard_hangar)))
-                .addGap(0, 12, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(discard_hangar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(reanimar_button)))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +238,8 @@ public class SpaceStationView extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(equip)
                     .addComponent(discard)
-                    .addComponent(discard_hangar))
+                    .addComponent(discard_hangar)
+                    .addComponent(reanimar_button))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -237,24 +255,21 @@ public class SpaceStationView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ammoPower)
-                                .addGap(62, 62, 62)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fuelUnits))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(station_name)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ammoPower)
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fuelUnits))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(station_name))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,6 +303,10 @@ public class SpaceStationView extends javax.swing.JPanel {
         MainView.controller.discardHangar();
     }//GEN-LAST:event_discard_hangarActionPerformed
 
+    private void reanimar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reanimar_buttonActionPerformed
+        MainView.controller.reanimar();
+    }//GEN-LAST:event_reanimar_buttonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ammoPower;
@@ -306,6 +325,7 @@ public class SpaceStationView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel nMedals;
+    private javax.swing.JButton reanimar_button;
     private javax.swing.JLabel shieldPower;
     private javax.swing.JPanel shields_panel;
     private javax.swing.JLabel station_name;

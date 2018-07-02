@@ -66,12 +66,12 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="nombre1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre 1:"/>
+        <Property name="text" type="java.lang.String" value="Jugador 1:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="nombre2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre 2: "/>
+        <Property name="text" type="java.lang.String" value="Jugador 2: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="texto1">

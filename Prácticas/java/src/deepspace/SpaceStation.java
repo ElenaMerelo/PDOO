@@ -292,6 +292,12 @@ class SpaceStation implements SpaceFighter{
         }
     }
     
+    public void reanimar(){
+        weapons.add(new Weapon("w", WeaponType.LASER, 3));
+        shieldBoosters.add(new ShieldBooster("n", 23.23f, 3));
+    }
+    
+    
     @Override
     public String toString() {
         return "SpaceStation--" + "ammoPower: " + ammoPower + ", fuelUnits: " + fuelUnits + ", name: " + name + ", nMedals: " + nMedals + ", shieldPower: " + shieldPower + ", weapons: " + weapons + ", shieldBoosters: " + shieldBoosters + ", hangar: " + hangar + ", pendingDamage: " + pendingDamage;

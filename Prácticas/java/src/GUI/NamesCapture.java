@@ -45,9 +45,9 @@ public class NamesCapture extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        nombre1.setText("Nombre 1:");
+        nombre1.setText("Jugador 1:");
 
-        nombre2.setText("Nombre 2: ");
+        nombre2.setText("Jugador 2: ");
 
         texto1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

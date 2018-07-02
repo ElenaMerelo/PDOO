@@ -106,5 +106,9 @@ public class Controller {
         return result;
     }
     
+    public void reanimar(){
+        model.reanimar();
+    }
+    
    
 }
