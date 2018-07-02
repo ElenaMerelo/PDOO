@@ -45,9 +45,10 @@ public class Controller {
     }
     
     public void mountItems(ArrayList<Integer> w, ArrayList<Integer> s){
-        int i, diff= w.size();
+        int i, diff;
         for(i= w.size() -1; i >= 0; i--)
             model.mountWeapon(w.get(i));
+        diff= w.size();
         
         for(i= s.size() -1; i >= 0; i--)
             model.mountShieldBooster(s.get(i) - diff); 
@@ -56,9 +57,11 @@ public class Controller {
     }
     
     public void discardItemsInHangar(ArrayList<Integer> w, ArrayList<Integer> s){
-        int i, diff= w.size();
+        int i, diff;
         for(i= w.size() -1; i >= 0; i--)
             model.discardWeaponInHangar(w.get(i));
+        
+        diff= w.size();
         
         for(i= s.size() -1; i >= 0; i--)
             model.discardShieldBoosterInHangar(s.get(i) - diff); 
