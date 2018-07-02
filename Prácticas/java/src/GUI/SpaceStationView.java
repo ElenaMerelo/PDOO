@@ -25,7 +25,7 @@ public class SpaceStationView extends javax.swing.JPanel {
         shields_panel.removeAll();
         hangar_panel.removeAll();
         
-        station_name.setText(s.getName()); 
+        station_name.setText("Estación espacial " + s.getName()); 
         ammoPower.setText(Float.toString(s.getAmmoPower()));
         fuelUnits.setText(Float.toString(s.getFuelUnits()));
         nMedals.setText(Integer.toString(s.getnMedals()));
@@ -82,8 +82,8 @@ public class SpaceStationView extends javax.swing.JPanel {
         ArrayList<Integer> selected_shields= new ArrayList();
         int i= 0;
         for(Component c: shields_panel.getComponents()){
-                if(((ShieldBoosterView) c).isSelected())
-                    selected_shields.add(i); 
+            if(((ShieldBoosterView) c).isSelected())
+                selected_shields.add(i); 
             
             i++;
         }  
@@ -229,6 +229,7 @@ public class SpaceStationView extends javax.swing.JPanel {
 
         fuelUnits.setText("jLabel5");
 
+        station_name.setFont(new java.awt.Font("Liberation Mono", 1, 12)); // NOI18N
         station_name.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -251,16 +252,15 @@ public class SpaceStationView extends javax.swing.JPanel {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
+                        .addGap(188, 188, 188)
                         .addComponent(station_name)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(station_name)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(ammoPower)

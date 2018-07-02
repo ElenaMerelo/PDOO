@@ -64,16 +64,13 @@ public class MainView extends javax.swing.JFrame {
             ev.setVisible(true);
         }
         
-        /*if(controller.nextTurn())
-            next_turn_button.setEnabled(true);*/
-        
         repaint();
         revalidate();   
     }
     
     
     public ArrayList<String> getNames() {
-        NamesCapture namesCapture = new NamesCapture (this, true);
+        NamesCapture namesCapture = new NamesCapture (this);
         return namesCapture.getNames();
     }
     

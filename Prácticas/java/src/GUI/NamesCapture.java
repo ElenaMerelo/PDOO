@@ -13,10 +13,11 @@ public class NamesCapture extends javax.swing.JDialog {
     /**
      * Creates new form NamesCapture
      */
-    public NamesCapture(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public NamesCapture(java.awt.Frame parent) {
+        super(parent, true);
         initComponents();
         setLocationRelativeTo (null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -114,8 +115,8 @@ public class NamesCapture extends javax.swing.JDialog {
 
     private void start_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_buttonActionPerformed
         names.clear();
-        names.add(nombre1.getText());
-        names.add(nombre2.getText());
+        names.add(texto1.getText());
+        names.add(texto2.getText());
         dispose();
     }//GEN-LAST:event_start_buttonActionPerformed
     
@@ -127,43 +128,7 @@ public class NamesCapture extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NamesCapture.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NamesCapture.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NamesCapture.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NamesCapture.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                NamesCapture dialog = new NamesCapture(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    public static void main(String args[]) {    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
