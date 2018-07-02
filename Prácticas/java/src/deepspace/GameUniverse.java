@@ -79,6 +79,12 @@ public class GameUniverse {
         currentStation.reanimar();
     }
     
+    public boolean spaceStationIsDead(){
+        if(currentStation.getWeapons().isEmpty() && currentStation.getShieldBoosters().isEmpty() && (currentStation.getHangar() == null || currentStation.getHangar().isEmpty()))
+                return true;
+        else return false;
+    }
+    
     /**
      * @brief Se realiza un combate entre la estación espacial y el enemigo que 
      * se reciben como parámetros. Se sigue el procedimiento descrito en las reglas 

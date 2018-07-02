@@ -108,7 +108,10 @@ public class Controller {
     
     public void reanimar(){
         model.reanimar();
+        view.updateView();
     }
     
-   
+    public boolean spaceStationIsDead(){
+        return model.spaceStationIsDead();
+    }
 }

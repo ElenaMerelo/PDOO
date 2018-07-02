@@ -64,7 +64,7 @@ public class SpaceStationView extends javax.swing.JPanel {
         }
         
         reanimar_button.setEnabled(false);
-        if(s.getWeapons().size() * s.getShieldBoosters().size() == 0 && (s.getHangar() == null || (s.getHangar().getWeapons().size() * s.getHangar().getShieldBoosters().size() == 0))){
+        if(MainView.controller.spaceStationIsDead()){
             reanimar_button.setEnabled(true);
             this.setBackground(Color.RED);
         }

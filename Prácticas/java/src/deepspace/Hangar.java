@@ -41,6 +41,10 @@ class Hangar{
         return shieldBoosters;
     }
     
+    public boolean isEmpty(){
+        return weapons.isEmpty() && shieldBoosters.isEmpty();
+    }
+    
     /**
      * @brief  Devuelve true si aún hay espacio para añadir elementos y por lo
      * tanto no se ha llegado a la capacidad máxima.
