@@ -47,6 +47,18 @@ public class HangarView extends javax.swing.JPanel {
         revalidate();   
     }
     
+    ArrayList<Integer> getSelectedItems(){
+        ArrayList<Integer> s= new ArrayList();
+        int i= 0;
+        for(Component c: panel_items.getComponents())
+            if(((CombatElement) c).isSelected())
+                s.add(i);
+        i++;
+        
+        return s;
+    }
+    
+    /*
     ArrayList<Integer> getSelectedShields(){
         ArrayList<Integer> selected_shields = new ArrayList();
         int i = 0;
@@ -74,7 +86,7 @@ public class HangarView extends javax.swing.JPanel {
             i++;
         }
         return selected_weapons;
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -9,7 +9,7 @@ package GUI;
 import deepspace.ShieldToUI;
 import java.awt.Color;
 
-public class ShieldBoosterView extends javax.swing.JPanel {
+public class ShieldBoosterView extends javax.swing.JPanel implements CombatElement {
     private boolean selected= false;
     
     public ShieldBoosterView() {
@@ -23,6 +23,7 @@ public class ShieldBoosterView extends javax.swing.JPanel {
         repaint();
     }
     
+    @Override
     public boolean isSelected(){
         return selected;
     }

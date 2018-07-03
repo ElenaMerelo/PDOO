@@ -8,7 +8,7 @@ package GUI;
 import deepspace.WeaponToUI;
 import java.awt.Color;
 
-public class WeaponView extends javax.swing.JPanel {
+public class WeaponView extends javax.swing.JPanel implements CombatElement {
     private boolean selected= false;
 
     public WeaponView() {
@@ -23,6 +23,7 @@ public class WeaponView extends javax.swing.JPanel {
         repaint();
     }
     
+    @Override
     public boolean isSelected(){
         return selected;
     }
