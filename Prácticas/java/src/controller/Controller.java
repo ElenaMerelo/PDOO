@@ -45,10 +45,11 @@ public class Controller {
     }
     
     public void mountItems(ArrayList<Integer> w, ArrayList<Integer> s){
-        int i, diff;
+        int i, diff= model.getUIversion().getCurrentStation().getHangar().getWeapons().size() - w.size();
         for(i= w.size() -1; i >= 0; i--)
             model.mountWeapon(w.get(i));
-        diff= w.size();
+        
+        //diff= model.getUIversion().getCurrentStation().getHangar().getWeapons().size();
         
         for(i= s.size() -1; i >= 0; i--)
             model.mountShieldBooster(s.get(i) - diff); 
