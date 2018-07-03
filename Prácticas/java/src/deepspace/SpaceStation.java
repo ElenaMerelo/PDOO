@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 class SpaceStation implements SpaceFighter{
     private static final int MAXFUEL= 100;
-    private static final float SHIELDLOSSPERUNITSHOT= 0.1f;    
+    private static final float SHIELDLOSSPERUNITSHOT= 0.1f;
+    private static int reanimaciones= 0;
     private float ammoPower, fuelUnits, shieldPower;
     private String name;
     private int nMedals;
@@ -84,7 +85,8 @@ class SpaceStation implements SpaceFighter{
     
     //Si todas las armas y escudos de la estación tienen un único uso sobrante devuelve true
     public boolean needsHelp(){
-        if(weapons.isEmpty() || shieldBoosters.isEmpty()) return false;
+        if((weapons.isEmpty() && shieldBoosters.isEmpty()) || hangar != null) return false;
+        
         else{
             for(Weapon w: weapons)
                 if(w.useIt() > 1)
@@ -93,7 +95,7 @@ class SpaceStation implements SpaceFighter{
             for(ShieldBooster s: shieldBoosters)
                 if(s.useIt() > 1)
                     return false;
-
+            
             return true;
         }
     }
@@ -133,14 +135,6 @@ class SpaceStation implements SpaceFighter{
            return hangar.addWeapon(w);
       
         return false;
-    }
-    
-    public void addShield(){
-        shieldBoosters.add(new ShieldBooster("help", 10.0f, 2));
-    }
-    
-    public void addWeapon(){
-        weapons.add(new Weapon("help", WeaponType.LASER, 2));
     }
     
     public boolean receiveShieldBooster(ShieldBooster s){
@@ -324,9 +318,15 @@ class SpaceStation implements SpaceFighter{
         }
     }
     
+    public boolean noMoreReanimaciones(){
+        return reanimaciones > 3;
+    }
     public void reanimar(){
-        weapons.add(new Weapon("w", WeaponType.LASER, 3));
-        shieldBoosters.add(new ShieldBooster("n", 23.23f, 3));
+        reanimaciones++;
+        if(reanimaciones <= 3){
+            weapons.add(new Weapon("w", WeaponType.LASER, 3));
+            shieldBoosters.add(new ShieldBooster("n", 23.23f, 3));
+        }
     }
     
     

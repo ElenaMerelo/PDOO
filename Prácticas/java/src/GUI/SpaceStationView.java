@@ -64,7 +64,7 @@ public class SpaceStationView extends javax.swing.JPanel {
         }
         
         reanimar_button.setEnabled(false);
-        if(MainView.controller.spaceStationIsDead()){
+        if(MainView.controller.spaceStationIsDead() && !MainView.controller.noMoreReanimaciones()){
             reanimar_button.setEnabled(true);
             this.setBackground(Color.RED);
         }

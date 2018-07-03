@@ -35,10 +35,6 @@ public class GameUniverse {
     public void fixUses(){
         currentStation.fixUses();
     }
-    
-    public boolean sendShield(){
-        return dice.sendShield();
-    }
 
     public GameState getState() {
         return gameState.getState();
@@ -91,18 +87,21 @@ public class GameUniverse {
         currentStation.reanimar();
     }
     
+    public boolean noMoreReanimaciones(){
+        return currentStation.noMoreReanimaciones();
+    }
+    
     public boolean spaceStationIsDead(){
         if(currentStation.getWeapons().isEmpty() && currentStation.getShieldBoosters().isEmpty() && (currentStation.getHangar() == null || currentStation.getHangar().isEmpty()))
                 return true;
         else return false;
     }
     
-    public void addShield(){
-        currentStation.addShield();
-    }
-    
-    public void addWeapon(){
-        currentStation.addWeapon();
+    public void addCombatElement(){
+        if(dice.sendShield())
+            currentStation.receiveShieldBooster(new ShieldBooster("help", 9.9f, 2));
+        else
+            currentStation.receiveWeapon(new Weapon("help", WeaponType.LASER, 2));
     }
     
     /**

@@ -40,6 +40,10 @@ public class Controller {
         return model.haveAWinner();
     }
     
+    public boolean noMoreReanimaciones(){
+        return model.noMoreReanimaciones();
+    }
+    
     public GameState getState(){
         return model.getState();
     }
@@ -50,13 +54,12 @@ public class Controller {
     
     public void fixUses(){
         model.fixUses();
+        view.updateView();
     }
     
     public void littleHelp(){
-        if(model.sendShield())
-            model.addShield();
-        else
-            model.addWeapon();
+        model.addCombatElement();
+        view.updateView();
     }
     
     public void mountItems(ArrayList<Integer> w, ArrayList<Integer> s){
