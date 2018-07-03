@@ -44,8 +44,23 @@ public class Controller {
         return model.getState();
     }
     
+    public boolean spaceStationNeedsHelp(){
+        return model.spaceStationNeedsHelp();
+    }
+    
+    public void fixUses(){
+        model.fixUses();
+    }
+    
+    public void littleHelp(){
+        if(model.sendShield())
+            model.addShield();
+        else
+            model.addWeapon();
+    }
+    
     public void mountItems(ArrayList<Integer> w, ArrayList<Integer> s){
-        int i, diff= model.getUIversion().getCurrentStation().getHangar().getWeapons().size() - w.size();
+        int i, diff= model.getUIversion().getCurrentStation().getHangar().getWeapons().size();
         for(i= w.size() -1; i >= 0; i--)
             model.mountWeapon(w.get(i));
         

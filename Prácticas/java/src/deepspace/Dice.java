@@ -10,7 +10,7 @@ package deepspace;
 import java.util.Random;
 
 class Dice {
-    private final float NHANGARSPROB, NSHIELDSPROB, NWEAPONSPROB, FIRSTSHOTPROB, EXTRAEFFICIENCYPROB;
+    private final float NHANGARSPROB, NSHIELDSPROB, NWEAPONSPROB, FIRSTSHOTPROB, EXTRAEFFICIENCYPROB, NEWSHIELDPROB;
     private Random generator;
     
     //Constructores
@@ -20,6 +20,7 @@ class Dice {
         this.NSHIELDSPROB=0.25f;
         this.NWEAPONSPROB=0.33f;
         this.FIRSTSHOTPROB=0.5f;
+        this.NEWSHIELDPROB= 0.5f;
         this.EXTRAEFFICIENCYPROB=0.8f;
     }
     
@@ -29,6 +30,10 @@ class Dice {
     */
     int initWithNHangars(){
         return generator.nextFloat() < NHANGARSPROB ? 0 : 1;
+    }
+    
+    boolean sendShield(){
+        return generator.nextFloat() < NEWSHIELDPROB ? true : false;
     }
     
     /**

@@ -69,6 +69,13 @@ public class SpaceStationView extends javax.swing.JPanel {
             this.setBackground(Color.RED);
         }
         
+        help_button.setEnabled(false);
+        if(MainView.controller.spaceStationNeedsHelp()){
+            help_button.setEnabled(true);
+            hv.setBackground(Color.CYAN);
+        }
+       
+        
         repaint();
         revalidate();
     }
@@ -124,6 +131,7 @@ public class SpaceStationView extends javax.swing.JPanel {
         discard = new javax.swing.JButton();
         discard_hangar = new javax.swing.JButton();
         reanimar_button = new javax.swing.JButton();
+        help_button = new javax.swing.JButton();
         ammoPower = new javax.swing.JLabel();
         fuelUnits = new javax.swing.JLabel();
         station_name = new javax.swing.JLabel();
@@ -212,13 +220,19 @@ public class SpaceStationView extends javax.swing.JPanel {
             }
         });
 
+        help_button.setText("Help");
+        help_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                help_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(equip)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -226,8 +240,13 @@ public class SpaceStationView extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(discard_hangar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(reanimar_button)))
+                        .addComponent(reanimar_button))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 18, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(help_button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +259,9 @@ public class SpaceStationView extends javax.swing.JPanel {
                     .addComponent(discard)
                     .addComponent(discard_hangar)
                     .addComponent(reanimar_button))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(help_button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         ammoPower.setText("jLabel5");
@@ -275,7 +296,7 @@ public class SpaceStationView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(station_name)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(ammoPower)
@@ -307,6 +328,11 @@ public class SpaceStationView extends javax.swing.JPanel {
         MainView.controller.reanimar();
     }//GEN-LAST:event_reanimar_buttonActionPerformed
 
+    private void help_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_help_buttonActionPerformed
+        MainView.controller.fixUses();
+        MainView.controller.littleHelp();
+    }//GEN-LAST:event_help_buttonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ammoPower;
@@ -315,6 +341,7 @@ public class SpaceStationView extends javax.swing.JPanel {
     private javax.swing.JButton equip;
     private javax.swing.JLabel fuelUnits;
     private javax.swing.JPanel hangar_panel;
+    private javax.swing.JButton help_button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

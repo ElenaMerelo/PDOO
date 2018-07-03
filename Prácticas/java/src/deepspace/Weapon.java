@@ -66,4 +66,8 @@ class Weapon implements CombatElement{
     WeaponToUI getUIversion(){
         return new WeaponToUI(this);
     }
+    
+    public void boostUses(){
+        uses++;
+    }
 }

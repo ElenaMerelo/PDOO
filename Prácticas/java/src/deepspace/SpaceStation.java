@@ -82,6 +82,30 @@ class SpaceStation implements SpaceFighter{
         return weapons;
     }
     
+    //Si todas las armas y escudos de la estación tienen un único uso sobrante devuelve true
+    public boolean needsHelp(){
+        if(weapons.isEmpty() || shieldBoosters.isEmpty()) return false;
+        else{
+            for(Weapon w: weapons)
+                if(w.useIt() > 1)
+                    return false;
+
+            for(ShieldBooster s: shieldBoosters)
+                if(s.useIt() > 1)
+                    return false;
+
+            return true;
+        }
+    }
+    
+    public void fixUses(){
+        for(Weapon w: weapons)
+            w.boostUses();
+        
+        for(ShieldBooster s: shieldBoosters)
+            s.boostUses();
+    }
+    
     /**
      * @brief Fija la cantidad de combustible al valor pasado como parámetro sin
      * que nunca se exceda el límite.
@@ -109,6 +133,14 @@ class SpaceStation implements SpaceFighter{
            return hangar.addWeapon(w);
       
         return false;
+    }
+    
+    public void addShield(){
+        shieldBoosters.add(new ShieldBooster("help", 10.0f, 2));
+    }
+    
+    public void addWeapon(){
+        weapons.add(new Weapon("help", WeaponType.LASER, 2));
     }
     
     public boolean receiveShieldBooster(ShieldBooster s){

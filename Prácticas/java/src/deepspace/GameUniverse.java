@@ -27,6 +27,18 @@ public class GameUniverse {
     public GameUniverseToUI getUIversion(){
         return new GameUniverseToUI(currentStation, currentEnemy);
     }
+    
+    public boolean spaceStationNeedsHelp(){
+        return currentStation.needsHelp();
+    }
+    
+    public void fixUses(){
+        currentStation.fixUses();
+    }
+    
+    public boolean sendShield(){
+        return dice.sendShield();
+    }
 
     public GameState getState() {
         return gameState.getState();
@@ -83,6 +95,14 @@ public class GameUniverse {
         if(currentStation.getWeapons().isEmpty() && currentStation.getShieldBoosters().isEmpty() && (currentStation.getHangar() == null || currentStation.getHangar().isEmpty()))
                 return true;
         else return false;
+    }
+    
+    public void addShield(){
+        currentStation.addShield();
+    }
+    
+    public void addWeapon(){
+        currentStation.addWeapon();
     }
     
     /**
