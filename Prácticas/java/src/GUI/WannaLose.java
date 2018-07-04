@@ -12,9 +12,21 @@ public class WannaLose extends javax.swing.JDialog {
     public WannaLose(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
+        setLocationRelativeTo (null);
+        setTitle("Deepspace");
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                // Se decide que cancelar la entrada de nombres supone no iniciar la aplicación
+                System.exit(0);
+            }
+        });  
     }
     
     public boolean getAnswer(){
+        this.setVisible(true);
         return option;
     }
 
@@ -34,6 +46,7 @@ public class WannaLose extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("¿Quieres deshacerte de unos \n pocos escudos y/o armas?");
@@ -86,10 +99,12 @@ public class WannaLose extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        option= true;
+       dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         option= false;
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

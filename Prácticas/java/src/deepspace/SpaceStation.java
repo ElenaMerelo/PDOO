@@ -84,7 +84,7 @@ class SpaceStation implements SpaceFighter{
     }
     
     public boolean isBoundToWin(){
-        return nMedals > 4 && weapons.size() > 2 && shieldBoosters.size() > 2;
+        return nMedals > 1 && weapons.size() > 1 && shieldBoosters.size() > 1;
     }
     
     //Si todas las armas y escudos de la estación tienen un único uso sobrante devuelve true

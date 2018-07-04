@@ -74,6 +74,9 @@ public class SpaceStationView extends javax.swing.JPanel {
             help_button.setEnabled(true);
             hv.setBackground(Color.CYAN);
         }
+        
+        if(s.isBoundToWin())
+            MainView.controller.stationBoundToWin();
        
         
         repaint();

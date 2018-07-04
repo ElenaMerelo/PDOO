@@ -94,6 +94,7 @@ public class MainView extends javax.swing.JFrame {
         return appName;
     }
     
+    
     public void showResultMessage(CombatResult cr){
         
         switch (cr) {
