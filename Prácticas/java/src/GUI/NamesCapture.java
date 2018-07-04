@@ -17,6 +17,7 @@ public class NamesCapture extends javax.swing.JDialog {
         super(parent, true);
         initComponents();
         setLocationRelativeTo (null);
+        setTitle("Deepspace");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         addWindowListener(new java.awt.event.WindowAdapter() {
