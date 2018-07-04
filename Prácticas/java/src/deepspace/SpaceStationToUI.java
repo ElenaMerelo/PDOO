@@ -23,6 +23,7 @@ public class SpaceStationToUI {
     private ArrayList<ShieldToUI> shieldBoosters;
     private HangarToUI hangar;   
     private DamageToUI pendingDamage;
+    private boolean boundToWin;
     
     SpaceStationToUI(SpaceStation station) {
         weapons=new ArrayList();
@@ -34,6 +35,8 @@ public class SpaceStationToUI {
         ammoPower=station.getAmmoPower();
         fuelUnits=station.getFuelUnits();
         shieldPower=station.getShieldPower();
+        
+        boundToWin= station.isBoundToWin();
         
         for (Weapon w:station.getWeapons()) {
             weapons.add(w.getUIversion());
@@ -96,5 +99,9 @@ public class SpaceStationToUI {
     
     public DamageToUI getPendingDamage() {
         return pendingDamage;
+    }
+    
+    public boolean isBoundToWin(){
+        return boundToWin;
     }
 }

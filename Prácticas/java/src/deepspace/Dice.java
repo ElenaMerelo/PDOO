@@ -51,6 +51,14 @@ class Dice {
             return 3; 
     }
     
+    int weaponsToDiscard(int total){
+        return total - initWithNWeapons();
+    }
+    
+    int shieldBoostersToDiscard(int total){
+        return total - initWithNShields();
+    }    
+    
     /**
      * @brief Devuelve 0 con una probabilidad de NSHIELDSPROB y 1 en caso contrario.
      * Este método determina el número de potenciadores de escudo que recibirá 

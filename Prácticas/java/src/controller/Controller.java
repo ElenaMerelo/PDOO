@@ -40,6 +40,17 @@ public class Controller {
         return model.haveAWinner();
     }
     
+    public void stationBoundToWin(){
+        boolean option;
+        if(model.getUIversion().getCurrentStation().isBoundToWin()){
+            option= view.getAnswer();
+            if(option)
+                model.discardItems();        
+        }
+        
+        view.updateView();
+    }
+    
     public boolean noMoreReanimaciones(){
         return model.noMoreReanimaciones();
     }

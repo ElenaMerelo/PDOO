@@ -35,6 +35,19 @@ public class GameUniverse {
     public void fixUses(){
         currentStation.fixUses();
     }
+    
+    public void discardItems(){
+        int nw= dice.weaponsToDiscard(currentStation.getWeapons().size());
+        int ns= dice.shieldBoostersToDiscard(currentStation.getShieldBoosters().size());
+        int i;
+        
+        for(i= 0; i < nw; i++)
+            currentStation.discardWeapon(0); 
+        
+        for(i= 0; i< ns; i++)
+            currentStation.discardShieldBooster(0);
+        
+    }
 
     public GameState getState() {
         return gameState.getState();

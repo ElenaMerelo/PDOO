@@ -74,6 +74,10 @@ public class MainView extends javax.swing.JFrame {
         return namesCapture.getNames();
     }
     
+    public boolean getAnswer(){
+        WannaLose w= new WannaLose(this);
+        return w.getAnswer();
+    }
     public void setController(Controller c){
         controller= c;
     }
