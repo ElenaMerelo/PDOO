@@ -63,6 +63,7 @@ public class SpaceStationView extends javax.swing.JPanel {
             discard_hangar.setEnabled(false);
         }
         
+        /*
         reanimar_button.setEnabled(false);
         if(MainView.controller.spaceStationIsDead() && !MainView.controller.noMoreReanimaciones()){
             reanimar_button.setEnabled(true);
@@ -73,11 +74,7 @@ public class SpaceStationView extends javax.swing.JPanel {
         if(MainView.controller.spaceStationNeedsHelp()){
             help_button.setEnabled(true);
             hv.setBackground(Color.CYAN);
-        }
-        
-        if(s.isBoundToWin())
-            MainView.controller.stationBoundToWin();
-       
+        }*/
         
         repaint();
         revalidate();
@@ -328,12 +325,12 @@ public class SpaceStationView extends javax.swing.JPanel {
     }//GEN-LAST:event_discard_hangarActionPerformed
 
     private void reanimar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reanimar_buttonActionPerformed
-        MainView.controller.reanimar();
+       // MainView.controller.reanimar();
     }//GEN-LAST:event_reanimar_buttonActionPerformed
 
     private void help_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_help_buttonActionPerformed
-        MainView.controller.fixUses();
-        MainView.controller.littleHelp();
+       // MainView.controller.fixUses();
+       // MainView.controller.littleHelp();
     }//GEN-LAST:event_help_buttonActionPerformed
 
 

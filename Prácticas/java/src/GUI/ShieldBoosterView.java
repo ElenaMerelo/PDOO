@@ -106,7 +106,7 @@ public class ShieldBoosterView extends javax.swing.JPanel implements CombatEleme
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         selected= !selected;
         setOpaque(selected);
-        if(selected) setBackground(Color.GREEN);
+        if(selected) setBackground(Color.ORANGE);
         else setBackground( new java.awt.Color(255, 255, 102) );
         repaint();
     }//GEN-LAST:event_formMouseClicked

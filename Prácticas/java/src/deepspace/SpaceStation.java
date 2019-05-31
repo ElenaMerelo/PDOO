@@ -82,7 +82,7 @@ class SpaceStation implements SpaceFighter{
     public ArrayList<Weapon> getWeapons(){
         return weapons;
     }
-    
+    /*
     public boolean isBoundToWin(){
         return nMedals > 1 && weapons.size() > 1 && shieldBoosters.size() > 1;
     }
@@ -110,7 +110,7 @@ class SpaceStation implements SpaceFighter{
         
         for(ShieldBooster s: shieldBoosters)
             s.boostUses();
-    }
+    } */
     
     /**
      * @brief Fija la cantidad de combustible al valor pasado como parámetro sin
@@ -321,7 +321,7 @@ class SpaceStation implements SpaceFighter{
             }
         }
     }
-    
+    /*
     public boolean noMoreReanimaciones(){
         return reanimaciones > 3;
     }
@@ -331,7 +331,7 @@ class SpaceStation implements SpaceFighter{
             weapons.add(new Weapon("w", WeaponType.LASER, 3));
             shieldBoosters.add(new ShieldBooster("n", 23.23f, 3));
         }
-    }
+    }*/
     
     
     @Override

@@ -27,7 +27,8 @@ public class GameUniverse {
     public GameUniverseToUI getUIversion(){
         return new GameUniverseToUI(currentStation, currentEnemy);
     }
-    
+ 
+ /*   
     public boolean spaceStationNeedsHelp(){
         return currentStation.needsHelp();
     }
@@ -35,7 +36,7 @@ public class GameUniverse {
     public void fixUses(){
         currentStation.fixUses();
     }
-    
+  */  
     public void discardItems(){
         int nw= dice.weaponsToDiscard(currentStation.getWeapons().size());
         int ns= dice.shieldBoostersToDiscard(currentStation.getShieldBoosters().size());
@@ -95,7 +96,7 @@ public class GameUniverse {
         if(correct_game_state())
             currentStation.mountWeapon(i);
     }
-    
+  /*  
     public void reanimar(){
         currentStation.reanimar();
     }
@@ -116,7 +117,7 @@ public class GameUniverse {
         else
             currentStation.receiveWeapon(new Weapon("help", WeaponType.LASER, 2));
     }
-    
+  */  
     /**
      * @brief Se realiza un combate entre la estación espacial y el enemigo que 
      * se reciben como parámetros. Se sigue el procedimiento descrito en las reglas 

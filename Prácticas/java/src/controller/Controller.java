@@ -40,22 +40,16 @@ public class Controller {
         return model.haveAWinner();
     }
     
-    public void stationBoundToWin(){
-        boolean option = view.getAnswer();
-        if(option)
-            model.discardItems();        
-        
-        view.updateView();
-    }
-    
+    /*
     public boolean noMoreReanimaciones(){
         return model.noMoreReanimaciones();
     }
-    
+   */ 
     public GameState getState(){
         return model.getState();
     }
     
+    /*
     public boolean spaceStationNeedsHelp(){
         return model.spaceStationNeedsHelp();
     }
@@ -69,7 +63,7 @@ public class Controller {
         model.addCombatElement();
         view.updateView();
     }
-    
+    */
     public void mountItems(ArrayList<Integer> w, ArrayList<Integer> s){
         int i, diff= model.getUIversion().getCurrentStation().getHangar().getWeapons().size();
         for(i= w.size() -1; i >= 0; i--)
@@ -133,6 +127,7 @@ public class Controller {
         return result;
     }
     
+    /*
     public void reanimar(){
         model.reanimar();
         view.updateView();
@@ -140,5 +135,5 @@ public class Controller {
     
     public boolean spaceStationIsDead(){
         return model.spaceStationIsDead();
-    }
+    }*/
 }
