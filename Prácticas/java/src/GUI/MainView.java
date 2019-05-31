@@ -16,7 +16,7 @@ import deepspace.GameState;
 
 public class MainView extends javax.swing.JFrame {
     static Controller controller;
-    private String appName= "Deepspace";
+    private String appName= "~Deepspace~";
     
     public MainView() {
         initComponents();
@@ -74,10 +74,6 @@ public class MainView extends javax.swing.JFrame {
         return namesCapture.getNames();
     }
     
-    public boolean getAnswer(){
-        WannaLose w= new WannaLose(this);
-        return w.getAnswer();
-    }
     public void setController(Controller c){
         controller= c;
     }
@@ -121,7 +117,7 @@ public class MainView extends javax.swing.JFrame {
     }
     
     public void showNextTurnMessage(){
-        JOptionPane.showMessageDialog(this,"No puedes pasar turno.\nDebes cumplir tu castigo.",getAppName(),JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,"No puedes pasar de turno.\nDebes cumplir tu castigo.",getAppName(),JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

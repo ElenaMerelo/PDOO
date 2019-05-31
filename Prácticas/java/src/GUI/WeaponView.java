@@ -102,7 +102,7 @@ public class WeaponView extends javax.swing.JPanel implements CombatElement {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         selected= !selected;
         setOpaque(selected);
-        if(selected) setBackground(Color.GREEN);
+        if(selected) setBackground(Color.CYAN);
         else setBackground( new java.awt.Color(255, 255, 102) );
         
         repaint();
